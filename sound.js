@@ -526,7 +526,7 @@
     });
 
     // 5. Slider & Quote changes
-    document.querySelectorAll('.slider-arrow, #prevQuote, #nextQuote, .gallery-lightbox-nav').forEach(btn => {
+    document.querySelectorAll('.slider-arrow, .t-arrow, #prevQuote, #nextQuote, .gallery-lightbox-nav').forEach(btn => {
       btn.addEventListener('click', () => {
         playSliderTick();
       });

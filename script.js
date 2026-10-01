@@ -832,22 +832,50 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight') lbShowImage(lbIndex + 1, 1);
 });
 
-/* Testimonials */
-const quotes = $$('.quote');
-let quoteIndex = 0;
-const renderQuote = () => {
-  quotes.forEach((q, i) => q.classList.toggle('active', i === quoteIndex));
-  $('#quoteProgress').style.width = `${((quoteIndex + 1) / quotes.length) * 100}%`;
+/* Testimonials — same snap-slider behaviour as the project sliders */
+const tStage = $('.t-stage');
+const tCards = $$('.t-card');
+const tFill = $('#quoteProgress');
+
+const syncTestimonials = () => {
+  if (!tStage || !tCards.length) return;
+  const center = tStage.scrollLeft + tStage.clientWidth / 2;
+  let closest = tCards[0];
+  let closestDistance = Infinity;
+  tCards.forEach(card => {
+    const distance = Math.abs(card.offsetLeft + card.offsetWidth / 2 - center);
+    if (distance < closestDistance) { closestDistance = distance; closest = card; }
+  });
+  tCards.forEach(card => card.classList.toggle('is-active', card === closest));
+  if (tFill) formatSliderProgress(tStage, tFill);
 };
-$('#prevQuote')?.addEventListener('click', () => {
-  quoteIndex = (quoteIndex - 1 + quotes.length) % quotes.length;
-  renderQuote();
-});
-$('#nextQuote')?.addEventListener('click', () => {
-  quoteIndex = (quoteIndex + 1) % quotes.length;
-  renderQuote();
-});
-renderQuote();
+
+const setTestimonialEdges = () => {
+  const track = $('.t-track');
+  if (!track || !tCards.length) return;
+  const edge = Math.max(0, (tStage.clientWidth - tCards[0].offsetWidth) / 2);
+  track.style.paddingLeft = track.style.paddingRight = `${edge}px`;
+  syncTestimonials();
+};
+
+const stepTestimonial = dir => {
+  const active = tCards.findIndex(card => card.classList.contains('is-active'));
+  const target = tCards[Math.max(0, Math.min(tCards.length - 1, active + dir))];
+  if (target) tStage.scrollTo({ left: target.offsetLeft + target.offsetWidth / 2 - tStage.clientWidth / 2, behavior: 'smooth' });
+};
+
+if (tStage) {
+  $('#prevQuote')?.addEventListener('click', () => stepTestimonial(-1));
+  $('#nextQuote')?.addEventListener('click', () => stepTestimonial(1));
+  tStage.addEventListener('scroll', syncTestimonials, { passive: true });
+  tStage.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight') { e.preventDefault(); stepTestimonial(1); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); stepTestimonial(-1); }
+  });
+  window.addEventListener('resize', setTestimonialEdges, { passive: true });
+  window.addEventListener('load', setTestimonialEdges);
+  setTestimonialEdges();
+}
 
 /* Process storytelling */
 const processData = [

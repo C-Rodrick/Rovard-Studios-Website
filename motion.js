@@ -341,7 +341,7 @@
   function initTilt() {
     if (!pointerFine || reduced()) return;
 
-    const tiltSelector = '[data-rm-tilt], .portfolio-card, .studio-card';
+    const tiltSelector = '[data-rm-tilt], .portfolio-card, .t-card, .studio-card';
 
     document.addEventListener('mousemove', e => {
       const card = e.target.closest(tiltSelector);
@@ -354,7 +354,7 @@
 
       // Portfolio cards carry a resting scale in CSS (.94, or 1.04 when active) —
       // keep it inside the tilt transform so hovering never changes their size.
-      const scale = card.classList.contains('portfolio-card') ? (card.classList.contains('is-active') ? 1.04 : 0.94) : 1;
+      const scale = card.matches('.portfolio-card, .t-card') ? (card.classList.contains('is-active') ? 1.04 : 0.94) : 1;
 
       clearTimeout(card._rmTiltTimer);
       card.classList.add('rm-tilt');
