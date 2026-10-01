@@ -460,36 +460,43 @@ const formatSliderProgress = (stage, fill) => {
   fill.style.width = `${Math.min(Math.max(progress, 8), 100)}%`;
 };
 
-const syncActiveCard = stage => {
-  const cards = [...stage.querySelectorAll('.portfolio-card')];
-  if (!cards.length) return;
+/* Shared slider helpers. Sliders start flush left and end flush right (no empty
+   lead-in space); the active card is the one nearest the centre, except at the
+   two ends where the first / last card is always active. */
+const pickActiveCard = (stage, cards) => {
+  const maxScroll = stage.scrollWidth - stage.clientWidth;
+  if (stage.scrollLeft <= 2) return cards[0];
+  if (maxScroll > 0 && stage.scrollLeft >= maxScroll - 2) return cards[cards.length - 1];
 
-  const center = stage.scrollLeft + stage.clientWidth / 2;
+  const stageRect = stage.getBoundingClientRect();
+  const center = stageRect.left + stageRect.width / 2;
   let closest = cards[0];
   let closestDistance = Infinity;
-
   cards.forEach(card => {
-    const cardCenter = card.offsetLeft + card.offsetWidth / 2;
-    const distance = Math.abs(cardCenter - center);
+    const rect = card.getBoundingClientRect();
+    const distance = Math.abs(rect.left + rect.width / 2 - center);
     if (distance < closestDistance) {
       closestDistance = distance;
       closest = card;
     }
   });
-
-  cards.forEach(card => card.classList.toggle('is-active', card === closest));
+  return closest;
 };
 
-const updateSliderEdgeSpace = stage => {
-  const track = stage.querySelector('.slider-track');
-  const firstCard = track?.querySelector('.portfolio-card');
-  const lastCard = track?.lastElementChild;
-  if (!track || !firstCard || !lastCard) return;
-
-  const edgeSpace = Math.max(0, (stage.clientWidth - firstCard.offsetWidth) / 2);
-  track.style.paddingLeft = `${edgeSpace}px`;
-  track.style.paddingRight = `${Math.max(0, (stage.clientWidth - lastCard.offsetWidth) / 2)}px`;
+const scrollStageToCard = (stage, card) => {
+  const inset = parseFloat(getComputedStyle(stage).scrollPaddingLeft) || 0;
+  const left = stage.scrollLeft + card.getBoundingClientRect().left - stage.getBoundingClientRect().left - inset;
+  stage.scrollTo({ left, behavior: 'smooth' });
 };
+
+const syncActiveCard = stage => {
+  const cards = [...stage.querySelectorAll('.portfolio-card')];
+  if (!cards.length) return;
+  const active = pickActiveCard(stage, cards);
+  cards.forEach(card => card.classList.toggle('is-active', card === active));
+};
+
+const updateSliderEdgeSpace = () => { /* intentionally empty: no centred lead-in padding */ };
 
 const renderPortfolioGroups = () => {
   if (!portfolioGroupsRoot) return;
@@ -564,8 +571,7 @@ const renderPortfolioGroups = () => {
         : Math.max(activeIndex - 1, 0);
 
       const targetCard = cards[nextIndex] || cards[0];
-      const targetScroll = targetCard.offsetLeft + targetCard.offsetWidth / 2 - stage.clientWidth / 2;
-      stage.scrollTo({ left: targetScroll, behavior: 'smooth' });
+      scrollStageToCard(stage, targetCard);
     });
   });
 
@@ -839,29 +845,17 @@ const tFill = $('#quoteProgress');
 
 const syncTestimonials = () => {
   if (!tStage || !tCards.length) return;
-  const center = tStage.scrollLeft + tStage.clientWidth / 2;
-  let closest = tCards[0];
-  let closestDistance = Infinity;
-  tCards.forEach(card => {
-    const distance = Math.abs(card.offsetLeft + card.offsetWidth / 2 - center);
-    if (distance < closestDistance) { closestDistance = distance; closest = card; }
-  });
-  tCards.forEach(card => card.classList.toggle('is-active', card === closest));
+  const active = pickActiveCard(tStage, tCards);
+  tCards.forEach(card => card.classList.toggle('is-active', card === active));
   if (tFill) formatSliderProgress(tStage, tFill);
 };
 
-const setTestimonialEdges = () => {
-  const track = $('.t-track');
-  if (!track || !tCards.length) return;
-  const edge = Math.max(0, (tStage.clientWidth - tCards[0].offsetWidth) / 2);
-  track.style.paddingLeft = track.style.paddingRight = `${edge}px`;
-  syncTestimonials();
-};
+const setTestimonialEdges = syncTestimonials;
 
 const stepTestimonial = dir => {
   const active = tCards.findIndex(card => card.classList.contains('is-active'));
   const target = tCards[Math.max(0, Math.min(tCards.length - 1, active + dir))];
-  if (target) tStage.scrollTo({ left: target.offsetLeft + target.offsetWidth / 2 - tStage.clientWidth / 2, behavior: 'smooth' });
+  if (target) scrollStageToCard(tStage, target);
 };
 
 if (tStage) {
