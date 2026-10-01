@@ -1442,7 +1442,7 @@ img {
 /* Tall stage so the sticky panel has real scroll room to travel through
    all five steps instead of scrolling past in one quick flick. */
 .process-stage {
-  height: 260vh;
+  height: 420vh;
 }
 
 .process-sticky {
@@ -1526,6 +1526,7 @@ img {
   place-items: center;
   overflow: hidden;
   position: relative;
+  border: 1px solid rgba(255, 255, 255, .22);
   transition: background .6s var(--ease);
 }
 

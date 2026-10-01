@@ -873,11 +873,11 @@ if (tStage) {
 
 /* Process storytelling */
 const processData = [
-  ['01', 'DISCOVER', 'Start with the real problem.', 'We learn the business, audience, context and objective before we decide what the design should look like.', '#162DAF'],
-  ['02', 'DEFINE', 'Turn context into direction.', 'We clarify the opportunity, positioning, audience and creative direction so the project has a clear north star.', '#D8A901'],
-  ['03', 'DESIGN', 'Make the idea visible.', 'We explore, develop and execute the visual solution across the places it needs to live.', '#F5CC00'],
-  ['04', 'REFINE', 'Make good work better.', 'We review, test, remove what is not working and sharpen what is until the system feels inevitable.', '#162DAF'],
-  ['05', 'DELIVER', 'Leave you with a system.', 'You receive organized, production-ready files and the guidance needed to use the work confidently.', '#000985']
+  ['01', 'DISCOVER', 'Start with the real problem.', 'We learn the business, audience, context and objective before we decide what the design should look like.', '#162DAF', '#000985'],
+  ['02', 'DEFINE', 'Turn context into direction.', 'We clarify the opportunity, positioning, audience and creative direction so the project has a clear north star.', '#D8A901', '#162DAF'],
+  ['03', 'DESIGN', 'Make the idea visible.', 'We explore, develop and execute the visual solution across the places it needs to live.', '#F5CC00', '#D8A901'],
+  ['04', 'REFINE', 'Make good work better.', 'We review, test, remove what is not working and sharpen what is until the system feels inevitable.', '#162DAF', '#F5CC00'],
+  ['05', 'DELIVER', 'Leave you with a system.', 'You receive organized, production-ready files and the guidance needed to use the work confidently.', '#F5CC00', '#162DAF']
 ];
 let processIndex = -1;
 const processStage = $('.process-stage');
@@ -893,7 +893,7 @@ const setProcessStep = idx => {
   $('#processLabel').textContent = d[1];
   $('#processTitle').textContent = d[2];
   $('#processText').textContent = d[3];
-  if (processVisual) processVisual.style.background = `linear-gradient(135deg, ${d[4]}, #000985)`;
+  if (processVisual) processVisual.style.background = `linear-gradient(135deg, ${d[4]}, ${d[5]})`;
   if (processBigNumber) processBigNumber.textContent = d[0];
   $$('.process-index i').forEach((i, n) => i.classList.toggle('active', n === idx));
 
@@ -905,13 +905,16 @@ const setProcessStep = idx => {
   }
 };
 
-// Map the sticky panel's travel across the tall stage onto the five steps.
+// Each step gets an equal share of the scroll distance the panel is actually pinned
+// for, so no step is used up while the section is still scrolling into place.
+const processSticky = $('.process-sticky');
 const updateProcess = () => {
-  if (!processStage) return;
+  if (!processStage || !processSticky) return;
   const rect = processStage.getBoundingClientRect();
-  const travel = Math.max(1, rect.height - window.innerHeight);
-  const progress = Math.min(1, Math.max(0, (window.innerHeight * 0.9 - rect.top) / travel));
-  setProcessStep(Math.min(processData.length - 1, Math.floor(progress * processData.length)));
+  const pinTop = parseFloat(getComputedStyle(processSticky).top) || 0;
+  const travel = Math.max(1, rect.height - processSticky.offsetHeight);
+  const progress = Math.min(0.9999, Math.max(0, (pinTop - rect.top) / travel));
+  setProcessStep(Math.floor(progress * processData.length));
 };
 
 let processRaf = null;
