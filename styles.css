@@ -1511,7 +1511,6 @@ img {
 
 .footer-brand img {
   width: 190px;
-  filter: brightness(0) invert(1);
 }
 
 .footer-brand p {
@@ -2104,8 +2103,16 @@ select:focus {
   color: var(--ink);
 }
 
-:root[data-theme="dark"] .brand img {
-  filter: brightness(0) invert(1);
+.brand .logo-dark {
+  display: none;
+}
+
+:root[data-theme="dark"] .brand .logo-light {
+  display: none;
+}
+
+:root[data-theme="dark"] .brand .logo-dark {
+  display: block;
 }
 
 :root[data-theme="dark"] .form-success-note {
