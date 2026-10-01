@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Top Partnering Fellowships - September</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:1422px;height:2000px;overflow:hidden}
+  body{
+    font-family:'Arial Narrow','Segoe UI',Arial,sans-serif;
+    background:
+      radial-gradient(ellipse at 50% 18%, #fffdf2 0%, #fbf1c9 45%, #f1d680 100%);
+    position:relative;color:#0b2a9a;
+  }
+  /* gold swooshes */
+  .ring{position:absolute;border-radius:50%;border:26px solid transparent;
+    background:linear-gradient(135deg,#fff3b0,#e0a823 45%,#fff0a0 70%,#b8860b) border-box;
+    -webkit-mask:linear-gradient(#000 0 0) padding-box,linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;mask-composite:exclude;opacity:.85}
+  .r1{width:1900px;height:2400px;left:-250px;top:-250px}
+  .r2{width:1700px;height:2200px;left:-150px;top:-150px;border-width:8px;opacity:.6}
+  .confetti i{position:absolute;width:26px;height:26px;background:linear-gradient(135deg,#ffe680,#d29a12);transform:rotate(30deg)}
+
+  .tag{position:absolute;top:26px;left:50%;transform:translateX(-50%);display:flex;align-items:center;height:78px}
+  .tag .badge{width:96px;height:78px;background:#d3202a;clip-path:polygon(0 0,100% 0,85% 100%,0 100%);display:flex;align-items:center;justify-content:center}
+  .tag .badge b{width:62px;height:62px;border-radius:50%;background:radial-gradient(#fff,#f6e08a);border:4px solid #d9a521;display:block}
+  .tag span{background:#1233c9;color:#fff;font:italic 900 34px Arial;letter-spacing:1px;height:78px;line-height:78px;padding:0 60px 0 40px;clip-path:polygon(0 0,100% 0,100% 100%,0 100%,5% 50%)}
+
+  h1{position:absolute;top:120px;width:100%;text-align:center;font:900 124px/0.9 Impact,'Arial Black',sans-serif;
+    letter-spacing:-2px;text-transform:uppercase;
+    background:linear-gradient(180deg,#fff7b8 0%,#ffd84a 40%,#d9980d 62%,#ffe27a 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    -webkit-text-stroke:3px #7a4b00;paint-order:stroke fill;
+    filter:drop-shadow(5px 6px 0 #12279e) drop-shadow(0 10px 8px rgba(0,0,0,.25))}
+  h1 small{display:block;font-size:92px;margin-top:6px}
+
+  .sub{position:absolute;top:458px;left:50%;transform:translateX(-50%);
+    background:linear-gradient(180deg,#2347f0,#0a1f9c);border:4px solid #f3c84a;border-radius:44px;
+    color:#fff;font:900 46px Arial;letter-spacing:1px;padding:14px 58px;white-space:nowrap;
+    box-shadow:0 8px 18px rgba(0,0,0,.3)}
+  .sub em{color:#ffe36a;font-style:normal}
+
+  .grid{position:absolute;top:585px;left:70px;right:70px;display:grid;grid-template-columns:repeat(4,1fr);gap:40px 38px}
+  .card{position:relative;padding-top:18px}
+  .frame{position:relative;width:100%;height:290px;border-radius:18px;padding:18px;
+    background:linear-gradient(135deg,#fff1a8,#d9a020 35%,#fff0a0 55%,#b78309);
+    box-shadow:0 10px 20px rgba(80,50,0,.35)}
+  .photo{width:100%;height:100%;border-radius:8px;border:3px solid #8a5d06;
+    background:radial-gradient(circle at 50% 35%,#4fd17a 0%,#1f9d4d 55%,#0f6b32 100%);
+    display:flex;align-items:center;justify-content:center;flex-direction:column;
+    color:rgba(255,255,255,.55);font:700 22px Arial;letter-spacing:3px}
+  .photo svg{width:96px;height:96px;opacity:.5;margin-bottom:8px}
+  .rank{position:absolute;top:-6px;left:-14px;z-index:3;width:86px;height:98px;
+    background:radial-gradient(circle at 40% 30%,#fff,#e9e4d0);
+    clip-path:polygon(50% 0,100% 12%,100% 62%,50% 100%,0 62%,0 12%);
+    display:flex;align-items:center;justify-content:center;
+    font:900 52px Georgia,serif;color:#1d1d1d;filter:drop-shadow(0 4px 4px rgba(0,0,0,.4))}
+  .rank::before{content:"";position:absolute;inset:5px;clip-path:inherit;border:0;background:linear-gradient(#fff,#f1ecd6);z-index:-1}
+  .top1 .rank,.top2 .rank,.top3 .rank{color:#fff}
+  .top1 .rank{background:linear-gradient(160deg,#ffe680,#c8870b)}
+  .top2 .rank{background:linear-gradient(160deg,#f4f4f4,#8e9aa8)}
+  .top3 .rank{background:linear-gradient(160deg,#f2b27a,#a35a1c)}
+  .top1 .rank::before,.top2 .rank::before,.top3 .rank::before{display:none}
+  .plate{margin-top:-12px;position:relative;z-index:2;height:78px;border-radius:12px;
+    background:linear-gradient(180deg,#f9d963,#cf9a16);display:flex;align-items:center;justify-content:center;
+    font:900 28px Arial;color:#2c2203;text-transform:uppercase;letter-spacing:.5px;
+    box-shadow:0 6px 12px rgba(80,50,0,.35);padding:0 10px;text-align:center;line-height:1}
+
+  .foot{position:absolute;left:92px;right:92px;bottom:0;height:116px;padding-top:6px;background:#fff;border-radius:18px 18px 0 0;
+    display:flex;align-items:center;justify-content:space-between;padding:0 50px;box-shadow:0 -6px 18px rgba(0,0,0,.2)}
+  .foot .lbl{font:900 26px Arial;color:#0b2a9a;letter-spacing:1px}
+  .foot .val{margin-top:6px;background:#1233c9;color:#fff;font:900 48px Arial;padding:0 26px;text-align:center}
+  .mid{text-align:center}
+  .mid .lbl{font-size:22px}
+  .coins{display:flex;gap:14px;margin-top:10px;justify-content:center}
+  .coins i{width:52px;height:52px;border-radius:50%;background:radial-gradient(#2a7bff,#0a2aa8);border:5px solid #e9b73a;
+    color:#ffd84a;font:italic 900 28px Georgia;display:flex;align-items:center;justify-content:center}
+  .logo{position:absolute;right:50px;top:34px;width:120px;height:120px;border-radius:50%;
+    background:radial-gradient(#3d8bff,#0a2aa8);border:6px solid #f3c84a;
+    color:#ffd84a;font:italic 900 90px Georgia;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 0 0 6px rgba(255,214,74,.35)}
+</style>
+</head>
+<body>
+<div class="ring r1"></div><div class="ring r2"></div>
+<div class="confetti">
+  <i style="left:110px;top:90px"></i><i style="left:1290px;top:150px;width:18px;height:18px"></i>
+  <i style="left:70px;top:420px;width:16px;height:16px"></i><i style="left:1340px;top:520px"></i>
+  <i style="left:40px;top:1500px;width:20px;height:20px"></i><i style="left:1330px;top:1180px;width:16px;height:16px"></i>
+</div>
+
+<div class="tag"><div class="badge"><b></b></div><span>BLW CAMEROON ZONE A</span></div>
+
+<h1>Celebrating Our<br>Top Partnering<small>Fellowships</small></h1>
+
+<div class="sub">FOR THE MONTH OF GROWTH &nbsp;•&nbsp; <em>SEPTEMBER</em></div>
+
+<div class="grid" id="grid"></div>
+
+<div class="logo">R</div>
+
+<div class="foot">
+  <div><div class="lbl">MOMO NUMBER</div><div class="val">671477292</div></div>
+  <div class="mid"><div class="lbl">PARTNER WITH US TODAY</div>
+    <div class="coins"><i>R</i><i>R</i><i>R</i><i>R</i><i>R</i></div></div>
+  <div><div class="lbl" style="text-align:center">ESPEES CODE:</div><div class="val">BLWCZA</div></div>
+</div>
+
+<script>
+const names=["BLW BUEA","BLW GABON","BLW YAOUNDE 1","BLW FOUMBAN","BLW TIKO","BLW UNIVERSITY OF DOUALA","BLW BONABERI","BLW NDONGO","BLW LIMBE","BLW CHAD","BLW KUMBA","BLW RECOBES"];
+const icon='<svg viewBox="0 0 24 24" fill="#fff"><circle cx="12" cy="8" r="4.5"/><path d="M3 22c0-5 4-8 9-8s9 3 9 8z"/></svg>';
+document.getElementById('grid').innerHTML=names.map((n,i)=>`
+  <div class="card ${i<3?'top'+(i+1):''}">
+    <div class="rank">${i+1}</div>
+    <div class="frame"><div class="photo">${icon}<span>LOGO</span></div></div>
+    <div class="plate" style="font-size:${n.length>16?22:28}px">${n}</div>
+  </div>`).join('');
+</script>
+</body>
+</html>
