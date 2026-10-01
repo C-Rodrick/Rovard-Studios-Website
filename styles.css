@@ -1250,20 +1250,6 @@ img {
 }
 
 /* Soft brand light behind the cards so the glass has something to refract */
-.testimonials::after {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  border-radius: 50%;
-  filter: blur(80px);
-  pointer-events: none;
-  width: 30vw;
-  height: 30vw;
-  right: -4vw;
-  bottom: 4%;
-  background: rgba(245, 204, 0, .38);
-}
-
 .testimonial-head {
   margin: clamp(56px, 7vw, 112px) 0 clamp(36px, 4vw, 64px);
 }
