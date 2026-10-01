@@ -19,7 +19,7 @@
   styleEl.id = 'rv-immersive-styles';
   styleEl.textContent = `
 .rv-orb-layer { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
-.rv-orb { position: absolute; border-radius: 50%; filter: blur(90px); will-change: transform; opacity: 0; animation: rvOrbDrift var(--rv-dur, 22s) var(--rv-delay, 0s) ease-in-out infinite alternate; }
+.rv-orb { position: absolute; border-radius: 50%; will-change: transform; opacity: 0; animation: rvOrbDrift var(--rv-dur, 22s) var(--rv-delay, 0s) ease-in-out infinite alternate; }
 @keyframes rvOrbDrift {
   0%   { transform: translate(0, 0) scale(1); opacity: var(--rv-opacity-low); }
   33%  { transform: translate(var(--rv-dx1, 80px), var(--rv-dy1, -50px)) scale(1.08); }
@@ -34,7 +34,7 @@
   animation: rvRipple 0.7s cubic-bezier(0.22,1,0.36,1) forwards; pointer-events: none;
 }
 @keyframes rvRipple { to { transform: translate(-50%,-50%) scale(var(--rv-ripple-size, 40)); opacity: 0; } }
-.rv-warp { transform-origin: center 80%; will-change: transform, opacity; transition: transform 1.1s cubic-bezier(0.22,1,0.36,1), opacity 1.1s cubic-bezier(0.22,1,0.36,1); }
+.rv-warp { transform-origin: center 80%; will-change: transform, opacity; transition: transform .75s cubic-bezier(0.22,1,0.36,1), opacity .6s cubic-bezier(0.22,1,0.36,1); }
 .rv-warp:not(.rv-warp-in) { transform: perspective(900px) rotateX(5deg) translateY(40px); opacity: 0; }
 .rv-warp.rv-warp-in { transform: perspective(900px) rotateX(0deg) translateY(0); opacity: 1; }
 @media (prefers-reduced-motion: reduce) { .rv-warp:not(.rv-warp-in) { transform: none; opacity: 0; } .rv-warp.rv-warp-in { transform: none; } }
@@ -90,13 +90,13 @@
     const orbs = defs.map(d => {
       const el = document.createElement('div');
       el.className = 'rv-orb';
-      el.style.cssText = `width:${d.w}px;height:${d.h}px;left:calc(${d.x}% - ${d.w/2}px);top:calc(${d.y}% - ${d.h/2}px);background:${isDark()?d.cd:d.cl};--rv-dur:${d.dur}s;--rv-delay:${d.delay}s;--rv-dx1:${d.dx1}px;--rv-dy1:${d.dy1}px;--rv-dx2:${d.dx2}px;--rv-dy2:${d.dy2}px;--rv-dx3:${d.dx3}px;--rv-dy3:${d.dy3}px;--rv-opacity-low:${d.opL};--rv-opacity-hi:${d.opH};`;
+      el.style.cssText = `width:${d.w}px;height:${d.h}px;left:calc(${d.x}% - ${d.w/2}px);top:calc(${d.y}% - ${d.h/2}px);background:radial-gradient(closest-side, ${isDark()?d.cd:d.cl}, transparent);--rv-dur:${d.dur}s;--rv-delay:${d.delay}s;--rv-dx1:${d.dx1}px;--rv-dy1:${d.dy1}px;--rv-dx2:${d.dx2}px;--rv-dy2:${d.dy2}px;--rv-dx3:${d.dx3}px;--rv-dy3:${d.dy3}px;--rv-opacity-low:${d.opL};--rv-opacity-hi:${d.opH};`;
       layer.appendChild(el);
       return { el, d };
     });
     new MutationObserver(() => {
       const dark = isDark();
-      orbs.forEach(({ el, d }) => { el.style.background = dark ? d.cd : d.cl; });
+      orbs.forEach(({ el, d }) => { el.style.background = `radial-gradient(closest-side, ${dark ? d.cd : d.cl}, transparent)`; });
     }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
     if (!reduced) {
       window.addEventListener('scroll', () => {
@@ -166,7 +166,7 @@
     $$('.rv-warp').forEach(el => {
       const obs = new IntersectionObserver(en => {
         if (en[0].isIntersecting) { el.classList.add('rv-warp-in'); obs.disconnect(); }
-      }, { threshold: 0.08, rootMargin: '0px 0px -60px 0px' });
+      }, { threshold: 0, rootMargin: '0px 0px 12% 0px' });
       obs.observe(el);
     });
   }

@@ -775,8 +775,6 @@ img {
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, .18);
   background: rgba(255, 255, 255, .12);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
   box-shadow: 0 14px 32px rgba(14, 18, 35, .09);
   cursor: pointer;
   scroll-snap-align: start;
@@ -943,7 +941,6 @@ img {
   transform: translate(-50%, -50%);
   background: radial-gradient(circle, rgba(22, 45, 175, 0.08) 0%, rgba(245, 204, 0, 0.02) 42%, transparent 70%);
   transition: opacity .4s ease;
-  mix-blend-mode: screen;
   will-change: transform;
 }
 
@@ -1661,7 +1658,7 @@ img {
 .reveal {
   opacity: 0;
   transform: translateY(35px);
-  transition: opacity .8s var(--ease), transform .8s var(--ease);
+  transition: opacity .6s var(--ease), transform .6s var(--ease);
 }
 
 .reveal.in-view {

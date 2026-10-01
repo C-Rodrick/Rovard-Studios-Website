@@ -68,7 +68,7 @@ const revealObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) entry.target.classList.add('in-view');
   });
-}, { threshold: 0.12 });
+}, { threshold: 0, rootMargin: '0px 0px 12% 0px' });
 
 $$('.reveal').forEach(el => revealObserver.observe(el));
 
@@ -107,7 +107,7 @@ const caseData = [
     approach: 'We developed a flexible identity system with sharp typography, a memorable symbol and a disciplined visual rhythm.',
     outcome: 'A cohesive, recognizable identity system that brings Green Blueprint’s sustainable construction vision to life across digital and physical touchpoints.',
     colours: ['#1B4839', '#EBEBEB', '#5CAD8D', '#f5cc00'],
-    coverImage: 'assets/Brand%20Identitities/1_Green%20Blueprint/Cover%207.jpg',
+    coverImage: 'assets/thumbs/1-green-blueprint-cover-7.jpg',
     galleryImages: [
       'assets/Brand%20Identitities/1_Green%20Blueprint/Cover%201.jpg',
       'assets/Brand%20Identitities/1_Green%20Blueprint/Cover%201.2.jpg',
@@ -131,7 +131,7 @@ const caseData = [
     approach: 'We simplified the visual language, refined the positioning and built a more consistent brand system from the inside out.',
     outcome: 'A cleaner and more premium identity that creates stronger recall and better internal alignment.',
     colours: ['#162daf', '#f7f7f5', '#f5cc00', '#000985'],
-    coverImage: 'assets/Brand%20Identitities/2_Design%20Eigen/imgi_157_c7b3d4219180769.67b0aff187b1c.jpg',
+    coverImage: 'assets/thumbs/2-design-eigen-imgi-157-c7b3d4219180769-67b0aff187b1c.jpg',
     galleryImages: [
       'assets/Brand%20Identitities/2_Design%20Eigen/imgi_200_f1f03a219180769.67ada23ebe1ae.jpg',
       'assets/Brand%20Identitities/2_Design%20Eigen/imgi_201_4a6fc4219180769.67ada43c328d1.jpg',
@@ -157,7 +157,7 @@ const caseData = [
     approach: 'We built a dark, high-contrast visual language around the Bitefort shield and cookie motif, extending it across campaigns, digital touchpoints and branded merchandise.',
     outcome: 'A memorable purple identity that makes trust, privacy and effortless cookie management feel immediate across every touchpoint.',
     colours: ['#21003F', '#F7F4F1', '#6B2FB3', '#0D0616'],
-    coverImage: 'assets/Brand%20Identitities/3_Bitefort/1.jpg',
+    coverImage: 'assets/thumbs/3-bitefort-1.jpg',
     galleryImages: [
       'assets/Brand%20Identitities/3_Bitefort/2.jpg',
       'assets/Brand%20Identitities/3_Bitefort/3.jpg',
@@ -178,7 +178,7 @@ const caseData = [
     approach: 'We developed a modular identity around linked forms, a deep navy foundation and a violet gradient accent that moves naturally across digital and physical applications.',
     outcome: 'A confident technology brand that gives engineering knowledge a memorable visual rhythm across products, spaces and culture.',
     colours: ['#07112F', '#F7F8FC', '#8B5CF6', '#101A3D'],
-    coverImage: 'assets/Brand%20Identitities/4_Linkrithm/linkrithm-cover.jpg',
+    coverImage: 'assets/thumbs/4-linkrithm-linkrithm-cover.jpg',
     galleryImages: [
       'assets/Brand%20Identitities/4_Linkrithm/linkrithm-gallery-01.jpg',
       'assets/Brand%20Identitities/4_Linkrithm/linkrithm-gallery-02.jpg',
@@ -225,7 +225,7 @@ const caseData = [
     approach: 'We created a flexible campaign language built from bold blue fields, energetic orange accents, expressive headlines and real human stories.',
     outcome: 'A recognizable social presence that makes ShorteeMe’s message easy to understand, share and remember across every campaign format.',
     colours: ['#0057B8', '#F7F7F5', '#FF9700', '#003B7A'],
-    coverImage: 'assets/Social%20Media/1_ShorteeMe/Make%20something%20amazing%201.jpg',
+    coverImage: 'assets/thumbs/1-shorteeme-make-something-amazing-1.jpg',
     galleryImages: [
       'assets/Social%20Media/1_ShorteeMe/Extend%20your%20reach%20today%201.jpg',
       'assets/Social%20Media/1_ShorteeMe/Did%20you%20know,%20raise%20money%20for%20what%20matters%20copy%201.jpg',
@@ -256,7 +256,7 @@ const caseData = [
     approach: 'We built a clear visual format across several campaign stories, each built to feel consistent without becoming repetitive.',
     outcome: 'A social set that improved recognition, helped the team move faster and supported story clarity.',
     colours: ['#2A363B', '#E8D5B5', '#99B898', '#E84A5F'],
-    coverImage: 'assets/Social%20Media/Kymela/cover.jpg',
+    coverImage: 'assets/thumbs/kymela-cover.jpg',
     galleryImages: [
       'assets/Social%20Media/Kymela/img1.jpg',
       'assets/Social%20Media/Kymela/img2.jpg',
@@ -273,7 +273,7 @@ const caseData = [
     approach: 'We designed a flexible template system with distinctive crop language, bold type and consistent campaign framing.',
     outcome: 'A consistent media system with stronger visual recall and clearer campaign storytelling.',
     colours: ['#0C0CB4', '#FCFCFC', '#FDCF09', '#0507B0'],
-    coverImage: 'assets/Social%20Media/3_PDOCA/Layer%205.jpg',
+    coverImage: 'assets/thumbs/3-pdoca-layer-5.jpg',
     galleryImages: [
       'assets/Social%20Media/3_PDOCA/RML%20-%20Dealing%20copy%201.jpg',
       'assets/Social%20Media/3_PDOCA/WhatsApp%20Image%202025-02-08%20at%201.27.27%20PM%20(2).jpg',
@@ -295,7 +295,7 @@ const caseData = [
     approach: 'We built a bold, reusable campaign language around cyan panels, orange call-to-actions, playful headlines and clean offer layouts.',
     outcome: 'A recognizable social presence with clearer offers, stronger recall and a consistent publishing rhythm.',
     colours: ['#FF6801', '#162336', '#0CE4FC', '#162336'],
-    coverImage: 'assets/Social%20Media/4_Dress%20Doctor/BOOK%20PICKUP_DD.jpg',
+    coverImage: 'assets/thumbs/4-dress-doctor-book-pickup-dd.jpg',
     galleryImages: [
       'assets/Social%20Media/4_Dress%20Doctor/Dress%20Doctor%201.jpg',
       'assets/Social%20Media/4_Dress%20Doctor/Wash%20in%20Bulk.jpg',
@@ -312,7 +312,7 @@ const caseData = [
     approach: 'We designed a bold green campaign language with playful type, clear feature call-outs and product mockups.',
     outcome: 'A recognizable launch presence with clearer feature storytelling and stronger engagement across socials.',
     colours: ['#016B29', '#FCFCFC', '#00F4A6', '#004F39'],
-    coverImage: 'assets/Social%20Media/6_GCE%20Study%20App/3.jpg',
+    coverImage: 'assets/thumbs/6-gce-study-app-3.jpg',
     galleryImages: [
       'assets/Social%20Media/6_GCE%20Study%20App/2.jpg',
       'assets/Social%20Media/6_GCE%20Study%20App/1.jpg',
@@ -348,7 +348,7 @@ const caseData = [
     approach: 'We explored bold typographic structures, gold foil accents and disciplined mockup rounds from prototype to final press.',
     outcome: 'A striking black-and-gold cover family that reads powerfully at thumbnail size and feels premium in hand.',
     colours: ['#141414', '#F5F1E6', '#C9A24B', '#8B6B2A'],
-    coverImage: 'assets/Packaging%20Design/1_Book%20Cover%20Design/Book%20Cover%20mockup%203.1%201.jpg',
+    coverImage: 'assets/thumbs/1-book-cover-design-book-cover-mockup-3-1-1.jpg',
     galleryImages: [
       'assets/Packaging%20Design/1_Book%20Cover%20Design/Book%20Cover%20mockup%203.1%201%20-%20Copy.jpg',
       'assets/Packaging%20Design/1_Book%20Cover%20Design/Book%20Cover%20mockup%204%201.jpg',
@@ -524,7 +524,7 @@ const renderPortfolioGroups = () => {
                     data-cursor-label="View case study"
                     aria-label="Open ${project.title} case study"
                   >
-                    <span class="portfolio-card-media" style="background-image: url('${image}')"></span>
+                    <span class="portfolio-card-media" data-bg="${image}"></span>
                     <span class="portfolio-card-copy">
                       <span class="portfolio-card-kicker">${project.category}</span>
                       <h3>${project.title}</h3>
@@ -549,6 +549,17 @@ const renderPortfolioGroups = () => {
       </div>
     `;
   }).join('');
+
+  // Only fetch a card's cover once it is near the viewport (or its slider's visible area).
+  const mediaObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      el.style.backgroundImage = `url('${el.dataset.bg}')`;
+      mediaObserver.unobserve(el);
+    });
+  }, { rootMargin: '600px 300px' });
+  $$('.portfolio-card-media[data-bg]').forEach(el => mediaObserver.observe(el));
 
   $$('.portfolio-card').forEach(card => {
     const index = Number(card.dataset.originalIndex);
