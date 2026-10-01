@@ -816,35 +816,35 @@ img {
   transform: scale(1.08);
 }
 
-/* Brand-blue gradient overlay — matches the Rovard logo blue (#162DAF → #000985) */
-.portfolio-card::after {
+/* Brand-blue wash (#162DAF → #000985): hidden at rest, fades in on hover / focus only.
+   Lives on ::before so motion.js's tilt gloss (::after) can't override it. */
+.portfolio-card::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(22, 45, 175, .22) 0%,
-    rgba(0, 8, 133, .58) 55%,
-    rgba(0, 8, 133, .9) 100%
-  );
-  transition: background .5s var(--ease);
-}
-
-.portfolio-card:hover::after,
-.portfolio-card:focus-visible::after {
+  z-index: 1;
+  pointer-events: none;
   background: linear-gradient(
     180deg,
     rgba(22, 45, 175, .32) 0%,
     rgba(0, 8, 133, .68) 55%,
     rgba(0, 8, 133, .94) 100%
   );
+  opacity: 0;
+  transition: opacity .5s var(--ease);
+}
+
+.portfolio-card:hover::before,
+.portfolio-card:focus-visible::before {
+  opacity: 1;
 }
 
 .portfolio-card-copy {
   position: absolute;
   inset: auto 0 0;
-  z-index: 1;
-  padding: 22px 22px 20px;
+  z-index: 2;
+  padding: 64px 22px 20px;
+  background: linear-gradient(0deg, rgba(6, 8, 30, .82) 0%, rgba(6, 8, 30, .5) 60%, transparent 100%);
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -1039,7 +1039,7 @@ img {
   }
 
   .portfolio-card-copy {
-    padding: 18px;
+    padding: 56px 18px 18px;
   }
 
   .portfolio-card-copy h3 {
@@ -1070,7 +1070,7 @@ img {
   }
 
   .portfolio-card-copy {
-    padding: 14px;
+    padding: 48px 14px 14px;
   }
 
   .portfolio-card-copy h3 {
