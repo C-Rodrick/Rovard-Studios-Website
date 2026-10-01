@@ -773,21 +773,18 @@ img {
   height: clamp(300px, 31vw, 420px);
   border-radius: 22px;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, .18);
-  background: rgba(255, 255, 255, .12);
+  background: var(--deep-blue);
   box-shadow: 0 14px 32px rgba(14, 18, 35, .09);
   cursor: pointer;
   scroll-snap-align: start;
   transform: scale(.94);
   transform-origin: center;
   will-change: transform;
-  transition: transform .55s cubic-bezier(.22, 1, .36, 1), box-shadow .35s ease, opacity .35s ease;
-  opacity: .8;
+  transition: transform .55s cubic-bezier(.22, 1, .36, 1), box-shadow .35s ease;
 }
 
 .portfolio-card.is-active {
   transform: scale(1.04);
-  opacity: 1;
   box-shadow: 0 18px 42px rgba(14, 18, 35, .12);
 }
 
@@ -807,7 +804,6 @@ img {
   inset: 0;
   background-size: cover;
   background-position: center;
-  transform: scale(1.04);
   transition: transform .6s ease;
 }
 
@@ -885,32 +881,14 @@ img {
   color: var(--yellow);
 }
 
-/* 3D Card Depth & Holographic Layer Pop */
-.portfolio-card,
-.studio-card {
-  transform-style: preserve-3d;
-  perspective: 1200px;
-}
-
+/* Cards stay flat: 3D translateZ on text/images forces blurry re-rasterisation */
 .portfolio-card-media {
-  transform: scale(1.04) translateZ(0);
+  transform: none;
   transition: transform .6s ease;
 }
 
 .portfolio-card:hover .portfolio-card-media {
-  transform: scale(1.08) translateZ(14px);
-}
-
-.portfolio-card-copy {
-  transform-style: preserve-3d;
-  transform: translateZ(30px);
-  transition: transform .35s var(--ease);
-}
-
-.portfolio-card-copy h3,
-.portfolio-card-kicker,
-.portfolio-card-meta {
-  transform: translateZ(16px);
+  transform: scale(1.05);
 }
 
 .studio-card {
