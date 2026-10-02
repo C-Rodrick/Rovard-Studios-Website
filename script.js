@@ -1,3 +1,101 @@
+const $ = (s, root = document) => root.querySelector(s);
+const $$ = (s, root = document) => [...root.querySelectorAll(s)];
+
+const body = document.body;
+const header = $('#site-header');
+const menuToggle = $('.menu-toggle');
+const mobileMenu = $('.mobile-menu');
+const themeToggle = $('.theme-toggle');
+const themeColorMeta = $('meta[name="theme-color"]');
+
+/* Always start back at the homepage top on refresh — never restore the
+   previous scroll position or a leftover section hash (#work, #services…). */
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+window.addEventListener('beforeunload', () => window.scrollTo(0, 0));
+window.addEventListener('load', () => {
+  if (window.location.hash) {
+    history.replaceState(null, '', window.location.pathname + window.location.search);
+  }
+  window.scrollTo(0, 0);
+});
+
+const setTheme = theme => {
+  const isDark = theme === 'dark';
+  document.documentElement.dataset.theme = isDark ? 'dark' : 'light';
+  themeToggle?.setAttribute('aria-checked', String(isDark));
+  themeToggle?.setAttribute('aria-label', `Switch to ${isDark ? 'light' : 'dark'} mode`);
+  themeToggle?.setAttribute('title', `Switch to ${isDark ? 'light' : 'dark'} mode`);
+  $('.theme-toggle-icon', themeToggle)?.replaceChildren(document.createTextNode(isDark ? '☀' : '☾'));
+  $('.theme-toggle-label', themeToggle)?.replaceChildren(document.createTextNode(isDark ? 'Light' : 'Dark'));
+  themeColorMeta?.setAttribute('content', isDark ? '#111318' : '#F7F7F5');
+  try {
+    localStorage.setItem('rovard-theme', isDark ? 'dark' : 'light');
+  } catch { }
+};
+
+setTheme(document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light');
+themeToggle?.addEventListener('click', () => {
+  setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
+});
+
+/* Loader */
+window.addEventListener('load', () => {
+  setTimeout(() => $('.page-loader')?.classList.add('done'), 450);
+});
+
+/* Header */
+const updateHeader = () => header.classList.toggle('scrolled', window.scrollY > 40);
+updateHeader();
+window.addEventListener('scroll', updateHeader, { passive: true });
+
+/* Mobile navigation */
+menuToggle?.addEventListener('click', () => {
+  const open = mobileMenu.classList.toggle('open');
+  menuToggle.setAttribute('aria-expanded', open);
+  mobileMenu.setAttribute('aria-hidden', !open);
+  body.classList.toggle('no-scroll', open);
+});
+const closeMobileMenu = () => {
+  mobileMenu.classList.remove('open');
+  menuToggle?.setAttribute('aria-expanded', 'false');
+  mobileMenu.setAttribute('aria-hidden', 'true');
+  body.classList.remove('no-scroll');
+};
+$$('.mobile-menu a').forEach(a => a.addEventListener('click', closeMobileMenu));
+
+/* Reveal on scroll */
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('in-view');
+  });
+}, { threshold: 0, rootMargin: '0px 0px 12% 0px' });
+
+$$('.reveal').forEach(el => revealObserver.observe(el));
+
+/* Cursor, magnetic buttons and scroll effects are handled by motion.js */
+
+/* Case studies */
+const makeGalleryAsset = (title, colors = ['#162daf', '#f7f7f5', '#f5cc00']) => {
+  const fontSize = Math.min(128, Math.floor(960 / (title.length * 0.62)));
+  const fg = colors[1] || '#f7f7f5';
+  const bg1 = colors[0] || '#162daf';
+  const bg2 = colors[2] || '#f5cc00';
+  const svg = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900">
+      <defs>
+        <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+          <stop offset="0%" stop-color="${bg1}" />
+          <stop offset="100%" stop-color="${bg2}" />
+        </linearGradient>
+      </defs>
+      <rect width="1200" height="900" fill="url(#g)"/>
+      <rect x="90" y="90" width="1020" height="720" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="6"/>
+      <text x="600" y="470" text-anchor="middle" font-family="'Syne', sans-serif" font-size="${fontSize}" font-weight="700" letter-spacing="${-Math.round(fontSize * 0.06)}" fill="${fg}">${title.toUpperCase().replace(/&/g, '&amp;').replace(/</g, '&lt;')}</text>
+    </svg>
+  `;
+  return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+};
+
 const caseData = [
   {
     title: 'Green Blueprint',
@@ -152,7 +250,7 @@ const caseData = [
     category: 'Social Media Design',
     year: '2026',
     services: 'Campaign Art / Social Stories',
-    summary: 'A bold campaign identity for PDOCA’s coaching academy, built to create consistent brand presence across multiple formats.',
+    summary: 'A bold campaign identity for PDOCA\u2019s coaching academy, built to create consistent brand presence across multiple formats.',
     challenge: 'The brand needed a clearer, more premium visual rhythm across posts, stories and supporting assets.',
     approach: 'We designed a flexible template system with distinctive crop language, bold type and consistent campaign framing.',
     outcome: 'A consistent media system with stronger visual recall and clearer campaign storytelling.',
@@ -210,8 +308,8 @@ const caseData = [
     year: '2026',
     services: 'Website UI / Interaction Design / 3D / Front-end Build',
     summary: 'A premium website and interface for a crypto and forex trading platform, built directly from the Proxima identity.',
-    challenge: 'Trading platforms often feel cold, cluttered and untrustworthy. Proxima needed one calm, credible interface that handles crypto and forex side by side and carries its royal blue, gold and white system into every interaction.',
-    approach: 'We turned the logo into the interface: its three colours drive the palette, and the mark itself is rebuilt as a layered 3D object. Bricolage Grotesque, Onest and Geist Mono give a premium but readable rhythm.',
+    challenge: 'Trading platforms often feel cold, cluttered and untrustworthy. Proxima needed one calm, credible interface that handles crypto and forex side by side and carries its royal blue, navy and gold identity.',
+    approach: 'We turned the logo into the interface: its three colours drive the palette, and the mark itself is rebuilt as a layered 3D object. Bricolage Grotesque, Onest and Geist Mono give a confident, technical tone, with live market data, glass surfaces and fully responsive layouts.',
     outcome: 'A fast, responsive website that feels premium and trustworthy, with a live trading terminal, a unified markets view and a clear path from sign-up to first trade. Concept project; figures shown are illustrative.',
     colours: ['#000081', '#ffffff', '#1C39BB', '#FFC000'],
     coverImage: 'assets/thumbs/proxima-exchange-cover.jpg',
@@ -233,9 +331,9 @@ const caseData = [
     year: '2026',
     services: 'Brand Identity / Fintech Website / Dashboard UI / Product Build',
     summary: 'A brand identity, fintech website and working escrow platform for a modern African payment network, built around one promise: building trust into every transaction.',
-    challenge: 'Informal commerce across Africa runs on "trust me": buyers pay strangers up front, sellers chase invoices, and disputes have no referee. A payment brand here has to feel safe before it says anything else.',
-    approach: 'We built the identity on one idea: two sides meeting at a verified point. The logo is an open A whose strokes converge on a green dot, the same dot that becomes the apostrophe in the wordmark.',
-    outcome: 'A complete brand and product system, from logo to ledger: a website that explains escrow in one scroll, and a platform you can sign in to and try as buyer, seller or mediator. Concept project; all figures are illustrative.',
+    challenge: 'Informal commerce across Africa runs on "trust me": buyers pay strangers up front, sellers chase invoices, and disputes have no referee. A payment brand here has to feel safe before it feels fast.',
+    approach: 'We built the identity on one idea: two sides meeting at a verified point. The logo is an open A whose strokes converge on a green dot, the same dot that becomes the apostrophe in the wordmark. Black, white and electric blue carry the interface, and green is reserved for money that is verified or released. From there we designed the landing, pricing and security pages and a functional platform with milestone escrow, signed contracts, a wallet, disputes and an explainable trust score, thumb-first for mobile-money users.',
+    outcome: 'A complete brand and product system, from logo to ledger: a website that explains escrow in one scroll, and a platform you can sign in to and try as buyer, seller or mediator. Concept project; payments are simulated and all figures are illustrative.',
     colours: ['#05060A', '#FFFFFF', '#2F5BFF', '#2EE59D'],
     liveUrl: 'afaa-pay/index.html',
     liveLabel: 'Explore the live concept ↗',
@@ -281,7 +379,7 @@ const caseData = [
     services: 'Packaging Design / Logo & Lettering / Mockups',
     summary: 'Retro-bright potato chip packaging built around a cream roundel mark, a red and orange sunburst and a clear window that lets the chips do the selling.',
     challenge: 'The snack aisle is loud. JoJo Foods needed a pouch that reads from across the shop, feels friendly rather than corporate, and still shows off the product inside.',
-    approach: 'We put the JoJo Foods wordmark on a cream roundel so it holds its own against a high-energy red and orange sunburst. A chunky retro script carries "Crispy Snack" and the "Potato Chip" descriptor with easy recall.',
+    approach: 'We put the JoJo Foods wordmark on a cream roundel so it holds its own against a high-energy red and orange sunburst. A chunky retro script carries "Crispy Snack" and the "Potato Chips" tag, and a clear window shows the product through the middle of the pack.',
     outcome: 'A bold, shelf-ready pouch with one clear focal point, a warm colour palette that suits the product and lettering that stays legible at a glance.',
     colours: ['#EC2934', '#EBE9E9', '#EE5930', '#FFDF56'],
     coverImage: 'assets/thumbs/jojo-foods-cover.jpg',
@@ -300,7 +398,7 @@ const caseData = [
     services: 'Motion Design / 3D / Cinematic Direction / Sound Design',
     summary: 'Two launch films for a crypto and forex trading platform: a cinematic 3D brand film and a precise product film built from the real interface.',
     challenge: 'Proxima Exchange needed to feel trustworthy and premium in a category full of noise, and to show both the emotion of the brand and the real product in motion.',
-    approach: 'We built the logo as a layered 3D object and shot it with a virtual camera: rack focus, light rays and lens streaks, a deep blue and gold grade, and a score cut to every hit. A second film translated the same system into product storytelling on the real UI.',
+    approach: 'We built the logo as a layered 3D object and shot it with a virtual camera: rack focus, light rays and lens streaks, a deep blue and gold grade, and a score cut to every hit. A second, frame-accurate film runs the actual website UI, live chart and markets table on the same timeline.',
     outcome: 'Two films that work together: a 40-second cinematic hook for campaigns and social, and a 30-second product film for the website and case studies. Concept project; figures shown are illustrative.',
     colours: ['#000081', '#ffffff', '#1C39BB', '#FFC000'],
     coverImage: 'assets/thumbs/proxima-exchange-films-cover.jpg',
@@ -366,3 +464,767 @@ const caseData = [
     ]
   }
 ];
+
+const portfolioGroupsData = [
+  { key: 'Brand Identity Design', label: 'Brand Identity', id: 'brand-identity' },
+  { key: 'Social Media Design', label: 'Social Media Design', id: 'social-media' },
+  { key: 'UI Design', label: 'UI Design', id: 'ui-design' },
+  { key: 'Packaging', label: 'Packaging', id: 'packaging' },
+  { key: 'Motion Design', label: 'Motion Design', id: 'motion-design' }
+];
+
+const portfolioGroupsRoot = $('#portfolioGroups');
+
+const getFilteredProjects = category => caseData
+  .map((project, index) => ({ ...project, originalIndex: index }))
+  .filter(project => project.category === category);
+
+const formatSliderProgress = (stage, fill) => {
+  const maxScroll = stage.scrollWidth - stage.clientWidth;
+  if (!maxScroll) {
+    fill.style.width = '100%';
+    return;
+  }
+
+  const progress = (stage.scrollLeft / maxScroll) * 100;
+  fill.style.width = `${Math.min(Math.max(progress, 8), 100)}%`;
+};
+
+/* Shared slider helpers. Sliders start flush left and end flush right (no empty
+   lead-in space); the active card is the one nearest the centre, except at the
+   two ends where the first / last card is always active. */
+const pickActiveCard = (stage, cards) => {
+  const maxScroll = stage.scrollWidth - stage.clientWidth;
+  if (stage.scrollLeft <= 2) return cards[0];
+  if (maxScroll > 0 && stage.scrollLeft >= maxScroll - 2) return cards[cards.length - 1];
+
+  const stageRect = stage.getBoundingClientRect();
+  const center = stageRect.left + stageRect.width / 2;
+  let closest = cards[0];
+  let closestDistance = Infinity;
+  cards.forEach(card => {
+    const rect = card.getBoundingClientRect();
+    const distance = Math.abs(rect.left + rect.width / 2 - center);
+    if (distance < closestDistance) {
+      closestDistance = distance;
+      closest = card;
+    }
+  });
+  return closest;
+};
+
+const scrollStageToCard = (stage, card) => {
+  const inset = parseFloat(getComputedStyle(stage).scrollPaddingLeft) || 0;
+  const left = stage.scrollLeft + card.getBoundingClientRect().left - stage.getBoundingClientRect().left - inset;
+  stage.scrollTo({ left, behavior: 'smooth' });
+};
+
+const syncActiveCard = stage => {
+  const cards = [...stage.querySelectorAll('.portfolio-card')];
+  if (!cards.length) return;
+  const active = pickActiveCard(stage, cards);
+  cards.forEach(card => card.classList.toggle('is-active', card === active));
+};
+
+const updateSliderEdgeSpace = () => { /* intentionally empty: no centred lead-in padding */ };
+
+const renderPortfolioGroups = () => {
+  if (!portfolioGroupsRoot) return;
+
+  portfolioGroupsRoot.innerHTML = portfolioGroupsData.map(group => {
+    const projects = getFilteredProjects(group.key);
+    return `
+      <div class="portfolio-group" data-group="${group.key}">
+        <div class="portfolio-group-top">
+          <span class="group-type">${group.label}</span>
+        </div>
+
+        <div class="portfolio-slider">
+          <button class="slider-arrow prev" type="button" data-target="${group.key}" aria-label="Previous ${group.label} projects">←</button>
+
+          <div class="slider-stage" data-stage="${group.key}" tabindex="0" aria-label="${group.label} project slider">
+            <div class="slider-track" data-track="${group.key}">
+              ${projects.map(project => {
+      const image = project.coverImage || (project.galleryImages && project.galleryImages[0]) || '#';
+      return `
+                  <button
+                    type="button"
+                    class="portfolio-card"
+                    data-original-index="${project.originalIndex}"
+                    data-cursor-label="View case study"
+                    aria-label="Open ${project.title} case study"
+                  >
+                    <span class="portfolio-card-media" data-bg="${image}"></span>
+                    <span class="portfolio-card-copy">
+                      <span class="portfolio-card-kicker">${project.category}</span>
+                      <h3>${project.title}</h3>
+                      <p>${project.summary}</p>
+                      <span class="portfolio-card-meta">
+                        <span>${project.year}</span>
+                        <span>View case study</span>
+                      </span>
+                    </span>
+                  </button>
+                `;
+    }).join('')}
+            </div>
+          </div>
+
+          <button class="slider-arrow next" type="button" data-target="${group.key}" aria-label="Next ${group.label} projects">→</button>
+        </div>
+
+        <div class="slider-bar" aria-hidden="true">
+          <span class="slider-fill" data-fill="${group.key}"></span>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  // Only fetch a card's cover once it is near the viewport (or its slider's visible area).
+  const mediaObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      el.style.backgroundImage = `url('${el.dataset.bg}')`;
+      mediaObserver.unobserve(el);
+    });
+  }, { rootMargin: '600px 300px' });
+  $$('.portfolio-card-media[data-bg]').forEach(el => mediaObserver.observe(el));
+
+  $$('.portfolio-card').forEach(card => {
+    const index = Number(card.dataset.originalIndex);
+    card.addEventListener('click', () => {
+      const colours = caseData[index] && caseData[index].colours;
+      if (window.RovardMotion) RovardMotion.curtainTo(() => openCase(index), colours);
+      else openCase(index);
+    });
+  });
+
+  $$('.slider-arrow').forEach(button => {
+    button.addEventListener('click', () => {
+      const stage = document.querySelector(`[data-stage="${button.dataset.target}"]`);
+      if (!stage) return;
+
+      const cards = [...stage.querySelectorAll('.portfolio-card')];
+      const activeIndex = cards.findIndex(card => card.classList.contains('is-active'));
+      const nextIndex = button.classList.contains('next')
+        ? Math.min(activeIndex + 1, cards.length - 1)
+        : Math.max(activeIndex - 1, 0);
+
+      const targetCard = cards[nextIndex] || cards[0];
+      scrollStageToCard(stage, targetCard);
+    });
+  });
+
+  $$('.slider-stage').forEach(stage => {
+    const fill = document.querySelector(`[data-fill="${stage.dataset.stage}"]`);
+    updateSliderEdgeSpace(stage);
+    if (fill) formatSliderProgress(stage, fill);
+    syncActiveCard(stage);
+
+    stage.addEventListener('scroll', () => {
+      const progressFill = document.querySelector(`[data-fill="${stage.dataset.stage}"]`);
+      if (progressFill) formatSliderProgress(stage, progressFill);
+      syncActiveCard(stage);
+    }, { passive: true });
+  });
+
+  window.addEventListener('resize', () => {
+    $$('.slider-stage').forEach(stage => {
+      updateSliderEdgeSpace(stage);
+      syncActiveCard(stage);
+    });
+  }, { passive: true });
+};
+
+renderPortfolioGroups();
+
+const caseModal = $('#caseModal');
+const caseHero = $('#caseHero');
+
+/* ── Bento layout engine ─────────────────────────────────────────────
+   Every gallery image is measured first, each tile takes the slot
+   shape whose proportions best match its aspect ratio, and the
+   trailing tiles are re-shaped so the grid always closes cleanly
+   (no holes, no ragged last row). First image always leads as the
+   feature tile.                                                                              */
+const BENTO_COLS = 4;
+const BENTO_SHAPES = [
+  { c: 2, r: 2, aspect: 1.35 }, // feature
+  { c: 1, r: 1, aspect: 1.3 },  // standard
+  { c: 2, r: 1, aspect: 2.7 },  // wide
+  { c: 1, r: 2, aspect: 0.68 }  // tall
+];
+
+const shapeCost = (imageAspect, shape) => Math.abs(Math.log(imageAspect / shape.aspect));
+
+const candidateShapes = imageAspect => {
+  const ranked = BENTO_SHAPES
+    .map(shape => ({ shape, cost: shapeCost(imageAspect, shape) }))
+    .sort((a, b) => a.cost - b.cost || (b.shape.c * b.shape.r) - (a.shape.c * a.shape.r))
+    .map(entry => entry.shape);
+  // The feature and standard slots crop almost identically, so prefer the
+  // standard tile as the default fit — features stay deliberate, which keeps
+  // the grid varied instead of a wall of identical big tiles.
+  if (ranked[0] === BENTO_SHAPES[0]) {
+    const standard = BENTO_SHAPES[1];
+    if (ranked.includes(standard) && shapeCost(imageAspect, standard) - shapeCost(imageAspect, ranked[0]) <= 0.1) {
+      return [standard, ...ranked.filter(shape => shape !== standard)];
+    }
+  }
+  return ranked;
+};
+
+function packBento(shapes) {
+  const occupied = new Set();
+  let placed = 0;
+  let rows = 0;
+  const isFree = (x, y, c, r) => {
+    for (let dy = 0; dy < r; dy++) for (let dx = 0; dx < c; dx++) {
+      if (x + dx >= BENTO_COLS || occupied.has(`${x + dx}:${y + dy}`)) return false;
+    }
+    return true;
+  };
+  shapes.forEach(shape => {
+    for (let y = 0; y < 400; y++) {
+      let done = false;
+      for (let x = 0; x <= BENTO_COLS - shape.c; x++) {
+        if (!isFree(x, y, shape.c, shape.r)) continue;
+        for (let dy = 0; dy < shape.r; dy++) for (let dx = 0; dx < shape.c; dx++) occupied.add(`${x + dx}:${y + dy}`);
+        placed++;
+        rows = Math.max(rows, y + shape.r);
+        done = true;
+        break;
+      }
+      if (done) break;
+    }
+  });
+  const area = shapes.reduce((sum, s) => sum + s.c * s.r, 0);
+  return { rows, empty: rows * BENTO_COLS - area, unplaced: shapes.length - placed };
+}
+
+function composeBentoLayout(aspects) {
+  const candidates = aspects.map((a, idx) => {
+    const list = candidateShapes(a);
+    // Deliberate rhythm: every fifth tile is promoted to a feature tile so
+    // larger galleries breathe instead of collapsing into uniform grids.
+    if (idx > 0 && idx % 5 === 0 && shapeCost(a, BENTO_SHAPES[0]) <= 0.5) {
+      return [BENTO_SHAPES[0], ...list.filter(shape => shape !== BENTO_SHAPES[0])];
+    }
+    return list;
+  });
+  candidates[0] = [BENTO_SHAPES[0]]; // the lead image is always the feature tile
+
+  let best = null;
+  const maxTail = Math.min(3, candidates.length);
+
+  for (let tail = 0; tail <= maxTail; tail++) {
+    const split = candidates.length - tail;
+    let combos = [[]];
+    for (let i = split; i < candidates.length; i++) {
+      const next = [];
+      candidates[i].slice(0, 3).forEach(shape => combos.forEach(combo => next.push(combo.concat(shape))));
+      combos = next;
+    }
+    combos.forEach(combo => {
+      const shapes = candidates.slice(0, split).map(list => list[0]).concat(combo);
+      const result = packBento(shapes);
+      const crop = combo.reduce((sum, shape, i) => sum + shapeCost(aspects[split + i], shape), 0);
+      const score = result.unplaced * 1000 + result.empty * 10 + result.rows + crop;
+      if (!best || score < best.score) best = { score, shapes };
+    });
+  }
+
+  return best ? best.shapes : candidates.map(list => list[0]);
+}
+
+function openCase(index) {
+  const d = caseData[index];
+  if (!d) return;
+  $('#caseCategory').textContent = d.category.toUpperCase();
+  $('#caseTitle').textContent = d.title;
+  $('#caseSummary').textContent = d.summary;
+  $('#caseYear').textContent = d.year;
+  $('#caseServices').textContent = d.services;
+  $('#caseChallenge').textContent = d.challenge;
+  $('#caseApproach').textContent = d.approach;
+  $('#caseOutcome').textContent = d.outcome;
+  const live = $('#caseLive');
+  if (live) {
+    live.hidden = !d.liveUrl;
+    if (d.liveUrl) { live.href = d.liveUrl; live.textContent = d.liveLabel || 'View live project ↗'; }
+  }
+
+  caseHero.style.background = `linear-gradient(135deg, ${d.colours[2]}, ${d.colours[0]})`;
+  $('#caseTitle').style.color = d.colours[1];
+
+  const gallery = $('#caseGallery');
+  gallery.innerHTML = '';
+  setCaseVideo(d);
+  renderMoreProjects(index);
+
+  const galleryImages = d.galleryImages && d.galleryImages.length ? d.galleryImages : d.colours.map((_, i) => makeGalleryAsset(d.title, d.colours));
+
+  const galleryToken = caseModal.dataset.galleryToken = String(Date.now());
+
+  const tiles = galleryImages.map((src, idx) => {
+    const box = document.createElement('button');
+    box.type = 'button';
+    box.className = 'case-gallery-item is-waiting';
+    box.setAttribute('aria-label', `Open ${d.title} image ${idx + 1}`);
+
+    const img = document.createElement('img');
+    img.alt = `${d.title} image ${idx + 1}`;
+    img.style.width = '100%';
+    img.style.height = '100%';
+    img.style.objectFit = 'cover';
+    img.style.display = 'block';
+    img.decoding = 'async';
+
+    box.appendChild(img);
+    box.addEventListener('click', () => openLightbox(galleryImages, idx, d.title));
+    gallery.appendChild(box);
+    return { box, img, src };
+  });
+
+  // Measure every image, then compose the bento grid around the real aspect ratios.
+  Promise.all(tiles.map(tile => new Promise(resolve => {
+    const probe = new Image();
+    probe.onload = () => resolve(probe.naturalWidth && probe.naturalHeight ? probe.naturalWidth / probe.naturalHeight : 1);
+    probe.onerror = () => resolve(1);
+    probe.src = tile.src;
+  }))).then(aspects => {
+    if (caseModal.dataset.galleryToken !== galleryToken) return; // another case study opened meanwhile
+
+    composeBentoLayout(aspects).forEach((shape, idx) => {
+      const tile = tiles[idx];
+      tile.box.style.gridColumn = `span ${shape.c}`;
+      tile.box.style.gridRow = `span ${shape.r}`;
+      tile.box.style.animation = `bentoIn .55s var(--ease) ${idx * 60}ms backwards`;
+      tile.box.classList.remove('is-waiting');
+      tile.img.src = tile.src;
+    });
+  });
+
+  // One history entry per open case study, so the browser Back button closes it.
+  // Switching between case studies replaces the entry instead of stacking another.
+  if (!caseModal.classList.contains('open')) history.pushState({ rv: 'case' }, '');
+  else if (history.state?.rv === 'case') history.replaceState({ rv: 'case' }, '');
+
+  caseModal.classList.add('open');
+  caseModal.setAttribute('aria-hidden', 'false');
+  body.classList.add('no-scroll');
+  $('.modal-scroll', caseModal).scrollTo({ top: 0 });
+}
+$$('.project-trigger').forEach(el => el.addEventListener('click', () => {
+  const index = Number(el.dataset.project);
+  const colours = caseData[index] && caseData[index].colours;
+  if (window.RovardMotion) RovardMotion.curtainTo(() => openCase(index), colours);
+  else openCase(index);
+}));
+$('.modal-close', caseModal)?.addEventListener('click', closeCase);
+function setCaseVideo(d) {
+  let wrap = $('#caseVideo');
+  const list = d.videos && d.videos.length ? d.videos : (d.video ? [{ src: d.video, poster: d.poster }] : []);
+  if (!list.length) {
+    wrap?.remove();
+    return;
+  }
+  if (!wrap) {
+    wrap = document.createElement('div');
+    wrap.id = 'caseVideo';
+    $('#caseGallery').before(wrap);
+  }
+  wrap.className = list.length > 1 ? 'case-video-group' : 'case-video';
+  wrap.innerHTML = '';
+  const players = [];
+  list.forEach(item => {
+    const box = list.length > 1 ? document.createElement('figure') : wrap;
+    if (list.length > 1) box.className = 'case-video';
+    const video = document.createElement('video');
+    video.src = item.src;
+    if (item.poster) video.poster = item.poster;
+    video.controls = true;
+    video.playsInline = true;
+    video.preload = 'metadata';
+    video.setAttribute('aria-label', `${d.title}${item.title ? ' — ' + item.title : ''} video`);
+    video.addEventListener('play', () => players.forEach(v => { if (v !== video) v.pause(); }));
+    players.push(video);
+    box.appendChild(video);
+    if (list.length > 1) {
+      if (item.title) {
+        const cap = document.createElement('figcaption');
+        cap.textContent = item.title;
+        box.appendChild(cap);
+      }
+      wrap.appendChild(box);
+    }
+  });
+}
+
+/* "More projects": three other case studies at the bottom of every case study.
+   Prefers projects with real cover art, starting from the one after the current. */
+function renderMoreProjects(currentIndex) {
+  const section = $('#caseMore');
+  const grid = $('#caseMoreGrid');
+  if (!section || !grid) return;
+  const others = caseData.map((p, i) => ({ p, i })).filter(({ i }) => i !== currentIndex);
+  const ordered = others.slice(others.findIndex(({ i }) => i > currentIndex) >= 0 ? others.findIndex(({ i }) => i > currentIndex) : 0)
+    .concat(others.slice(0, Math.max(0, others.findIndex(({ i }) => i > currentIndex))));
+  const picks = ordered.filter(({ p }) => p.coverImage).concat(ordered.filter(({ p }) => !p.coverImage)).slice(0, 3);
+  grid.innerHTML = '';
+  picks.forEach(({ p, i }) => {
+    const card = document.createElement('button');
+    card.type = 'button';
+    card.className = 'case-more-card';
+    card.setAttribute('aria-label', `Open ${p.title} case study`);
+    const media = document.createElement('span');
+    media.className = 'case-more-media';
+    media.style.backgroundImage = `url('${p.coverImage || (p.galleryImages && p.galleryImages[0]) || ''}')`;
+    const copy = document.createElement('span');
+    copy.className = 'case-more-copy';
+    const kicker = document.createElement('span');
+    kicker.className = 'case-more-kicker';
+    kicker.textContent = p.category;
+    const title = document.createElement('h4');
+    title.textContent = p.title;
+    const go = document.createElement('span');
+    go.className = 'case-more-go';
+    go.textContent = 'View case study ↗';
+    copy.append(kicker, title, go);
+    card.append(media, copy);
+    card.addEventListener('click', () => {
+      $$('#caseVideo video').forEach(v => v.pause());
+      if (window.RovardMotion) RovardMotion.curtainTo(() => openCase(i), p.colours);
+      else openCase(i);
+    });
+    grid.appendChild(card);
+  });
+  section.hidden = !picks.length;
+}
+
+// Visual close only (used by the Back button handler).
+function hideCase() {
+  $$('#caseVideo video').forEach(v => v.pause());
+  caseModal.classList.remove('open');
+  caseModal.setAttribute('aria-hidden', 'true');
+  body.classList.remove('no-scroll');
+}
+
+// Close from the UI (X, backdrop, Escape): hide, then consume the history entry we pushed.
+function closeCase() {
+  if (!caseModal.classList.contains('open')) return;
+  hideCase();
+  if (history.state?.rv === 'case') history.back();
+}
+caseModal.addEventListener('click', e => { if (e.target === caseModal) closeCase(); });
+
+const galleryLightbox = $('#galleryLightbox');
+const galleryLightboxImage = $('#galleryLightboxImage');
+const galleryLightboxCounter = $('#galleryLightboxCounter');
+const lbPrev = $('#galleryLightboxPrev');
+const lbNext = $('#galleryLightboxNext');
+
+let lbImages = [];
+let lbIndex = 0;
+let lbTitle = '';
+
+const lbUpdateNav = () => {
+  lbPrev.disabled = lbIndex === 0;
+  lbNext.disabled = lbIndex === lbImages.length - 1;
+  galleryLightboxCounter.textContent = `${lbIndex + 1} / ${lbImages.length}`;
+};
+
+const lbShowImage = (idx, direction = 0) => {
+  lbIndex = Math.max(0, Math.min(idx, lbImages.length - 1));
+  const src = lbImages[lbIndex];
+  if (!src) return;
+
+  galleryLightboxImage.classList.add('transitioning');
+  setTimeout(() => {
+    galleryLightboxImage.src = src;
+    galleryLightboxImage.alt = lbTitle;
+    galleryLightboxImage.classList.remove('transitioning');
+    lbUpdateNav();
+  }, 200);
+};
+
+const openLightbox = (images, startIndex, title) => {
+  lbImages = images;
+  lbIndex = startIndex;
+  lbTitle = title;
+  galleryLightboxImage.src = images[startIndex];
+  galleryLightboxImage.alt = title;
+  galleryLightboxImage.classList.remove('transitioning');
+  lbUpdateNav();
+  if (!galleryLightbox.classList.contains('open')) history.pushState({ rv: 'lightbox' }, '');
+  galleryLightbox.classList.add('open');
+  galleryLightbox.setAttribute('aria-hidden', 'false');
+  body.classList.add('no-scroll');
+};
+
+const hideLightbox = () => {
+  galleryLightbox.classList.remove('open');
+  galleryLightbox.setAttribute('aria-hidden', 'true');
+  // keep the page locked if the case study is still open underneath
+  if (!caseModal.classList.contains('open')) body.classList.remove('no-scroll');
+};
+
+const closeGalleryLightbox = () => {
+  if (!galleryLightbox.classList.contains('open')) return;
+  hideLightbox();
+  if (history.state?.rv === 'lightbox') history.back();
+};
+
+/* Browser Back / Forward: close the top-most layer (image viewer, then case study). */
+window.addEventListener('popstate', e => {
+  const layer = e.state?.rv;
+  if (layer !== 'lightbox' && galleryLightbox.classList.contains('open')) hideLightbox();
+  if (layer !== 'lightbox' && layer !== 'case' && caseModal.classList.contains('open')) hideCase();
+});
+
+lbPrev?.addEventListener('click', () => lbShowImage(lbIndex - 1, -1));
+lbNext?.addEventListener('click', () => lbShowImage(lbIndex + 1, 1));
+$('#galleryLightboxClose')?.addEventListener('click', closeGalleryLightbox);
+galleryLightbox?.addEventListener('click', e => { if (e.target === galleryLightbox) closeGalleryLightbox(); });
+
+document.addEventListener('keydown', e => {
+  if (!galleryLightbox?.classList.contains('open')) return;
+  if (e.key === 'Escape') { closeGalleryLightbox(); e.stopImmediatePropagation(); }
+  if (e.key === 'ArrowLeft') lbShowImage(lbIndex - 1, -1);
+  if (e.key === 'ArrowRight') lbShowImage(lbIndex + 1, 1);
+});
+
+/* Testimonials — same snap-slider behaviour as the project sliders */
+const tStage = $('.t-stage');
+const tCards = $$('.t-card');
+const tFill = $('#quoteProgress');
+
+const syncTestimonials = () => {
+  if (!tStage || !tCards.length) return;
+  const active = pickActiveCard(tStage, tCards);
+  tCards.forEach(card => card.classList.toggle('is-active', card === active));
+  if (tFill) formatSliderProgress(tStage, tFill);
+};
+
+const setTestimonialEdges = syncTestimonials;
+
+const stepTestimonial = dir => {
+  const active = tCards.findIndex(card => card.classList.contains('is-active'));
+  const target = tCards[Math.max(0, Math.min(tCards.length - 1, active + dir))];
+  if (target) scrollStageToCard(tStage, target);
+};
+
+if (tStage) {
+  $('#prevQuote')?.addEventListener('click', () => stepTestimonial(-1));
+  $('#nextQuote')?.addEventListener('click', () => stepTestimonial(1));
+  tStage.addEventListener('scroll', syncTestimonials, { passive: true });
+  tStage.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight') { e.preventDefault(); stepTestimonial(1); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); stepTestimonial(-1); }
+  });
+  window.addEventListener('resize', setTestimonialEdges, { passive: true });
+  window.addEventListener('load', setTestimonialEdges);
+  setTestimonialEdges();
+}
+
+/* Process storytelling */
+const processData = [
+  ['01', 'DISCOVER', 'Start with the real problem.', 'We learn the business, audience, context and objective before we decide what the design should look like.', '#162DAF', '#000985'],
+  ['02', 'DEFINE', 'Turn context into direction.', 'We clarify the opportunity, positioning, audience and creative direction so the project has a clear north star.', '#D8A901', '#162DAF'],
+  ['03', 'DESIGN', 'Make the idea visible.', 'We explore, develop and execute the visual solution across the places it needs to live.', '#F5CC00', '#D8A901'],
+  ['04', 'REFINE', 'Make good work better.', 'We review, test, remove what is not working and sharpen what is until the system feels inevitable.', '#162DAF', '#F5CC00'],
+  ['05', 'DELIVER', 'Leave you with a system.', 'You receive organized, production-ready files and the guidance needed to use the work confidently.', '#F5CC00', '#162DAF']
+];
+let processIndex = -1;
+const processStage = $('.process-stage');
+const processCopy = $('.process-copy');
+const processVisual = $('#processVisual');
+const processBigNumber = processVisual ? processVisual.querySelector('span') : null;
+
+const setProcessStep = idx => {
+  if (idx === processIndex || !processData[idx]) return;
+  processIndex = idx;
+  const d = processData[idx];
+  $('#processNumber').textContent = d[0];
+  $('#processLabel').textContent = d[1];
+  $('#processTitle').textContent = d[2];
+  $('#processText').textContent = d[3];
+  if (processBigNumber) processBigNumber.textContent = d[0];
+  $$('.process-index i').forEach((i, n) => i.classList.toggle('active', n === idx));
+
+  // Replay the swap animation so each step change feels intentional.
+  if (processCopy) {
+    processCopy.classList.remove('swap');
+    void processCopy.offsetWidth;
+    processCopy.classList.add('swap');
+  }
+};
+
+// Each step gets an equal share of the scroll distance the panel is actually pinned
+// for, so no step is used up while the section is still scrolling into place.
+const processSticky = $('.process-sticky');
+const updateProcess = () => {
+  if (!processStage || !processSticky) return;
+  const rect = processStage.getBoundingClientRect();
+  const pinTop = parseFloat(getComputedStyle(processSticky).top) || 0;
+  const travel = Math.max(1, rect.height - processSticky.offsetHeight);
+  const progress = Math.min(0.9999, Math.max(0, (pinTop - rect.top) / travel));
+  setProcessStep(Math.floor(progress * processData.length));
+};
+
+let processRaf = null;
+window.addEventListener('scroll', () => {
+  if (processRaf == null) processRaf = requestAnimationFrame(() => {
+    processRaf = null;
+    updateProcess();
+  });
+}, { passive: true });
+window.addEventListener('resize', updateProcess);
+updateProcess();
+
+/* Inquiry form */
+const inquiryModal = $('#inquiryModal');
+const openInquiry = $('#openInquiry');
+const closeInquiry = () => {
+  inquiryModal.classList.remove('open');
+  inquiryModal.setAttribute('aria-hidden', 'true');
+  body.classList.remove('no-scroll');
+};
+openInquiry?.addEventListener('click', () => {
+  inquiryModal.classList.add('open');
+  inquiryModal.setAttribute('aria-hidden', 'false');
+  body.classList.add('no-scroll');
+});
+$$('.inquiry-close').forEach(b => b.addEventListener('click', closeInquiry));
+inquiryModal.addEventListener('click', e => { if (e.target === inquiryModal) closeInquiry(); });
+$('#modalProject')?.addEventListener('click', () => {
+  hideCase();
+  if (history.state?.rv === 'case') history.replaceState(null, '');
+  openInquiry.click();
+});
+
+let currentStep = 1;
+const totalSteps = 5;
+const form = $('#projectForm');
+const steps = $$('.form-step', form);
+
+function updateForm() {
+  steps.forEach(s => s.classList.toggle('active', Number(s.dataset.step) === currentStep));
+  $('#stepCount').textContent = `0${currentStep} / 05`;
+  $('#inquiryProgress').style.width = `${(currentStep / totalSteps) * 100}%`;
+  $('#prevStep').style.visibility = currentStep === 1 ? 'hidden' : 'visible';
+  $('#nextStep').style.display = currentStep === totalSteps ? 'none' : 'inline-flex';
+  $('#submitForm').style.display = currentStep === totalSteps ? 'inline-flex' : 'none';
+  $('#formError').textContent = '';
+}
+
+function validateStep() {
+  const active = $(`.form-step[data-step="${currentStep}"]`);
+  const required = $$('input[required], textarea[required], select[required]', active);
+  for (const field of required) {
+    if (field.type === 'radio') {
+      const group = $$(`input[name="${field.name}"]`, active);
+      if (!group.some(r => r.checked)) return false;
+    } else if (!field.value.trim()) {
+      field.focus();
+      return false;
+    }
+  }
+  if (currentStep === 2 && !$$('input[name="services"]:checked', active).length) return false;
+  const email = $('input[name="email"]', active);
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
+    email.focus();
+    return false;
+  }
+  return true;
+}
+
+$('#nextStep').addEventListener('click', () => {
+  if (!validateStep()) {
+    $('#formError').textContent = 'Please complete the required information before continuing.';
+    return;
+  }
+  currentStep = Math.min(totalSteps, currentStep + 1);
+  updateForm();
+});
+$('#prevStep').addEventListener('click', () => {
+  currentStep = Math.max(1, currentStep - 1);
+  updateForm();
+});
+
+form.addEventListener('submit', async e => {
+  e.preventDefault();
+  if (!validateStep()) {
+    $('#formError').textContent = 'Please complete the required information before submitting.';
+    return;
+  }
+
+  const data = new FormData(form);
+  const payload = {};
+  data.forEach((value, key) => {
+    if (payload[key]) payload[key] += `, ${value}`;
+    else payload[key] = value;
+  });
+
+  /*
+    PRODUCTION SETUP:
+    Replace FORM_ENDPOINT below with your real endpoint.
+    Recommended: Formspree, Basin, a serverless function, or your own API.
+    Example:
+    const FORM_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
+  */
+  const FORM_ENDPOINT = "";
+
+  const submitButton = $('#submitForm');
+  submitButton.disabled = true;
+  submitButton.innerHTML = 'Sending…';
+
+  try {
+    if (FORM_ENDPOINT) {
+      const response = await fetch(FORM_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      if (!response.ok) throw new Error('Submission failed');
+    } else {
+      /*
+        Demo mode: saves the inquiry locally so the interface can be tested.
+        Connect FORM_ENDPOINT before launch.
+      */
+      localStorage.setItem('rovard_last_inquiry', JSON.stringify({
+        ...payload,
+        submittedAt: new Date().toISOString()
+      }));
+    }
+
+    form.innerHTML = `
+      <div class="form-step active" style="display:block;min-height:auto;padding:80px 0;text-align:center">
+        <p class="eyebrow" style="color:var(--accent)">Inquiry received</p>
+        <h2 style="margin:25px 0;font:600 clamp(3rem,7vw,7rem)/.9 Syne,sans-serif;letter-spacing:-.06em">Let's build<br><em style="color:var(--accent);font-style:normal">what's next.</em></h2>
+        <p style="max-width:560px;margin:0 auto;color:var(--muted);line-height:1.6">Thank you. We'll review the brief and reach out to schedule a consultation.</p>
+        <button type="button" class="primary-button" style="margin-top:35px" onclick="location.reload()">Back to Rovard <span>↗</span></button>
+      </div>`;
+  } catch (err) {
+    $('#formError').textContent = 'Something went wrong. Please try again or email hello@rovardstudios.com.';
+    submitButton.disabled = false;
+    submitButton.innerHTML = 'Send inquiry <span>↗</span>';
+  }
+});
+
+updateForm();
+
+/* Keyboard accessibility */
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    closeCase();
+    closeInquiry();
+    if (mobileMenu.classList.contains('open')) closeMobileMenu();
+  }
+});
+
+/* Dynamic year */
+$$('.footer-bottom').forEach(el => {
+  el.innerHTML = el.innerHTML.replace('© 2026', `© ${new Date().getFullYear()}`);
+});
