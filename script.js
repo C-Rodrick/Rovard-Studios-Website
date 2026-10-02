@@ -321,21 +321,26 @@ const caseData = [
     ]
   },
   {
-    title: 'UI Project 01',
+    title: 'Proxima Exchange',
     category: 'UI Design',
     year: '2026',
-    services: 'Product UI / UX Direction / Design System',
-    summary: 'A product interface built to simplify decision-making and improve product confidence.',
-    challenge: 'The interface had strong functionality but had become difficult to understand quickly.',
-    approach: 'We clarified the structure, refined the hierarchy and built the components to scale with the product.',
-    outcome: 'A more intuitive experience that helps users move faster and makes the product feel more established.',
-    colours: ['#dfe7f2', '#ffffff', '#162daf', '#f5cc00'],
+    services: 'Website UI / Interaction Design / 3D / Front-end Build',
+    summary: 'A premium website and interface for a crypto and forex trading platform, built directly from the Proxima identity.',
+    challenge: 'Trading platforms often feel cold, cluttered and untrustworthy. Proxima needed one calm, credible interface that handles crypto and forex side by side and carries its royal blue, navy and gold identity.',
+    approach: 'We turned the logo into the interface: its three colours drive the palette, and the mark itself is rebuilt as a layered 3D object. Bricolage Grotesque, Onest and Geist Mono give a confident, technical tone, with live market data, glass surfaces and fully responsive layouts.',
+    outcome: 'A fast, responsive website that feels premium and trustworthy, with a live trading terminal, a unified markets view and a clear path from sign-up to first trade. Concept project; figures shown are illustrative.',
+    colours: ['#000081', '#ffffff', '#1C39BB', '#FFC000'],
+    coverImage: 'assets/thumbs/proxima-exchange-cover.jpg',
     galleryImages: [
-      makeGalleryAsset('UI Project 01', ['#dfe7f2', '#ffffff', '#162daf']),
-      makeGalleryAsset('Dashboard', ['#dfe7f2', '#ffffff', '#162daf']),
-      makeGalleryAsset('Navigation', ['#dfe7f2', '#ffffff', '#162daf']),
-      makeGalleryAsset('Components', ['#dfe7f2', '#ffffff', '#162daf']),
-      makeGalleryAsset('UX System', ['#dfe7f2', '#ffffff', '#162daf'])
+      'assets/UI%20Design/1_Proxima%20Exchange/proxima-01-cover.jpg',
+      'assets/UI%20Design/1_Proxima%20Exchange/proxima-02-showcase.jpg',
+      'assets/UI%20Design/1_Proxima%20Exchange/proxima-03-hero.jpg',
+      'assets/UI%20Design/1_Proxima%20Exchange/proxima-04-mobile.jpg',
+      'assets/UI%20Design/1_Proxima%20Exchange/proxima-05-security-3d.jpg',
+      'assets/UI%20Design/1_Proxima%20Exchange/proxima-06-markets.jpg',
+      'assets/UI%20Design/1_Proxima%20Exchange/proxima-07-platform.jpg',
+      'assets/UI%20Design/1_Proxima%20Exchange/proxima-08-fees.jpg',
+      'assets/UI%20Design/1_Proxima%20Exchange/proxima-09-brand-board.jpg'
     ]
   },
   {
@@ -398,21 +403,28 @@ const caseData = [
     ]
   },
   {
-    title: 'Motion Project 02',
+    title: 'Rovard Studios Brand Film',
     category: 'Motion Design',
     year: '2026',
-    services: 'Brand Motion / Social / Titles',
-    summary: 'Motion assets designed to support a premium social and campaign system with stronger rhythm and clarity.',
-    challenge: 'A static identity needed energy and movement without becoming visually inconsistent.',
-    approach: 'We developed a motion vocabulary built around confidence, whitespace and deliberate pacing.',
-    outcome: 'A more dynamic brand language that feels premium and consistent across motion touchpoints.',
-    colours: ['#1B4839', '#EBEBEB', '#5CAD8D', '#f5cc00'],
+    services: 'Motion Design / Kinetic Typography / Sound Design',
+    summary: 'A 90-second brand film that turns the Rovard identity, services and selected work into one continuous piece of motion.',
+    challenge: 'The studio needed a single film that could introduce who Rovard is, what it does and the quality of its work in under two minutes.',
+    approach: 'We built every frame from the brand system itself: Syne and Space Grotesk kinetic type, the blue and yellow palette, real project work and a soundtrack composed to cut on every bar.',
+    outcome: 'A premium, on-brand film ready for the website, social channels and pitch presentations.',
+    colours: ['#000985', '#ffffff', '#162DAF', '#F5CC00'],
+    coverImage: 'assets/thumbs/rovard-brand-film-cover.jpg',
+    video: 'assets/Motion%20Design/1_Rovard%20Brand%20Film/rovard-brand-film.mp4',
+    poster: 'assets/Motion%20Design/1_Rovard%20Brand%20Film/film-01.jpg',
     galleryImages: [
-      makeGalleryAsset('Motion Project 02', ['#1B4839', '#EBEBEB', '#5CAD8D']),
-      makeGalleryAsset('Loop', ['#1B4839', '#EBEBEB', '#5CAD8D']),
-      makeGalleryAsset('Title', ['#1B4839', '#EBEBEB', '#5CAD8D']),
-      makeGalleryAsset('Social', ['#1B4839', '#EBEBEB', '#5CAD8D']),
-      makeGalleryAsset('Sequence', ['#1B4839', '#EBEBEB', '#5CAD8D'])
+      'assets/Motion%20Design/1_Rovard%20Brand%20Film/film-02.jpg',
+      'assets/Motion%20Design/1_Rovard%20Brand%20Film/film-03.jpg',
+      'assets/Motion%20Design/1_Rovard%20Brand%20Film/film-04.jpg',
+      'assets/Motion%20Design/1_Rovard%20Brand%20Film/film-05.jpg',
+      'assets/Motion%20Design/1_Rovard%20Brand%20Film/film-06.jpg',
+      'assets/Motion%20Design/1_Rovard%20Brand%20Film/film-07.jpg',
+      'assets/Motion%20Design/1_Rovard%20Brand%20Film/film-08.jpg',
+      'assets/Motion%20Design/1_Rovard%20Brand%20Film/film-09.jpg',
+      'assets/Motion%20Design/1_Rovard%20Brand%20Film/film-10.jpg'
     ]
   },
   {
@@ -725,6 +737,7 @@ function openCase(index) {
 
   const gallery = $('#caseGallery');
   gallery.innerHTML = '';
+  setCaseVideo(d);
 
   const galleryImages = d.galleryImages && d.galleryImages.length ? d.galleryImages : d.colours.map((_, i) => makeGalleryAsset(d.title, d.colours));
 
@@ -781,7 +794,31 @@ $$('.project-trigger').forEach(el => el.addEventListener('click', () => {
   else openCase(index);
 }));
 $('.modal-close', caseModal)?.addEventListener('click', closeCase);
+function setCaseVideo(d) {
+  let wrap = $('#caseVideo');
+  if (!d.video) {
+    wrap?.remove();
+    return;
+  }
+  if (!wrap) {
+    wrap = document.createElement('div');
+    wrap.id = 'caseVideo';
+    wrap.className = 'case-video';
+    $('#caseGallery').before(wrap);
+  }
+  wrap.innerHTML = '';
+  const video = document.createElement('video');
+  video.src = d.video;
+  if (d.poster) video.poster = d.poster;
+  video.controls = true;
+  video.playsInline = true;
+  video.preload = 'metadata';
+  video.setAttribute('aria-label', `${d.title} video`);
+  wrap.appendChild(video);
+}
+
 function closeCase() {
+  $('#caseVideo video')?.pause();
   caseModal.classList.remove('open');
   caseModal.setAttribute('aria-hidden', 'true');
   body.classList.remove('no-scroll');

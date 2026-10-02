@@ -1758,6 +1758,24 @@ img {
   max-width: 720px;
 }
 
+/* ── Case study video ───────────────────────────── */
+.case-video {
+  margin-top: 70px;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #000;
+  aspect-ratio: 16 / 9;
+  box-shadow: 0 16px 40px rgba(10, 10, 11, .22);
+}
+
+.case-video video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #000;
+}
+
 /* ── Bento Gallery ─────────────────────────────────── */
 .case-gallery {
   display: grid;
