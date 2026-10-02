@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pricing — Afa'a Pay</title>
+<meta name="description" content="Simple, transparent escrow pricing. Start free, pay only when deals complete.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%232f5bff'/%3E%3Cpath d='M9 23 16 8l7 15M12 18h8' stroke='white' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs>
+  <symbol id="mark" viewBox="0 0 32 32"><rect width="32" height="32" rx="9" fill="#2f5bff"/><path d="M9 23 16 8l7 15M12 18h8" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="23" cy="9" r="3" fill="#2ee59d"/></symbol>
+</defs></svg>
+
+<header class="nav"><div class="wrap">
+  <a class="logo" href="index.html"><svg><use href="#mark"/></svg>Afa'a Pay</a>
+  <nav class="links" aria-label="Main">
+    <a href="index.html#how">How it works</a><a href="index.html#trust">Trust score</a><a href="index.html#mobile">Mobile</a><a href="pricing.html" class="on">Pricing</a><a href="security.html">Security</a>
+  </nav>
+  <div class="nav-cta"><a class="btn btn-ghost btn-sm" href="platform/index.html">Sign in</a><a class="btn btn-primary btn-sm" href="platform/index.html#/signup">Get started</a>
+    <button class="burger" aria-label="Menu" aria-expanded="false"><i></i></button></div>
+</div></header>
+
+<main>
+<div class="page-hero"><div class="wrap">
+  <span class="eyebrow">Pricing</span>
+  <h1>Pay only when deals <span class="grad">close.</span></h1>
+  <p class="lead">No setup fees, no monthly minimums on Starter. Fees are charged on completed escrows and drop as your trust score grows.</p>
+  <div class="toggle" role="group" aria-label="Billing period"><button class="on" data-p="m">Monthly</button><button data-p="y">Yearly <em>2 months free</em></button></div>
+</div></div>
+
+<section style="padding-top:30px" id="plans"><div class="wrap">
+  <div class="plans">
+    <div class="plan rv">
+      <div><h3>Starter</h3><p style="color:var(--mute);font-size:14px;margin-top:6px">For individuals and new sellers</p></div>
+      <div class="price">1.5%<small> per escrow</small></div>
+      <ul><li>Up to 2 000 000 XAF / month</li><li>Mobile money and card payments</li><li>Standard contract templates</li><li>Trust score & public profile</li><li>Email support</li></ul>
+      <a class="btn btn-ghost" href="platform/index.html#/signup">Start free</a>
+    </div>
+    <div class="plan hot rv">
+      <div><h3>Business</h3><p style="color:#b9c4ff;font-size:14px;margin-top:6px">For growing merchants and agencies</p></div>
+      <div class="price"><span data-m="25 000" data-y="20 000">25 000</span><small> XAF / mo + 1.0%</small></div>
+      <ul><li>Unlimited volume</li><li>Milestone & split payments</li><li>Merchant dashboard & CSV export</li><li>24h payouts at score 680+</li><li>Custom contracts, EN / FR</li><li>Priority chat support</li></ul>
+      <a class="btn btn-light" href="platform/index.html">Open the platform</a>
+    </div>
+    <div class="plan rv">
+      <div><h3>Platform</h3><p style="color:var(--mute);font-size:14px;margin-top:6px">For marketplaces and banks</p></div>
+      <div class="price">Custom</div>
+      <ul><li>Escrow API & webhooks</li><li>White-label checkout</li><li>Instant release at score 760+</li><li>Dedicated compliance manager</li><li>99.99% uptime SLA</li></ul>
+      <a class="btn btn-ghost" href="security.html#contact">Talk to sales</a>
+    </div>
+  </div>
+</div></section>
+
+<section class="light"><div class="wrap calc">
+  <div class="rv">
+    <span class="eyebrow">Fee calculator</span>
+    <h2 style="margin:18px 0 20px">See what you'd save.</h2>
+    <p class="lead" style="margin-bottom:28px">Compare Afa'a Pay with a typical card-and-chargeback setup.</p>
+    <div class="sliders">
+      <div class="sl"><label for="vol">Monthly volume <output id="o-vol"></output></label><input id="vol" type="range" min="100000" max="20000000" step="100000" value="3000000"></div>
+      <div class="sl"><label for="tier" style="display:block">Your plan</label><select id="tier" style="width:100%;padding:12px;border-radius:12px;border:1px solid var(--paper-line);font:inherit;background:#fff"><option value="1.5">Starter · 1.5%</option><option value="1" selected>Business · 1.0%</option><option value="0.7">Platform · 0.7%</option></select></div>
+      <div class="sl"><label for="comp" style="display:block">Compared with</label><select id="comp" style="width:100%;padding:12px;border-radius:12px;border:1px solid var(--paper-line);font:inherit;background:#fff"><option value="2.9">Card gateway · 2.9% + chargebacks</option><option value="3.5">Marketplace escrow · 3.5%</option><option value="5">Informal agent · ~5%</option></select></div>
+    </div>
+  </div>
+  <div class="calc-out rv">
+    <div><span>Afa'a Pay fee</span><b id="o-fee"></b></div>
+    <div><span>Typical alternative</span><b id="o-cmp"></b></div>
+    <div class="big"><span style="font:500 14px var(--font);color:var(--paper-mute)">You save / month</span><b id="o-save"></b></div>
+    <p style="font-size:12.5px;color:var(--paper-mute)">Illustrative estimate. Excludes the cost of fraud and disputes, which escrow reduces.</p>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="sec-head rv"><span class="eyebrow">Compare plans</span><h2>What's in each plan.</h2></div>
+  <div class="tbl-wrap" style="overflow-x:auto"><table class="cmp" style="min-width:560px">
+    <thead><tr><th>Feature</th><th>Starter</th><th>Business</th><th>Platform</th></tr></thead>
+    <tbody>
+      <tr><td>Escrow fee</td><td>1.5%</td><td>1.0%</td><td>From 0.7%</td></tr>
+      <tr><td>Payout speed</td><td>48h</td><td>24h / instant at 760+</td><td>Instant</td></tr>
+      <tr><td>Milestone payments</td><td>—</td><td class="y">✓</td><td class="y">✓</td></tr>
+      <tr><td>Team members</td><td>1</td><td>10</td><td>Unlimited</td></tr>
+      <tr><td>API & webhooks</td><td>—</td><td>Read-only</td><td class="y">Full</td></tr>
+      <tr><td>Dispute mediation</td><td class="y">✓</td><td class="y">✓</td><td class="y">✓ Dedicated</td></tr>
+    </tbody>
+  </table></div>
+</div></section>
+
+<section style="background:var(--bg2);border-top:1px solid var(--line)"><div class="wrap">
+  <div class="sec-head rv"><span class="eyebrow">FAQ</span><h2>Questions, answered.</h2></div>
+  <div class="faq" style="max-width:820px">
+    <details open><summary>Who pays the escrow fee?</summary><p>You choose: the buyer, the seller or split 50/50. The fee is shown on the contract before anyone signs.</p></details>
+    <details><summary>What happens if there's a dispute?</summary><p>Funds stay frozen. Both sides upload evidence and a mediator decides within 72 hours. Funds are released or refunded accordingly.</p></details>
+    <details><summary>Can I pay with mobile money?</summary><p>Yes. MTN MoMo and Orange Money are first-class payment rails, alongside cards and bank transfers.</p></details>
+    <details><summary>How does my trust score lower my fees?</summary><p>Merchants with a score above 680 qualify for faster payouts, and above 760 for instant release and reduced rates on Business and Platform.</p></details>
+  </div>
+</div></section>
+</main>
+
+<footer class="footer"><div class="wrap">
+  <div class="foot-grid">
+    <div><a class="logo" href="index.html"><svg><use href="#mark"/></svg>Afa'a Pay</a><p>Building trust into every transaction. A concept brand identity, website and product UI case study.</p></div>
+    <div><h4>Product</h4><a href="index.html#how">Escrow</a><a href="index.html#trust">Trust score</a><a href="platform/index.html">Platform</a><a href="pricing.html">Pricing</a></div>
+    <div><h4>Company</h4><a href="security.html">About</a><a href="security.html#security">Security</a><a href="security.html#compliance">Compliance</a></div>
+    <div><h4>Case study</h4><a href="../index.html">Rovard Studios</a><a href="#">Brand identity</a><a href="platform/index.html">Platform</a></div>
+  </div>
+  <div class="legal"><span>© 2026 Afa'a Pay concept · Design by Rovard Studios</span><span>Concept project. Not a real financial service. All figures are illustrative.</span></div>
+</div></footer>
+<script src="app.js"></script>
+</body>
+</html>
