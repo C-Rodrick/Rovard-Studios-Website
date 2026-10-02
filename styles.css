@@ -1733,6 +1733,31 @@ img {
   border-bottom: 1px solid var(--line);
 }
 
+.case-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 44px;
+  margin: 0;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.case-facts[hidden] {
+  display: none;
+}
+
+.case-facts dt {
+  color: var(--muted);
+  font-size: .62rem;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+}
+
+.case-facts dd {
+  margin: 5px 0 0;
+  font-size: .9rem;
+}
+
 .case-section {
   max-width: 900px;
   padding: 100px 0 20px;

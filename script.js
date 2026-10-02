@@ -198,6 +198,38 @@ const caseData = [
     ]
   },
   {
+    title: 'Vita House',
+    category: 'Brand Identity Design',
+    year: '2026',
+    services: 'Brand Strategy / Visual Identity / Brand Guidelines',
+    client: 'Vita House (fictional)',
+    industry: 'Healthcare / Preventative Wellness',
+    type: 'Self-initiated concept project',
+    summary: 'A warm, human brand identity for a fictional U.S. preventative healthcare company, built to feel like coming home rather than going to a clinic.',
+    challenge: 'Healthcare brands default to cold clinical blue and institutional language. Vita House needed to communicate trust, warmth, professionalism and accessibility to young professionals and families, without looking or sounding like a hospital.',
+    approach: 'The identity rests on one idea: care that feels like coming home. The symbol, The Open Door, joins an arch (the house), a V (Vita: open arms and a rising shoot) and a honey sun. Warm neutrals, sage and deep moss carry the system, with clay and honey as quiet accents and no blue at all. Fraunces gives the voice warmth, Figtree keeps it clear, and every colour pairing is checked for accessible contrast. An arch-based graphic language, a custom icon set, illustrated portraits and photography direction complete the guidelines.',
+    outcome: 'A complete brand system: positioning and voice, logo and lockups, colour, typography, photography direction, graphic language, iconography and applications from membership cards to signage. Self-initiated concept; Vita House is fictional and nothing shown is medical advice.',
+    colours: ['#20352A', '#FBF8F2', '#3F5C47', '#E8BC5E'],
+    coverImage: 'assets/thumbs/vita-house-brand-cover.jpg',
+    galleryImages: [
+      'assets/Brand%20Identitities/5_Vita%20House/vita-brand-01-cover.jpg',
+      'assets/Brand%20Identitities/5_Vita%20House/vita-brand-02-strategy.jpg',
+      'assets/Brand%20Identitities/5_Vita%20House/vita-brand-03-personality.jpg',
+      'assets/Brand%20Identitities/5_Vita%20House/vita-brand-04-voice.jpg',
+      'assets/Brand%20Identitities/5_Vita%20House/vita-brand-05-logo.jpg',
+      'assets/Brand%20Identitities/5_Vita%20House/vita-brand-06-lockups.jpg',
+      'assets/Brand%20Identitities/5_Vita%20House/vita-brand-07-usage.jpg',
+      'assets/Brand%20Identitities/5_Vita%20House/vita-brand-08-colour.jpg',
+      'assets/Brand%20Identitities/5_Vita%20House/vita-brand-09-accessibility.jpg',
+      'assets/Brand%20Identitities/5_Vita%20House/vita-brand-10-typography.jpg',
+      'assets/Brand%20Identitities/5_Vita%20House/vita-brand-11-photography.jpg',
+      'assets/Brand%20Identitities/5_Vita%20House/vita-brand-12-graphic-system.jpg',
+      'assets/Brand%20Identitities/5_Vita%20House/vita-brand-13-iconography.jpg',
+      'assets/Brand%20Identitities/5_Vita%20House/vita-brand-14-applications-a.jpg',
+      'assets/Brand%20Identitities/5_Vita%20House/vita-brand-15-applications-b.jpg'
+    ]
+  },
+  {
     title: 'ShorteeMe',
     category: 'Social Media Design',
     year: '2026',
@@ -347,6 +379,37 @@ const caseData = [
       'assets/UI%20Design/2_Afaa%20Pay/afaa-06-mobile.jpg',
       'assets/UI%20Design/2_Afaa%20Pay/afaa-07-system.jpg',
       'assets/UI%20Design/2_Afaa%20Pay/afaa-08-voice.jpg'
+    ]
+  },
+  {
+    title: 'Vita House Care',
+    category: 'UI Design',
+    year: '2026',
+    services: 'UX/UI Design / Website Design / Digital Product Design',
+    client: 'Vita House (fictional)',
+    industry: 'Healthcare / Preventative Wellness',
+    type: 'Self-initiated concept project',
+    summary: 'A responsive healthcare website, a six-step booking flow and a patient dashboard that make preventative care feel clear, calm and easy to use.',
+    challenge: 'Healthcare interfaces tend to be dense, jargon-heavy and hidden behind logins. The brief was to reimagine the digital front door for young professionals and families, with a clear information hierarchy, accessibility built in, and kind error, empty and confirmation states.',
+    approach: 'We designed ten website pages, a booking journey with one decision per step, and a dashboard for appointments, care team, messages, documents, membership and settings, all on one design system. WCAG AA contrast, 44px targets, error summaries, text-size and reduced-motion settings, and mobile versions of the booking flow and dashboard with a bottom tab bar and sticky actions.',
+    outcome: 'A working front-end you can explore: book an appointment end to end and watch it appear in the dashboard. Self-initiated concept; every provider, location, price and article is fictional.',
+    colours: ['#20352A', '#FBF8F2', '#3F5C47', '#E8BC5E'],
+    liveUrl: 'vita-house/site/index.html',
+    liveLabel: 'Explore the live concept ↗',
+    coverImage: 'assets/thumbs/vita-house-ui-cover.jpg',
+    galleryImages: [
+      'assets/UI%20Design/3_Vita%20House/vita-ui-01-cover.jpg',
+      'assets/UI%20Design/3_Vita%20House/vita-ui-02-journey.jpg',
+      'assets/UI%20Design/3_Vita%20House/vita-ui-03-sitemap.jpg',
+      'assets/UI%20Design/3_Vita%20House/vita-ui-04-components.jpg',
+      'assets/UI%20Design/3_Vita%20House/vita-ui-05-website.jpg',
+      'assets/UI%20Design/3_Vita%20House/vita-ui-06-pages.jpg',
+      'assets/UI%20Design/3_Vita%20House/vita-ui-07-booking.jpg',
+      'assets/UI%20Design/3_Vita%20House/vita-ui-08-states.jpg',
+      'assets/UI%20Design/3_Vita%20House/vita-ui-09-dashboard.jpg',
+      'assets/UI%20Design/3_Vita%20House/vita-ui-10-sections.jpg',
+      'assets/UI%20Design/3_Vita%20House/vita-ui-11-mobile-booking.jpg',
+      'assets/UI%20Design/3_Vita%20House/vita-ui-12-mobile-dashboard.jpg'
     ]
   },
   {
@@ -746,6 +809,12 @@ function openCase(index) {
   $('#caseSummary').textContent = d.summary;
   $('#caseYear').textContent = d.year;
   $('#caseServices').textContent = d.services;
+  const facts = $('#caseFacts');
+  if (facts) {
+    const rows = [['Client', d.client], ['Industry', d.industry], ['Project type', d.type]].filter(r => r[1]);
+    facts.hidden = !rows.length;
+    facts.innerHTML = rows.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('');
+  }
   $('#caseChallenge').textContent = d.challenge;
   $('#caseApproach').textContent = d.approach;
   $('#caseOutcome').textContent = d.outcome;
