@@ -768,6 +768,7 @@ function openCase(index) {
   const gallery = $('#caseGallery');
   gallery.innerHTML = '';
   setCaseVideo(d);
+  renderMoreProjects(index);
 
   const galleryImages = d.galleryImages && d.galleryImages.length ? d.galleryImages : d.colours.map((_, i) => makeGalleryAsset(d.title, d.colours));
 
@@ -845,6 +846,47 @@ function setCaseVideo(d) {
   video.preload = 'metadata';
   video.setAttribute('aria-label', `${d.title} video`);
   wrap.appendChild(video);
+}
+
+/* "More projects": three other case studies at the bottom of every case study.
+   Prefers projects with real cover art, starting from the one after the current. */
+function renderMoreProjects(currentIndex) {
+  const section = $('#caseMore');
+  const grid = $('#caseMoreGrid');
+  if (!section || !grid) return;
+  const others = caseData.map((p, i) => ({ p, i })).filter(({ i }) => i !== currentIndex);
+  const ordered = others.slice(others.findIndex(({ i }) => i > currentIndex) >= 0 ? others.findIndex(({ i }) => i > currentIndex) : 0)
+    .concat(others.slice(0, Math.max(0, others.findIndex(({ i }) => i > currentIndex))));
+  const picks = ordered.filter(({ p }) => p.coverImage).concat(ordered.filter(({ p }) => !p.coverImage)).slice(0, 3);
+  grid.innerHTML = '';
+  picks.forEach(({ p, i }) => {
+    const card = document.createElement('button');
+    card.type = 'button';
+    card.className = 'case-more-card';
+    card.setAttribute('aria-label', `Open ${p.title} case study`);
+    const media = document.createElement('span');
+    media.className = 'case-more-media';
+    media.style.backgroundImage = `url('${p.coverImage || (p.galleryImages && p.galleryImages[0]) || ''}')`;
+    const copy = document.createElement('span');
+    copy.className = 'case-more-copy';
+    const kicker = document.createElement('span');
+    kicker.className = 'case-more-kicker';
+    kicker.textContent = p.category;
+    const title = document.createElement('h4');
+    title.textContent = p.title;
+    const go = document.createElement('span');
+    go.className = 'case-more-go';
+    go.textContent = 'View case study ↗';
+    copy.append(kicker, title, go);
+    card.append(media, copy);
+    card.addEventListener('click', () => {
+      $('#caseVideo video')?.pause();
+      if (window.RovardMotion) RovardMotion.curtainTo(() => openCase(i), p.colours);
+      else openCase(i);
+    });
+    grid.appendChild(card);
+  });
+  section.hidden = !picks.length;
 }
 
 function closeCase() {
