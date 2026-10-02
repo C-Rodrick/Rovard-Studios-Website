@@ -391,21 +391,22 @@ const caseData = [
     ]
   },
   {
-    title: 'Packaging Project 02',
+    title: 'JoJo Foods',
     category: 'Packaging',
     year: '2026',
-    services: 'Packaging System / Retail / Print',
-    summary: 'A flexible packaging family designed to keep a growing product line consistent from shelf to unboxing.',
-    challenge: 'Multiple product variants were drifting visually, weakening recognition across the range.',
-    approach: 'We built a modular label system with a shared grid, variant colour coding and disciplined typography.',
-    outcome: 'A cohesive packaging range that scales with new variants while staying instantly recognizable.',
-    colours: ['#5B2E91', '#F7F3EC', '#E8734A', '#221532'],
+    services: 'Packaging Design / Logo & Lettering / Mockups',
+    summary: 'Retro-bright potato chip packaging built around a cream roundel mark, a red and orange sunburst and a clear window that lets the chips do the selling.',
+    challenge: 'The snack aisle is loud. JoJo Foods needed a pouch that reads from across the shop, feels friendly rather than corporate, and still shows off the product inside.',
+    approach: 'We put the JoJo Foods wordmark on a cream roundel so it holds its own against a high-energy red and orange sunburst. A chunky retro script carries "Crispy Snack" and the "Potato Chips" tag, and a clear window shows the product through the middle of the pack.',
+    outcome: 'A bold, shelf-ready pouch with one clear focal point, a warm colour palette that suits the product and lettering that stays legible at a glance.',
+    colours: ['#EC2934', '#EBE9E9', '#EE5930', '#FFDF56'],
+    coverImage: 'assets/thumbs/jojo-foods-cover.jpg',
     galleryImages: [
-      makeGalleryAsset('Packaging Project 02', ['#5B2E91', '#F7F3EC', '#E8734A']),
-      makeGalleryAsset('Variant System', ['#5B2E91', '#F7F3EC', '#E8734A']),
-      makeGalleryAsset('Label Grid', ['#5B2E91', '#F7F3EC', '#E8734A']),
-      makeGalleryAsset('Shelf Set', ['#5B2E91', '#F7F3EC', '#E8734A']),
-      makeGalleryAsset('Unboxing', ['#5B2E91', '#F7F3EC', '#E8734A'])
+      'assets/Packaging%20Design/2_JoJo%20Foods/jojo-01-hero.jpg',
+      'assets/Packaging%20Design/2_JoJo%20Foods/jojo-02-pair.jpg',
+      'assets/Packaging%20Design/2_JoJo%20Foods/jojo-03-mark.jpg',
+      'assets/Packaging%20Design/2_JoJo%20Foods/jojo-04-colour.jpg',
+      'assets/Packaging%20Design/2_JoJo%20Foods/jojo-05-detail.jpg'
     ]
   },
   {
