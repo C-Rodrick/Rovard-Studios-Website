@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Overview — Northstar Capital</title>
+<meta name="description" content="Northstar Capital product dashboard — a self-initiated concept by Rovard Studios. All data is fictional.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#F6F5F1">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' rx='22' fill='%230B0D12'/%3E%3Cg transform='translate(24 24)' fill='%23F6F5F1'%3E%3Cpolygon points='7,42 7,6 16,6 32,29.04 32,6 41,6 41,42 32,42 16,18.96 16,42' transform='translate(-7 -6) scale(1)'/%3E%3Cpolygon fill='%236A8AFF' points='16,18.96 16,42 32,42' transform='translate(-7 -6)'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="stylesheet" href="../shared/tokens.css">
+<link rel="stylesheet" href="../shared/ui.css">
+<link rel="stylesheet" href="../shared/charts.css">
+<link rel="stylesheet" href="app.css">
+<script>
+  /* apply theme before first paint */
+  (function () {
+    try {
+      var p = localStorage.getItem('ns-theme') || 'system', d = localStorage.getItem('ns-density') || 'comfortable';
+      var dark = p === 'dark' || (p === 'system' && matchMedia('(prefers-color-scheme: dark)').matches);
+      var q = new URLSearchParams(location.search).get('theme'); if (q === 'dark') dark = true; if (q === 'light') dark = false;
+      document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-density', d);
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body class="ns-root">
+<script src="../shared/icons.js"></script>
+
+<div class="app">
+  <aside class="side" id="side" aria-label="Primary">
+    <a class="side__brand" href="#/overview" aria-label="Northstar Capital — Overview"><svg viewBox="0 0 195.6 36" role="img" aria-label="Northstar Capital"><use href="#ns-logo"/></svg></a>
+    <button class="ws" id="ws" type="button" aria-label="Workspace: Highline Roasters">
+      <span class="ns-avatar ns-avatar--sq ns-avatar--ink" style="--s:32px">HR</span>
+      <span style="min-width:0"><b>Highline Roasters</b><span>Growth plan · 3 seats</span></span>
+      <svg class="i"><use href="#i-chevron-down"/></svg>
+    </button>
+    <nav id="nav" aria-label="Sections"></nav>
+    <div class="side__foot">
+      <div class="plan">
+        <b>Forecasting is on</b>
+        <div class="ns-meter"><i style="width:72%"></i></div>
+        <small>2 of 3 seats used. Invite your bookkeeper to collaborate.</small>
+      </div>
+      <p class="concept-note"><b>Concept prototype.</b> Northstar Capital is a fictional brand by Rovard Studios. All data and names are invented.</p>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="top">
+      <a class="brand-m" href="#/overview" aria-label="Northstar Capital"><svg viewBox="0 0 34 36"><use href="#ns-mark-sm"/></svg></a>
+      <div class="top__crumb"><span class="hide-m">Highline Roasters</span><svg class="i hide-m"><use href="#i-chevron-right"/></svg><b id="crumb">Overview</b></div>
+      <div class="top__spacer"></div>
+      <button class="cmd" id="cmd" type="button" aria-label="Search or jump to…"><svg class="i"><use href="#i-search"/></svg><span>Search or jump to…</span><kbd class="ns-kbd">⌘K</kbd></button>
+      <a class="icon-btn" id="bell" href="#/notifications" aria-label="Notifications"><svg class="i"><use href="#i-bell"/></svg><i class="dot" id="bell-dot"></i></a>
+      <button class="icon-btn hide-m" id="themeBtn" type="button" aria-label="Toggle dark mode"><svg class="i"><use href="#i-moon"/></svg></button>
+      <button class="ns-avatar ns-avatar--accent" id="me" type="button" style="--s:34px;border:0;cursor:pointer" aria-label="Account: Dana Whitfield">DW</button>
+    </header>
+    <main class="page" id="view" tabindex="-1"></main>
+  </div>
+</div>
+
+<nav class="tabbar" id="tabbar" aria-label="Quick navigation"></nav>
+<div id="overlay"></div>
+<div class="ns-toast-host" id="toasts" aria-live="polite"></div>
+
+<script src="../shared/charts.js"></script>
+<script src="../shared/data.js"></script>
+<script src="app.js"></script>
+<script src="views-a.js"></script>
+<script src="views-b.js"></script>
+<script>App.start();</script>
+</body>
+</html>

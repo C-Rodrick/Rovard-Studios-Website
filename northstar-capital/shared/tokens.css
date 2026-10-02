@@ -1,0 +1,158 @@
+/* ==========================================================================
+   Northstar Capital — Design Tokens
+   One source of truth for the website, the product and the case study.
+   Primitives → semantic roles. Components only ever read semantic roles,
+   so any surface can be flipped with data-theme="dark" | "light".
+   ========================================================================== */
+
+:root {
+  /* ---------- Type ---------- */
+  --font-sans: "Geist", "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+
+  --fs-display-xl: clamp(3.25rem, 1.1rem + 7.4vw, 7.5rem);   /* 52 → 120 */
+  --fs-display:    clamp(2.5rem, 1.2rem + 4.6vw, 5rem);      /* 40 → 80  */
+  --fs-h1:         clamp(2.25rem, 1.3rem + 3.2vw, 3.75rem);  /* 36 → 60  */
+  --fs-h2:         clamp(1.75rem, 1.15rem + 2vw, 2.75rem);   /* 28 → 44  */
+  --fs-h3:         1.375rem;                                 /* 22 */
+  --fs-h4:         1.125rem;                                 /* 18 */
+  --fs-body-lg:    1.1875rem;                                /* 19 */
+  --fs-body:       1rem;                                     /* 16 */
+  --fs-sm:         .875rem;                                  /* 14 */
+  --fs-xs:         .75rem;                                   /* 12 */
+  --fs-mono:       .6875rem;                                 /* 11 */
+
+  --tracking-display: -0.045em;
+  --tracking-heading: -0.03em;
+  --tracking-tight:   -0.012em;
+  --tracking-mono:    0.09em;
+
+  /* ---------- Space (4px base) ---------- */
+  --s-1: 4px;  --s-2: 8px;  --s-3: 12px; --s-4: 16px; --s-5: 20px; --s-6: 24px;
+  --s-8: 32px; --s-10: 40px; --s-12: 48px; --s-16: 64px; --s-20: 80px; --s-24: 96px; --s-32: 128px;
+
+  /* ---------- Radius ---------- */
+  --r-xs: 4px; --r-sm: 6px; --r-md: 10px; --r-lg: 14px; --r-xl: 20px; --r-pill: 999px;
+
+  /* ---------- Motion ---------- */
+  --ease: cubic-bezier(.2, .7, .2, 1);
+  --ease-in-out: cubic-bezier(.65, 0, .35, 1);
+  --dur-1: 120ms; --dur-2: 200ms; --dur-3: 360ms; --dur-4: 640ms;
+
+  /* ---------- Primitive colour ---------- */
+  /* Night Ink — near-blacks */
+  --ink-950: #07090D; --ink-900: #0B0D12; --ink-850: #0F1218; --ink-800: #141821;
+  --ink-700: #1C212C; --ink-600: #2A303D; --ink-500: #3A4252;
+  /* Paper — warm off-whites */
+  --paper-50: #FBFAF7; --paper-100: #F6F5F1; --paper-200: #EFEDE7; --paper-300: #E4E1D8;
+  /* Slate — cool neutral grays */
+  --slate-50: #F3F4F6;  --slate-100: #E6E9EE; --slate-200: #D0D5DD; --slate-300: #AAB2BF;
+  --slate-400: #858FA0; --slate-500: #5F6879; --slate-600: #4A5262; --slate-700: #384050;
+  --slate-800: #232A36; --slate-900: #151A23;
+  /* Polaris — the one blue */
+  --polaris-50: #EEF2FF;  --polaris-100: #DCE5FF; --polaris-200: #B9CBFF; --polaris-300: #8FA9FF;
+  --polaris-400: #6A8AFF; --polaris-500: #2B5BFF; --polaris-600: #1E47E6; --polaris-700: #1936B0;
+  --polaris-800: #152B82; --polaris-900: #0F1E57;
+  /* Surplus — positive financial states */
+  --surplus-300: #3DDC97; --surplus-500: #14A06F; --surplus-700: #0B7F53;
+  /* Ember / Amber — used only for status */
+  --ember-300: #FF7A73; --ember-500: #E2483F; --ember-700: #C2342F;
+  --amber-300: #F2B84B; --amber-500: #EDA100; --amber-700: #9A6200;
+
+  /* ---------- Semantic roles — LIGHT (default) ---------- */
+  color-scheme: light;
+  --bg:         var(--paper-100);
+  --bg-sunken:  var(--paper-200);
+  --surface:    #FFFFFF;
+  --surface-2:  var(--paper-50);
+  --surface-3:  var(--paper-100);
+  --inverse-bg: var(--ink-900);
+  --inverse-text: var(--paper-100);
+
+  --text:   var(--ink-900);
+  --text-2: var(--slate-600);
+  --text-3: var(--slate-500);
+
+  --line:        rgba(11, 13, 18, .10);
+  --line-strong: rgba(11, 13, 18, .20);
+  --line-soft:   rgba(11, 13, 18, .055);
+
+  --accent:         var(--polaris-500);
+  --accent-hover:   var(--polaris-600);
+  --accent-ink:     var(--polaris-500);   /* accent used as text/link/icon */
+  --accent-contrast:#FFFFFF;
+  --accent-soft:    rgba(43, 91, 255, .085);
+  --accent-line:    rgba(43, 91, 255, .30);
+  --mark-accent:    var(--polaris-500);
+
+  --pos:       var(--surplus-700);
+  --pos-fill:  var(--surplus-500);
+  --pos-soft:  rgba(20, 160, 111, .12);
+  --neg:       var(--ember-700);
+  --neg-fill:  var(--ember-500);
+  --neg-soft:  rgba(226, 72, 63, .09);
+  --warn:      var(--amber-700);
+  --warn-fill: var(--amber-500);
+  --warn-soft: rgba(237, 161, 0, .15);
+
+  --shadow-1: 0 1px 0 rgba(11,13,18,.03), 0 1px 2px rgba(11,13,18,.06);
+  --shadow-2: 0 1px 2px rgba(11,13,18,.05), 0 8px 24px -8px rgba(11,13,18,.12);
+  --shadow-3: 0 2px 4px rgba(11,13,18,.05), 0 24px 56px -16px rgba(11,13,18,.28);
+  --ring: 0 0 0 3px rgba(43, 91, 255, .22);
+
+  /* Data-visualisation palette (validated for CVD separation — see case study §06) */
+  --c1: #2B5BFF; --c2: #EB6834; --c3: #1BAF7A; --c4: #EDA100; --c5: #E87BA4; --c6: #4A3AA7;
+  --viz-grid: rgba(11, 13, 18, .075);
+  --viz-axis: rgba(11, 13, 18, .18);
+  --viz-muted: #C9CED8;           /* de-emphasis series */
+  --viz-area-op: .10;
+}
+
+/* ---------- Semantic roles — DARK ---------- */
+[data-theme="dark"] {
+  color-scheme: dark;
+  --bg:         var(--ink-900);
+  --bg-sunken:  var(--ink-950);
+  --surface:    #11141B;
+  --surface-2:  #161A22;
+  --surface-3:  #1B2029;
+  --inverse-bg: var(--paper-100);
+  --inverse-text: var(--ink-900);
+
+  --text:   #F3F1EB;
+  --text-2: #A9B0BD;
+  --text-3: #81899B;
+
+  --line:        rgba(255, 255, 255, .095);
+  --line-strong: rgba(255, 255, 255, .19);
+  --line-soft:   rgba(255, 255, 255, .05);
+
+  --accent:         var(--polaris-500);
+  --accent-hover:   #4A73FF;
+  --accent-ink:     #86A2FF;
+  --accent-contrast:#FFFFFF;
+  --accent-soft:    rgba(106, 138, 255, .13);
+  --accent-line:    rgba(134, 162, 255, .38);
+  --mark-accent:    #6A8AFF;
+
+  --pos:       var(--surplus-300);
+  --pos-fill:  var(--surplus-300);
+  --pos-soft:  rgba(61, 220, 151, .13);
+  --neg:       var(--ember-300);
+  --neg-fill:  var(--ember-300);
+  --neg-soft:  rgba(255, 122, 115, .13);
+  --warn:      var(--amber-300);
+  --warn-fill: var(--amber-300);
+  --warn-soft: rgba(242, 184, 75, .14);
+
+  --shadow-1: 0 1px 0 rgba(255,255,255,.03) inset, 0 1px 2px rgba(0,0,0,.4);
+  --shadow-2: 0 1px 0 rgba(255,255,255,.04) inset, 0 12px 28px -10px rgba(0,0,0,.6);
+  --shadow-3: 0 1px 0 rgba(255,255,255,.05) inset, 0 28px 64px -16px rgba(0,0,0,.75);
+  --ring: 0 0 0 3px rgba(106, 138, 255, .3);
+
+  --c1: #5A82FF; --c2: #D95926; --c3: #199E70; --c4: #C98500; --c5: #D55181; --c6: #9085E9;
+  --viz-grid: rgba(255, 255, 255, .075);
+  --viz-axis: rgba(255, 255, 255, .2);
+  --viz-muted: #3A4252;
+  --viz-area-op: .16;
+}

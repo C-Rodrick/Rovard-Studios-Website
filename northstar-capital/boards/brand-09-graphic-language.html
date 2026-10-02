@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1200">
+<title>Northstar Capital — brand-09-graphic-language</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/tokens.css">
+<link rel="stylesheet" href="../shared/ui.css">
+<link rel="stylesheet" href="../shared/charts.css">
+<link rel="stylesheet" href="boards.css">
+
+</head>
+<body class="board">
+<script src="../shared/icons.js"></script>
+<div class="bd-top"><span><b>Northstar Capital</b> — Brand Identity</span><span>09 — Graphic language</span></div>
+<div class="bd-main"><div class="bd-h"><span class="n">09</span><h2>Graphic language & icons</h2><p>Four devices, all derived from the mark. Seventy icons drawn on one rule.</p></div>
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px">
+  <div><div style="position:relative;aspect-ratio:1;border-radius:16px;border:1px solid var(--line);background:var(--surface);overflow:hidden"><span class="wedge" style="position:absolute;left:16%;top:14%;width:14px;height:15px"></span><b class="mono" style="position:absolute;left:28%;top:13.5%;font-size:9px;letter-spacing:.1em;font-weight:500">TODAY</b><span class="wedge" style="position:absolute;left:16%;top:42%;width:8px;height:9px"></span><span class="wedge" style="position:absolute;right:16%;bottom:16%;width:54px;height:60px"></span></div><h4 style="font:600 14px var(--font-sans);letter-spacing:-.02em;margin:10px 0 4px">The north wedge</h4><p class="dim" style="font-size:11px">Bullet, marker and “today” flag.</p></div>
+  <div><div style="position:relative;aspect-ratio:1;border-radius:16px;border:1px solid var(--line);background:repeating-linear-gradient(to right,transparent 0 calc(100%/12 - 1px),var(--line) calc(100%/12 - 1px) calc(100%/12)),var(--surface);overflow:hidden"><i style="position:absolute;left:33.3%;top:25%;width:11px;height:11px;margin:-5px;background:linear-gradient(currentColor,currentColor) center/100% 1px no-repeat,linear-gradient(currentColor,currentColor) center/1px 100% no-repeat;opacity:.6"></i><i style="position:absolute;left:66.6%;top:25%;width:11px;height:11px;margin:-5px;background:linear-gradient(currentColor,currentColor) center/100% 1px no-repeat,linear-gradient(currentColor,currentColor) center/1px 100% no-repeat;opacity:.6"></i><i style="position:absolute;left:33.3%;top:75%;width:11px;height:11px;margin:-5px;background:linear-gradient(currentColor,currentColor) center/100% 1px no-repeat,linear-gradient(currentColor,currentColor) center/1px 100% no-repeat;opacity:.6"></i><i style="position:absolute;left:66.6%;top:75%;width:11px;height:11px;margin:-5px;background:linear-gradient(currentColor,currentColor) center/100% 1px no-repeat,linear-gradient(currentColor,currentColor) center/1px 100% no-repeat;opacity:.6"></i><span class="wedge" style="position:absolute;left:36%;top:44%"></span></div><h4 style="font:600 14px var(--font-sans);letter-spacing:-.02em;margin:10px 0 4px">Meridian grid</h4><p class="dim" style="font-size:11px">Twelve hairline columns, registration crosses.</p></div>
+  <div><div style="display:grid;place-items:center;aspect-ratio:1;border-radius:16px;border:1px solid var(--line);background:var(--surface);overflow:hidden;padding:18px"><svg viewBox="0 0 200 140" style="width:100%;--mark-accent:#2B5BFF"><path d="M20 130V20L100 130V20" fill="none" stroke="currentColor" stroke-width="10" stroke-linejoin="miter"/><path d="M100 20 L128 36 L150 28 L196 4" fill="none" stroke="#2B5BFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h4 style="font:600 14px var(--font-sans);letter-spacing:-.02em;margin:10px 0 4px">Rise · dip · rise</h4><p class="dim" style="font-size:11px">The N’s path is the chart motif.</p></div>
+  <div><div id="const" style="aspect-ratio:1;border-radius:16px;border:1px solid var(--line);background:var(--surface);overflow:hidden"></div><h4 style="font:600 14px var(--font-sans);letter-spacing:-.02em;margin:10px 0 4px">Constellation</h4><p class="dim" style="font-size:11px">Generated from real cash balances.</p></div>
+</div>
+<div style="display:grid;grid-template-columns:210px 1fr;gap:14px;margin-top:16px">
+  <div style="padding:16px;border:1px solid var(--line);border-radius:16px;background:var(--surface)"><span class="cap" style="margin-bottom:12px">Iconography</span><ul style="font-size:11.5px;display:grid;gap:9px;color:var(--text-2)"><li><b style="color:var(--text)">24 px grid</b> · 2 px padding</li><li><b style="color:var(--text)">1.5 px stroke</b> · round caps &amp; joins</li><li><b style="color:var(--text)">One metaphor</b> · arrows, bars, paths — no dollar signs, coins or padlocks</li></ul></div>
+  <div id="icons" style="display:grid;grid-template-columns:repeat(14,1fr);border-top:1px solid var(--line);border-left:1px solid var(--line)"></div>
+</div>
+</div>
+<div class="bd-foot"><span>Self-initiated concept · Rovard Studios · 2026</span><span>09 / 11</span></div>
+<script src="../shared/charts.js"></script>
+<script src="../shared/data.js"></script>
+<script src="frames.js"></script>
+<script>
+var D=NS.data, pts=D.cashSeries.filter(function(p){return p.off>=-70&&p.off<=30}).filter(function(p,i){return i%2===0});
+var W=260,H=260,ys=pts.map(function(p){return p.y}),mn=Math.min.apply(null,ys),mx=Math.max.apply(null,ys),xs=pts.map(function(p,i){return 24+i/(pts.length-1)*(W-48)}),py=pts.map(function(p){return H-26-(p.y-mn)/(mx-mn)*(H-60)});
+var s='<svg viewBox="0 0 '+W+' '+H+'" width="100%" height="100%" style="color:var(--text)">';
+for(var i=0;i<pts.length;i++){for(var j=i+1;j<Math.min(pts.length,i+3);j++){s+='<line x1="'+xs[i]+'" y1="'+py[i]+'" x2="'+xs[j]+'" y2="'+py[j]+'" stroke="currentColor" stroke-opacity=".16"/>';}}
+for(var k=0;k<pts.length;k++){var t=pts[k].off===0||Math.abs(pts[k].off)<1;s+='<circle cx="'+xs[k]+'" cy="'+py[k]+'" r="'+(k%7===0?2.4:1.5)+'" fill="currentColor" opacity="'+(k%7===0?.9:.5)+'"/>';}
+var ti=pts.findIndex(function(p){return p.off>=0});s+='<circle cx="'+xs[ti]+'" cy="'+py[ti]+'" r="9" fill="#2B5BFF" fill-opacity=".18"/><circle cx="'+xs[ti]+'" cy="'+py[ti]+'" r="4.5" fill="#2B5BFF"/></svg>';
+document.getElementById('const').innerHTML=s;
+var names=['overview','cashflow','revenue','expenses','invoices','transactions','reports','bell','settings','search','plus','check','arrow-up-right','shield','lock','bank','card','users','calendar','download','filter','link','alert','info','wallet','target','globe','mail','chat','clock','refresh','layers','key','eye','logout','moon','sun','help','book','compass','repeat','percent','copy','edit','bolt','plug','pie','building','tag','receipt','inbox','activity','scale','flag','briefcase','box'];
+document.getElementById('icons').innerHTML=names.slice(0,42).map(function(n){return '<div style="aspect-ratio:1;display:grid;place-items:center;border-right:1px solid var(--line);border-bottom:1px solid var(--line);color:var(--text-2);background:var(--surface)">'+NS.icon(n)+'</div>'}).join('');
+</script>
+</body>
+</html>

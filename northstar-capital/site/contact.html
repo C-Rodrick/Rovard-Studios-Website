@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Contact — Northstar Capital</title>
+<meta name="description" content="Talk to the Northstar team about plans, migrations and support. A self-initiated concept by Rovard Studios.">
+<meta name="theme-color" content="#F6F5F1">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' rx='22' fill='%230B0D12'/%3E%3Cg transform='translate(24 24)' fill='%23F6F5F1'%3E%3Cpolygon points='7,42 7,6 16,6 32,29.04 32,6 41,6 41,42 32,42 16,18.96 16,42' transform='translate(-7 -6)'/%3E%3Cpolygon fill='%236A8AFF' points='16,18.96 16,42 32,42' transform='translate(-7 -6)'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="stylesheet" href="../shared/tokens.css">
+<link rel="stylesheet" href="../shared/ui.css">
+<link rel="stylesheet" href="../shared/charts.css">
+<link rel="stylesheet" href="site.css">
+</head>
+<body class="ns-root" data-page="contact">
+<script src="../shared/icons.js"></script>
+<div id="site-header"></div>
+<main id="main">
+
+<section class="phero" style="padding-bottom:clamp(32px,4vw,56px)">
+  <div class="meridian" aria-hidden="true"></div>
+  <div class="w" style="position:relative">
+    <div class="crumbs rv"><a href="index.html">Northstar</a><span>/</span><span>Contact</span></div>
+    <h1 class="display rv" style="--d:.05s">Talk to a <span class="dim-h">human.</span></h1>
+  </div>
+</section>
+
+<section class="sec sec--flush" style="padding-top:clamp(24px,3vw,40px);border-top:0"><div class="w contact">
+  <div class="rv">
+    <p class="lead">Questions about plans, migrating your books or whether Northstar fits your business? We reply within one business day.</p>
+    <div class="chan">
+      <div><span class="ic"><svg class="i"><use href="#i-mail"/></svg></span><div><b>Sales</b><span>Plans, demos and migrations</span><a href="mailto:sales@northstarcapital.example">sales@northstarcapital.example</a></div></div>
+      <div><span class="ic"><svg class="i"><use href="#i-help"/></svg></span><div><b>Support</b><span>Mon–Fri · 7 AM–7 PM CT</span><a href="mailto:help@northstarcapital.example">help@northstarcapital.example</a></div></div>
+      <div><span class="ic"><svg class="i"><use href="#i-chat"/></svg></span><div><b>Phone</b><span>Growth &amp; Scale customers</span><a href="tel:+15125550142">(512) 555-0142</a></div></div>
+      <div><span class="ic"><svg class="i"><use href="#i-globe"/></svg></span><div><b>Press &amp; partnerships</b><span>Media kit and enquiries</span><a href="mailto:press@northstarcapital.example">press@northstarcapital.example</a></div></div>
+    </div>
+  </div>
+  <form class="form rv" id="contact-form" novalidate style="--d:.08s">
+    <div><h2 class="h3">Send us a message</h2><p class="dim" style="margin-top:6px;font-size:.9375rem">Fields marked with an asterisk are required.</p></div>
+    <div class="row2">
+      <div class="ns-field"><label class="ns-label" for="name">Full name *</label><input class="ns-input" id="name" autocomplete="name" placeholder="Jordan Ellis"><span class="err">Please enter your name.</span></div>
+      <div class="ns-field"><label class="ns-label" for="email">Work email *</label><input class="ns-input" id="email" type="email" autocomplete="email" placeholder="jordan@yourbusiness.com"><span class="err">Enter a valid email address.</span></div>
+    </div>
+    <div class="row2">
+      <div class="ns-field"><label class="ns-label" for="company">Company</label><input class="ns-input" id="company" autocomplete="organization" placeholder="Ellis &amp; Co."></div>
+      <div class="ns-field"><label class="ns-label" for="size">Team size</label><select class="ns-select" id="size"><option>Just me</option><option>2–10</option><option>11–50</option><option>51–200</option></select></div>
+    </div>
+    <div class="ns-field"><label class="ns-label" for="topic">What can we help with? *</label><select class="ns-select" id="topic"><option value="">Choose a topic…</option><option>Pricing &amp; plans</option><option>Book a demo</option><option>Migrating from another tool</option><option>Support for my account</option><option>Press &amp; partnerships</option></select><span class="err">Please choose a topic.</span></div>
+    <div class="ns-field"><label class="ns-label" for="msg">Message *</label><textarea class="ns-textarea" id="msg" placeholder="Tell us a little about your business and what you’d like to solve."></textarea><span class="err">Please write at least a sentence.</span></div>
+    <button class="ns-btn ns-btn--primary ns-btn--lg" type="submit">Send message<svg class="i i-arrow"><use href="#i-arrow-right"/></svg></button>
+    <p class="fine" style="margin:0">Concept prototype — your message isn’t sent anywhere.</p>
+    <div class="done" role="status"><div class="ok"><svg class="i"><use href="#i-check"/></svg></div><h3 class="h3">Thanks, <span id="done-name"></span> — message received.</h3><p class="dim" style="max-width:36ch">In a real project we’d reply within one business day. (This is a prototype, so nothing was sent.)</p><button type="button" class="ns-btn ns-btn--outline" id="again">Send another</button></div>
+  </form>
+</div></section>
+
+<section class="sec sec--sunken"><div class="w split">
+  <div class="rv"><span class="ns-eyebrow">Headquarters</span><h2 class="h1" style="margin-top:20px">Austin, <span class="dim-h">with friends in New York.</span></h2><p class="lead" style="margin-top:20px">We’re remote-first, with hubs in Austin and New York. Drop by on a Thursday — there’s always coffee.</p><div class="outs"><div><span>Austin, TX</span><b style="color:var(--text)">1200 Meridian Plaza, Suite 400</b></div><div><span>New York, NY</span><b style="color:var(--text)">88 Wythe Row, Floor 6</b></div><div><span>Hours</span><b style="color:var(--text)">Mon–Fri · 9–5 CT</b></div></div></div>
+  <div class="map rv" style="--d:.08s" role="img" aria-label="Stylized map of downtown Austin with the Northstar office marked">
+    <svg viewBox="0 0 640 360" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="640" height="360" fill="var(--surface-2)"/>
+      <g stroke="var(--line-strong)" stroke-width="1" fill="none"><path d="M0 70H640M0 150H640M0 230H640M0 300H640M90 0V360M200 0V360M330 0V360M450 0V360M560 0V360"/></g>
+      <path d="M0 330 C140 270 220 330 330 250 S 520 140 640 170" stroke="var(--c1)" stroke-opacity=".35" stroke-width="18" fill="none"/>
+      <g fill="var(--line-soft)"><rect x="100" y="80" width="90" height="60"/><rect x="210" y="80" width="110" height="60"/><rect x="340" y="160" width="100" height="60"/><rect x="460" y="80" width="90" height="60"/><rect x="100" y="240" width="90" height="50"/><rect x="460" y="240" width="90" height="50"/></g>
+    </svg>
+    <div class="pinl"><b>Northstar HQ</b>1200 Meridian Plaza, Austin</div>
+  </div>
+</div></section>
+
+</main>
+<div id="site-footer"></div>
+<script src="../shared/charts.js"></script>
+<script src="../shared/data.js"></script>
+<script src="site.js"></script>
+</body>
+</html>

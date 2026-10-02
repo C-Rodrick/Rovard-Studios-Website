@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Sign in — Northstar Capital</title>
+<meta name="description" content="Sign in to Northstar Capital. A self-initiated concept prototype by Rovard Studios.">
+<meta name="theme-color" content="#F6F5F1">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' rx='22' fill='%230B0D12'/%3E%3Cg transform='translate(24 24)' fill='%23F6F5F1'%3E%3Cpolygon points='7,42 7,6 16,6 32,29.04 32,6 41,6 41,42 32,42 16,18.96 16,42' transform='translate(-7 -6)'/%3E%3Cpolygon fill='%236A8AFF' points='16,18.96 16,42 32,42' transform='translate(-7 -6)'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="stylesheet" href="../shared/tokens.css">
+<link rel="stylesheet" href="../shared/ui.css">
+<link rel="stylesheet" href="../shared/charts.css">
+<link rel="stylesheet" href="site.css">
+</head>
+<body class="ns-root" data-page="signin">
+<script src="../shared/icons.js"></script>
+<main id="main">
+
+<div class="auth">
+  <div class="auth__l">
+    <a class="nav__logo" href="index.html" aria-label="Northstar Capital — home"><svg viewBox="0 0 195.6 36" style="width:156px;height:29px" role="img" aria-label="Northstar Capital"><use href="#ns-logo"/></svg></a>
+    <div class="auth__form">
+      <div style="display:grid;gap:10px"><div class="ns-seg" id="mode" role="group" aria-label="Sign in or create account" style="justify-self:start"><button data-m="signin" aria-pressed="true">Sign in</button><button data-m="signup" aria-pressed="false">Create account</button></div><h1 id="auth-h" style="margin-top:14px">Welcome back</h1><p id="auth-p" class="dim">Sign in to see where your business stands.</p></div>
+      <div class="proto"><svg class="i"><use href="#i-info"/></svg><span><b style="font-weight:600;color:var(--text)">Prototype.</b> Any email opens the demo workspace — no account is created and nothing is stored.</span></div>
+      <form id="auth-form" novalidate style="display:grid;gap:18px">
+        <div class="ns-field only-signup" style="display:none"><label class="ns-label" for="biz">Business name</label><input class="ns-input" id="biz" autocomplete="organization" placeholder="Highline Roasters"></div>
+        <div class="ns-field"><label class="ns-label" for="em">Work email</label><input class="ns-input" id="em" type="email" autocomplete="email" value="dana@highlineroasters.example" required></div>
+        <div class="ns-field"><div style="display:flex;justify-content:space-between;align-items:baseline"><label class="ns-label" for="pw">Password</label><a class="only-signin" href="#" data-concept="Concept prototype — password reset is not part of the design scope." style="font-size:.8125rem;color:var(--accent-ink);text-decoration:none">Forgot password?</a></div><div class="ns-input-wrap"><input class="ns-input" id="pw" type="password" autocomplete="current-password" value="demo-password" style="padding-left:14px;padding-right:46px"><button type="button" id="showpw" aria-label="Show password" aria-pressed="false" class="ns-btn ns-btn--ghost ns-btn--icon ns-btn--sm" style="position:absolute;right:6px"><svg class="i"><use href="#i-lock"/></svg></button></div></div>
+        <button class="ns-btn ns-btn--primary ns-btn--lg ns-btn--block" id="auth-submit" type="submit">Sign in</button>
+      </form>
+      <div class="divide">or</div>
+      <div style="display:grid;gap:10px"><button class="ns-btn ns-btn--outline ns-btn--lg ns-btn--block" type="button" data-demo><svg class="i"><use href="#i-fingerprint"/></svg>Continue with a passkey</button><button class="ns-btn ns-btn--ghost ns-btn--block" type="button" data-demo><svg class="i"><use href="#i-play"/></svg>Skip — explore the demo workspace</button></div>
+      <p class="fine" style="margin:0">By continuing you agree to nothing in particular — this is a design concept by Rovard Studios.</p>
+    </div>
+    <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:.8125rem;color:var(--text-3)"><span>© 2026 Northstar Capital (fictional)</span><a href="../../index.html#work" style="color:inherit">Back to Rovard Studios</a></div>
+  </div>
+  <aside class="auth__r" data-theme="dark" aria-hidden="true">
+    <div class="meridian"></div>
+    <span class="ns-eyebrow" style="position:relative">Customer story</span>
+    <div style="position:relative;display:grid;gap:36px;justify-items:start">
+      <div class="ring-card" id="ring-card"></div>
+      <p class="q">“I open one page and it tells me whether I can make payroll.”</p>
+      <div style="display:flex;align-items:center;gap:12px"><span class="ns-avatar ns-avatar--accent" style="--s:42px">MO</span><div><b style="display:block;font-weight:600">Maya Okafor</b><span class="dim" style="font-size:.875rem">Founder, Lumen Dental Studio</span></div></div>
+    </div>
+    <p class="fine" style="position:relative;margin:0">Illustrative testimonial for a fictional product.</p>
+  </aside>
+</div>
+
+</main>
+<script src="../shared/charts.js"></script>
+<script src="../shared/data.js"></script>
+<script src="site.js"></script>
+</body>
+</html>

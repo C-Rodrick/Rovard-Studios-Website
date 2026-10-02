@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1200">
+<title>Northstar Capital — ui-08-dashboard-detail</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/tokens.css">
+<link rel="stylesheet" href="../shared/ui.css">
+<link rel="stylesheet" href="../shared/charts.css">
+<link rel="stylesheet" href="boards.css">
+
+</head>
+<body class="board">
+<script src="../shared/icons.js"></script>
+<div class="bd-top"><span><b>Northstar Capital</b> — UI Design</span><span>07 — Dashboard detail</span></div>
+<div class="bd-main"><div class="bd-h"><span class="n">07</span><h2>Forecasting, invoices & more</h2><p>Scenario planning, an invoice drawer with a live document, revenue and expenses with validated chart colours.</p></div>
+<div style="display:grid;grid-template-columns:repeat(12,1fr);grid-template-rows:320px 260px;gap:14px;height:594px">
+  <div style="grid-column:span 7;display:grid;grid-template-rows:1fr auto;gap:8px"><div class="fr" style="border-radius:12px"><div class="fr__bar"><i></i><i></i><i></i><span>northstarcapital.example/app/cash-flow</span></div><div class="fr__vp" data-frame data-src="../app/index.html?theme=light#/cash-flow" data-w="1440" data-h="900" data-act='var b=document.querySelectorAll(&#39;#scen button&#39;);b[0].click();b[1].click();window.scrollTo({top:96,behavior:&#39;instant&#39;})' data-wait="1200" data-ih="1000"></div></div><div><b style="font-size:13px">Cash flow</b> <span class="dim" style="font-size:12px">· two scenarios stacked on the baseline</span></div></div>
+  <div style="grid-column:span 5;display:grid;grid-template-rows:1fr auto;gap:8px"><div class="fr" style="border-radius:12px"><div class="fr__bar"><i></i><i></i><i></i><span>northstarcapital.example/app/invoices</span></div><div class="fr__vp" data-frame data-src="../app/index.html?theme=light#/invoices" data-w="1440" data-h="900" data-act='var st=document.createElement(&#39;style&#39;);st.textContent=&#39;.scrim,.top,.tabbar{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}&#39;;document.head.appendChild(st);var v=App.state.invoices.filter(function(x){return x.status===&#39;overdue&#39;})[0];App.openInvoice(v.id)' data-wait="1300" data-ih="1000"></div></div><div><b style="font-size:13px">Invoices</b> <span class="dim" style="font-size:12px">· drawer with timeline and document</span></div></div>
+  <div style="grid-column:span 5;display:grid;grid-template-rows:1fr auto;gap:8px"><div class="fr" style="border-radius:12px"><div class="fr__bar"><i></i><i></i><i></i><span>northstarcapital.example/app/revenue</span></div><div class="fr__vp" data-frame data-src="../app/index.html?theme=light#/revenue" data-w="1440" data-h="900" data-wait="1200" data-ih="1000"></div></div><div><b style="font-size:13px">Revenue</b> <span class="dim" style="font-size:12px">· stacked by channel, top customers</span></div></div>
+  <div style="grid-column:span 7;display:grid;grid-template-rows:1fr auto;gap:8px"><div class="fr" style="border-radius:12px"><div class="fr__bar"><i></i><i></i><i></i><span>northstarcapital.example/app/expenses</span></div><div class="fr__vp" data-frame data-src="../app/index.html?theme=dark#/expenses" data-w="1440" data-h="900" data-wait="1200" data-ih="1000"></div></div><div><b style="font-size:13px">Expenses</b> <span class="dim" style="font-size:12px">· budget vs. actual, vendors, recurring</span></div></div>
+</div>
+</div>
+<div class="bd-foot"><span>Self-initiated concept · Rovard Studios · 2026</span><span>08 / 10</span></div>
+<script src="../shared/charts.js"></script>
+<script src="../shared/data.js"></script>
+<script src="frames.js"></script>
+
+</body>
+</html>
