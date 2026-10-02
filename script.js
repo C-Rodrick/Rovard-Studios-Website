@@ -178,7 +178,7 @@ const caseData = [
     approach: 'We developed a modular identity around linked forms, a deep navy foundation and a violet gradient accent that moves naturally across digital and physical applications.',
     outcome: 'A confident technology brand that gives engineering knowledge a memorable visual rhythm across products, spaces and culture.',
     colours: ['#07112F', '#F7F8FC', '#8B5CF6', '#101A3D'],
-    coverImage: 'assets/thumbs/4-linkrithm-linkrithm-cover.jpg',
+    coverImage: 'assets/thumbs/linkrithm-tshirt-cover.jpg',
     galleryImages: [
       'assets/Brand%20Identitities/4_Linkrithm/linkrithm-gallery-01.jpg',
       'assets/Brand%20Identitities/4_Linkrithm/linkrithm-gallery-02.jpg',
@@ -227,6 +227,34 @@ const caseData = [
       'assets/Brand%20Identitities/5_Vita%20House/vita-brand-13-iconography.jpg',
       'assets/Brand%20Identitities/5_Vita%20House/vita-brand-14-applications-a.jpg',
       'assets/Brand%20Identitities/5_Vita%20House/vita-brand-15-applications-b.jpg'
+    ]
+  },
+  {
+    title: 'Northstar Capital',
+    category: 'Brand Identity Design',
+    year: '2026',
+    services: 'Brand Strategy / Visual Identity / Brand Guidelines',
+    client: 'Northstar Capital (fictional)',
+    industry: 'Financial Technology / SaaS',
+    type: 'Self-initiated concept project',
+    summary: 'An editorial-tech brand identity for a fictional U.S. fintech that helps small businesses understand cash flow, built on one idea: a fixed point to steer by.',
+    challenge: 'Fintech brands default to padlocks, dollar signs and teal gradients, and speak in jargon. Northstar needed to feel confident, intelligent and credible to owners who are not finance people, without looking like a bank or a generic SaaS template.',
+    approach: 'The mark is a bold, geometric N with a blue wedge inlaid in its counter: a compass needle, a sail, an arrow pointing north. Traced, the N is also a cash-flow line (up, down, up). Night Ink, Paper and Slate carry the system, Polaris Blue is the single accent, and Surplus green is reserved for positive money. Geist and Geist Mono set the tone, and four graphic devices (the north wedge, a meridian grid, the rise-dip-rise line and a data constellation) are all derived from the mark.',
+    outcome: 'A complete brand system: strategy and voice, logo suite and usage rules, colour with contrast ratios, typography, graphic language, a custom icon set and applications from business cards to out-of-home. Self-initiated concept; Northstar Capital is fictional and nothing here is a real financial service.',
+    colours: ['#0B0D12', '#F6F5F1', '#2B5BFF', '#14A06F'],
+    coverImage: 'assets/thumbs/northstar-brand-cover.jpg',
+    galleryImages: [
+      'assets/Brand%20Identitities/6_Northstar%20Capital/northstar-brand-01-cover.jpg',
+      'assets/Brand%20Identitities/6_Northstar%20Capital/northstar-brand-02-strategy.jpg',
+      'assets/Brand%20Identitities/6_Northstar%20Capital/northstar-brand-03-personality-voice.jpg',
+      'assets/Brand%20Identitities/6_Northstar%20Capital/northstar-brand-04-logo-concept.jpg',
+      'assets/Brand%20Identitities/6_Northstar%20Capital/northstar-brand-05-logo-suite.jpg',
+      'assets/Brand%20Identitities/6_Northstar%20Capital/northstar-brand-06-logo-usage.jpg',
+      'assets/Brand%20Identitities/6_Northstar%20Capital/northstar-brand-07-colour.jpg',
+      'assets/Brand%20Identitities/6_Northstar%20Capital/northstar-brand-08-typography.jpg',
+      'assets/Brand%20Identitities/6_Northstar%20Capital/northstar-brand-09-graphic-language.jpg',
+      'assets/Brand%20Identitities/6_Northstar%20Capital/northstar-brand-10-applications-a.jpg',
+      'assets/Brand%20Identitities/6_Northstar%20Capital/northstar-brand-11-applications-b.jpg'
     ]
   },
   {
@@ -413,6 +441,35 @@ const caseData = [
     ]
   },
   {
+    title: 'Northstar Capital Website',
+    category: 'UI Design',
+    year: '2026',
+    services: 'UX/UI Design / Website Design / Product Design',
+    client: 'Northstar Capital (fictional)',
+    industry: 'Financial Technology / SaaS',
+    type: 'Self-initiated concept project',
+    summary: 'A responsive eight-page website for a fictional U.S. fintech, with a working product dashboard behind it. The hero is the product itself, not a stock photo.',
+    challenge: 'Small-business finance sites tend to lean on stock photography, vague claims and jargon. The brief was a site that proves the product in the first scroll, stays honest about what it is, and works as well on a phone as on a desktop.',
+    approach: 'The homepage tells the story in eleven beats: a live cash-flow chart, a self-playing product tour, plain-English insights, an interactive what-if forecast, invoicing, security, testimonials and pricing. Everything is built from one design system with light and dark themes, a validated chart palette and a custom icon set. Behind the site sits a nine-view dashboard on realistic, fictional data: scenario planning, an invoice drawer and builder, reports, notifications and a command palette.',
+    outcome: 'A working front-end you can explore: run a forecast scenario on the homepage, switch pricing plans, then open the demo workspace and send a reminder. Self-initiated concept; every customer, figure and testimonial is fictional.',
+    colours: ['#0B0D12', '#F6F5F1', '#2B5BFF', '#14A06F'],
+    liveUrl: 'northstar-capital/site/index.html',
+    liveLabel: 'Explore the live website ↗',
+    coverImage: 'assets/thumbs/northstar-ui-cover.jpg',
+    galleryImages: [
+      'assets/UI%20Design/4_Northstar%20Capital/northstar-ui-01-cover.jpg',
+      'assets/UI%20Design/4_Northstar%20Capital/northstar-ui-02-homepage.jpg',
+      'assets/UI%20Design/4_Northstar%20Capital/northstar-ui-03-tour-insights.jpg',
+      'assets/UI%20Design/4_Northstar%20Capital/northstar-ui-04-forecast-invoicing.jpg',
+      'assets/UI%20Design/4_Northstar%20Capital/northstar-ui-05-pricing-features.jpg',
+      'assets/UI%20Design/4_Northstar%20Capital/northstar-ui-06-supporting-pages.jpg',
+      'assets/UI%20Design/4_Northstar%20Capital/northstar-ui-07-dashboard-overview.jpg',
+      'assets/UI%20Design/4_Northstar%20Capital/northstar-ui-08-dashboard-detail.jpg',
+      'assets/UI%20Design/4_Northstar%20Capital/northstar-ui-09-mobile.jpg',
+      'assets/UI%20Design/4_Northstar%20Capital/northstar-ui-10-design-system.jpg'
+    ]
+  },
+  {
     title: 'Book Cover Design',
     category: 'Packaging',
     year: '2026',
@@ -558,8 +615,8 @@ const formatSliderProgress = (stage, fill) => {
    two ends where the first / last card is always active. */
 const pickActiveCard = (stage, cards) => {
   const maxScroll = stage.scrollWidth - stage.clientWidth;
-  if (stage.scrollLeft <= 2) return cards[0];
-  if (maxScroll > 0 && stage.scrollLeft >= maxScroll - 2) return cards[cards.length - 1];
+  if (stage.scrollLeft <= 24) return cards[0];
+  if (maxScroll > 0 && stage.scrollLeft >= maxScroll - 24) return cards[cards.length - 1];
 
   const stageRect = stage.getBoundingClientRect();
   const center = stageRect.left + stageRect.width / 2;
@@ -580,6 +637,23 @@ const scrollStageToCard = (stage, card) => {
   const inset = parseFloat(getComputedStyle(stage).scrollPaddingLeft) || 0;
   const left = stage.scrollLeft + card.getBoundingClientRect().left - stage.getBoundingClientRect().left - inset;
   stage.scrollTo({ left, behavior: 'smooth' });
+};
+
+/* Arrow stepping works from the card at the slider's left edge (not the highlighted
+   centre card), so Previous / Next always move by one card and never stall at the ends. */
+const stepStage = (stage, cards, dir) => {
+  if (!cards.length) return;
+  const first = cards[0].offsetLeft;
+  const starts = cards.map(card => card.offsetLeft - first);
+  const x = stage.scrollLeft;
+  // Cards are scaled (.94 / 1.04), so a snapped card rests up to ~13px off its layout position.
+  const TOL = 24;
+  let left = 0;
+  starts.forEach((start, i) => { if (start <= x + TOL) left = i; });
+  const target = dir > 0
+    ? Math.min(left + 1, cards.length - 1)
+    : (x > starts[left] + TOL ? left : Math.max(left - 1, 0));
+  stage.scrollTo({ left: starts[target], behavior: 'smooth' });
 };
 
 const syncActiveCard = stage => {
@@ -668,14 +742,7 @@ const renderPortfolioGroups = () => {
       const stage = document.querySelector(`[data-stage="${button.dataset.target}"]`);
       if (!stage) return;
 
-      const cards = [...stage.querySelectorAll('.portfolio-card')];
-      const activeIndex = cards.findIndex(card => card.classList.contains('is-active'));
-      const nextIndex = button.classList.contains('next')
-        ? Math.min(activeIndex + 1, cards.length - 1)
-        : Math.max(activeIndex - 1, 0);
-
-      const targetCard = cards[nextIndex] || cards[0];
-      scrollStageToCard(stage, targetCard);
+      stepStage(stage, [...stage.querySelectorAll('.portfolio-card')], button.classList.contains('next') ? 1 : -1);
     });
   });
 
@@ -1078,11 +1145,7 @@ const syncTestimonials = () => {
 
 const setTestimonialEdges = syncTestimonials;
 
-const stepTestimonial = dir => {
-  const active = tCards.findIndex(card => card.classList.contains('is-active'));
-  const target = tCards[Math.max(0, Math.min(tCards.length - 1, active + dir))];
-  if (target) scrollStageToCard(tStage, target);
-};
+const stepTestimonial = dir => stepStage(tStage, tCards, dir);
 
 if (tStage) {
   $('#prevQuote')?.addEventListener('click', () => stepTestimonial(-1));
