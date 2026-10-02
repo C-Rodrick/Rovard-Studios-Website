@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Providers — Vita House</title>
+<meta name="description" content="Meet the fictional clinicians of Vita House: primary care, mental wellness, nutrition, pediatrics and more. Concept project by Rovard Studios.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..600,0..100,0..1;1,9..144,300..600,0..100,0..1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="vh.css">
+<style>
+  .filters { display: grid; grid-template-columns: 1.4fr 1fr 1fr auto; gap: 1rem; align-items: end; padding: 1.25rem; background: var(--oat); border: 1px solid var(--line); border-radius: var(--r-lg); margin-bottom: 1.5rem; }
+  .result-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.75rem; flex-wrap: wrap; gap: .75rem; }
+  @media (max-width: 960px) { .filters { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .filters { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<main id="main">
+  <section class="page-hero">
+    <div class="container inner">
+      <div>
+        <nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="index.html">Home</a></li><li aria-current="page">Providers</li></ol></nav>
+        <span class="eyebrow">Providers</span>
+        <h1>People who have the <em>time to listen.</em></h1>
+        <p class="lead">Every Vita House clinician is chosen for clinical skill and for how they make you feel. Find someone who fits your needs, your schedule and your language.</p>
+      </div>
+      <div class="art" id="art"></div>
+    </div>
+  </section>
+
+  <section class="section-sm" style="padding-top:0">
+    <div class="container">
+      <form class="filters" id="filters" role="search" aria-label="Find a provider" novalidate>
+        <div class="field"><label for="q">Search by name or specialty</label><div class="input-icon"><span data-icon="search"></span><input class="input" id="q" type="search" placeholder="e.g. Okafor, nutrition" autocomplete="off"></div></div>
+        <div class="field"><label for="svc">Service</label><select class="select" id="svc"><option value="">Any service</option></select></div>
+        <div class="field"><label for="loc">Location</label><select class="select" id="loc"><option value="">Anywhere</option></select></div>
+        <label class="check" style="min-height:3.25rem;align-items:center"><input type="checkbox" id="acc"> Welcoming new patients</label>
+      </form>
+      <div class="result-bar"><p id="count" role="status" aria-live="polite" class="muted"></p><button class="btn btn-text" id="clear" type="button" hidden>Clear filters</button></div>
+      <div class="grid cols-4" id="list"></div>
+      <div id="empty" hidden></div>
+    </div>
+  </section>
+
+  <section class="section tint">
+    <div class="container split">
+      <div class="stack reveal" style="--gap:1.25rem"><span class="eyebrow">Our approach</span><h2>Matched by <em>needs,</em> not by luck.</h2><p class="lead">Not sure who to see? Choose “any available provider” when you book and we'll find the soonest opening with a clinician who covers your service.</p><a class="btn btn-primary" href="book.html">Book with the soonest provider</a></div>
+      <ul class="plain list-stack reveal" role="list">
+        <li class="card row" style="flex-wrap:nowrap;align-items:flex-start"><span class="icon-chip" data-icon="globe"></span><div><b>Languages that match yours</b><p class="muted small">Visits in English, Spanish, Tamil, Hindi, Japanese, Igbo and Hebrew.</p></div></li>
+        <li class="card row" style="flex-wrap:nowrap;align-items:flex-start"><span class="icon-chip clay" data-icon="clock"></span><div><b>Real availability, up front</b><p class="muted small">See each clinician's next opening before you choose.</p></div></li>
+        <li class="card row" style="flex-wrap:nowrap;align-items:flex-start"><span class="icon-chip honey" data-icon="users"></span><div><b>A team behind every provider</b><p class="muted small">Nurses, coordinators and dietitians work alongside your clinician.</p></div></li>
+      </ul>
+    </div>
+  </section>
+</main>
+<script src="vh.js"></script><script src="data.js"></script>
+<script>
+  VH.shell({ active: 'providers.html' }); VH.hydrate();
+  const $ = VH.$;
+  $('#art').innerHTML = `<svg viewBox="0 0 380 420" role="img" aria-label="Three illustrated clinician portraits"><g>
+    <g transform="translate(20 130)"><path d="${VH.archPath(0, 0, 110, 290)}" fill="#C9D7C0"/><svg x="0" y="158" width="110" height="132" viewBox="0 0 200 240" overflow="hidden"><g>${VH.person(VH.prov('okafor').look)}</g></svg></g>
+    <g transform="translate(135 50)"><path d="${VH.archPath(0, 0, 110, 370)}" fill="#F0D3C4"/><svg x="0" y="238" width="110" height="132" viewBox="0 0 200 240" overflow="hidden"><g>${VH.person(VH.prov('reyes').look)}</g></svg></g>
+    <g transform="translate(250 170)"><path d="${VH.archPath(0, 0, 110, 250)}" fill="#F2DDA6"/><svg x="0" y="118" width="110" height="132" viewBox="0 0 200 240" overflow="hidden"><g>${VH.person(VH.prov('bell').look)}</g></svg></g></g>
+    <circle cx="70" cy="70" r="24" fill="#E8BC5E"/></svg>`;
+  VH.services.forEach(s => $('#svc').insertAdjacentHTML('beforeend', `<option value="${s.id}">${s.name}</option>`));
+  VH.locations.forEach(l => $('#loc').insertAdjacentHTML('beforeend', `<option value="${l.id}">${l.city}, ${l.state}</option>`));
+  $('#loc').insertAdjacentHTML('beforeend', '<option value="virtual">Video visits</option>');
+  const pre = VH.params.get('service'); if (pre) $('#svc').value = pre;
+  const render = () => {
+    const q = $('#q').value.trim().toLowerCase(), s = $('#svc').value, l = $('#loc').value, a = $('#acc').checked;
+    const list = VH.providers.filter(p => (!q || (p.name + ' ' + p.role + ' ' + p.focus.join(' ')).toLowerCase().includes(q)) && (!s || p.services.includes(s)) && (!l || p.locations.includes(l)) && (!a || p.accepting));
+    const filtered = q || s || l || a;
+    $('#count').textContent = `${list.length} ${list.length === 1 ? 'provider' : 'providers'}${filtered ? ' match your filters' : ''}`;
+    $('#clear').hidden = !filtered;
+    $('#list').hidden = !list.length;
+    $('#list').innerHTML = list.map((p, i) => VH.cards.provider(p, i)).join('');
+    const e = $('#empty'); e.hidden = !!list.length;
+    e.innerHTML = list.length ? '' : `<div class="empty">${VH.emptyArt('search')}<h3>No providers match those filters</h3><p>Try removing a filter, or choose “any available provider” when you book and we'll match you.</p><div class="row" style="justify-content:center"><button class="btn btn-primary" type="button" id="empClear">Clear filters</button><a class="btn btn-secondary" href="book.html">Book with any provider</a></div></div>`;
+    const ec = $('#empClear'); if (ec) ec.onclick = clear;
+    VH.reveal();
+  };
+  const clear = () => { $('#filters').reset(); render(); $('#q').focus(); };
+  $('#filters').addEventListener('input', render); $('#filters').addEventListener('submit', e => e.preventDefault()); $('#clear').onclick = clear;
+  render();
+</script>
+</body>
+</html>

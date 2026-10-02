@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Membership — Vita House</title>
+<meta name="description" content="Open Door, Everyday and Whole House memberships. Illustrative pricing for a fictional healthcare concept by Rovard Studios.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..600,0..100,0..1;1,9..144,300..600,0..100,0..1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="vh.css">
+<style>
+  .billing { display: flex; justify-content: center; margin-bottom: 2.5rem; }
+  .perk { display: grid; gap: .75rem; }
+  .perk h3 { font-size: 1.3rem; font-weight: 400; }
+  .perk p { color: var(--text-2); font-size: .975rem; }
+  .plan[data-selected="true"] { box-shadow: 0 0 0 3px var(--honey-400); }
+</style>
+</head>
+<body>
+<main id="main">
+  <section class="page-hero">
+    <div class="container inner">
+      <div>
+        <nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="index.html">Home</a></li><li aria-current="page">Membership</li></ol></nav>
+        <span class="eyebrow">Membership</span>
+        <h1>A simple way to <em>stay looked after.</em></h1>
+        <p class="lead">Join for a flat monthly price and get more time, more access and fewer surprises. Or just book a visit; insurance is always welcome.</p>
+        <p class="tiny muted" style="margin-top:1rem">Prices are illustrative and belong to a fictional concept project.</p>
+      </div>
+      <div class="art" id="art"></div>
+    </div>
+  </section>
+
+  <section class="section-sm" style="padding-top:0">
+    <div class="container">
+      <div class="billing"><div class="segmented" role="radiogroup" aria-label="Billing period"><label><input type="radio" name="bill" value="m" checked><span>Monthly</span></label><label><input type="radio" name="bill" value="y"><span>Yearly <span class="badge badge-clay" style="margin-left:.4rem">2 months free</span></span></label></div></div>
+      <div class="grid cols-3" id="plans" style="align-items:stretch"></div>
+    </div>
+  </section>
+
+  <section class="section tint">
+    <div class="container">
+      <div class="section-head"><span class="eyebrow">Compare</span><h2>Everything, <em>side by side.</em></h2></div>
+      <div class="table-wrap reveal"><table class="compare"><caption class="sr-only">Comparison of Open Door, Everyday and Whole House memberships</caption><thead><tr><th scope="col"><span class="sr-only">Feature</span></th><th scope="col">Open Door</th><th scope="col">Everyday</th><th scope="col">Whole House</th></tr></thead><tbody id="cmp"></tbody></table></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head center"><span class="eyebrow plain">What's included</span><h2>Designed around <em>how people live.</em></h2></div>
+      <div class="grid cols-3">
+        <article class="perk reveal"><span class="icon-chip" data-icon="clock"></span><h3>Time, built in</h3><p>Longer appointments mean questions get answered and plans get explained.</p></article>
+        <article class="perk reveal" style="transition-delay:80ms"><span class="icon-chip clay" data-icon="message"></span><h3>Same-day messaging</h3><p>Message your care team any time. Replies come from real people, typically within one business day.</p></article>
+        <article class="perk reveal" style="transition-delay:160ms"><span class="icon-chip honey" data-icon="calendar-check"></span><h3>Priority booking</h3><p>First pick of evening, weekend and same-week appointments.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tint" id="faq">
+    <div class="container narrow">
+      <div class="section-head"><span class="eyebrow">Questions</span><h2>Good things to <em>know.</em></h2></div>
+      <div class="faq">
+        <details><summary>Do I need a membership to book a visit?<span data-icon="plus"></span></summary><div>No. Open Door is free and lets you book any service. Insurance is accepted at every Vita House location.</div></details>
+        <details><summary>Does membership replace insurance?<span data-icon="plus"></span></summary><div>No. Membership covers access and certain included services. For care beyond those, insurance or self-pay rates apply, and we'll explain costs before your visit.</div></details>
+        <details><summary>Can I cancel any time?<span data-icon="plus"></span></summary><div>Yes. Monthly memberships can be paused or cancelled from your dashboard at any time, with no cancellation fee.</div></details>
+        <details><summary>Who counts as a household member on Whole House?<span data-icon="plus"></span></summary><div>Up to four people living at the same address, including children and partners. Add or remove members from your dashboard.</div></details>
+        <details><summary>Is this a real service?<span data-icon="plus"></span></summary><div>No. Vita House is a fictional brand created by Rovard Studios as a self-initiated design concept. Prices and benefits are illustrative.</div></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-sm" style="padding-bottom:clamp(4.5rem,9vw,8rem)">
+    <div class="container"><div class="cta-band reveal"><div class="stack" style="--gap:1.5rem;position:relative;z-index:1"><h2>Start with a visit. <em>Stay for the care.</em></h2><p class="lead" style="color:var(--ink-2)">Join online in minutes. Your first appointment can be this week.</p><div class="row"><a class="btn btn-primary btn-lg" href="book.html">Book a visit</a><a class="btn btn-secondary btn-lg" href="contact.html">Ask a question</a></div></div><div class="art" data-art="door"></div></div></div>
+  </section>
+</main>
+<script src="vh.js"></script><script src="data.js"></script>
+<script>
+  VH.shell({ active: 'membership.html' }); VH.hydrate();
+  const $ = VH.$;
+  $('#art').innerHTML = VH.pageArt('shield', 2);
+  const renderPlans = yearly => {
+    $('#plans').innerHTML = VH.plans.map(p => {
+      const price = p.price ? (yearly ? Math.round(p.price * 10 / 12) : p.price) : 0;
+      return `<article class="plan reveal in ${p.featured ? 'featured' : ''}" id="${p.id}" style="scroll-margin-top:6rem">
+        ${p.featured ? '<span class="badge tag" style="background:var(--honey-400);color:var(--moss-900)">Most popular</span>' : ''}
+        <div><h3>${p.name}</h3><p class="desc" style="margin-top:.4rem">${p.who}</p></div>
+        <div><div class="price nums">${p.price ? '$' + price : 'Free'}<small> ${p.per || 'to join'}</small></div>${p.price && yearly ? `<p class="tiny desc" style="margin-top:.4rem">Billed $${p.price * 10} per year</p>` : ''}</div>
+        <p class="desc">${p.desc}</p>
+        <ul class="plain" role="list">${p.feats.map(f => `<li>${VH.icon('check')}<span>${f}</span></li>`).join('')}</ul>
+        <a class="btn ${p.featured ? 'btn-honey' : 'btn-primary'} btn-block" style="margin-top:auto" href="${p.price ? 'portal.html#/membership' : 'book.html'}">${p.price ? 'Join ' + p.name : 'Book a visit'}</a></article>`;
+    }).join('');
+  };
+  renderPlans(false);
+  VH.$$('input[name=bill]').forEach(r => r.addEventListener('change', () => renderPlans(r.value === 'y')));
+  const ck = '<svg class="icon" viewBox="0 0 24 24" role="img" aria-label="Included">' + VH.icons.check + '</svg>', no = '<span class="muted" aria-label="Not included">—</span>';
+  $('#cmp').innerHTML = VH.compare.map(([f, v]) => `<tr><th scope="row">${f}</th>${v.map(x => `<td>${x ? ck : no}</td>`).join('')}</tr>`).join('');
+  if (location.hash) { const t = $(location.hash); if (t) t.dataset.selected = 'true'; }
+  VH.reveal();
+</script>
+</body>
+</html>

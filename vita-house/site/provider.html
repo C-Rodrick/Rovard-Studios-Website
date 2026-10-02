@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Provider — Vita House</title>
+<meta name="description" content="A Vita House provider profile. Fictional clinician created for a concept project by Rovard Studios.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..600,0..100,0..1;1,9..144,300..600,0..100,0..1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="vh.css">
+<style>
+  .pv-hero { display: grid; grid-template-columns: minmax(0, 340px) 1fr; gap: clamp(2rem, 6vw, 5rem); align-items: center; }
+  .pv-portrait { border-radius: var(--arch); overflow: hidden; aspect-ratio: 5 / 6; background: var(--sage-100); box-shadow: var(--shadow-2); }
+  .pv-portrait svg { width: 100%; height: 100%; }
+  .pv-hero h1 { font-size: clamp(2.4rem, 5vw, 4rem); margin-block: 1rem; }
+  .pq { font: 340 clamp(1.3rem, 2.2vw, 1.7rem)/1.35 var(--font-display); font-variation-settings: 'SOFT' 80; letter-spacing: -.01em; border-left: 3px solid var(--honey-400); padding-left: 1.25rem; max-width: 30em; color: var(--ink-2); }
+  .layout { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: clamp(2rem, 5vw, 4.5rem); align-items: start; }
+  .block + .block { margin-top: 3rem; }
+  .block h2 { font-size: clamp(1.5rem, 2.6vw, 2rem); margin-bottom: 1rem; }
+  .avail { position: sticky; top: calc(var(--header-h) + 1rem); display: grid; gap: 1rem; }
+  .day { display: grid; grid-template-columns: 5.5rem 1fr; gap: .9rem; padding: .9rem 0; border-top: 1px solid var(--line); align-items: start; }
+  .day:first-of-type { border-top: 0; }
+  .day b { display: block; line-height: 1.2; }
+  .day .times { display: flex; flex-wrap: wrap; gap: .5rem; }
+  .time { display: inline-flex; align-items: center; justify-content: center; min-height: 2.75rem; min-width: 5.5rem; padding: .4rem .8rem; border-radius: 12px; border: 1.5px solid var(--moss-700); background: transparent; color: var(--moss-800); font-weight: 700; font-size: .9375rem; text-decoration: none; transition: all var(--t-fast); }
+  .time:hover { background: var(--moss-700); color: #fff; }
+  @media (max-width: 900px) { .pv-hero, .layout { grid-template-columns: 1fr; } .pv-portrait { max-width: 280px; } .avail { position: static; } }
+</style>
+</head>
+<body>
+<main id="main"><div id="root"></div></main>
+<script src="vh.js"></script><script src="data.js"></script>
+<script>
+  VH.shell({ active: 'providers.html' });
+  const $ = VH.$;
+  const p = VH.prov(VH.params.get('id') || 'okafor');
+  const root = $('#root');
+  if (!p) {
+    document.title = 'Provider not found — Vita House';
+    root.innerHTML = `<section class="section"><div class="container narrow"><div class="empty">${VH.emptyArt('user')}<h1 style="font-size:2rem">We couldn't find that provider</h1><p>The link may be out of date. Browse everyone on the team instead.</p><a class="btn btn-primary" href="providers.html">See all providers</a></div></div></section>`;
+  } else {
+    document.title = `${p.name}, ${p.creds} — Vita House`;
+    const mode = p.locations[0] === 'virtual' ? 'video' : 'in-person';
+    const days = []; for (let i = 0; i < 14 && days.length < 5; i++) { const k = VH.fmt.key(VH.fmt.plus(new Date(), i)), s = VH.slots(p.id, k, mode); if (s.length) days.push([k, s]); }
+    const locs = p.locations.map(VH.loc);
+    const others = VH.providers.filter(o => o.id !== p.id && o.services.some(s => p.services.includes(s))).slice(0, 4);
+    root.innerHTML = `
+    <section class="section-sm" style="padding-top:clamp(2rem,4vw,3.5rem)">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="index.html">Home</a></li><li><a href="providers.html">Providers</a></li><li aria-current="page">${p.name}</li></ol></nav>
+        <div class="pv-hero">
+          <div class="pv-portrait">${VH.portrait({ ...p.look, alt: `Illustrated portrait of ${p.name}` })}</div>
+          <div class="stack" style="--gap:1.25rem">
+            <div class="row"><span class="badge ${p.accepting ? 'badge-ok' : 'badge-warn'}"><span class="dot"></span>${p.accepting ? 'Welcoming new patients' : 'Waitlist only'}</span><span class="badge">${p.years} years in practice</span></div>
+            <div><h1>${p.name}, <em>${p.creds}</em></h1><p class="lead">${p.role}</p></div>
+            <blockquote class="pq">“${p.quote}”</blockquote>
+            <div class="row" style="margin-top:.5rem"><a class="btn btn-primary btn-lg" href="book.html?provider=${p.id}">Book with ${p.short.replace('Dr. ', 'Dr. ')} ${VH.icon('arrow-right', 'icon-arrow')}</a><a class="btn btn-secondary btn-lg" href="portal.html#/messages">Message the team</a></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section-sm tint">
+      <div class="container layout">
+        <div>
+          <div class="block"><h2>About ${p.short}</h2><p class="prose lead" style="color:var(--ink-2)">${p.bio}</p></div>
+          <div class="block"><h2>Focus areas</h2><div class="chips">${p.focus.map(f => `<span class="chip" style="cursor:default">${f}</span>`).join('')}</div></div>
+          <div class="block"><h2>Visits with ${p.short}</h2><div class="grid cols-2">${p.services.map(id => { const s = VH.svc(id); return `<a class="card card-lift row" style="flex-wrap:nowrap;align-items:flex-start;gap:1rem" href="book.html?provider=${p.id}&service=${id}"><span class="icon-chip">${VH.icon(s.icon)}</span><span><b>${s.name}</b><br><span class="muted small">${s.mins} · ${s.mode}</span></span></a>`; }).join('')}</div></div>
+          <div class="block"><h2>Where to find ${p.short}</h2><div class="grid cols-2">${locs.map(l => l.virtual ? `<div class="card row" style="flex-wrap:nowrap;align-items:flex-start;gap:1rem"><span class="icon-chip clay">${VH.icon('video')}</span><span><b>Video visits</b><br><span class="muted small">Join securely from anywhere in our 12 virtual-care states.</span></span></div>` : `<a class="card card-lift row" style="flex-wrap:nowrap;align-items:flex-start;gap:1rem" href="locations.html#${l.id}"><span class="icon-chip">${VH.icon('pin')}</span><span><b>${l.name}</b><br><span class="muted small">${l.addr}, ${l.city}, ${l.state}</span></span></a>`).join('')}</div></div>
+          <div class="block"><h2>Good to know</h2><dl style="display:grid;gap:1rem;margin:0"><div class="card-flat"><dt class="eyebrow plain">Languages</dt><dd style="margin:.4rem 0 0;font-weight:600">${p.langs.join(', ')}</dd></div><div class="card-flat"><dt class="eyebrow plain">Beyond the clinic</dt><dd style="margin:.4rem 0 0">${p.beyond}</dd></div></dl></div>
+        </div>
+        <aside class="avail card" aria-labelledby="availH">
+          <div><h2 id="availH" style="font-size:1.5rem;font-weight:400">Next available times</h2><p class="muted small" style="margin-top:.25rem">${mode === 'video' ? 'Video visits' : 'In-person visits'}. Select a time to start booking.</p></div>
+          <div>${days.length ? days.map(([k, s]) => `<div class="day"><div><b>${VH.fmt.rel(k)}</b><span class="muted small">${VH.fmt.date(k, { month: 'short', day: 'numeric' })}</span></div><div class="times">${s.slice(0, 4).map(t => `<a class="time nums" href="book.html?provider=${p.id}&date=${k}&time=${t}">${VH.fmt.time(t)}</a>`).join('')}</div></div>`).join('') : `<div class="empty" style="padding:1.5rem">${VH.emptyArt('calendar')}<h4>No openings in the next two weeks</h4><p class="small">Join the waitlist and we'll message you when a time opens.</p></div>`}</div>
+          <a class="btn btn-soft btn-block" href="book.html?provider=${p.id}">See all times</a>
+        </aside>
+      </div>
+    </section>
+    <section class="section">
+      <div class="container"><div class="section-head row"><h2>Others you might <em>like to meet</em></h2><a class="link-arrow" href="providers.html">All providers ${VH.icon('arrow-right')}</a></div>
+      <div class="grid cols-4">${others.map((o, i) => VH.cards.provider(o, i)).join('')}</div></div>
+    </section>`;
+  }
+  VH.reveal();
+</script>
+</body>
+</html>

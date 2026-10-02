@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Services — Vita House</title>
+<meta name="description" content="Primary care, annual wellness exams, mental wellness, nutrition, women's health, family care and more. A fictional concept by Rovard Studios.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..600,0..100,0..1;1,9..144,300..600,0..100,0..1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="vh.css">
+<style>
+  .svc { display: grid; grid-template-columns: 1.4fr 1fr; gap: clamp(1.5rem, 4vw, 3.5rem); scroll-margin-top: 6rem; }
+  .svc + .svc { margin-top: 1.5rem; }
+  .svc h2 { font-size: clamp(1.7rem, 3vw, 2.3rem); margin: 1rem 0 .75rem; }
+  .svc ul { display: grid; gap: .7rem; margin-top: 1.25rem; }
+  .svc li { display: flex; gap: .7rem; align-items: flex-start; }
+  .svc li .icon { color: var(--sage-600); margin-top: .2rem; }
+  .facts { display: grid; gap: 1rem; align-content: start; background: var(--linen); border: 1px solid var(--line); border-radius: 20px; padding: 1.5rem; }
+  .facts dt { font: 700 .75rem var(--font-ui); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
+  .facts dd { margin: .2rem 0 0; font-weight: 600; }
+  .chooser { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.5rem, 4vw, 3rem); align-items: start; }
+  .result { background: var(--moss-800); color: var(--oat); border-radius: var(--r-xl); padding: clamp(1.5rem, 3vw, 2.25rem); display: grid; gap: 1rem; min-height: 18rem; align-content: start; }
+  .result h3 { color: var(--oat); }
+  .result p { color: #CAD5C5; }
+  .mode { display: flex; gap: 1rem; align-items: flex-start; }
+  @media (max-width: 900px) { .svc, .chooser { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<main id="main">
+  <section class="page-hero">
+    <div class="container inner">
+      <div>
+        <nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="index.html">Home</a></li><li aria-current="page">Services</li></ol></nav>
+        <span class="eyebrow">Services</span>
+        <h1>Care for every part of <em>your week.</em></h1>
+        <p class="lead">From a quick check-in to a long overdue yearly exam, every service lives under the same roof, with the same team and the same easy booking.</p>
+        <div class="row" style="margin-top:1.75rem"><a class="btn btn-primary btn-lg" href="book.html">Book a visit</a><a class="btn btn-secondary btn-lg" href="#choose">Help me choose</a></div>
+      </div>
+      <div class="art" id="art"></div>
+    </div>
+  </section>
+
+  <!-- chips anchor nav -->
+  <div class="container"><div class="chips" id="svcNav" role="list" aria-label="Jump to a service"></div></div>
+
+  <section class="section-sm">
+    <div class="container" id="svcList"></div>
+  </section>
+
+  <!-- how visits work -->
+  <section class="section tint">
+    <div class="container">
+      <div class="section-head"><span class="eyebrow">Two ways to visit</span><h2>Come in, or <em>join from home.</em></h2></div>
+      <div class="grid cols-2">
+        <article class="card mode reveal"><span class="icon-chip" data-icon="home"></span><div><h3 style="font-size:1.4rem;font-weight:400">In person at a Vita House</h3><p class="muted" style="margin-top:.5rem">Warm, quiet spaces with natural light, step-free access and no crowded waiting room. Check in from your phone when you arrive.</p></div></article>
+        <article class="card mode reveal" style="transition-delay:80ms"><span class="icon-chip clay" data-icon="video"></span><div><h3 style="font-size:1.4rem;font-weight:400">Video from anywhere</h3><p class="muted" style="margin-top:.5rem">Join securely from your phone or computer, no download needed. Evening and weekend times are available for many services.</p></div></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- chooser -->
+  <section class="section" id="choose">
+    <div class="container chooser">
+      <div class="stack reveal" style="--gap:1.5rem">
+        <span class="eyebrow">Not sure where to start?</span>
+        <h2>Tell us what's on your mind. We'll <em>point you</em> to a good first visit.</h2>
+        <fieldset class="fieldset">
+          <legend class="sr-only">What would you like help with?</legend>
+          <div class="chips" id="needs" role="radiogroup" aria-label="What would you like help with?"></div>
+        </fieldset>
+        <p class="tiny muted">This is a booking helper, not medical advice. If you think you may be having an emergency, call 911.</p>
+      </div>
+      <div class="result reveal" id="result" aria-live="polite" style="transition-delay:100ms"></div>
+    </div>
+  </section>
+
+  <section class="section-sm" style="padding-bottom:clamp(4.5rem,9vw,8rem)">
+    <div class="container">
+      <div class="cta-band reveal">
+        <div class="stack" style="--gap:1.5rem;position:relative;z-index:1"><h2>Ready to <em>get started?</em></h2><p class="lead" style="color:var(--ink-2)">Choose a service, meet your clinician and pick a time. It takes about three minutes.</p><div class="row"><a class="btn btn-primary btn-lg" href="book.html">Book a visit <span data-icon="arrow-right" data-cls="icon-arrow"></span></a></div></div>
+        <div class="art" data-art="door"></div>
+      </div>
+    </div>
+  </section>
+</main>
+<script src="vh.js"></script><script src="data.js"></script>
+<script>
+  VH.shell({ active: 'services.html' }); VH.hydrate();
+  const $ = VH.$;
+  $('#art').innerHTML = VH.pageArt('stethoscope', 0);
+  $('#svcNav').innerHTML = VH.services.map(s => `<a class="chip" role="listitem" href="#${s.id}">${VH.icon(s.icon)}${s.name}</a>`).join('');
+  $('#svcList').innerHTML = VH.services.map((s, i) => `
+    <article class="card svc reveal" id="${s.id}">
+      <div><span class="icon-chip ${['', 'clay', 'honey'][i % 3]}">${VH.icon(s.icon, 'icon-lg')}</span>
+        <h2>${s.name}</h2><p class="lead" style="max-width:34em">${s.blurb}</p><p class="muted" style="margin-top:1rem;max-width:36em">${s.long}</p>
+        <ul class="plain" role="list">${s.points.map(p => `<li>${VH.icon('check')}<span>${p}</span></li>`).join('')}</ul></div>
+      <aside class="facts" aria-label="${s.name} details">
+        <dl style="margin:0;display:grid;gap:1rem"><div><dt>Typical length</dt><dd>${s.mins}</dd></div><div><dt>Format</dt><dd>${s.mode}</dd></div><div><dt>Cost</dt><dd>${s.price}</dd></div>
+        <div><dt>Who sees you</dt><dd>${VH.providers.filter(p => p.services.includes(s.id)).map(p => p.short).slice(0, 3).join(', ')}</dd></div></dl>
+        <a class="btn btn-primary btn-block" href="book.html?service=${s.id}">Book ${s.name.toLowerCase()}</a>
+      </aside>
+    </article>`).join('');
+  const needs = [
+    ['A yearly check-in', 'exam', 'Start with an annual wellness exam. It is longer than a standard visit, so there is room for every question.'],
+    ['Something is bothering me', 'primary', 'A primary care visit is the right first step. Your clinician can look into it and bring in a specialist if needed.'],
+    ['I feel stressed or low', 'mental', 'Mental wellness sessions are with licensed clinicians, in person or by video, with evening and weekend times.'],
+    ['Eating and energy', 'nutrition', 'A nutrition visit with a registered dietitian can build realistic plans around your schedule and budget.'],
+    ['I am not sleeping well', 'sleep', 'A sleep and recovery visit looks at your routines, environment and energy, and chooses small changes to try.'],
+    ['Care for my kids', 'family', 'Family and pediatric visits include well-child check-ins, school forms and back-to-back times for siblings.'],
+    ['Labs or a vaccine', 'labs', 'Quick lab visits are walk-in friendly, and results appear in your dashboard with notes from your clinician.']
+  ];
+  $('#needs').innerHTML = needs.map((n, i) => `<button type="button" class="chip" role="radio" aria-checked="${i === 0}" data-i="${i}">${n[0]}</button>`).join('');
+  const show = i => {
+    const [label, id, text] = needs[i], s = VH.svc(id);
+    VH.$$('#needs .chip').forEach((c, k) => { c.setAttribute('aria-checked', k === i); c.classList.toggle('is-on', k === i); c.tabIndex = k === i ? 0 : -1; });
+    $('#result').innerHTML = `<span class="icon-chip dark">${VH.icon(s.icon, 'icon-lg')}</span><span class="eyebrow on-dark" style="color:var(--honey-400)">A good first visit</span><h3>${s.name}</h3><p>${text}</p>
+      <p class="tiny">${s.mins} · ${s.mode}</p><a class="btn btn-honey" href="book.html?service=${s.id}">Book ${s.name.toLowerCase()} ${VH.icon('arrow-right', 'icon-arrow')}</a>`;
+  };
+  $('#needs').addEventListener('click', e => { const b = e.target.closest('.chip'); if (b) show(+b.dataset.i); });
+  $('#needs').addEventListener('keydown', e => {
+    const cur = VH.$$('#needs .chip'); let i = cur.findIndex(c => c === document.activeElement);
+    if (['ArrowRight', 'ArrowDown'].includes(e.key)) i = (i + 1) % cur.length; else if (['ArrowLeft', 'ArrowUp'].includes(e.key)) i = (i - 1 + cur.length) % cur.length; else return;
+    e.preventDefault(); show(i); cur[i].focus();
+  });
+  show(0); VH.reveal();
+</script>
+</body>
+</html>
