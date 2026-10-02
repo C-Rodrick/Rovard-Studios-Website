@@ -43,7 +43,7 @@
     const link = ([h, l, p]) => `<a class="nv ${active === h ? 'on' : ''}" href="${h}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="${p}"/></svg>${l}${h === '#/deals' && n ? `<span class="count">${n}</span>` : ''}</a>`;
     return `<div class="mnav" aria-label="Sections">${nav.map(([h, l]) => `<a class="${active === h ? 'on' : ''}" href="${h}">${l}</a>`).join('')}</div>
     <div class="app-shell"><aside class="side">
-      <a class="logo" href="../index.html" title="Marketing site"><svg><use href="#mark"/></svg>Afa'a Pay</a>
+      <a class="logo" href="../index.html" title="Marketing site"><svg><use href="#mark"/></svg><span>Afa<span class="ap">'</span>a Pay</span></a>
       ${nav.map(link).join('')}<div class="sp"></div>
       <div class="demo"><span>Demo controls</span><div><button data-act="ff" data-h="24">+24h</button><button data-act="ff" data-h="72">+72h</button></div></div>
       <div class="merchant"><span class="av">${initials(me.name)}</span><div>${esc(me.name)}<small>${me.role === 'mediator' ? 'Mediator' : me.plan === 'business' ? 'Business plan' : 'Starter plan'}</small></div></div>
@@ -220,7 +220,7 @@
 
   /* auth */
   function vAuth(mode) {
-    const art = `<div class="auth-art"><a class="logo" href="../index.html"><svg><use href="#mark"/></svg>Afa'a Pay</a><div class="stack"><h2>Building <span class="grad">trust</span> into every transaction.</h2><ul><li>Funds held until delivery is confirmed</li><li>Contracts signed in-app</li><li>Mediation when things go wrong</li></ul></div><span class="muted sm">Concept platform · simulated payments · data stays in your browser</span></div>`;
+    const art = `<div class="auth-art"><a class="logo" href="../index.html"><svg><use href="#mark"/></svg><span>Afa<span class="ap">'</span>a Pay</span></a><div class="stack"><h2>Building <span class="grad">trust</span> into every transaction.</h2><ul><li>Funds held until delivery is confirmed</li><li>Contracts signed in-app</li><li>Mediation when things go wrong</li></ul></div><span class="muted sm">Concept platform · simulated payments · data stays in your browser</span></div>`;
     const demo = `<div class="or">try the demo</div><div class="demo-tiles">${[['u_amina', 'Amina Tchinda', 'Buyer · funded wallet · 4 deals'], ['u_mballa', 'Mballa Electronics', 'Seller · Business plan'], ['u_med', 'Mediation Desk', 'Resolve the open dispute']].map(([id, n, s]) => `<button data-act="demo" data-u="${id}"><span class="av">${initials(n)}</span><div>${n}<small>${s}</small></div></button>`).join('')}</div>`;
     if (mode === 'signup') return `<div class="auth">${art}<form class="auth-form" id="signup-form"><h1>Create your account</h1><p class="muted">Free to start. Pay only on completed deals.</p>
       <label class="field">Full name<input name="name" required autocomplete="name"></label><label class="field">Email<input name="email" type="email" required autocomplete="email"></label><label class="field">Mobile number<input name="phone" required placeholder="+237 6XX XXX XXX" autocomplete="tel"></label>
@@ -328,6 +328,8 @@
 
   (async function boot() {
     await A.init();
+    const dm = new URLSearchParams(location.search).get('demo'), dmap = { buyer: 'u_amina', seller: 'u_mballa', mediator: 'u_med' };
+    if (dm && dmap[dm]) { A.setSession(dmap[dm]); history.replaceState(null, '', location.pathname + (location.hash.length > 2 && !/login|signup/.test(location.hash) ? location.hash : dm === 'mediator' ? '#/mediation' : '#/')); }
     $('#boot').remove(); route();
     setInterval(() => { if (A.me() && A.tick() && !document.querySelector('#modal .modal') && !/new|settings/.test(location.hash)) route(); }, 20000);
   })();

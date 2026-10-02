@@ -344,6 +344,30 @@ const caseData = [
     ]
   },
   {
+    title: 'Afa\'a Pay',
+    category: 'UI Design',
+    year: '2026',
+    services: 'Brand Identity / Fintech Website / Dashboard UI / Product Build',
+    summary: 'A brand identity, fintech website and working escrow platform for a modern African payment network, built around one promise: building trust into every transaction.',
+    challenge: 'Informal commerce across Africa runs on "trust me": buyers pay strangers up front, sellers chase invoices, and disputes have no referee. A payment brand here has to feel safe before it feels fast.',
+    approach: 'We built the identity on one idea: two sides meeting at a verified point. The logo is an open A whose strokes converge on a green dot, the same dot that becomes the apostrophe in the wordmark. Black, white and electric blue carry the interface, and green is reserved for money that is verified or released. From there we designed the landing, pricing and security pages and a functional platform with milestone escrow, signed contracts, a wallet, disputes and an explainable trust score, thumb-first for mobile-money users.',
+    outcome: 'A complete brand and product system, from logo to ledger: a website that explains escrow in one scroll, and a platform you can sign in to and try as buyer, seller or mediator. Concept project; payments are simulated and all figures are illustrative.',
+    colours: ['#05060A', '#FFFFFF', '#2F5BFF', '#2EE59D'],
+    liveUrl: 'afaa-pay/index.html',
+    liveLabel: 'Explore the live concept ↗',
+    coverImage: 'assets/thumbs/afaa-pay-cover.jpg',
+    galleryImages: [
+      'assets/UI%20Design/2_Afaa%20Pay/afaa-01-cover.jpg',
+      'assets/UI%20Design/2_Afaa%20Pay/afaa-02-logo.jpg',
+      'assets/UI%20Design/2_Afaa%20Pay/afaa-03-colour-type.jpg',
+      'assets/UI%20Design/2_Afaa%20Pay/afaa-04-website.jpg',
+      'assets/UI%20Design/2_Afaa%20Pay/afaa-05-platform.jpg',
+      'assets/UI%20Design/2_Afaa%20Pay/afaa-06-mobile.jpg',
+      'assets/UI%20Design/2_Afaa%20Pay/afaa-07-system.jpg',
+      'assets/UI%20Design/2_Afaa%20Pay/afaa-08-voice.jpg'
+    ]
+  },
+  {
     title: 'Book Cover Design',
     category: 'Packaging',
     year: '2026',
@@ -731,6 +755,11 @@ function openCase(index) {
   $('#caseChallenge').textContent = d.challenge;
   $('#caseApproach').textContent = d.approach;
   $('#caseOutcome').textContent = d.outcome;
+  const live = $('#caseLive');
+  if (live) {
+    live.hidden = !d.liveUrl;
+    if (d.liveUrl) { live.href = d.liveUrl; live.textContent = d.liveLabel || 'View live project ↗'; }
+  }
 
   caseHero.style.background = `linear-gradient(135deg, ${d.colours[2]}, ${d.colours[0]})`;
   $('#caseTitle').style.color = d.colours[1];

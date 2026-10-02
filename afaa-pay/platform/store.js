@@ -83,7 +83,7 @@
     const other = Object.values(db.users).find(u => u.email === email);
     const mine = i.role === 'seller' ? 'seller' : 'buyer', theirs = mine === 'buyer' ? 'seller' : 'buyer';
     const d = {
-      id: uid('d'), ref: dealRef(), title, desc: (i.desc || '').trim(), currency: 'XAF', createdBy: me.id, created: now(), status: 'proposed',
+      id: i.id || uid('d'), ref: dealRef(), title, desc: (i.desc || '').trim(), currency: 'XAF', createdBy: me.id, created: now(), status: 'proposed',
       buyerId: null, sellerId: null, milestones: ms, feePayer: i.feePayer || 'seller', rate: rateOf(me), autoHours: +i.autoHours || 48,
       signed: {}, events: [], messages: [], dispute: null, fundedAt: null,
     };
@@ -250,24 +250,24 @@
     if (bal) wtx(id, 'topup', bal, 'Top-up via MTN MoMo');
   }
   async function seed() {
-    db = { v: 1, users: {}, deals: {}, wtx: [], notifs: [], session: null, skew: 0, platform: { fees: 0 } };
+    db = { v: 2, users: {}, deals: {}, wtx: [], notifs: [], session: null, skew: 0, platform: { fees: 0 } };
     await mkUser('u_amina', 'Amina Tchinda', 'amina@demo.afaa', '+237 677 000 111', '', 'user', 2500000, 2);
     await mkUser('u_mballa', 'Mballa Electronics', 'mballa@demo.afaa', '+237 699 000 222', 'Mballa Electronics SARL', 'user', 120000, 2, 'business');
     await mkUser('u_med', 'Afa\'a Mediation Desk', 'mediator@demo.afaa', '+237 650 000 000', '', 'mediator', 0, 2);
     const as = id => { db.session = id; };
     db.skew = -9 * DAY; as('u_amina');
-    let d = createDeal({ title: 'Dell XPS 13 laptop', desc: 'Brand new, sealed, with 12-month warranty.', role: 'buyer', counterparty: 'mballa@demo.afaa', milestones: [{ title: 'Delivery & warranty card', amount: 450000, days: 3 }], feePayer: 'seller' });
+    let d = createDeal({ id: 'd_laptop', title: 'Dell XPS 13 laptop', desc: 'Brand new, sealed, with 12-month warranty.', role: 'buyer', counterparty: 'mballa@demo.afaa', milestones: [{ title: 'Delivery & warranty card', amount: 450000, days: 3 }], feePayer: 'seller' });
     as('u_mballa'); accept(d.id); as('u_amina'); db.skew = -8.5 * DAY; fund(d.id); as('u_mballa'); db.skew = -8 * DAY;
     submit(d.id, 'm1', { note: 'Delivered by DHL, tracking DLA-77120. Warranty card inside the box.' }); as('u_amina'); db.skew = -7.5 * DAY; approve(d.id, 'm1');
     db.skew = -3 * DAY; as('u_mballa');
-    d = createDeal({ title: 'Brand website redesign', desc: 'Design and build of a 5-page marketing site.', role: 'seller', counterparty: 'amina@demo.afaa', milestones: [{ title: 'Design mock-ups', amount: 200000, days: 3 }, { title: 'Development', amount: 300000, days: 6 }, { title: 'Launch & handover', amount: 100000, days: 2 }], feePayer: 'split' });
+    d = createDeal({ id: 'd_website', title: 'Brand website redesign', desc: 'Design and build of a 5-page marketing site.', role: 'seller', counterparty: 'amina@demo.afaa', milestones: [{ title: 'Design mock-ups', amount: 200000, days: 3 }, { title: 'Development', amount: 300000, days: 6 }, { title: 'Launch & handover', amount: 100000, days: 2 }], feePayer: 'split' });
     as('u_amina'); accept(d.id); db.skew = -2.8 * DAY; fund(d.id); as('u_mballa'); db.skew = -2.5 * DAY;
     submit(d.id, 'm1', { note: 'Figma mock-ups shared: figma.com/file/demo-mockups' }); as('u_amina'); db.skew = -2.2 * DAY; approve(d.id, 'm1');
     as('u_mballa'); db.skew = -.2 * DAY; submit(d.id, 'm2', { note: 'Staging site live at staging.example.com with all five pages.' });
     db.skew = -6 * HOUR; as('u_mballa');
-    createDeal({ title: '40 prepaid SIM bundles', desc: 'Wholesale, MTN, activated on delivery.', role: 'seller', counterparty: 'amina@demo.afaa', milestones: [{ title: 'Delivery of 40 bundles', amount: 640000, days: 2 }], feePayer: 'seller' });
+    createDeal({ id: 'd_sims', title: '40 prepaid SIM bundles', desc: 'Wholesale, MTN, activated on delivery.', role: 'seller', counterparty: 'amina@demo.afaa', milestones: [{ title: 'Delivery of 40 bundles', amount: 640000, days: 2 }], feePayer: 'seller' });
     db.skew = -2 * DAY; as('u_amina');
-    d = createDeal({ title: 'Kitchen fit-out · phase 1', desc: 'Cabinets and worktops installed.', role: 'buyer', counterparty: 'mballa@demo.afaa', milestones: [{ title: 'Cabinets installed', amount: 780000, days: 5 }], feePayer: 'seller' });
+    d = createDeal({ id: 'd_kitchen', title: 'Kitchen fit-out · phase 1', desc: 'Cabinets and worktops installed.', role: 'buyer', counterparty: 'mballa@demo.afaa', milestones: [{ title: 'Cabinets installed', amount: 780000, days: 5 }], feePayer: 'seller' });
     as('u_mballa'); accept(d.id); as('u_amina'); db.skew = -1.9 * DAY; fund(d.id); as('u_mballa'); db.skew = -1.2 * DAY;
     submit(d.id, 'm1', { note: 'Cabinets installed on site, photos attached to chat.' }); as('u_amina'); db.skew = -.9 * DAY;
     dispute(d.id, 'Two cabinet doors are chipped and the worktop is the wrong colour compared with the quote.');
@@ -276,7 +276,7 @@
   }
   async function init() {
     try { db = JSON.parse(localStorage.getItem(KEY)); } catch (e) { db = null; }
-    if (!db || db.v !== 1) await seed();
+    if (!db || db.v !== 2) await seed();
     tick(); save();
   }
   async function reset() { localStorage.removeItem(KEY); await seed(); }

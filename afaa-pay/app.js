@@ -29,7 +29,8 @@
         if (p < 1) requestAnimationFrame(tick);
       })(t0);
     };
-    io ? new IntersectionObserver((e, o) => { if (e[0].isIntersecting) { run(); o.disconnect(); } }).observe(el) : run();
+    if (/[?&]static/.test(location.search)) el.textContent = pre + (dec ? to.toFixed(dec) : fmt(to)) + suf;
+    else io ? new IntersectionObserver((e, o) => { if (e[0].isIntersecting) { run(); o.disconnect(); } }).observe(el) : run();
   });
 
   // escrow flow (landing)

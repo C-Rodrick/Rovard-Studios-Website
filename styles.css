@@ -1859,6 +1859,21 @@ img {
   margin-top: 60px;
 }
 
+.case-live {
+  margin-top: 60px;
+  margin-right: 14px;
+  background: var(--yellow);
+  color: var(--deep-blue);
+}
+
+.case-live:hover {
+  background: white;
+}
+
+.case-live[hidden] {
+  display: none;
+}
+
 .gallery-lightbox {
   position: fixed;
   inset: 0;

@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Brand Guidelines — Afa'a Pay</title>
+<meta name="description" content="Afa'a Pay brand identity: logo, colour, typography, voice and applications.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%234a70ff'/%3E%3Cstop offset='1' stop-color='%232a22c4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='18' fill='url(%23g)'/%3E%3Cpath d='M19 47 32 17l13 30M25 37h14' stroke='white' stroke-width='6.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='32' cy='17' r='6' fill='%232ee59d' stroke='%232a22c4' stroke-width='3'/%3E%3C/svg%3E">
+<style>
+body{background:#0b0d14}
+.bar{position:sticky;top:0;z-index:30;display:flex;justify-content:space-between;align-items:center;padding:14px 24px;background:rgba(5,6,10,.85);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.bar a.back{color:var(--mute);font-size:14px}.bar a.back:hover{color:#fff}
+.stackv{display:grid;gap:40px;justify-items:center;padding:40px 0 80px}
+/* board = fixed 1600x1067 canvas (3:2) */
+.board{width:1600px;height:1067px;position:relative;overflow:hidden;padding:80px;display:grid;align-content:start;gap:28px;background:var(--bg);zoom:var(--z,.6);border-radius:14px}
+body.single{background:#000}body.single .bar{display:none}body.single .stackv{padding:0;gap:0;display:block}
+body.single .board{zoom:1;border-radius:0;display:none}body.single .board.show{display:grid}
+.board.light{background:var(--paper);color:var(--paper-ink)}
+.board .tag{font:600 14px var(--font);letter-spacing:.18em;text-transform:uppercase;color:var(--blue2);display:flex;gap:14px;align-items:center;background:none;padding:0;margin:0;border-radius:0}
+.handset .vp::before{content:"9:41";display:block;height:34px;background:#07080d;color:#fff;font:600 13px var(--font);padding:11px 0 0 28px;position:relative;z-index:2}
+.handset .vp iframe{top:34px}
+.board.light .tag{color:var(--blue)}
+.board .tag b{font-weight:600;color:var(--mute)}
+.board h2{font-size:64px;max-width:18ch}
+.board .sub{font-size:22px;color:var(--mute);max-width:52ch;line-height:1.5}
+.board.light .sub{color:var(--paper-mute)}
+.brand-logo{display:flex;align-items:center;gap:22px;font:600 64px var(--display);letter-spacing:-.04em;line-height:1}
+.brand-logo svg{width:84px;height:84px;flex:none}.brand-logo .ap{color:var(--green)}
+.brand-logo.on-light{color:var(--paper-ink)}
+.abs{position:absolute}
+/* frames */
+.browser{border-radius:16px;overflow:hidden;background:#000;border:1px solid var(--line2);box-shadow:0 40px 90px -30px rgba(47,91,255,.5)}
+.browser .chrome{height:36px;background:#12141d;display:flex;align-items:center;gap:8px;padding:0 14px;border-bottom:1px solid var(--line)}
+.browser .chrome i{width:10px;height:10px;border-radius:50%;background:#2a2e3d}
+.browser .chrome span{margin-left:14px;font-size:12px;color:var(--mute);background:#0a0c13;padding:4px 14px;border-radius:99px;flex:1;max-width:340px}
+.vp{position:relative;overflow:hidden}
+.vp iframe{border:0;position:absolute;left:0;top:0;transform-origin:0 0;background:var(--bg);pointer-events:none}
+.handset{border-radius:46px;background:#000;border:1px solid var(--line2);padding:11px;box-shadow:0 40px 80px -24px rgba(47,91,255,.55),inset 0 0 0 2px #181b26;position:relative}
+.handset::before{content:"";position:absolute;top:19px;left:50%;translate:-50% 0;width:90px;height:24px;background:#000;border-radius:99px;z-index:3}
+.handset .vp{border-radius:36px}
+.cap{font-size:18px;color:var(--mute);margin-top:16px;text-align:center}.cap b{display:block;color:#fff;font:600 22px var(--display);margin-bottom:4px}
+.swatch{border-radius:22px;padding:26px;display:flex;flex-direction:column;justify-content:flex-end;min-height:300px;font-size:16px}
+.swatch b{font:600 28px var(--display);letter-spacing:-.02em;display:block}.swatch span{opacity:.8;font-family:ui-monospace,Consolas,monospace;font-size:15px;display:block;margin-top:4px}
+.grid-bg{background-image:linear-gradient(rgba(10,12,20,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(10,12,20,.07) 1px,transparent 1px);background-size:40px 40px}
+.card-biz{width:520px;height:290px;border-radius:18px;padding:36px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 30px 60px -20px rgba(10,12,20,.45)}
+.appicon{border-radius:26%;display:grid;place-items:center;overflow:hidden}
+.appicon svg{width:100%;height:100%}
+.comp-row{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.comp-row .btn{font-size:18px;padding:16px 30px}
+.pillar{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:30px}
+.pillar b{display:block;font:600 28px var(--display);letter-spacing:-.02em;margin-bottom:8px}.pillar p{color:var(--mute);font-size:18px}
+.say{border-radius:18px;padding:22px 26px;font-size:20px}
+.say.yes{background:rgba(46,229,157,.1);border:1px solid rgba(46,229,157,.4)}.say.no{background:rgba(255,93,108,.08);border:1px solid rgba(255,93,108,.35);color:var(--mute)}
+.say small{display:block;font:600 12px var(--font);letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px;color:var(--green)}.say.no small{color:var(--red)}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs>
+  <symbol id="mark" viewBox="0 0 64 64"><defs><linearGradient id="mk" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4a70ff"/><stop offset="1" stop-color="#2a22c4"/></linearGradient></defs><rect width="64" height="64" rx="18" fill="url(#mk)"/><path d="M19 47 32 17l13 30M25 37h14" stroke="#fff" stroke-width="6.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="32" cy="17" r="6" fill="#2ee59d" stroke="#2a22c4" stroke-width="3"/></symbol>
+  <symbol id="glyph" viewBox="0 0 64 64"><path d="M19 47 32 17l13 30M25 37h14" stroke="currentColor" stroke-width="6.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="32" cy="17" r="6" fill="#2ee59d" stroke="var(--ring,#05060a)" stroke-width="3"/></symbol>
+  <linearGradient id="gg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2f5bff"/><stop offset="1" stop-color="#2ee59d"/></linearGradient>
+</defs></svg>
+
+<div class="bar"><a class="back" href="index.html">← Afa'a Pay</a><span class="muted" style="color:var(--mute);font-size:14px">Brand guidelines · 8 boards</span><a class="btn btn-primary btn-sm" href="platform/index.html">Open platform</a></div>
+
+<div class="stackv" id="boards">
+
+<!-- 01 COVER -->
+<section class="board" id="b1" style="background:radial-gradient(60% 70% at 78% 30%,rgba(47,91,255,.55),transparent 70%),radial-gradient(40% 50% at 10% 100%,rgba(58,47,216,.45),transparent 70%),#05060a">
+  <div class="tag">Brand identity <b>· 01 / 08</b></div>
+  <div class="abs" style="left:80px;top:300px;display:grid;gap:40px">
+    <div class="brand-logo" style="font-size:96px"><svg style="width:128px;height:128px"><use href="#mark"/></svg><span>Afa<span class="ap">'</span>a Pay</span></div>
+    <h2 style="font-size:84px;max-width:11ch">Building <span class="grad">trust</span> into every transaction.</h2>
+    <p class="sub">Brand identity, fintech website and escrow platform for a modern African payment network.</p>
+  </div>
+  <div class="abs" style="right:150px;top:110px;transform:rotate(6deg)">
+    <div class="handset" style="width:380px;height:780px"><div class="vp" style="width:358px;height:758px"><iframe src="platform/index.html?demo=buyer#/deal/d_laptop" style="width:390px;height:826px;transform:scale(.918)" scrolling="no" title="Platform"></iframe></div></div>
+  </div>
+  <div class="abs" style="right:520px;top:560px;background:rgba(16,19,28,.9);border:1px solid var(--line2);border-radius:20px;padding:20px 24px;display:flex;gap:16px;align-items:center;backdrop-filter:blur(12px)"><div style="width:46px;height:46px;border-radius:14px;background:rgba(46,229,157,.15);color:var(--green);display:grid;place-items:center;font-size:22px">✓</div><div><b style="font:600 20px var(--display)">Funds released</b><div style="color:var(--mute);font-size:15px">Seller paid in 3 seconds</div></div></div>
+</section>
+
+<!-- 02 LOGO -->
+<section class="board light" id="b2">
+  <div class="tag">Logo <b>· 02 / 08</b></div>
+  <h2>A point where two sides meet.</h2>
+  <p class="sub" style="max-width:62ch">An open <b>A</b> built from two converging strokes: buyer and seller. They meet at a single green point, the moment trust is verified. The same dot becomes the apostrophe in the wordmark.</p>
+  <div style="display:grid;grid-template-columns:520px 1fr;gap:40px;margin-top:10px">
+    <div class="grid-bg" style="border-radius:26px;background-color:#fff;border:1px solid var(--paper-line);display:grid;place-items:center;height:560px;position:relative">
+      <svg viewBox="0 0 64 64" style="width:340px;height:340px;overflow:visible"><rect width="64" height="64" rx="18" fill="url(#mk)"/><path d="M19 47 32 17l13 30M25 37h14" stroke="#fff" stroke-width="6.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="32" cy="17" r="6" fill="#2ee59d" stroke="#2a22c4" stroke-width="3"/>
+        <g stroke="#ff5d6c" stroke-width=".35" fill="none" opacity=".9"><circle cx="32" cy="32" r="22"/><path d="M32 -4v72M-4 32h72M19 47 32 17 45 47" stroke-dasharray="1.2 1.2"/></g></svg>
+      <span style="position:absolute;bottom:18px;left:22px;font-size:13px;color:var(--paper-mute)">Corner radius 28% · stroke 6.5 / 64</span>
+    </div>
+    <div style="display:grid;grid-template-rows:1fr 1fr;gap:24px">
+      <div style="background:#05060a;border-radius:26px;display:grid;place-items:center"><div class="brand-logo" style="color:#fff"><svg><use href="#mark"/></svg><span>Afa<span class="ap">'</span>a Pay</span></div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px">
+        <div style="background:#fff;border:1px solid var(--paper-line);border-radius:26px;display:grid;place-items:center;align-content:center;gap:14px"><svg style="width:110px;height:110px"><use href="#mark"/></svg><div class="brand-logo on-light" style="font-size:36px;gap:0">Afa<span class="ap">'</span>a Pay</div></div>
+        <div style="background:#2f5bff;border-radius:26px;display:grid;place-items:center"><svg viewBox="0 0 64 64" style="width:130px;height:130px;color:#fff;--ring:#2f5bff"><use href="#glyph"/></svg></div>
+        <div style="background:#0a0c14;border-radius:26px;display:grid;place-items:center;color:#fff"><svg viewBox="0 0 64 64" style="width:130px;height:130px;--ring:#0a0c14"><use href="#glyph"/></svg></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 COLOUR + TYPE -->
+<section class="board" id="b3">
+  <div class="tag">Colour & typography <b>· 03 / 08</b></div>
+  <h2>Black, white, one electric blue.</h2>
+  <div style="display:grid;grid-template-columns:2fr 2fr 1.4fr 1.4fr 1fr 1fr;gap:16px">
+    <div class="swatch" style="background:#05060a;border:1px solid var(--line2)"><b>Ink</b><span>#05060A</span></div>
+    <div class="swatch" style="background:#2f5bff;color:#fff"><b>Trust Blue</b><span>#2F5BFF</span></div>
+    <div class="swatch" style="background:#3a2fd8;color:#fff"><b>Deep Indigo</b><span>#3A2FD8</span></div>
+    <div class="swatch" style="background:#2ee59d;color:#042"><b>Verified</b><span>#2EE59D</span></div>
+    <div class="swatch" style="background:#f4f5f8;color:#0a0c14"><b>Paper</b><span>#F4F5F8</span></div>
+    <div class="swatch" style="background:#ffb84a;color:#2a1800"><b>Held</b><span>#FFB84A</span></div>
+  </div>
+  <p class="sub" style="margin-top:-4px">Blue is the brand. Green is reserved for one meaning: money verified, released or safe. Amber means held or disputed; red means refunded.</p>
+  <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:50px;margin-top:6px">
+    <div><div style="font:600 14px var(--font);letter-spacing:.16em;color:var(--blue2);text-transform:uppercase;margin-bottom:12px">Display · Sora</div>
+      <div style="font:600 120px/1 var(--display);letter-spacing:-.05em">Aa<span style="color:var(--green)">.</span> 782</div>
+      <div style="font:600 40px/1.15 var(--display);letter-spacing:-.03em;margin-top:18px">Funds held until delivery is confirmed.</div></div>
+    <div><div style="font:600 14px var(--font);letter-spacing:.16em;color:var(--blue2);text-transform:uppercase;margin-bottom:12px">Text · Inter</div>
+      <div style="font:400 22px/1.6 var(--font);color:#cfd3e3">Afa'a Pay holds the money until the deal is done. Sell, buy and contract without gambling on a stranger. Numbers always use thin spaces: <b style="color:#fff">1 250 000 XAF</b>.</div>
+      <div style="display:flex;gap:14px;margin-top:22px"><span class="badge b-held" style="font-size:16px;padding:8px 16px">In escrow</span><span class="badge b-rel" style="font-size:16px;padding:8px 16px">Released</span><span class="badge b-disp" style="font-size:16px;padding:8px 16px">Disputed</span><span class="badge b-ref" style="font-size:16px;padding:8px 16px">Refunded</span></div></div>
+  </div>
+</section>
+
+<!-- 04 WEBSITE -->
+<section class="board" id="b4" style="background:radial-gradient(60% 60% at 50% 0,rgba(47,91,255,.35),transparent 70%),#05060a">
+  <div class="tag">Fintech website <b>· 04 / 08</b></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end"><h2 style="font-size:56px">A landing page that sells safety.</h2><p class="sub" style="font-size:20px">Escrow flow, trust score and mobile payments explained in one scroll, with pricing and a security page that earn the sign-up.</p></div>
+  <div style="display:grid;grid-template-columns:1.55fr 1fr;gap:34px;margin-top:8px">
+    <div class="browser"><div class="chrome"><i></i><i></i><i></i><span>afaapay.com</span></div><div class="vp" style="height:600px"><iframe src="index.html?static" style="width:1520px;height:1040px;transform:scale(.58)" scrolling="no" title="Landing"></iframe></div></div>
+    <div class="browser" style="margin-top:56px"><div class="chrome"><i></i><i></i><i></i><span>afaapay.com/pricing</span></div><div class="vp" style="height:544px"><iframe src="pricing.html" style="width:1520px;height:1480px;transform:scale(.37)" scrolling="no" title="Pricing"></iframe></div></div>
+  </div>
+</section>
+
+<!-- 05 PLATFORM -->
+<section class="board" id="b5" style="background:radial-gradient(60% 60% at 80% 100%,rgba(47,91,255,.35),transparent 70%),#05060a">
+  <div class="tag">Platform UI <b>· 05 / 08</b></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end"><h2 style="font-size:56px">A working escrow platform, not a mock-up.</h2><p class="sub" style="font-size:20px">Milestone deals, signed contracts, a wallet, disputes and a mediation desk, all running in the browser.</p></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:34px;margin-top:6px">
+    <div><div class="browser"><div class="chrome"><i></i><i></i><i></i><span>app.afaapay.com</span></div><div class="vp" style="height:575px"><iframe src="platform/index.html?demo=buyer" style="width:1440px;height:1180px;transform:scale(.4875)" scrolling="no" title="Dashboard"></iframe></div></div><div class="cap"><b>Dashboard</b>What needs your action, at a glance</div></div>
+    <div><div class="browser"><div class="chrome"><i></i><i></i><i></i><span>app.afaapay.com/deal</span></div><div class="vp" style="height:575px"><iframe src="platform/index.html?demo=buyer#/deal/d_website" style="width:1440px;height:1180px;transform:scale(.4875)" scrolling="no" title="Deal"></iframe></div></div><div class="cap"><b>Milestone escrow</b>Proof, approval and auto-release per milestone</div></div>
+  </div>
+</section>
+
+<!-- 06 MOBILE -->
+<section class="board" id="b6" style="background:radial-gradient(70% 60% at 50% 100%,rgba(58,47,216,.5),transparent 70%),#05060a">
+  <div class="tag">Mobile experience <b>· 06 / 08</b></div>
+  <h2 style="font-size:56px;max-width:22ch">Thumb-first, because that's how Africa pays.</h2>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:30px;justify-items:center;margin-top:-4px">
+    <div><div class="handset" style="width:300px;height:620px"><div class="vp" style="width:278px;height:598px"><iframe src="platform/index.html?demo=buyer" style="width:390px;height:838px;transform:scale(.7128)" scrolling="no" title="m1"></iframe></div></div><div class="cap"><b>Home</b>Wallet and actions</div></div>
+    <div style="margin-top:-30px"><div class="handset" style="width:300px;height:620px"><div class="vp" style="width:278px;height:598px"><iframe src="platform/index.html?demo=buyer#/deal/d_website" style="width:390px;height:838px;transform:scale(.7128)" scrolling="no" title="m2"></iframe></div></div><div class="cap"><b>Deal</b>Milestones and proof</div></div>
+    <div><div class="handset" style="width:300px;height:620px"><div class="vp" style="width:278px;height:598px"><iframe src="platform/index.html?demo=buyer#/wallet" style="width:390px;height:838px;transform:scale(.7128)" scrolling="no" title="m3"></iframe></div></div><div class="cap"><b>Wallet</b>MoMo, Orange, card</div></div>
+    <div style="margin-top:-30px"><div class="handset" style="width:300px;height:620px"><div class="vp" style="width:278px;height:598px"><iframe src="platform/index.html?demo=buyer#/trust" style="width:390px;height:838px;transform:scale(.7128)" scrolling="no" title="m4"></iframe></div></div><div class="cap"><b>Trust score</b>Explainable reputation</div></div>
+  </div>
+</section>
+
+<!-- 07 SYSTEM -->
+<section class="board light" id="b7">
+  <div class="tag">Design system <b>· 07 / 08</b></div>
+  <h2>One system from landing page to ledger.</h2>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:30px">
+    <div style="background:#05060a;border-radius:26px;padding:36px;display:grid;gap:28px;color:#fff">
+      <div style="font:600 13px var(--font);letter-spacing:.16em;color:var(--blue2);text-transform:uppercase">Buttons & status</div>
+      <div class="comp-row"><a class="btn btn-primary">Fund escrow</a><a class="btn btn-ghost">View contract</a><a class="btn btn-light">Release funds</a></div>
+      <div class="comp-row"><span class="badge b-held" style="font-size:16px;padding:8px 16px">In escrow</span><span class="badge b-rel" style="font-size:16px;padding:8px 16px">Released</span><span class="badge b-disp" style="font-size:16px;padding:8px 16px">Awaiting funds</span><span class="badge b-ref" style="font-size:16px;padding:8px 16px">Refunded</span></div>
+      <div class="kpi" style="padding:26px"><span style="font-size:16px">Held in escrow</span><b style="font-size:44px">2 430 000 <small style="font-size:18px;color:var(--mute)">XAF</small></b><em style="font-size:15px;color:var(--blue2)">3 active deals</em></div>
+    </div>
+    <div style="background:#fff;border:1px solid var(--paper-line);border-radius:26px;padding:36px;display:grid;grid-template-columns:260px 1fr;gap:30px;align-items:center">
+      <div class="gauge-ring" style="margin:0"><svg viewBox="0 0 270 270"><circle class="bg" cx="135" cy="135" r="120"/><circle class="fg" cx="135" cy="135" r="120" style="stroke-dashoffset:210"/></svg><div class="gauge-num"><b style="font-size:62px">782</b><span style="font-size:14px">Strong</span></div></div>
+      <div style="display:grid;gap:16px"><div style="font:600 13px var(--font);letter-spacing:.16em;color:var(--blue);text-transform:uppercase">Trust score</div>
+        <div class="factor" style="margin:0"><div style="color:#0a0c14">On-time <b>92%</b></div><div class="meter" style="background:#e6e8f1"><i style="width:92%"></i></div></div>
+        <div class="factor" style="margin:0"><div style="color:#0a0c14">Dispute-free <b>96%</b></div><div class="meter" style="background:#e6e8f1"><i style="width:96%"></i></div></div>
+        <div class="factor" style="margin:0"><div style="color:#0a0c14">Verified ID <b>100%</b></div><div class="meter" style="background:#e6e8f1"><i style="width:100%"></i></div></div></div>
+    </div>
+  </div>
+  <div style="background:#0a0c14;border-radius:26px;padding:34px 40px;color:#fff">
+    <div style="font:600 13px var(--font);letter-spacing:.16em;color:var(--blue2);text-transform:uppercase;margin-bottom:22px">Escrow lifecycle</div>
+    <div class="parties" style="grid-template-columns:1fr 1.2fr 1fr 1.2fr 1fr 1.2fr 1fr">
+      <div class="node ok"><i>1</i>Agree</div><div class="line go"></div><div class="node hot"><i>2</i>Fund</div><div class="line go"></div><div class="node hot"><i>3</i>Deliver</div><div class="line go"></div><div class="node ok"><i>✓</i>Release</div>
+    </div>
+  </div>
+</section>
+
+<!-- 08 APPLICATIONS + VOICE -->
+<section class="board" id="b8" style="background:radial-gradient(50% 60% at 100% 0,rgba(47,91,255,.35),transparent 70%),#05060a">
+  <div class="tag">Voice & applications <b>· 08 / 08</b></div>
+  <div style="display:grid;grid-template-columns:1fr 1.1fr;gap:50px">
+    <div style="display:grid;gap:22px;align-content:start">
+      <h2 style="font-size:54px">Calm, plain, protective.</h2>
+      <div class="pillar"><b>Neutral</b><p>We never take a side. We hold, verify and release.</p></div>
+      <div class="pillar"><b>Plain</b><p>Short sentences. Real amounts. No fintech jargon.</p></div>
+      <div class="say yes"><small>We say</small>"Your money is safe until you approve delivery."</div>
+      <div class="say no"><small>We don't say</small>"Leveraging blockchain-grade transactional synergy."</div>
+    </div>
+    <div style="position:relative;height:820px">
+      <div class="abs card-biz" style="left:0;top:20px;background:linear-gradient(135deg,#2f5bff,#2a22c4);color:#fff;transform:rotate(-5deg)"><div class="brand-logo" style="font-size:34px;gap:12px"><svg style="width:46px;height:46px"><use href="#mark"/></svg><span>Afa<span class="ap">'</span>a Pay</span></div><div><div style="font:600 26px var(--display)">Amina Tchinda</div><div style="opacity:.8;font-size:16px;margin-top:4px">Head of Merchant Trust · amina@afaapay.com</div></div></div>
+      <div class="abs card-biz" style="left:210px;top:290px;background:#f4f5f8;color:#0a0c14;transform:rotate(3deg)"><div style="display:flex;justify-content:space-between;align-items:center"><svg style="width:46px;height:46px"><use href="#mark"/></svg><span style="font:600 13px var(--font);letter-spacing:.16em;color:#2f5bff">VERIFIED MERCHANT</span></div><div><div style="font:600 30px/1.1 var(--display);letter-spacing:-.03em">Building trust into every transaction.</div><div style="color:#5b6178;font-size:15px;margin-top:10px">afaapay.com</div></div></div>
+      <div class="abs" style="left:0;top:640px;display:flex;gap:22px;align-items:end">
+        <div class="appicon" style="width:170px;height:170px;box-shadow:0 30px 50px -16px rgba(47,91,255,.7)"><svg><use href="#mark"/></svg></div>
+        <div class="appicon" style="width:110px;height:110px;background:#fff"><svg viewBox="0 0 64 64" style="width:100%;height:100%;color:#2f5bff;--ring:#fff"><use href="#glyph"/></svg></div>
+        <div class="appicon" style="width:70px;height:70px"><svg><use href="#mark"/></svg></div>
+        <div class="appicon" style="width:44px;height:44px"><svg><use href="#mark"/></svg></div>
+        <div style="width:150px;height:150px;border-radius:50%;overflow:hidden;background:#05060a;border:1px solid var(--line2);display:grid;place-items:center"><svg style="width:100px;height:100px"><use href="#mark"/></svg></div>
+        <div style="margin-left:8px;color:var(--mute);font-size:15px;line-height:1.6">App icon · glyph<br>Favicon · social avatar</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+<script>
+(function(){
+  var q=new URLSearchParams(location.search).get('board');
+  if(q){document.body.classList.add('single');var b=document.getElementById('b'+q);if(b)b.classList.add('show');return;}
+  function fit(){var z=Math.min(1,(innerWidth-32)/1600);document.documentElement.style.setProperty('--z',z.toFixed(3));}
+  fit();addEventListener('resize',fit);
+})();
+</script>
+</body>
+</html>

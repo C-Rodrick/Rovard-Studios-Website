@@ -110,7 +110,7 @@ a.nv.on{background:rgba(47,91,255,.16);color:#fff}
 .bnav{display:none}
 @media (max-width:980px){
   .auth{grid-template-columns:1fr}.auth-art{display:none}
-  .pf-grid{grid-template-columns:1fr}
+  .pf-grid,.dash-grid,.trust-dash{grid-template-columns:1fr!important}
   .mnav a.on{background:var(--blue);color:#fff;border-radius:99px}
 }
 @media (max-width:640px){
