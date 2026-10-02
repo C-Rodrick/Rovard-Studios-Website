@@ -824,6 +824,11 @@ function openCase(index) {
     });
   });
 
+  // One history entry per open case study, so the browser Back button closes it.
+  // Switching between case studies replaces the entry instead of stacking another.
+  if (!caseModal.classList.contains('open')) history.pushState({ rv: 'case' }, '');
+  else if (history.state?.rv === 'case') history.replaceState({ rv: 'case' }, '');
+
   caseModal.classList.add('open');
   caseModal.setAttribute('aria-hidden', 'false');
   body.classList.add('no-scroll');
@@ -916,11 +921,19 @@ function renderMoreProjects(currentIndex) {
   section.hidden = !picks.length;
 }
 
-function closeCase() {
+// Visual close only (used by the Back button handler).
+function hideCase() {
   $$('#caseVideo video').forEach(v => v.pause());
   caseModal.classList.remove('open');
   caseModal.setAttribute('aria-hidden', 'true');
   body.classList.remove('no-scroll');
+}
+
+// Close from the UI (X, backdrop, Escape): hide, then consume the history entry we pushed.
+function closeCase() {
+  if (!caseModal.classList.contains('open')) return;
+  hideCase();
+  if (history.state?.rv === 'case') history.back();
 }
 caseModal.addEventListener('click', e => { if (e.target === caseModal) closeCase(); });
 
@@ -962,16 +975,31 @@ const openLightbox = (images, startIndex, title) => {
   galleryLightboxImage.alt = title;
   galleryLightboxImage.classList.remove('transitioning');
   lbUpdateNav();
+  if (!galleryLightbox.classList.contains('open')) history.pushState({ rv: 'lightbox' }, '');
   galleryLightbox.classList.add('open');
   galleryLightbox.setAttribute('aria-hidden', 'false');
   body.classList.add('no-scroll');
 };
 
-const closeGalleryLightbox = () => {
+const hideLightbox = () => {
   galleryLightbox.classList.remove('open');
   galleryLightbox.setAttribute('aria-hidden', 'true');
-  body.classList.remove('no-scroll');
+  // keep the page locked if the case study is still open underneath
+  if (!caseModal.classList.contains('open')) body.classList.remove('no-scroll');
 };
+
+const closeGalleryLightbox = () => {
+  if (!galleryLightbox.classList.contains('open')) return;
+  hideLightbox();
+  if (history.state?.rv === 'lightbox') history.back();
+};
+
+/* Browser Back / Forward: close the top-most layer (image viewer, then case study). */
+window.addEventListener('popstate', e => {
+  const layer = e.state?.rv;
+  if (layer !== 'lightbox' && galleryLightbox.classList.contains('open')) hideLightbox();
+  if (layer !== 'lightbox' && layer !== 'case' && caseModal.classList.contains('open')) hideCase();
+});
 
 lbPrev?.addEventListener('click', () => lbShowImage(lbIndex - 1, -1));
 lbNext?.addEventListener('click', () => lbShowImage(lbIndex + 1, 1));
@@ -1088,7 +1116,11 @@ openInquiry?.addEventListener('click', () => {
 });
 $$('.inquiry-close').forEach(b => b.addEventListener('click', closeInquiry));
 inquiryModal.addEventListener('click', e => { if (e.target === inquiryModal) closeInquiry(); });
-$('#modalProject')?.addEventListener('click', () => { closeCase(); openInquiry.click(); });
+$('#modalProject')?.addEventListener('click', () => {
+  hideCase();
+  if (history.state?.rv === 'case') history.replaceState(null, '');
+  openInquiry.click();
+});
 
 let currentStep = 1;
 const totalSteps = 5;
