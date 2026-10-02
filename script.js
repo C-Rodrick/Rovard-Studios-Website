@@ -410,21 +410,32 @@ const caseData = [
     ]
   },
   {
-    title: 'Motion Project 01',
+    title: 'Proxima Exchange Films',
     category: 'Motion Design',
     year: '2026',
-    services: 'Motion Identity / Titles / Campaign',
-    summary: 'A motion system built to give the brand a sharper, more dynamic digital presence.',
-    challenge: 'The brand needed a stronger sense of movement without losing editorial clarity.',
-    approach: 'We built a consistent motion language that translated across intro graphics, campaigns and supporting motion assets.',
-    outcome: 'A motion toolkit that helps the identity feel alive without sacrificing clarity or polish.',
-    colours: ['#111111', '#ffffff', '#f5cc00', '#162daf'],
+    services: 'Motion Design / 3D / Cinematic Direction / Sound Design',
+    summary: 'Two launch films for a crypto and forex trading platform: a cinematic 3D brand film and a precise product film built from the real interface.',
+    challenge: 'Proxima Exchange needed to feel trustworthy and premium in a category full of noise, and to show both the emotion of the brand and the real product in motion.',
+    approach: 'We built the logo as a layered 3D object and shot it with a virtual camera: rack focus, light rays and lens streaks, a deep blue and gold grade, and a score cut to every hit. A second, frame-accurate film runs the actual website UI, live chart and markets table on the same timeline.',
+    outcome: 'Two films that work together: a 40-second cinematic hook for campaigns and social, and a 30-second product film for the website and case studies. Concept project; figures shown are illustrative.',
+    colours: ['#000081', '#ffffff', '#1C39BB', '#FFC000'],
+    coverImage: 'assets/thumbs/proxima-exchange-films-cover.jpg',
+    videos: [
+      { title: 'Cinematic Film', src: 'assets/Motion%20Design/2_Proxima%20Exchange%20Films/proxima-exchange-cinematic.mp4', poster: 'assets/Motion%20Design/2_Proxima%20Exchange%20Films/poster-cinematic.jpg' },
+      { title: 'Product Film', src: 'assets/Motion%20Design/2_Proxima%20Exchange%20Films/proxima-exchange-film.mp4', poster: 'assets/Motion%20Design/2_Proxima%20Exchange%20Films/poster-film.jpg' }
+    ],
     galleryImages: [
-      makeGalleryAsset('Motion Project 01', ['#111111', '#ffffff', '#f5cc00']),
-      makeGalleryAsset('Intro', ['#111111', '#ffffff', '#f5cc00']),
-      makeGalleryAsset('Campaign', ['#111111', '#ffffff', '#f5cc00']),
-      makeGalleryAsset('Sequence', ['#111111', '#ffffff', '#f5cc00']),
-      makeGalleryAsset('End Frame', ['#111111', '#ffffff', '#f5cc00'])
+      'assets/Motion%20Design/2_Proxima%20Exchange%20Films/still-01-cinematic.jpg',
+      'assets/Motion%20Design/2_Proxima%20Exchange%20Films/still-02-cinematic.jpg',
+      'assets/Motion%20Design/2_Proxima%20Exchange%20Films/still-03-cinematic.jpg',
+      'assets/Motion%20Design/2_Proxima%20Exchange%20Films/still-04-cinematic.jpg',
+      'assets/Motion%20Design/2_Proxima%20Exchange%20Films/still-05-cinematic.jpg',
+      'assets/Motion%20Design/2_Proxima%20Exchange%20Films/still-06-cinematic.jpg',
+      'assets/Motion%20Design/2_Proxima%20Exchange%20Films/still-07-cinematic.jpg',
+      'assets/Motion%20Design/2_Proxima%20Exchange%20Films/still-08-film.jpg',
+      'assets/Motion%20Design/2_Proxima%20Exchange%20Films/still-09-film.jpg',
+      'assets/Motion%20Design/2_Proxima%20Exchange%20Films/still-10-film.jpg',
+      'assets/Motion%20Design/2_Proxima%20Exchange%20Films/still-11-film.jpg'
     ]
   },
   {
@@ -827,25 +838,41 @@ $$('.project-trigger').forEach(el => el.addEventListener('click', () => {
 $('.modal-close', caseModal)?.addEventListener('click', closeCase);
 function setCaseVideo(d) {
   let wrap = $('#caseVideo');
-  if (!d.video) {
+  const list = d.videos && d.videos.length ? d.videos : (d.video ? [{ src: d.video, poster: d.poster }] : []);
+  if (!list.length) {
     wrap?.remove();
     return;
   }
   if (!wrap) {
     wrap = document.createElement('div');
     wrap.id = 'caseVideo';
-    wrap.className = 'case-video';
     $('#caseGallery').before(wrap);
   }
+  wrap.className = list.length > 1 ? 'case-video-group' : 'case-video';
   wrap.innerHTML = '';
-  const video = document.createElement('video');
-  video.src = d.video;
-  if (d.poster) video.poster = d.poster;
-  video.controls = true;
-  video.playsInline = true;
-  video.preload = 'metadata';
-  video.setAttribute('aria-label', `${d.title} video`);
-  wrap.appendChild(video);
+  const players = [];
+  list.forEach(item => {
+    const box = list.length > 1 ? document.createElement('figure') : wrap;
+    if (list.length > 1) box.className = 'case-video';
+    const video = document.createElement('video');
+    video.src = item.src;
+    if (item.poster) video.poster = item.poster;
+    video.controls = true;
+    video.playsInline = true;
+    video.preload = 'metadata';
+    video.setAttribute('aria-label', `${d.title}${item.title ? ' — ' + item.title : ''} video`);
+    video.addEventListener('play', () => players.forEach(v => { if (v !== video) v.pause(); }));
+    players.push(video);
+    box.appendChild(video);
+    if (list.length > 1) {
+      if (item.title) {
+        const cap = document.createElement('figcaption');
+        cap.textContent = item.title;
+        box.appendChild(cap);
+      }
+      wrap.appendChild(box);
+    }
+  });
 }
 
 /* "More projects": three other case studies at the bottom of every case study.
@@ -880,7 +907,7 @@ function renderMoreProjects(currentIndex) {
     copy.append(kicker, title, go);
     card.append(media, copy);
     card.addEventListener('click', () => {
-      $('#caseVideo video')?.pause();
+      $$('#caseVideo video').forEach(v => v.pause());
       if (window.RovardMotion) RovardMotion.curtainTo(() => openCase(i), p.colours);
       else openCase(i);
     });
@@ -890,7 +917,7 @@ function renderMoreProjects(currentIndex) {
 }
 
 function closeCase() {
-  $('#caseVideo video')?.pause();
+  $$('#caseVideo video').forEach(v => v.pause());
   caseModal.classList.remove('open');
   caseModal.setAttribute('aria-hidden', 'true');
   body.classList.remove('no-scroll');

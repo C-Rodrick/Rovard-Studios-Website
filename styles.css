@@ -1776,6 +1776,32 @@ img {
   background: #000;
 }
 
+.case-video-group {
+  display: grid;
+  gap: 34px;
+  margin-top: 70px;
+}
+
+.case-video-group .case-video {
+  position: relative;
+  margin: 0;
+}
+
+.case-video-group figcaption {
+  position: absolute;
+  left: 18px;
+  top: 16px;
+  padding: 7px 14px;
+  border-radius: 99px;
+  background: rgba(10, 10, 11, .6);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  font-size: .72rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
 /* ── Bento Gallery ─────────────────────────────────── */
 .case-gallery {
   display: grid;
