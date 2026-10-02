@@ -941,7 +941,6 @@ const setProcessStep = idx => {
   $('#processLabel').textContent = d[1];
   $('#processTitle').textContent = d[2];
   $('#processText').textContent = d[3];
-  if (processVisual) processVisual.style.background = `linear-gradient(135deg, ${d[4]}, ${d[5]})`;
   if (processBigNumber) processBigNumber.textContent = d[0];
   $$('.process-index i').forEach((i, n) => i.classList.toggle('active', n === idx));
 
