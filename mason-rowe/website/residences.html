@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Residences — Mason &amp; Rowe (concept)</title>
+<meta name="description" content="Residence types across four fictional Mason &amp; Rowe developments: through-residences, penthouses and villas, with plans and two finish schemes.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#1C1B19">
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
+<script>try{if(sessionStorage.getItem('mr-nav')){document.documentElement.classList.add('mr-enter');sessionStorage.removeItem('mr-nav')}}catch(e){}</script>
+<noscript><style>[data-r]{opacity:1!important;transform:none!important}[data-mask]>img,[data-mask-x]>img{clip-path:none!important;transform:none!important}.split .w>span{transform:none!important}</style></noscript>
+</head>
+<body data-page="residences" data-hdr="over">
+<main id="main">
+
+  <section class="phero">
+    <div class="bg" aria-hidden="true"><img src="img/living.jpg" alt="" data-parallax="0.06"></div>
+    <div class="wrap">
+      <p class="eyebrow">Residences</p>
+      <h1 class="d-xxl" data-split>Homes with <em>proportion.</em></h1>
+      <p class="lead">From two-bedroom through-residences to single-level canyon villas: every plan begins with the longest view and works inward.</p>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="flex-between" style="margin-bottom:36px;gap:24px">
+        <div class="filters" role="group" aria-label="Filter by type">
+          <button type="button" class="fbtn" aria-pressed="true" data-kind="all">All types</button>
+          <button type="button" class="fbtn" aria-pressed="false" data-kind="Residence">Residences</button>
+          <button type="button" class="fbtn" aria-pressed="false" data-kind="Penthouse">Penthouses</button>
+          <button type="button" class="fbtn" aria-pressed="false" data-kind="Villa">Villas</button>
+        </div>
+        <div class="filters" role="group" aria-label="Filter by city">
+          <button type="button" class="fbtn" aria-pressed="true" data-city="all">All cities</button>
+          <button type="button" class="fbtn" aria-pressed="false" data-city="ny">NYC</button>
+          <button type="button" class="fbtn" aria-pressed="false" data-city="mia">Miami</button>
+          <button type="button" class="fbtn" aria-pressed="false" data-city="la">LA</button>
+          <button type="button" class="fbtn" aria-pressed="false" data-city="atx">Austin</button>
+        </div>
+      </div>
+      <p class="small mute" id="resCount" style="margin-bottom:22px" aria-live="polite"></p>
+      <div class="rcards" id="resList"></div>
+      <p class="note" style="margin-top:34px;max-width:70ch">Plans are schematic and fictional. Interior areas are calculated from the plans shown.</p>
+    </div>
+  </section>
+
+  <section class="sec sec--dark">
+    <div class="wrap">
+      <div class="grid" style="row-gap:40px;align-items:end;margin-bottom:clamp(36px,5vw,72px)">
+        <div style="grid-column:1 / span 7"><p class="eyebrow">Finish schemes</p><h2 class="d-xl" data-split style="margin-top:22px">Two ways <em>to live.</em></h2></div>
+        <div style="grid-column:9 / span 4"><div class="filters" role="group" aria-label="Finish scheme"><button type="button" class="fbtn" aria-pressed="true" data-scheme="a">I · Ivory</button><button type="button" class="fbtn" aria-pressed="false" data-scheme="b">II · Charcoal</button></div></div>
+      </div>
+      <div class="scheme" id="scheme"><img src="img/living.jpg" alt="Living room in the Ivory finish scheme"><img src="img/living_charcoal.jpg" alt="Living room in the Charcoal finish scheme"></div>
+      <div class="grid" style="margin-top:36px;row-gap:24px">
+        <div style="grid-column:1 / span 6" data-sc="a"><h4 class="d-s">Ivory <em>scheme</em></h4><p style="color:var(--stone);max-width:46ch">Lime-plastered walls in warm ivory, white oak floors, honed limestone and bronze. Light, calm, and quietly luminous at every hour.</p></div>
+        <div style="grid-column:1 / span 6" data-sc="b" hidden><h4 class="d-s">Charcoal <em>scheme</em></h4><p style="color:var(--stone);max-width:46ch">Basalt-toned plaster, smoked oak, dark travertine and bronze. Deep, enveloping, made for evenings and for the view at night.</p></div>
+        <ul style="grid-column:8 / span 5;list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px 24px;font-size:15px;color:var(--stone)"><li>Plaster walls</li><li>Oak floors</li><li>Honed stone</li><li>Bronze hardware</li><li>Oak joinery</li><li>Integrated lighting</li></ul>
+      </div>
+    </div>
+  </section>
+
+</main>
+<script src="../brand/mark.js"></script>
+<script src="js/data.js"></script>
+<script src="js/plans.js"></script>
+<script src="js/site.js"></script>
+<script src="js/pages.js"></script>
+</body>
+</html>

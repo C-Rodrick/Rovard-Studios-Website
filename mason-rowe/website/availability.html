@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Availability — Mason &amp; Rowe (concept)</title>
+<meta name="description" content="Browse fictional residence availability across four Mason &amp; Rowe developments with an interactive stacking plan.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#1C1B19">
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
+<script>try{if(sessionStorage.getItem('mr-nav')){document.documentElement.classList.add('mr-enter');sessionStorage.removeItem('mr-nav')}}catch(e){}</script>
+<noscript><style>[data-r]{opacity:1!important;transform:none!important}[data-mask]>img,[data-mask-x]>img{clip-path:none!important;transform:none!important}.split .w>span{transform:none!important}</style></noscript>
+</head>
+<body data-page="availability" data-hdr="solid">
+<main id="main">
+
+  <section class="page-top" style="padding-bottom:clamp(28px,3vw,48px)">
+    <div class="wrap">
+      <p class="eyebrow" data-r>Availability</p>
+      <h1 class="d-xl" data-split style="margin:22px 0 0">Find your <em>residence.</em></h1>
+    </div>
+  </section>
+
+  <section style="padding-bottom:clamp(60px,7vw,120px)">
+    <div class="wrap">
+      <div class="tabs" id="avTabs" role="tablist" aria-label="Choose a development" style="margin-bottom:clamp(28px,3vw,44px)"></div>
+      <div class="flex-between" id="avHead" style="margin-bottom:clamp(28px,3vw,44px);gap:32px"></div>
+
+      <div class="flex-between" style="margin-bottom:24px;gap:20px">
+        <div style="display:flex;gap:28px;flex-wrap:wrap">
+          <div><p class="small mute" style="margin:0 0 8px;letter-spacing:.18em;text-transform:uppercase;font-size:10.5px;font-weight:500">Bedrooms</p>
+            <div class="filters" role="group" aria-label="Bedrooms"><button type="button" class="fbtn" aria-pressed="true" data-f="beds:all">Any</button><button type="button" class="fbtn" aria-pressed="false" data-f="beds:1">1</button><button type="button" class="fbtn" aria-pressed="false" data-f="beds:2">2</button><button type="button" class="fbtn" aria-pressed="false" data-f="beds:3">3</button><button type="button" class="fbtn" aria-pressed="false" data-f="beds:4">4+</button></div></div>
+          <div><p class="small mute" style="margin:0 0 8px;letter-spacing:.18em;text-transform:uppercase;font-size:10.5px;font-weight:500">Status</p>
+            <div class="filters" role="group" aria-label="Status"><button type="button" class="fbtn" aria-pressed="true" data-f="status:all">All</button><button type="button" class="fbtn" aria-pressed="false" data-f="status:available">Available</button><button type="button" class="fbtn" aria-pressed="false" data-f="status:reserved">Reserved</button></div></div>
+        </div>
+        <div><p class="small mute" style="margin:0 0 8px;letter-spacing:.18em;text-transform:uppercase;font-size:10.5px;font-weight:500">View</p>
+          <div class="filters" role="group" aria-label="View"><button type="button" class="fbtn" aria-pressed="true" data-view="stack">Stacking plan</button><button type="button" class="fbtn" aria-pressed="false" data-view="list">List</button></div></div>
+      </div>
+
+      <div class="av" id="viewStack">
+        <div class="stackplan">
+          <div class="head"><div class="legend"><span><i></i>Available</span><span class="r"><i></i>Reserved</span><span class="s"><i></i>Sold</span></div></div>
+          <div id="avStack"></div>
+        </div>
+        <aside class="udetail" id="avDetail" aria-live="polite"></aside>
+      </div>
+      <div id="viewList" hidden><div class="tablewrap stackplan" style="padding:clamp(16px,2vw,32px)"><table class="table" id="avTable" aria-label="Residences"></table></div></div>
+
+      <p class="note" style="margin-top:30px;max-width:70ch">Availability, pricing and plans are fictional and for concept purposes only. Nothing on this page is an offer to sell.</p>
+    </div>
+  </section>
+
+</main>
+<script src="../brand/mark.js"></script>
+<script src="js/data.js"></script>
+<script src="js/plans.js"></script>
+<script src="js/site.js"></script>
+<script src="js/pages.js"></script>
+</body>
+</html>

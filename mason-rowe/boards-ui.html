@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Mason &amp; Rowe Residences — UI boards (portfolio image source)</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="boards.css">
+<style>
+.stage { position: relative; flex: 1; }
+.abs { position: absolute; }
+.abs { position: absolute !important; }
+.bw .scr, .ph .scr, .tb .scr { position: relative; }
+.bw .scr img, .ph .scr img, .tb .scr img { position: absolute !important; inset: 0; width: 100% !important; height: 100% !important; object-fit: cover; object-position: top; }
+.bw.crop .scr { flex: none; height: var(--h, 600px); }
+.bw.fit { min-height: 0; } .bw.fit .scr { flex: 1; min-height: 0; } .bw.fit .scr img { object-position: left top; }
+.bw.auto .scr { flex: none; } .bw.auto .scr img { position: static !important; height: auto !important; }
+.cap2 { font-size: 19px; letter-spacing: .26em; text-transform: uppercase; font-weight: 500; color: var(--mute); }
+.dark .cap2 { color: var(--stone-3); }
+.node { border: 1px solid var(--char); background: var(--white); padding: 18px 26px; font-family: var(--serif); font-size: 32px; display: inline-flex; align-items: center; gap: 14px; position: relative; }
+.node small { font-family: var(--sans); font-size: 15px; letter-spacing: .22em; color: var(--bronze-ink); font-weight: 500; }
+.node.pri { background: var(--char); color: var(--ivory); } .node.pri small { color: var(--bronze-lt); }
+.node.acc { background: var(--bronze); color: var(--white); border-color: var(--bronze); } .node.acc small { color: var(--white); }
+.stg { position: relative; min-height: 300px; padding: 40px 34px 44px; border-top: 3px solid var(--char); background: var(--white); }
+.stg b { font: 300 52px/1 var(--serif); display: block; margin-bottom: 14px; }
+.u-btn { display: inline-flex; padding: 22px 38px; border: 1px solid var(--char); font-size: 20px; letter-spacing: .2em; text-transform: uppercase; font-weight: 500; }
+.u-btn.s { background: var(--char); color: var(--ivory); } .u-btn.b { background: var(--bronze); color: var(--white); border-color: var(--bronze); }
+.u-chip { display: inline-flex; align-items: center; gap: 10px; padding: 10px 18px; border: 1px solid var(--line); font-size: 17px; letter-spacing: .2em; text-transform: uppercase; font-weight: 500; background: var(--white); }
+.u-chip::before { content: ''; width: 9px; height: 9px; border-radius: 50%; background: var(--bronze); }
+.u-field { border-bottom: 1px solid rgba(28,27,25,.4); padding: 8px 0 12px; font: 300 32px var(--serif); color: var(--mute); }
+.u-lbl { font-size: 16px; letter-spacing: .22em; text-transform: uppercase; font-weight: 500; color: var(--mute); margin-bottom: 8px; }
+.u-cell { height: 70px; border: 1px solid var(--char); display: flex; align-items: center; justify-content: center; font-size: 20px; letter-spacing: .08em; font-weight: 500; background: var(--white); }
+.u-cell.r { background: repeating-linear-gradient(45deg, #CBC4B6 0 4px, #FAF8F3 4px 9px); border-color: #A39B8B; color: var(--mute); }
+.u-cell.s { background: var(--char); color: #A39B8B; } .u-cell.sel { background: var(--bronze); border-color: var(--bronze); color: #fff; box-shadow: 0 0 0 4px var(--white), 0 0 0 6px var(--bronze); }
+.u-tab { font-size: 18px; letter-spacing: .2em; text-transform: uppercase; font-weight: 500; padding-bottom: 14px; color: var(--mute); }
+.u-tab.on { color: var(--char); border-bottom: 2px solid var(--char); }
+.arrowline { position: absolute; height: 2px; background: var(--bronze); }
+.arrowline::after { content: ''; position: absolute; right: -2px; top: -7px; border: 8px solid transparent; border-left: 14px solid var(--bronze); }
+@keyframes pulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.3); opacity: .5; } }
+</style>
+</head>
+<body>
+<script src="brand/mark.js"></script>
+
+<!-- ═══════════ U01 COVER ═══════════ -->
+<section class="board dark nopad" id="u01">
+  <div class="abs" style="left:150px;top:126px">
+    <span class="stamp-tag">Self-initiated concept project</span>
+  </div>
+  <div class="abs col" style="left:150px;top:260px;width:820px;gap:46px">
+    <div style="display:flex;align-items:center;gap:26px;--mr-pier:var(--bronze-lt)"><svg class="mono" style="width:96px;height:96px;color:var(--ivory)"><use href="#mr-mono"/></svg><span class="wm" style="font-size:30px;color:var(--ivory)">Mason <i>&amp;</i> Rowe</span></div>
+    <p class="t-xl" style="font-size:176px">Residences,<br><em>online.</em></p>
+    <p class="p" style="font-size:34px;max-width:640px">A responsive luxury real-estate website: cinematic arrival, a property interface with interactive stacking plans and drawn floor plans, and a private-viewing booking flow.</p>
+  </div>
+  <dl class="meta abs" style="left:150px;bottom:130px;width:760px">
+    <div><dt>Client</dt><dd>Mason &amp; Rowe <span class="mut" style="font-size:22px">(fictional)</span></dd></div>
+    <div><dt>Industry</dt><dd>Luxury Real Estate</dd></div>
+    <div class="wide"><dt>Services</dt><dd>UX/UI Design · Website Design · Art Direction · Front-end Build</dd></div>
+    <div><dt>Year</dt><dd>2026</dd></div>
+    <div><dt>Project type</dt><dd>Self-Initiated Concept</dd></div>
+  </dl>
+  <div class="bw abs" style="left:1130px;top:150px;width:1130px;height:716px"><div class="bar"><i></i><i></i><i></i><span>masonandrowe.example</span></div><div class="scr"><img src="_art/shots/d_home_hero.png" alt="" style="height:100%;object-fit:cover;object-position:top"></div></div>
+  <div class="bw abs" style="left:1420px;top:700px;width:840px;height:620px"><div class="bar"><i></i><i></i><i></i><span>masonandrowe.example/availability</span></div><div class="scr"><img src="_art/shots/d_avail.png" alt="" style="height:100%;object-fit:cover;object-position:top"></div></div>
+  <div class="ph abs" style="left:1040px;top:760px;width:340px;height:740px"><div class="scr top"><img src="_art/shots/m_home.png" alt=""></div></div>
+</section>
+
+<!-- ═══════════ U02 EXPERIENCE MAP ═══════════ -->
+<section class="board" id="u02">
+  <div class="bh"><span><b>02</b> &nbsp;/&nbsp; Experience map</span><span class="stamp">Self-initiated concept project</span></div>
+  <div class="stage">
+    <p class="lbl" style="margin-bottom:26px">Sitemap · 11 pages</p>
+    <div style="position:relative;height:520px">
+      <div class="node pri abs" style="left:0;top:180px"><small>01</small>Home</div>
+      <div class="abs" style="left:230px;top:215px;width:70px;height:1px;background:var(--char)"></div>
+      <div class="abs" style="left:300px;top:20px;width:1px;height:440px;background:var(--char)"></div>
+      <div class="node abs" style="left:300px;top:0"><small>02</small>Developments</div><div class="abs" style="left:300px;top:42px;width:0"></div>
+      <div class="abs" style="left:610px;top:34px;width:60px;height:1px;background:var(--char)"></div><div class="node acc abs" style="left:670px;top:0"><small>03</small>Development detail</div>
+      <div class="node abs" style="left:300px;top:84px"><small>04</small>Residences</div>
+      <div class="node abs" style="left:300px;top:168px"><small>05</small>Amenities</div>
+      <div class="node abs" style="left:300px;top:252px"><small>06</small>Architecture</div>
+      <div class="node abs" style="left:300px;top:336px"><small>07</small>Neighborhood</div>
+      <div class="node abs" style="left:300px;top:420px"><small>08</small>Availability</div>
+      <div class="node pri abs" style="left:1330px;top:420px"><small>09</small>Private viewing</div>
+      <div class="abs" style="left:560px;top:462px;width:770px;height:1px;background:var(--bronze)"></div>
+      <div class="node abs" style="left:1540px;top:0"><small>10</small>About</div>
+      <div class="node abs" style="left:1540px;top:84px"><small>11</small>Contact</div>
+      <div class="abs" style="left:1620px;top:200px;width:480px"><p class="p xs" style="margin:0">Global navigation stays minimal: <b style="font-weight:500">Developments</b>, <b style="font-weight:500">Availability</b> and <b style="font-weight:500">Private viewing</b> are always one tap away; everything else lives in the full-screen menu.</p></div>
+    </div>
+    <div style="position:absolute;left:0;right:0;bottom:0"><p class="lbl" style="margin:0 0 26px">Buyer journey</p>
+    <div class="grid g5" style="gap:0;border-left:1px solid var(--line)">
+      <div class="stg" style="border-left:0"><b>Discover</b><p class="p xs" style="margin:0 0 14px">Cinematic homepage, four cities, one standard.</p><span class="cap2">Home · Developments</span></div>
+      <div class="stg"><b>Evaluate</b><p class="p xs" style="margin:0 0 14px">Gallery, architecture, specifications, amenities.</p><span class="cap2">Detail · Architecture</span></div>
+      <div class="stg"><b>Imagine</b><p class="p xs" style="margin:0 0 14px">Drawn plans, finish schemes, the neighborhood.</p><span class="cap2">Residences · Map</span></div>
+      <div class="stg"><b>Reserve</b><p class="p xs" style="margin:0 0 14px">Stacking plan with filters, unit panel, request details.</p><span class="cap2">Availability</span></div>
+      <div class="stg" style="background:var(--char);color:var(--ivory);border-top-color:var(--bronze)"><b>Visit</b><p class="p xs" style="margin:0 0 14px;color:var(--stone)">Three steps to a private viewing.</p><span class="cap2" style="color:var(--bronze-lt)">Private viewing</span></div>
+    </div></div>
+  </div>
+  <div class="bf"><span>Mason &amp; Rowe Residences · UX</span><span>Rovard Studios · 2026</span></div>
+</section>
+
+<!-- ═══════════ U03 DESIGN SYSTEM ═══════════ -->
+<section class="board white" id="u03">
+  <div class="bh"><span><b>03</b> &nbsp;/&nbsp; Design system</span><span class="stamp">Self-initiated concept project</span></div>
+  <div class="grid fill" style="grid-template-columns:.9fr 1.5fr 1fr;gap:70px">
+    <div class="col" style="gap:34px">
+      <p class="lbl">Tokens</p>
+      <div class="grid g3" style="gap:14px"><div style="height:130px;background:#F2EDE3;border:1px solid var(--line)"></div><div style="height:130px;background:#FAF8F3;border:1px solid var(--line)"></div><div style="height:130px;background:#1C1B19"></div><div style="height:130px;background:#CBC4B6"></div><div style="height:130px;background:#8B6B47"></div><div style="height:130px;background:#B38E62"></div></div>
+      <div class="col" style="gap:0;border-top:1px solid var(--char)">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;padding:16px 0;border-bottom:1px solid var(--line)"><span class="serif" style="font-size:64px;font-weight:300;line-height:1">Display</span><span class="cap2">Newsreader 300</span></div>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;padding:16px 0;border-bottom:1px solid var(--line)"><span class="serif" style="font-size:40px;font-weight:300">Headline</span><span class="cap2">Newsreader 300</span></div>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;padding:16px 0;border-bottom:1px solid var(--line)"><span style="font-size:26px">Body copy, Jost light</span><span class="cap2">Jost 300</span></div>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;padding:16px 0;border-bottom:1px solid var(--line)"><span class="lbl">Label caps</span><span class="cap2">Jost 500</span></div>
+      </div>
+      <p class="lbl" style="margin-top:12px">Motion</p>
+      <p class="p xs" style="margin:0">ease <b style="font-weight:500">cubic-bezier(.22,.8,.2,1)</b><br>0.3 s · 0.7 s · 1.2 s</p>
+    </div>
+    <div class="col" style="gap:36px">
+      <p class="lbl">Components</p>
+      <div style="display:flex;gap:18px;flex-wrap:wrap"><span class="u-btn">Outline</span><span class="u-btn s">Solid</span><span class="u-btn b">Accent</span><span class="u-btn" style="border-color:var(--line);color:var(--mute)">Disabled</span></div>
+      <div style="display:flex;gap:16px;flex-wrap:wrap"><span class="u-chip">Now selling</span><span class="u-chip" style="--x:1"><i style="width:9px;height:9px;border-radius:50%;background:#A39B8B;display:block"></i>Preview release</span><span class="u-chip"><i style="width:9px;height:9px;border-radius:50%;border:1px solid var(--char);display:block"></i>Registering interest</span></div>
+      <div class="card" style="padding:34px 40px"><div class="grid g2" style="gap:50px"><div><div class="u-lbl">Full name</div><div class="u-field">Alex Morgan</div></div><div><div class="u-lbl">Email</div><div class="u-field" style="border-bottom-color:#9a3b2e;color:var(--char)">alex@</div><div style="font-size:18px;color:#9a3b2e;margin-top:8px">Please enter a valid email address.</div></div></div></div>
+      <div style="display:flex;gap:46px;border-bottom:1px solid var(--line)"><span class="u-tab on">Residence A</span><span class="u-tab">Residence B</span><span class="u-tab">Residence C</span><span class="u-tab">The Penthouse</span></div>
+      <div>
+        <div class="u-lbl">Stacking-plan cell states</div>
+        <div class="grid g5" style="gap:10px"><div class="u-cell">9A</div><div class="u-cell r">9B</div><div class="u-cell s">9C</div><div class="u-cell sel">10A</div><div class="u-cell" style="opacity:.25">10B</div></div>
+        <div class="grid g5" style="gap:10px;margin-top:10px"><span class="cap2">Available</span><span class="cap2">Reserved</span><span class="cap2">Sold</span><span class="cap2">Selected</span><span class="cap2">Filtered out</span></div>
+      </div>
+    </div>
+    <div class="col" style="gap:30px">
+      <p class="lbl">Residence card</p>
+      <div class="card" style="padding:0;border:1px solid var(--line)">
+        <div style="background:var(--ivory);padding:30px 34px;border-bottom:1px solid var(--line)"><div data-plan="t1" data-mini style="width:100%"></div></div>
+        <div style="padding:34px 38px"><div class="u-lbl">Halden House · New York</div><div class="serif" style="font-size:46px;font-weight:300;line-height:1.05;margin-bottom:12px">Residence A</div><p class="p xs" style="margin:0 0 22px">Two bedrooms, a long gallery, north light.</p><div class="grid g3" style="gap:10px;border-top:1px solid var(--line);padding-top:18px"><div><div class="u-lbl">Beds</div><div class="serif" style="font-size:34px">2</div></div><div><div class="u-lbl">Baths</div><div class="serif" style="font-size:34px">2</div></div><div><div class="u-lbl">Sq ft</div><div class="serif" style="font-size:34px">1,496</div></div></div></div>
+      </div>
+      <p class="p xs" style="margin:0">Cards, plans and panels share one 1-px hairline, one radius (none) and one shadow, used only on hover.</p>
+    </div>
+  </div>
+  <div class="bf"><span>Mason &amp; Rowe Residences · UI</span><span>Rovard Studios · 2026</span></div>
+</section>
+
+<!-- ═══════════ U04 HOMEPAGE ═══════════ -->
+<section class="board stone" id="u04">
+  <div class="bh"><span><b>04</b> &nbsp;/&nbsp; Homepage</span><span class="stamp">Self-initiated concept project</span></div>
+  <div class="stage">
+    <div class="bw crop abs" style="left:0;top:0;width:1240px;--h:700px"><div class="bar"><i></i><i></i><i></i><span>masonandrowe.example</span></div><div class="scr"><img src="_art/shots/d_home_hero.png" alt=""></div></div>
+    <div class="bw crop abs" style="left:1330px;top:0;width:770px;--h:400px"><div class="bar"><i></i><i></i><i></i><span>masonandrowe.example</span></div><div class="scr"><img src="_art/shots/d_home_feat.png" alt=""></div></div>
+    <div class="bw crop abs" style="left:1330px;top:520px;width:770px;--h:330px"><div class="bar"><i></i><i></i><i></i><span>masonandrowe.example</span></div><div class="scr"><img src="_art/shots/d_home_arch.png" alt=""></div></div>
+    <div class="bw crop abs" style="left:0;top:850px;width:1240px;--h:290px"><div class="bar"><i></i><i></i><i></i><span>masonandrowe.example</span></div><div class="scr"><img src="_art/shots/d_home_cities.png" alt=""></div></div>
+    <div class="bw crop abs" style="left:1330px;top:960px;width:770px;--h:180px"><div class="bar"><i></i><i></i><i></i><span>masonandrowe.example</span></div><div class="scr"><img src="_art/shots/d_home_avail.png" alt=""></div></div>
+    <div class="callout" style="left:760px;top:100px"><i>1</i><span>Cinematic slideshow hero</span></div>
+    <div class="callout" style="left:1380px;top:340px"><i>2</i><span>Featured card overlaps image</span></div>
+    <div class="callout" style="left:1380px;top:780px"><i>3</i><span>Four materials, offset grid</span></div>
+    <div class="callout" style="left:640px;top:918px"><i>4</i><span>City list swaps backdrop on hover</span></div>
+  </div>
+  <div class="bf"><span>Mason &amp; Rowe Residences · UI</span><span>Rovard Studios · 2026</span></div>
+</section>
+
+<!-- ═══════════ U05 DEVELOPMENT PAGE ═══════════ -->
+<section class="board" id="u05">
+  <div class="bh"><span><b>05</b> &nbsp;/&nbsp; Development page</span><span class="stamp">Self-initiated concept project</span></div>
+  <div class="stage">
+    <div class="bw crop abs" style="left:0;top:0;width:1180px;--h:700px"><div class="bar"><i></i><i></i><i></i><span>masonandrowe.example/development?d=halden-house</span></div><div class="scr"><img src="_art/shots/d_dev_hero.png" alt=""></div></div>
+    <div class="bw crop abs" style="left:1260px;top:0;width:840px;--h:420px"><div class="bar"><i></i><i></i><i></i><span>…#overview</span></div><div class="scr"><img src="_art/shots/d_dev_over.png" alt=""></div></div>
+    <div class="bw crop abs" style="left:1260px;top:540px;width:840px;--h:480px"><div class="bar"><i></i><i></i><i></i><span>…#location</span></div><div class="scr"><img src="_art/shots/d_dev_loc.png" alt=""></div></div>
+    <div class="bw crop abs" style="left:0;top:810px;width:1180px;--h:330px"><div class="bar"><i></i><i></i><i></i><span>…#plans</span></div><div class="scr"><img src="_art/shots/d_dev_plans.png" alt=""></div></div>
+    <div class="callout" style="left:640px;top:110px"><i>1</i><span>Status, facts, sticky sub-navigation</span></div>
+    <div class="callout" style="left:1300px;top:372px"><i>2</i><span>Overview &amp; credits</span></div>
+    <div class="callout" style="left:1300px;top:900px"><i>3</i><span>Illustrated map + places</span></div>
+    <div class="callout" style="left:700px;top:900px"><i>4</i><span>Drawn floor plans</span></div>
+  </div>
+  <div class="bf"><span>Mason &amp; Rowe Residences · UI</span><span>Rovard Studios · 2026</span></div>
+</section>
+
+<!-- ═══════════ U06 PROPERTY INTERFACE ═══════════ -->
+<section class="board dark" id="u06">
+  <div class="bh"><span><b>06</b> &nbsp;/&nbsp; Property interface</span><span class="stamp">Self-initiated concept project</span></div>
+  <div class="grid fill" style="grid-template-columns:1.55fr 1fr;gap:70px">
+    <div class="col" style="gap:26px">
+      <div class="bw" style="height:640px;flex:none"><div class="bar"><i></i><i></i><i></i><span>masonandrowe.example/availability</span></div><div class="scr"><img src="_art/shots/d_avail.png" alt="" style="height:100%;object-fit:cover;object-position:top"></div></div>
+      <div class="bw" style="flex:1;min-height:0"><div class="bar"><i></i><i></i><i></i><span>…#plans</span></div><div class="scr"><img src="_art/shots/d_dev_plans.png" alt="" style="height:100%;object-fit:cover;object-position:top"></div></div>
+    </div>
+    <div class="col" style="gap:34px">
+      <p class="t-l" style="font-size:98px">Choose by<br><em>looking.</em></p>
+      <div class="col" style="border-top:1px solid var(--line-lt)">
+        <div style="display:grid;grid-template-columns:70px 1fr;gap:20px;padding:24px 0;border-bottom:1px solid var(--line-lt)"><span class="lbl">01</span><div><div class="serif" style="font-size:40px;font-weight:300">Stacking plan</div><p class="p xs" style="margin:8px 0 0">Floor by floor, status at a glance. Filter by bedrooms and status; non-matching homes fade back.</p></div></div>
+        <div style="display:grid;grid-template-columns:70px 1fr;gap:20px;padding:24px 0;border-bottom:1px solid var(--line-lt)"><span class="lbl">02</span><div><div class="serif" style="font-size:40px;font-weight:300">Unit panel</div><p class="p xs" style="margin:8px 0 0">Plan, aspect, interior and outdoor area, price, with request and viewing actions in reach.</p></div></div>
+        <div style="display:grid;grid-template-columns:70px 1fr;gap:20px;padding:24px 0;border-bottom:1px solid var(--line-lt)"><span class="lbl">03</span><div><div class="serif" style="font-size:40px;font-weight:300">Generated floor plans</div><p class="p xs" style="margin:8px 0 0">Rooms, door swings, windows, furniture and dimensions drawn from data, so areas always add up.</p></div></div>
+        <div style="display:grid;grid-template-columns:70px 1fr;gap:20px;padding:24px 0;border-bottom:1px solid var(--line-lt)"><span class="lbl">04</span><div><div class="serif" style="font-size:40px;font-weight:300">List view</div><p class="p xs" style="margin:8px 0 0">The same residences as a sortable table, selection kept in sync with the plan.</p></div></div>
+      </div>
+      <div class="grid g2" style="margin-top:auto;gap:20px"><div class="card" style="padding:28px 34px"><div class="lbl">126</div><p class="p xs" style="margin:6px 0 0">fictional residences generated</p></div><div class="card" style="padding:28px 34px"><div class="lbl">12</div><p class="p xs" style="margin:6px 0 0">residence types, 7 plan templates</p></div></div>
+    </div>
+  </div>
+  <div class="bf"><span>Mason &amp; Rowe Residences · UI</span><span>Rovard Studios · 2026</span></div>
+</section>
+
+<!-- ═══════════ U07 PAGE LIBRARY ═══════════ -->
+<section class="board white" id="u07">
+  <div class="bh"><span><b>07</b> &nbsp;/&nbsp; Page library</span><span class="stamp">Self-initiated concept project</span></div>
+  <div class="grid g3 fill" style="grid-template-rows:1fr 1fr;gap:44px 40px">
+    <div class="col" style="gap:14px"><div class="bw fit" style="flex:1"><div class="bar"><i></i><i></i><i></i><span>/developments</span></div><div class="scr"><img src="_art/shots/d_devs.png" alt=""></div></div><span class="cap2">Developments</span></div>
+    <div class="col" style="gap:14px"><div class="bw fit" style="flex:1"><div class="bar"><i></i><i></i><i></i><span>/residences</span></div><div class="scr"><img src="_art/shots/d_res.png" alt=""></div></div><span class="cap2">Residences</span></div>
+    <div class="col" style="gap:14px"><div class="bw fit" style="flex:1"><div class="bar"><i></i><i></i><i></i><span>/amenities</span></div><div class="scr"><img src="_art/shots/d_amen.png" alt=""></div></div><span class="cap2">Amenities</span></div>
+    <div class="col" style="gap:14px"><div class="bw fit" style="flex:1"><div class="bar"><i></i><i></i><i></i><span>/architecture</span></div><div class="scr"><img src="_art/shots/d_arch_top.png" alt=""></div></div><span class="cap2">Architecture</span></div>
+    <div class="col" style="gap:14px"><div class="bw fit" style="flex:1"><div class="bar"><i></i><i></i><i></i><span>/neighborhood</span></div><div class="scr"><img src="_art/shots/d_hood.png" alt=""></div></div><span class="cap2">Neighborhood</span></div>
+    <div class="col" style="gap:14px"><div class="bw fit" style="flex:1"><div class="bar"><i></i><i></i><i></i><span>/about</span></div><div class="scr"><img src="_art/shots/d_about.png" alt=""></div></div><span class="cap2">About</span></div>
+  </div>
+  <div class="bf"><span>Mason &amp; Rowe Residences · UI</span><span>Rovard Studios · 2026</span></div>
+</section>
+
+<!-- ═══════════ U08 PRIVATE VIEWING ═══════════ -->
+<section class="board stone" id="u08">
+  <div class="bh"><span><b>08</b> &nbsp;/&nbsp; Private viewing flow</span><span class="stamp">Self-initiated concept project</span></div>
+  <div class="stage">
+    <div class="abs" style="left:0;top:0;width:1100px"><p class="t-l" style="font-size:112px">Three steps to <em>a visit.</em></p></div>
+    <div class="abs" style="left:1260px;top:6px;width:840px"><p class="p sm" style="margin:0">One decision per screen, a custom calendar with real availability logic (no Sundays, no past dates, taken slots struck through) and a confirmation that reads like a ticket. Nothing is sent or stored.</p></div>
+    <div class="abs" style="left:0;top:250px;width:660px"><div class="bw auto"><div class="bar"><i></i><i></i><i></i><span>/private-viewing</span></div><div class="scr"><img src="_art/shots/d_pv1c.png" alt=""></div></div><p class="cap2" style="margin:20px 0 0"><b style="color:var(--bronze-ink);font-weight:500">01</b> &nbsp;Choose a development</p></div>
+    <div class="abs" style="left:720px;top:250px;width:660px"><div class="bw auto"><div class="bar"><i></i><i></i><i></i><span>/private-viewing</span></div><div class="scr"><img src="_art/shots/d_pv2c.png" alt=""></div></div><p class="cap2" style="margin:20px 0 0"><b style="color:var(--bronze-ink);font-weight:500">02</b> &nbsp;Date, time and format</p></div>
+    <div class="abs" style="left:1440px;top:250px;width:660px"><div class="bw auto"><div class="bar"><i></i><i></i><i></i><span>/private-viewing</span></div><div class="scr"><img src="_art/shots/d_pv4c.png" alt=""></div></div><p class="cap2" style="margin:20px 0 0"><b style="color:var(--bronze-ink);font-weight:500">03</b> &nbsp;Confirmation</p></div>
+  </div>
+  <div class="bf"><span>Mason &amp; Rowe Residences · UX</span><span>Rovard Studios · 2026</span></div>
+</section>
+
+<!-- ═══════════ U09 MOBILE ═══════════ -->
+<section class="board dark" id="u09">
+  <div class="bh"><span><b>09</b> &nbsp;/&nbsp; Mobile experience</span><span class="stamp">Self-initiated concept project</span></div>
+  <div class="stage">
+    <div class="abs" style="left:0;top:0;width:520px"><p class="t-l" style="font-size:96px;margin-bottom:34px">Built for<br><em>the thumb.</em></p><p class="p sm">On phones the experience is rebuilt, not shrunk: a full-screen menu, swipeable galleries, a sticky action bar for enquiry and viewing, and a stacking plan that scrolls into a bottom-sheet-style unit panel.</p>
+      <ul style="margin:40px 0 0;padding:0;list-style:none;border-top:1px solid var(--line-lt)"><li style="padding:16px 0;border-bottom:1px solid var(--line-lt);font-size:25px;color:var(--stone)">Sticky call · enquire · book bar</li><li style="padding:16px 0;border-bottom:1px solid var(--line-lt);font-size:25px;color:var(--stone)">48 px minimum touch targets</li><li style="padding:16px 0;border-bottom:1px solid var(--line-lt);font-size:25px;color:var(--stone)">Safe-area aware, no horizontal scroll</li><li style="padding:16px 0;border-bottom:1px solid var(--line-lt);font-size:25px;color:var(--stone)">Hero art-directed by crop</li></ul></div>
+    <div class="ph abs" style="left:580px;top:0;width:350px;height:760px"><div class="scr top"><img src="_art/shots/m_home.png" alt=""></div></div>
+    <div class="ph abs" style="left:966px;top:70px;width:350px;height:760px"><div class="scr top"><img src="_art/shots/m_menu.png" alt=""></div></div>
+    <div class="ph abs" style="left:1352px;top:0;width:350px;height:760px"><div class="scr top"><img src="_art/shots/m_dev.png" alt=""></div></div>
+    <div class="ph abs" style="left:1738px;top:70px;width:350px;height:760px"><div class="scr top"><img src="_art/shots/m_pv2.png" alt=""></div></div>
+    <div class="abs cap2" style="left:580px;top:790px;width:340px">Arrival</div><div class="abs cap2" style="left:966px;top:860px;width:340px">Full-screen menu</div><div class="abs cap2" style="left:1352px;top:790px;width:340px">Development</div><div class="abs cap2" style="left:1738px;top:860px;width:340px">Booking calendar</div>
+    <div class="abs" style="left:580px;top:950px;width:1508px;display:grid;grid-template-columns:1fr 1fr;gap:40px"><div class="card" style="padding:36px 40px"><div class="lbl">Breakpoints</div><p class="p sm" style="margin:12px 0 0">1180 px · navigation collapses<br>900 px · single-column, action bar<br>560 px · two-up grids to one</p></div><div class="card" style="padding:36px 40px"><div class="lbl">Performance</div><p class="p sm" style="margin:12px 0 0">Images 100–300 KB, lazy-loaded.<br>No framework, no layout shift.</p></div></div>
+  </div>
+  <div class="bf"><span>Mason &amp; Rowe Residences · Responsive</span><span>Rovard Studios · 2026</span></div>
+</section>
+
+<!-- ═══════════ U10 RESPONSIVE ═══════════ -->
+<section class="board" id="u10">
+  <div class="bh"><span><b>10</b> &nbsp;/&nbsp; Responsive design</span><span class="stamp">Self-initiated concept project</span></div>
+  <div class="stage">
+    <div class="bw crop abs" style="left:0;top:0;width:1300px;--h:750px"><div class="bar"><i></i><i></i><i></i><span>1440 px · Desktop</span></div><div class="scr"><img src="_art/shots/d_dev_hero.png" alt=""></div></div>
+    <div class="tb abs" style="left:1340px;top:0;width:470px;height:660px"><div class="scr"><img src="_art/shots/t_dev.png" alt=""></div></div>
+    <div class="ph abs" style="left:1840px;top:0;width:270px;height:600px"><div class="scr top"><img src="_art/shots/m_dev.png" alt=""></div></div>
+    <div class="abs cap2" style="left:1340px;top:690px">820 px · Tablet</div><div class="abs cap2" style="left:1840px;top:690px">390 px · Phone</div>
+    <div class="abs" style="left:0;top:870px;width:2100px;border-top:1px solid var(--char);display:grid;grid-template-columns:repeat(4,1fr);gap:50px;padding-top:34px">
+      <div><div class="lbl">≥ 1180 px</div><p class="p sm" style="margin:12px 0 0">Inline navigation, twelve-column grids, sticky sub-navigation, side-by-side plan and details.</p></div>
+      <div><div class="lbl">900 – 1180 px</div><p class="p sm" style="margin:12px 0 0">Navigation collapses to the menu; panels stack under the plan; gallery stays editorial.</p></div>
+      <div><div class="lbl">&lt; 900 px</div><p class="p sm" style="margin:12px 0 0">Single column, sticky action bar, swipeable strips, 48 px targets, hero repositioned.</p></div>
+      <div><div class="lbl">Always</div><p class="p sm" style="margin:12px 0 0">Fluid type via clamp(), reduced-motion respected, focus rings, no horizontal overflow.</p></div>
+    </div>
+  </div>
+  <div class="bf"><span>Mason &amp; Rowe Residences · Responsive</span><span>Rovard Studios · 2026</span></div>
+</section>
+
+<!-- ═══════════ U11 MOTION ═══════════ -->
+<section class="board dark" id="u11">
+  <div class="bh"><span><b>11</b> &nbsp;/&nbsp; Motion &amp; micro-interactions</span><span class="stamp">Self-initiated concept project</span></div>
+  <div class="grid fill" style="grid-template-columns:1fr 1.2fr;gap:100px">
+    <div class="col" style="gap:34px">
+      <p class="t-l" style="font-size:112px">Slow, weighted,<br><em>quiet.</em></p>
+      <p class="p" style="font-size:32px">Motion in a luxury product should feel like a heavy door closing, not a spring. Everything eases out of rest, nothing bounces, and every transition has a reason.</p>
+      <div class="card" style="padding:30px 36px;margin-top:auto"><svg viewBox="0 0 400 260" style="width:100%;height:auto"><rect x="30" y="20" width="340" height="220" fill="none" stroke="rgba(250,248,243,.2)"/><path d="M30 240L370 20" stroke="rgba(250,248,243,.15)" stroke-dasharray="4 6"/><path d="M30 240C105 64 125 29 370 20" fill="none" stroke="#B38E62" stroke-width="3"/><path d="M30 240C240 240 160 20 370 20" fill="none" stroke="rgba(250,248,243,.4)" stroke-width="2" stroke-dasharray="6 6"/><circle cx="105" cy="64" r="6" fill="#B38E62"/></svg><div style="display:flex;justify-content:space-between;margin-top:14px" class="cap2"><span style="color:var(--bronze-lt)">— ease-out · .22 .8 .2 1</span><span>- - ease-in-out · .65 0 .35 1</span></div></div>
+    </div>
+    <div class="col" style="border-top:1px solid var(--line-lt)">
+      <div style="display:grid;grid-template-columns:90px 1fr 260px;gap:24px;padding:26px 0;border-bottom:1px solid var(--line-lt);align-items:baseline"><span class="lbl">01</span><div><div class="serif" style="font-size:42px;font-weight:300">Cinematic hero</div><p class="p xs" style="margin:6px 0 0">Four slides crossfade over 2 s with an 11 s ken-burns settle.</p></div><span class="cap2">2 s · 11 s</span></div>
+      <div style="display:grid;grid-template-columns:90px 1fr 260px;gap:24px;padding:26px 0;border-bottom:1px solid var(--line-lt);align-items:baseline"><span class="lbl">02</span><div><div class="serif" style="font-size:42px;font-weight:300">Mask &amp; split reveals</div><p class="p xs" style="margin:6px 0 0">Images wipe open from the top; headlines rise word by word.</p></div><span class="cap2">1.5 s · 55 ms stagger</span></div>
+      <div style="display:grid;grid-template-columns:90px 1fr 260px;gap:24px;padding:26px 0;border-bottom:1px solid var(--line-lt);align-items:baseline"><span class="lbl">03</span><div><div class="serif" style="font-size:42px;font-weight:300">Scroll-linked statement</div><p class="p xs" style="margin:6px 0 0">Words light up with scroll progress; the sentence is read by moving.</p></div><span class="cap2">Scroll-linked</span></div>
+      <div style="display:grid;grid-template-columns:90px 1fr 260px;gap:24px;padding:26px 0;border-bottom:1px solid var(--line-lt);align-items:baseline"><span class="lbl">04</span><div><div class="serif" style="font-size:42px;font-weight:300">Page curtain</div><p class="p xs" style="margin:6px 0 0">The monogram breathes on charcoal while the next page loads.</p></div><span class="cap2">.85 s</span></div>
+      <div style="display:grid;grid-template-columns:90px 1fr 260px;gap:24px;padding:26px 0;border-bottom:1px solid var(--line-lt);align-items:baseline"><span class="lbl">05</span><div><div class="serif" style="font-size:42px;font-weight:300">Cursor &amp; link wipes</div><p class="p xs" style="margin:6px 0 0">A soft cursor grows into a label over images; underlines wipe out and in.</p></div><span class="cap2">Pointer devices</span></div>
+      <div style="display:grid;grid-template-columns:90px 1fr 260px;gap:24px;padding:26px 0;border-bottom:1px solid var(--line-lt);align-items:baseline"><span class="lbl">06</span><div><div class="serif" style="font-size:42px;font-weight:300">Reduced motion</div><p class="p xs" style="margin:6px 0 0">All of the above collapses to instant state changes on request.</p></div><span class="cap2">prefers-reduced-motion</span></div>
+    </div>
+  </div>
+  <div class="bf"><span>Mason &amp; Rowe Residences · Interaction</span><span>Rovard Studios · 2026</span></div>
+</section>
+
+<script src="website/js/data.js"></script>
+<script src="website/js/plans.js"></script>
+<script src="boards.js"></script>
+</body>
+</html>

@@ -258,6 +258,39 @@ const caseData = [
     ]
   },
   {
+    title: 'Mason & Rowe',
+    category: 'Brand Identity Design',
+    year: '2026',
+    services: 'Brand Strategy / Visual Identity / Art Direction / Brand Guidelines',
+    client: 'Mason & Rowe (fictional)',
+    industry: 'Luxury Real Estate / Property Development',
+    type: 'Self-initiated concept project',
+    summary: 'A quiet, architectural brand identity for a fictional U.S. luxury residential developer, built on one idea: homes made to be inherited.',
+    challenge: 'Luxury property brands tend to borrow the look of a brokerage: gold foil, stock palm trees and shouted superlatives. Mason & Rowe needed to read as an architecture and craft practice that happens to build homes in New York, Miami, Los Angeles and Austin, and to earn the trust of buyers who think in decades.',
+    approach: 'The monogram, The Shared Pier, joins an M and an R on a single vertical, the way a pier carries two arches. Ivory Plaster, Warm Limewash, Charcoal Basalt, Soft Travertine and Muted Bronze carry the system, every pairing is contrast-checked, and bronze has two companions for small text. Newsreader sets an editorial voice and Jost keeps it precise. A plan-grid graphic language (hairlines, dimensions, section marks) makes every image feel measured, and the art direction fixes the look of the imagery: blue-hour exteriors, true verticals and raking light on material.',
+    outcome: 'A complete brand system: strategy and voice, monogram and lockups, usage rules, colour with live contrast ratios, typography, graphic system, photography direction, layout grid and applications from stationery and signage to a property brochure and digital advertising. Self-initiated concept; Mason & Rowe is fictional and every development, image and price is illustrative.',
+    colours: ['#1C1B19', '#F2EDE3', '#8B6B47', '#B38E62'],
+    coverImage: 'assets/thumbs/mason-rowe-brand-cover.jpg',
+    galleryImages: [
+      'assets/Brand%20Identitities/7_Mason%20and%20Rowe/mr-brand-01-cover.jpg',
+      'assets/Brand%20Identitities/7_Mason%20and%20Rowe/mr-brand-02-strategy.jpg',
+      'assets/Brand%20Identitities/7_Mason%20and%20Rowe/mr-brand-03-personality.jpg',
+      'assets/Brand%20Identitities/7_Mason%20and%20Rowe/mr-brand-04-monogram.jpg',
+      'assets/Brand%20Identitities/7_Mason%20and%20Rowe/mr-brand-05-wordmark.jpg',
+      'assets/Brand%20Identitities/7_Mason%20and%20Rowe/mr-brand-06-usage.jpg',
+      'assets/Brand%20Identitities/7_Mason%20and%20Rowe/mr-brand-07-color.jpg',
+      'assets/Brand%20Identitities/7_Mason%20and%20Rowe/mr-brand-08-accessibility.jpg',
+      'assets/Brand%20Identitities/7_Mason%20and%20Rowe/mr-brand-09-typography.jpg',
+      'assets/Brand%20Identitities/7_Mason%20and%20Rowe/mr-brand-10-graphic-system.jpg',
+      'assets/Brand%20Identitities/7_Mason%20and%20Rowe/mr-brand-11-photography.jpg',
+      'assets/Brand%20Identitities/7_Mason%20and%20Rowe/mr-brand-12-layout.jpg',
+      'assets/Brand%20Identitities/7_Mason%20and%20Rowe/mr-brand-13-stationery.jpg',
+      'assets/Brand%20Identitities/7_Mason%20and%20Rowe/mr-brand-14-signage.jpg',
+      'assets/Brand%20Identitities/7_Mason%20and%20Rowe/mr-brand-15-brochure.jpg',
+      'assets/Brand%20Identitities/7_Mason%20and%20Rowe/mr-brand-16-digital.jpg'
+    ]
+  },
+  {
     title: 'ShorteeMe',
     category: 'Social Media Design',
     year: '2026',
@@ -470,6 +503,36 @@ const caseData = [
     ]
   },
   {
+    title: 'Mason & Rowe Residences',
+    category: 'UI Design',
+    year: '2026',
+    services: 'UX/UI Design / Website Design / Art Direction / Front-end Build',
+    client: 'Mason & Rowe (fictional)',
+    industry: 'Luxury Real Estate / Property Development',
+    type: 'Self-initiated concept project',
+    summary: 'A responsive luxury real-estate website for a fictional U.S. developer: a cinematic arrival, a property interface with interactive stacking plans and drawn floor plans, and a private-viewing booking flow.',
+    challenge: 'Property websites usually bury the home under search filters and stock photography. The brief was an editorial experience that feels like an architectural monograph on arrival, then turns practical: where is it, what is it like inside, which residence is still available, and how do I see it?',
+    approach: 'Eleven pages share one design system. The homepage is a slow, cinematic sequence; each development page carries a gallery, floor plans generated from data, specifications, an illustrated neighbourhood map and an interactive stacking plan with a unit panel. Booking is three calm steps with a custom calendar. On phones the experience is rebuilt rather than shrunk, with a full-screen menu and a sticky enquire and viewing bar.',
+    outcome: 'A working front-end you can explore: open a development, filter the stacking plan, read a drawn plan and book a private viewing end to end. Self-initiated concept; Mason & Rowe is fictional and every development, price, unit and place is illustrative. Nothing you enter is sent anywhere.',
+    colours: ['#1C1B19', '#F2EDE3', '#8B6B47', '#B38E62'],
+    liveUrl: 'mason-rowe/website/index.html',
+    liveLabel: 'Explore the live website ↗',
+    coverImage: 'assets/thumbs/mason-rowe-ui-cover.jpg',
+    galleryImages: [
+      'assets/UI%20Design/5_Mason%20and%20Rowe/mr-ui-01-cover.jpg',
+      'assets/UI%20Design/5_Mason%20and%20Rowe/mr-ui-02-sitemap.jpg',
+      'assets/UI%20Design/5_Mason%20and%20Rowe/mr-ui-03-system.jpg',
+      'assets/UI%20Design/5_Mason%20and%20Rowe/mr-ui-04-home.jpg',
+      'assets/UI%20Design/5_Mason%20and%20Rowe/mr-ui-05-development.jpg',
+      'assets/UI%20Design/5_Mason%20and%20Rowe/mr-ui-06-property.jpg',
+      'assets/UI%20Design/5_Mason%20and%20Rowe/mr-ui-07-pages.jpg',
+      'assets/UI%20Design/5_Mason%20and%20Rowe/mr-ui-08-viewing.jpg',
+      'assets/UI%20Design/5_Mason%20and%20Rowe/mr-ui-09-mobile.jpg',
+      'assets/UI%20Design/5_Mason%20and%20Rowe/mr-ui-10-responsive.jpg',
+      'assets/UI%20Design/5_Mason%20and%20Rowe/mr-ui-11-motion.jpg'
+    ]
+  },
+  {
     title: 'Book Cover Design',
     category: 'Packaging',
     year: '2026',
@@ -566,21 +629,26 @@ const caseData = [
     ]
   },
   {
-    title: 'Motion Project 03',
+    title: 'Northstar Capital Ad',
     category: 'Motion Design',
     year: '2026',
-    services: 'Campaign Asset / Motion Identity',
-    summary: 'A motion-led identity system designed to create tempo and presence without excess.',
-    challenge: 'The brand needed motion assets that could feel modern and premium while still matching the broader visual discipline.',
-    approach: 'We created a set of modular motion frames and transitions that could be reused across digital campaign moments.',
-    outcome: 'A flexible motion toolkit that makes the brand feel more alive across digital channels.',
-    colours: ['#162daf', '#f7f7f5', '#f5cc00', '#000985'],
+    services: 'Motion Design / 3D / Product Film / Sound Design',
+    summary: 'A 30-second 3D launch ad for the Northstar Capital website and dashboard, presenting the concept as a real product.',
+    challenge: 'Northstar needed an ad that could sell clarity: show a calm, trustworthy fintech product in motion and make a small-business owner want to try it within half a minute.',
+    approach: 'We built the N mark as a lit, extruded 3D object and placed the real website and dashboard screens in a virtual 3D space: a floating browser that scrolls the live homepage, data cards lifting off the glass, a dashboard carousel and phones rising in perspective, all cut to an original 120 BPM score.',
+    outcome: 'A 30-second, 60 fps product ad ready for social, the website and pitch decks. Self-initiated concept project; Northstar Capital is a fictional brand and all figures are illustrative.',
+    colours: ['#0B0D12', '#F6F5F1', '#2B5BFF', '#3DDC97'],
+    coverImage: 'assets/thumbs/northstar-ad-cover.jpg',
+    video: 'assets/Motion%20Design/3_Northstar%20Capital%20Ad/northstar-capital-ad.mp4',
+    poster: 'assets/Motion%20Design/3_Northstar%20Capital%20Ad/poster.jpg',
     galleryImages: [
-      makeGalleryAsset('Motion Project 03', ['#162daf', '#f7f7f5', '#f5cc00']),
-      makeGalleryAsset('Transition', ['#162daf', '#f7f7f5', '#f5cc00']),
-      makeGalleryAsset('Teaser', ['#162daf', '#f7f7f5', '#f5cc00']),
-      makeGalleryAsset('Campaign', ['#162daf', '#f7f7f5', '#f5cc00']),
-      makeGalleryAsset('Final Frame', ['#162daf', '#f7f7f5', '#f5cc00'])
+      'assets/Motion%20Design/3_Northstar%20Capital%20Ad/still-02.jpg',
+      'assets/Motion%20Design/3_Northstar%20Capital%20Ad/still-03.jpg',
+      'assets/Motion%20Design/3_Northstar%20Capital%20Ad/still-04.jpg',
+      'assets/Motion%20Design/3_Northstar%20Capital%20Ad/still-05.jpg',
+      'assets/Motion%20Design/3_Northstar%20Capital%20Ad/still-06.jpg',
+      'assets/Motion%20Design/3_Northstar%20Capital%20Ad/still-07.jpg',
+      'assets/Motion%20Design/3_Northstar%20Capital%20Ad/still-08.jpg'
     ]
   }
 ];
