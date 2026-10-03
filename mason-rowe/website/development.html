@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Development — Mason &amp; Rowe (concept)</title>
+<meta name="description" content="A fictional Mason &amp; Rowe development: gallery, residences, floor plans, specifications, amenities, location and availability. Self-initiated concept by Rovard Studios.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#1C1B19">
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
+<script>try{if(sessionStorage.getItem('mr-nav')){document.documentElement.classList.add('mr-enter');sessionStorage.removeItem('mr-nav')}}catch(e){}</script>
+<noscript><style>[data-r]{opacity:1!important;transform:none!important}[data-mask]>img,[data-mask-x]>img{clip-path:none!important;transform:none!important}.split .w>span{transform:none!important}</style></noscript>
+</head>
+<body data-page="development" data-hdr="over">
+<main id="main">
+
+  <section class="phero" style="min-height:min(86vh,820px)">
+    <div class="bg" id="hero-bg" aria-hidden="true"></div>
+    <div class="wrap">
+      <p class="eyebrow eyebrow--plain" id="h-eyebrow" style="color:var(--bronze-lt)"></p>
+      <h1 class="d-xxl" id="h-title" style="max-width:none"></h1>
+      <p class="lead" id="h-lead"></p>
+    </div>
+  </section>
+
+  <section class="sec--tight sec--white" style="padding-block:clamp(28px,3.4vw,56px)">
+    <div class="wrap"><dl class="facts facts--lg" id="h-facts" style="margin:0;border-top:0"></dl></div>
+  </section>
+
+  <div class="subnav">
+    <div class="wrap">
+      <nav aria-label="On this page">
+        <a href="#overview">Overview</a><a href="#gallery">Gallery</a><a href="#residences">Residences</a><a href="#plans">Floor plans</a><a href="#specs">Specifications</a><a href="#amenities">Amenities</a><a href="#location">Location</a><a href="#availability">Availability</a><a href="#enquire">Enquire</a>
+      </nav>
+      <a class="btn btn--sm btn--solid" href="#enquire">Request information</a>
+    </div>
+  </div>
+
+  <section class="sec" id="overview">
+    <div class="wrap grid" style="row-gap:48px">
+      <div style="grid-column:1 / span 7"><p class="eyebrow" data-r>Overview</p><p class="d-m" id="o-lead" data-r style="margin-top:26px;font-family:var(--serif);font-weight:300;letter-spacing:-.015em;line-height:1.22"></p></div>
+      <div style="grid-column:9 / span 4;align-self:end">
+        <p class="mute" id="o-body" data-r></p>
+        <dl class="kv" id="o-team" data-r style="margin-top:30px"></dl>
+        <ul id="o-mats" data-r style="list-style:none;padding:0;margin:26px 0 0;display:flex;flex-wrap:wrap;gap:8px"></ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec--white" id="gallery" style="padding-top:clamp(60px,7vw,110px)">
+    <div class="wrap">
+      <div class="flex-between" style="margin-bottom:44px"><div><p class="eyebrow" data-r>Gallery</p><h2 class="d-l" data-split style="margin-top:20px">Seen <em>closely.</em></h2></div><p class="mute small" style="margin:0">Concept renderings. Select any image to enlarge.</p></div>
+      <div class="gal" id="gal"></div>
+    </div>
+  </section>
+
+  <section class="sec" id="residences">
+    <div class="wrap">
+      <div class="flex-between" style="margin-bottom:48px"><div><p class="eyebrow" data-r>Residences</p><h2 class="d-l" data-split style="margin-top:20px">Residence <em>types.</em></h2></div></div>
+      <div class="rcards" id="rcards"></div>
+    </div>
+  </section>
+
+  <section class="sec sec--white" id="plans">
+    <div class="wrap">
+      <p class="eyebrow" data-r>Floor plans</p><h2 class="d-l" data-split style="margin:20px 0 40px">Drawn to <em>scale.</em></h2>
+      <div class="tabs" id="planTabs" role="tablist" aria-label="Choose a residence" style="margin-bottom:clamp(28px,4vw,56px)"></div>
+      <div class="pv"><div class="viewer" id="planViewer"></div><aside id="planInfo"></aside></div>
+      <p class="note" style="margin-top:26px;max-width:70ch">Plans are schematic, fictional and not to be relied upon. Dimensions are approximate.</p>
+    </div>
+  </section>
+
+  <section class="sec" id="specs">
+    <div class="wrap specs">
+      <div class="intro"><p class="eyebrow" data-r>Specifications</p><h2 class="d-l" data-split style="margin:20px 0 24px">Made to a <em>standard.</em></h2><p class="mute" style="max-width:34ch">Every material is chosen to age well, and every junction is detailed to be repaired.</p></div>
+      <div class="acc" id="specAcc"></div>
+    </div>
+  </section>
+
+  <section class="sec sec--white" id="amenities">
+    <div class="wrap">
+      <div class="flex-between" style="margin-bottom:48px"><div><p class="eyebrow" data-r>Amenities</p><h2 class="d-l" data-split style="margin-top:20px">Shared, <em>and quiet.</em></h2></div><a class="lnk" href="amenities.html">All amenities <svg class="ic"><use href="#i-arrow"/></svg></a></div>
+      <div class="igrid" id="amenGrid"></div>
+    </div>
+  </section>
+
+  <section class="sec" id="location">
+    <div class="wrap">
+      <p class="eyebrow" data-r>Location</p><h2 class="d-l" id="locTitle" data-r style="margin:20px 0 18px"></h2><p class="lead mute" id="locStory" data-r style="margin-bottom:clamp(36px,4vw,64px);max-width:60ch"></p>
+      <div id="locMap"></div>
+    </div>
+  </section>
+
+  <section class="sec sec--white" id="availability">
+    <div class="wrap">
+      <div class="flex-between" style="margin-bottom:40px"><div><p class="eyebrow" data-r>Availability</p><h2 class="d-l" data-split style="margin-top:20px">Choose your <em>residence.</em></h2></div><a class="lnk" id="avLink" href="availability.html">Full availability <svg class="ic"><use href="#i-arrow"/></svg></a></div>
+      <div style="max-width:520px;margin-bottom:34px" id="avSum"></div>
+      <div class="av">
+        <div class="stackplan">
+          <div class="head"><div class="legend"><span><i></i>Available</span><span class="r"><i></i>Reserved</span><span class="s"><i></i>Sold</span></div></div>
+          <div id="avStack"></div>
+        </div>
+        <aside class="udetail" id="avDetail" aria-live="polite"></aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec--dark" id="enquire">
+    <div class="wrap grid" style="row-gap:48px">
+      <div style="grid-column:1 / span 5">
+        <p class="eyebrow">Enquire</p><h2 class="d-l" style="margin:20px 0 26px">Request <em>information.</em></h2>
+        <p class="lead" style="color:var(--stone)">Plans, pricing and availability, sent privately. Or come and see it in person.</p>
+        <p style="margin-top:30px"><a class="btn btn--light btn--solid" id="pvLink" href="private-viewing.html">Schedule a private viewing <svg class="ic"><use href="#i-arrow"/></svg></a></p>
+      </div>
+      <div style="grid-column:7 / span 6">
+        <form class="form" id="enqForm" novalidate>
+          <div class="row"><div class="field"><label for="n1">Full name</label><input id="n1" name="name" required autocomplete="name"><span class="msg"></span></div><div class="field"><label for="n2">Email</label><input id="n2" name="email" type="email" required autocomplete="email"><span class="msg"></span></div></div>
+          <div class="row"><div class="field"><label for="n3">Phone</label><input id="n3" name="phone" type="tel" autocomplete="tel"></div><div class="field"><label for="enqDev">Development</label><select id="enqDev" name="dev"></select></div></div>
+          <div class="field"><label for="n4">Message</label><textarea id="n4" name="msg" rows="3"></textarea></div>
+          <label class="check"><input type="checkbox" required><span style="color:var(--stone)">I agree to be contacted about this development.</span></label>
+          <div><button class="btn btn--light btn--solid" type="submit">Send request <svg class="ic"><use href="#i-arrow"/></svg></button></div>
+        </form>
+        <div class="success" role="status" style="background:transparent;border-color:var(--line-lt)"><div class="tick"><svg><use href="#i-check"/></svg></div><h3 class="d-s">Thank you.</h3><p style="color:var(--stone)">Your request has been noted for our advisory team.</p><p class="note" style="color:var(--stone-3)">This is a concept project. Nothing you entered has been sent, saved or shared.</p></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+<script src="../brand/mark.js"></script>
+<script src="js/data.js"></script>
+<script src="js/plans.js"></script>
+<script src="js/site.js"></script>
+<script src="js/pages.js"></script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Contact — Vita House</title>
+<meta name="description" content="Get in touch with Vita House: call, message or visit. A fictional healthcare concept by Rovard Studios.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..600,0..100,0..1;1,9..144,300..600,0..100,0..1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="vh.css">
+<style>
+  .contact-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: clamp(2rem, 5vw, 4.5rem); align-items: start; }
+  .ways { display: grid; gap: 1rem; }
+  .way { display: flex; gap: 1rem; align-items: flex-start; text-decoration: none; }
+  .way b { display: block; }
+  .form-card { padding: clamp(1.5rem, 4vw, 2.5rem); border-radius: var(--r-xl); background: var(--oat); border: 1px solid var(--line); box-shadow: var(--shadow-2); }
+  .err-summary { margin-bottom: 1.5rem; }
+  .err-summary ul { margin: .5rem 0 0; padding-left: 1.2rem; }
+  .err-summary a { color: inherit; font-weight: 600; }
+  @media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<main id="main">
+  <section class="page-hero">
+    <div class="container inner">
+      <div>
+        <nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="index.html">Home</a></li><li aria-current="page">Contact</li></ol></nav>
+        <span class="eyebrow">Contact</span>
+        <h1>We'd love to <em>hear from you.</em></h1>
+        <p class="lead">Questions about booking, membership or what to expect? A real person will reply, usually within one business day.</p>
+      </div>
+      <div class="art" id="art"></div>
+    </div>
+  </section>
+
+  <section class="section-sm" style="padding-top:0">
+    <div class="container contact-grid">
+      <div class="stack" style="--gap:1.5rem">
+        <div class="alert alert-warn"><span data-icon="alert"></span><div><b>In an emergency, call 911.</b>Contact forms and messages are not monitored around the clock.</div></div>
+        <div class="ways">
+          <a class="card card-lift way" href="tel:5125550142"><span class="icon-chip" data-icon="phone"></span><span><b>Call us</b><span class="muted">(512) 555-0142 · Mon–Fri 7:30 AM – 7 PM</span></span></a>
+          <a class="card card-lift way" href="portal.html#/messages"><span class="icon-chip clay" data-icon="message"></span><span><b>Message your care team</b><span class="muted">Existing patients: sign in to your dashboard</span></span></a>
+          <a class="card card-lift way" href="locations.html"><span class="icon-chip honey" data-icon="pin"></span><span><b>Visit a house</b><span class="muted">Six locations across the U.S.</span></span></a>
+          <a class="card card-lift way" href="mailto:hello@vita-house.example"><span class="icon-chip" data-icon="mail"></span><span><b>Email</b><span class="muted">hello@vita-house.example (fictional)</span></span></a>
+        </div>
+      </div>
+      <div class="form-card" id="formCard">
+        <h2 style="font-size:1.8rem;margin-bottom:.4rem">Send us a message</h2>
+        <p class="muted" style="margin-bottom:1.75rem">Fields marked <span aria-hidden="true">*</span><span class="sr-only">with an asterisk</span> are required. Please don't include sensitive medical details.</p>
+        <div id="errSummary" class="alert alert-err err-summary" role="alert" tabindex="-1" hidden></div>
+        <form id="form" novalidate>
+          <div class="stack" style="--gap:1.25rem">
+            <div class="field-row">
+              <div class="field"><label for="name">Full name <span aria-hidden="true">*</span></label><input class="input" id="name" name="name" autocomplete="name" required aria-describedby="name-e"><p class="error-text" id="name-e"></p></div>
+              <div class="field"><label for="email">Email <span aria-hidden="true">*</span></label><input class="input" id="email" name="email" type="email" autocomplete="email" required aria-describedby="email-h email-e"><p class="hint" id="email-h">We'll only use this to reply.</p><p class="error-text" id="email-e"></p></div>
+            </div>
+            <div class="field"><label for="topic">What's this about? <span aria-hidden="true">*</span></label>
+              <select class="select" id="topic" name="topic" required aria-describedby="topic-e"><option value="">Choose a topic</option><option>Booking an appointment</option><option>Membership and billing</option><option>Insurance questions</option><option>Accessibility support</option><option>Something else</option></select><p class="error-text" id="topic-e"></p></div>
+            <div class="field"><label for="msg">Message <span aria-hidden="true">*</span></label><textarea class="textarea" id="msg" name="msg" required minlength="10" aria-describedby="msg-h msg-e"></textarea><p class="hint" id="msg-h">At least 10 characters.</p><p class="error-text" id="msg-e"></p></div>
+            <div class="field"><label class="check"><input type="checkbox" id="consent" aria-describedby="consent-e"><span>I agree that Vita House may contact me about this message. <span aria-hidden="true">*</span></span></label><p class="error-text" id="consent-e"></p></div>
+            <button class="btn btn-primary btn-lg" type="submit" id="send">Send message</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tint" id="faq">
+    <div class="container narrow">
+      <div class="section-head"><span class="eyebrow">FAQs</span><h2>Quick <em>answers.</em></h2></div>
+      <div class="faq">
+        <details><summary>How quickly will I hear back?<span data-icon="plus"></span></summary><div>Messages from this form are answered within one business day. Existing patients get the fastest replies through the secure dashboard.</div></details>
+        <details><summary>What insurance do you accept?<span data-icon="plus"></span></summary><div>Vita House accepts most major plans at every location. Add your insurance details during booking and we'll confirm coverage before your visit.</div></details>
+        <details><summary>How do I cancel or reschedule?<span data-icon="plus"></span></summary><div>Open your dashboard, choose the appointment and select Reschedule or Cancel. Changes are free up to 24 hours before your visit.</div></details>
+        <details><summary>Can I bring someone with me?<span data-icon="plus"></span></summary><div>Of course. A friend or family member is welcome at in-person visits, and can join by video for virtual visits.</div></details>
+        <details><summary>Is Vita House a real clinic?<span data-icon="plus"></span></summary><div>No. It's a fictional concept created by Rovard Studios. No messages sent from this site are delivered anywhere.</div></details>
+      </div>
+    </div>
+  </section>
+</main>
+<script src="vh.js"></script><script src="data.js"></script>
+<script>
+  VH.shell({ active: '' }); VH.hydrate();
+  const $ = VH.$;
+  $('#art').innerHTML = VH.pageArt('mail', 2);
+  const rules = [
+    ['name', v => v.trim() ? '' : 'Enter your full name.'],
+    ['email', v => !v.trim() ? 'Enter your email address.' : /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) ? '' : 'Enter an email address like name@example.com.'],
+    ['topic', v => v ? '' : 'Choose a topic so we can send this to the right person.'],
+    ['msg', v => v.trim().length >= 10 ? '' : 'Write at least 10 characters so we can help.'],
+    ['consent', (v, el) => el.checked ? '' : 'Tick the box so we know it is OK to reply to you.']
+  ];
+  const setErr = (id, msg) => {
+    const el = $('#' + id), f = el.closest('.field'), e = $('#' + id + '-e');
+    f.classList.toggle('is-invalid', !!msg);
+    msg ? el.setAttribute('aria-invalid', 'true') : el.removeAttribute('aria-invalid');
+    e.innerHTML = msg ? VH.icon('alert-circle') + `<span>${msg}</span>` : '';
+  };
+  const check = id => { const r = rules.find(x => x[0] === id), el = $('#' + id), m = r[1](el.value, el); setErr(id, m); return m; };
+  rules.forEach(([id]) => { const el = $('#' + id); el.addEventListener('blur', () => { if (el.dataset.touched) check(id); }); el.addEventListener('input', () => { el.dataset.touched = 1; if (el.closest('.field').classList.contains('is-invalid')) check(id); }); el.addEventListener('change', () => { el.dataset.touched = 1; check(id); }); });
+  $('#form').addEventListener('submit', e => {
+    e.preventDefault();
+    const bad = rules.map(([id]) => [id, check(id)]).filter(x => x[1]);
+    const sum = $('#errSummary');
+    if (bad.length) {
+      sum.hidden = false;
+      sum.innerHTML = `${VH.icon('alert-circle')}<div><b>${bad.length === 1 ? '1 thing needs' : bad.length + ' things need'} your attention</b><ul>${bad.map(([id, m]) => `<li><a href="#${id}">${m}</a></li>`).join('')}</ul></div>`;
+      sum.focus(); sum.querySelectorAll('a').forEach(a => a.addEventListener('click', ev => { ev.preventDefault(); $(a.getAttribute('href')).focus(); }));
+      return;
+    }
+    sum.hidden = true;
+    const btn = $('#send'), addr = $('#email').value.trim(); btn.classList.add('is-loading'); btn.textContent = 'Sending';
+    setTimeout(() => {
+      $('#formCard').innerHTML = `<div class="stack" style="--gap:1rem" role="status"><span class="icon-chip round" style="width:4rem;height:4rem;background:var(--ok-bg)">${VH.icon('check-circle', 'icon-xl')}</span><h2 style="font-size:1.9rem">Thank you. Your message is on its way.</h2><p class="muted">In a real service, a team member would reply to <b>${VH.esc(addr)}</b> within one business day. This is a concept project, so nothing was actually sent.</p><div class="row"><a class="btn btn-primary" href="book.html">Book a visit</a><a class="btn btn-secondary" href="index.html">Back to home</a></div></div>`;
+    }, 900);
+  });
+  VH.reveal();
+</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Book an appointment — Vita House</title>
+<meta name="description" content="Book a visit in about three minutes: choose a service, provider, location and time. A fictional healthcare booking flow by Rovard Studios.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..600,0..100,0..1;1,9..144,300..600,0..100,0..1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="vh.css">
+<link rel="stylesheet" href="book.css">
+</head>
+<body>
+<main id="main" class="book">
+  <div class="container">
+    <div class="book-top">
+      <div><span class="eyebrow">Book an appointment</span><h1 style="margin-top:.75rem">Let's find you <em>a time.</em></h1><p class="lead">About three minutes. You can change anything before you confirm.</p></div>
+      <ul class="plain reassure" role="list"><li data-icon-li="shield">Insurance accepted</li><li data-icon-li="clock">Free changes up to 24 hours before</li><li data-icon-li="lock">Private and secure</li></ul>
+    </div>
+
+    <nav aria-label="Booking progress"><ol class="stepper" id="stepper"></ol><div class="step-mobile" id="stepMobile"></div></nav>
+
+    <div class="book-grid">
+      <section class="stage" id="stage" aria-live="off"></section>
+      <aside class="summary" id="summary" aria-label="Your visit summary"></aside>
+    </div>
+  </div>
+  <div class="sr-only" id="announce" role="status" aria-live="polite"></div>
+</main>
+<script src="vh.js"></script><script src="data.js"></script><script src="book.js"></script>
+</body>
+</html>

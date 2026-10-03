@@ -1,0 +1,56 @@
+/* MASON & ROWE — brand tokens
+   Self-initiated concept project by Rovard Studios. Mason & Rowe is a fictional company. */
+
+:root {
+  /* Palette — five core colours + supporting tones */
+  --ivory: #F2EDE3;        /* Ivory Plaster   — primary ground            */
+  --white: #FAF8F3;        /* Warm Limewash   — lifted surfaces            */
+  --char: #1C1B19;         /* Charcoal Basalt — type, dark grounds         */
+  --char-2: #26241F;
+  --stone: #CBC4B6;        /* Soft Travertine — dividers, quiet fills      */
+  --stone-2: #E4DED2;
+  --stone-3: #A39B8B;
+  --bronze: #8B6B47;       /* Muted Bronze    — large type, graphics only  */
+  --bronze-ink: #6F5233;   /* Bronze for small text on light (6.1:1)       */
+  --bronze-lt: #B38E62;    /* Bronze on dark grounds (5.7:1)               */
+  --bronze-xl: #D9BC92;    /* Bronze tint for display type over imagery    */
+  --mute: #6B665D;         /* Secondary text on light (4.9:1)              */
+
+  --line: rgba(28, 27, 25, .14);
+  --line-lt: rgba(250, 248, 243, .20);
+
+  /* Type */
+  --serif: 'Newsreader', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+  --sans: 'Jost', 'Helvetica Neue', Arial, sans-serif;
+
+  /* Motion — slow, weighted, quiet */
+  --ease: cubic-bezier(.22, .8, .2, 1);
+  --ease-io: cubic-bezier(.65, 0, .35, 1);
+  --t-fast: .3s;
+  --t-mid: .7s;
+  --t-slow: 1.2s;
+
+  --pad: clamp(20px, 4.2vw, 72px);
+  --max: 1680px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body { margin: 0; }
+img, svg, video, canvas { display: block; max-width: 100%; }
+button, input, select, textarea { font: inherit; color: inherit; }
+a { color: inherit; text-decoration: none; }
+
+/* Wordmark — built from live type so it stays crisp at any size */
+.wm {
+  display: inline-flex; align-items: baseline; gap: .55em;
+  font-family: var(--serif); font-weight: 500; font-size: 15px;
+  letter-spacing: .34em; text-transform: uppercase; line-height: 1; white-space: nowrap;
+}
+.wm i { font-style: italic; font-weight: 400; letter-spacing: 0; color: var(--bronze-lt); font-size: 1.15em; transform: translateY(.04em); }
+.wm--stack { flex-direction: column; align-items: flex-start; gap: .2em; letter-spacing: .5em; }
+.wm--stack i { margin-left: .05em; }
+
+.mono { width: 1em; height: 1em; display: inline-block; flex: none; --mr-pier: currentColor; }
+.mono--bronze { --mr-pier: var(--bronze); }
+.mono--bronze-lt { --mr-pier: var(--bronze-lt); }

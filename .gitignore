@@ -2,3 +2,10 @@ motion-video/build/
 motion-video/stills/
 motion-video/probe.png
 motion-video/*.mp4
+
+# Mason & Rowe generated working files
+mason-rowe/_art/_cache/
+mason-rowe/_art/_preview/
+mason-rowe/_art/_shots/
+mason-rowe/_art/shots/
+mason-rowe/_art/__pycache__/

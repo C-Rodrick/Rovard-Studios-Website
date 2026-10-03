@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>About — Vita House</title>
+<meta name="description" content="Vita House is a fictional healthcare brand, a self-initiated brand and UX concept by Rovard Studios. Learn about the idea behind it.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..600,0..100,0..1;1,9..144,300..600,0..100,0..1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="vh.css">
+<style>
+  .value { display: grid; gap: .9rem; align-content: start; padding-top: 1.5rem; border-top: 1px solid var(--line-strong); }
+  .value h3 { font-size: 1.5rem; font-weight: 400; }
+  .value p { color: var(--text-2); }
+  .concept { display: grid; grid-template-columns: auto 1fr auto; gap: 1.5rem; align-items: center; padding: clamp(1.5rem, 3vw, 2.25rem); border-radius: var(--r-xl); border: 1.5px dashed var(--clay-500); background: var(--blush-100); }
+  .concept .stamp { font: 700 .75rem var(--font-ui); letter-spacing: .14em; color: var(--clay-700); border: 1.5px solid currentColor; padding: .5rem .8rem; border-radius: 10px; transform: rotate(-4deg); text-align: center; line-height: 1.3; }
+  @media (max-width: 760px) { .concept { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<main id="main">
+  <section class="page-hero">
+    <div class="container inner">
+      <div>
+        <nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="index.html">Home</a></li><li aria-current="page">About</li></ol></nav>
+        <span class="eyebrow">About Vita House</span>
+        <h1>A healthcare company, <em>built like a home.</em></h1>
+        <p class="lead">Vita comes from the Latin for “life”. House is where life happens. We combine primary care, prevention and wellness in spaces and software that feel warm, clear and unhurried.</p>
+      </div>
+      <div class="art" id="art"></div>
+    </div>
+  </section>
+
+  <section class="section-sm">
+    <div class="container split">
+      <div class="stack reveal" style="--gap:1.25rem"><span class="eyebrow">Our idea</span><h2>Healthcare shouldn't feel like <em>a waiting room.</em></h2></div>
+      <div class="prose reveal lead" style="color:var(--ink-2)"><p>Too many people put off care because the experience around it feels cold, confusing or rushed. Phone trees, paper forms and portals that read like legal documents.</p><p>Vita House starts from a different place: what would it feel like to walk through a door where someone is glad you came? Everything follows from that, from longer appointments and plain-language summaries to a booking flow that takes minutes.</p></div>
+    </div>
+  </section>
+
+  <section class="section tint">
+    <div class="container">
+      <div class="section-head"><span class="eyebrow">What we believe</span><h2>Six values, <em>one way of caring.</em></h2></div>
+      <div class="grid cols-3" style="row-gap:2.5rem">
+        <article class="value reveal"><span class="icon-chip" data-icon="heart"></span><h3>Warm</h3><p>We greet people like we're glad to see them, because we are.</p></article>
+        <article class="value reveal" style="transition-delay:60ms"><span class="icon-chip clay" data-icon="sparkle"></span><h3>Intelligent</h3><p>Evidence-minded clinicians who explain the “why”, not just the “what”.</p></article>
+        <article class="value reveal" style="transition-delay:120ms"><span class="icon-chip honey" data-icon="users"></span><h3>Human</h3><p>Real people answer your messages. Real time is set aside for your questions.</p></article>
+        <article class="value reveal"><span class="icon-chip" data-icon="leaf"></span><h3>Calm</h3><p>Quiet spaces, gentle language and interfaces that never shout.</p></article>
+        <article class="value reveal" style="transition-delay:60ms"><span class="icon-chip clay" data-icon="shield"></span><h3>Professional</h3><p>Rigour behind the kindness: privacy, safety and clear standards.</p></article>
+        <article class="value reveal" style="transition-delay:120ms"><span class="icon-chip honey" data-icon="phone2"></span><h3>Contemporary</h3><p>Booking, messages and records that work as well on a phone as they do in the house.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section dark">
+    <div class="container">
+      <div class="grid cols-4 keep2" style="gap:2.5rem">
+        <div class="stat reveal"><b>6</b><span>houses in six cities</span></div>
+        <div class="stat reveal"><b>12</b><span>states with virtual care</span></div>
+        <div class="stat reveal"><b>7</b><span>languages spoken by our team</span></div>
+        <div class="stat reveal"><b>9</b><span>services under one roof</span></div>
+      </div>
+      <p class="tiny muted" style="margin-top:2rem">Illustrative figures for a fictional company.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container split">
+      <div class="stack reveal" style="--gap:1.25rem"><span class="eyebrow">Accessibility</span><h2>Designed so <em>everyone</em> can walk in.</h2><p class="lead">Accessibility is a starting point at Vita House, not an afterthought. It shapes our buildings, our website and our dashboard.</p></div>
+      <ul class="plain list-stack reveal" role="list">
+        <li class="card row" style="flex-wrap:nowrap;align-items:flex-start"><span class="icon-chip" data-icon="type"></span><div><b>Readable by default</b><p class="muted small">17px body text, generous spacing and WCAG AA contrast on every colour pairing.</p></div></li>
+        <li class="card row" style="flex-wrap:nowrap;align-items:flex-start"><span class="icon-chip clay" data-icon="sliders"></span><div><b>Your preferences, remembered</b><p class="muted small">Adjust text size and reduce motion in your <a href="portal.html#/settings">dashboard settings</a>.</p></div></li>
+        <li class="card row" style="flex-wrap:nowrap;align-items:flex-start"><span class="icon-chip honey" data-icon="access"></span><div><b>Keyboard and screen reader friendly</b><p class="muted small">Clear focus states, labelled forms and error messages that explain how to fix things.</p></div></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section-sm" style="padding-bottom:clamp(4.5rem,9vw,8rem)">
+    <div class="container">
+      <div class="concept reveal">
+        <span class="stamp">SELF-INITIATED<br>CONCEPT PROJECT</span>
+        <div><h2 style="font-size:1.6rem">About this project</h2><p class="muted" style="margin-top:.5rem;max-width:44em">Vita House is a fictional company designed by Rovard Studios to explore how healthcare branding and digital products can feel warmer and clearer. Providers, locations, prices, testimonials and articles are invented. Nothing here is medical advice.</p></div>
+        <a class="btn btn-primary" href="../../index.html#work">See it in the portfolio</a>
+      </div>
+    </div>
+  </section>
+</main>
+<script src="vh.js"></script><script src="data.js"></script>
+<script>
+  VH.shell({ active: 'about.html' }); VH.hydrate();
+  VH.$('#art').innerHTML = VH.pageArt('home', 0);
+  VH.reveal();
+</script>
+</body>
+</html>

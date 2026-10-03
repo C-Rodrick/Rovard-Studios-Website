@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Resources — Vita House</title>
+<meta name="description" content="Calm, practical guides on prevention, sleep, nutrition, movement and using Vita House. Fictional editorial for a concept project by Rovard Studios.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..600,0..100,0..1;1,9..144,300..600,0..100,0..1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="vh.css">
+<style>
+  .featured { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(1.5rem, 4vw, 3.5rem); align-items: center; background: var(--sage-200); border-radius: var(--r-xl); overflow: hidden; text-decoration: none; color: inherit; }
+  .featured .thumb { align-self: stretch; min-height: 20rem; }
+  .featured .thumb svg { width: 100%; height: 100%; }
+  .featured .copy { padding: clamp(1.5rem, 4vw, 3rem); display: grid; gap: 1rem; }
+  .featured h2 { font-size: clamp(1.8rem, 3.4vw, 2.6rem); }
+  .tools { display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: center; margin: 3rem 0 2rem; }
+  .news { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.5rem, 4vw, 3rem); align-items: center; }
+  .news form { display: grid; gap: 1rem; }
+  .read h3 { font-size: 1.8rem; margin: .75rem 0 1rem; }
+  .read p { color: var(--text-2); }
+  .read p + p { margin-top: 1rem; }
+  @media (max-width: 860px) { .featured, .news, .tools { grid-template-columns: 1fr; } .featured .thumb { min-height: 14rem; } }
+</style>
+</head>
+<body>
+<main id="main">
+  <section class="page-hero">
+    <div class="container inner">
+      <div>
+        <nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="index.html">Home</a></li><li aria-current="page">Resources</li></ol></nav>
+        <span class="eyebrow">Resources</span>
+        <h1>Calm, practical reading for <em>everyday health.</em></h1>
+        <p class="lead">Short guides written in plain language to help you prepare, ask better questions and build small habits. General information only, never medical advice.</p>
+      </div>
+      <div class="art" id="art"></div>
+    </div>
+  </section>
+
+  <section class="section-sm" style="padding-top:0">
+    <div class="container">
+      <a class="featured reveal" id="feat" href="#a1" data-open="a1"></a>
+      <div class="tools">
+        <div class="chips" id="cats" role="group" aria-label="Filter by topic"></div>
+        <div class="field" style="min-width:16rem"><label class="sr-only" for="q">Search resources</label><div class="input-icon"><span data-icon="search"></span><input class="input" id="q" type="search" placeholder="Search articles" autocomplete="off"></div></div>
+      </div>
+      <p class="muted small" id="count" role="status" aria-live="polite" style="margin-bottom:1.5rem"></p>
+      <div class="grid cols-3" id="grid"></div>
+      <div id="empty"></div>
+    </div>
+  </section>
+
+  <section class="section tint">
+    <div class="container news">
+      <div class="stack" style="--gap:1rem"><span class="eyebrow">Newsletter</span><h2>One thoughtful email, <em>once a month.</em></h2><p class="lead">Seasonal reminders, new guides and house news. No spam, unsubscribe in one click.</p></div>
+      <form id="news" novalidate aria-label="Newsletter sign-up">
+        <div id="newsBox"><div class="field"><label for="email">Email address</label><input class="input" id="email" type="email" autocomplete="email" placeholder="you@example.com" aria-describedby="emailErr" required><p class="error-text" id="emailErr" role="alert"></p></div>
+        <label class="check" style="margin-top:1rem"><input type="checkbox" id="ok"> I'd like to receive the Vita House monthly newsletter.</label>
+        <button class="btn btn-primary" type="submit" style="margin-top:1.25rem">Subscribe</button></div>
+      </form>
+    </div>
+  </section>
+</main>
+<script src="vh.js"></script><script src="data.js"></script>
+<script>
+  VH.shell({ active: 'resources.html' }); VH.hydrate();
+  const $ = VH.$;
+  $('#art').innerHTML = VH.pageArt('leaf', 1);
+  const body = {
+    a1: ['For many of us, the yearly checkup feels like a test we did not study for. It does not have to. Think of it as a conversation: a chance to say what is going well, what has been nagging at you and what you would like help with this year.', 'Before you come, jot down three things: anything that has changed since last time, questions that keep coming back, and one goal for the year. Bring a list of anything you take regularly. Then let the visit go both ways.', 'Afterwards you will find a one-page summary in your dashboard. Treat it as a gentle map for the next twelve months, not a report card.'],
+    a2: ['A first visit goes better when you arrive with a few questions. Here are five worth bringing: How does your team work together? How do I reach you between visits? What would you like us to focus on this year? Who do I contact if something changes? And what would you like to know about me?', 'There are no silly questions. If something feels too small to mention, mention it anyway. Small things often turn out to be useful context.'],
+    a3: ['A wind-down routine works best when it is small enough to repeat on a rough night. Pick a regular time to put screens away, dim the lights a little, and choose one calming ritual: a warm drink, a few pages of a book, a short stretch.', 'Consistency matters more than perfection. If you miss a night, begin again the next evening. Over time the routine becomes a signal to your day that it is ending.'],
+    a4: ['Start with one anchor: a breakfast or lunch you can repeat without thinking. Then add a “bridge” food for busy days, something filling you can eat in two minutes, and cook one thing in bulk on a quieter evening.', 'Aim for flexible, not strict. If the plan falls apart on Wednesday, Thursday is a fresh start.'],
+    a5: ['Tell children what will happen in simple, honest words: who they will meet, what the room looks like and roughly how long it will take. Let them choose a comfort item to bring.', 'Practising at home with a stuffed animal can make the real thing feel familiar. Afterwards, name what went well. It helps the next visit feel easier.'],
+    a6: ['Movement does not need a gym bag. Try ten minutes: a walk around the block, a few stretches at the kitchen counter, or a slow set of stairs between meetings.', 'Pick something you enjoy and attach it to something you already do, such as after your morning coffee or right after work. Small, regular and pleasant beats large and rare.'],
+    a7: ['A lab visit is usually quick. You check in on your phone, wait a few minutes, and a trained team member collects your sample. Results appear in your dashboard, along with a note from your clinician.', 'Your appointment reminder will tell you whether to eat or drink beforehand. Wear sleeves that roll up easily and bring a photo ID. If needles make you uneasy, tell the team and they will go at your pace.'],
+    a8: ['A first session is mostly an introduction. You will talk about what brings you in, what you would like to change and how you like to be supported. You set the pace and you can share as much or as little as you want.', 'It is normal to feel a little nervous. Many people find it helps to write down a couple of goals first, even rough ones, and to treat the first session as a chance to see if the fit feels right.']
+  };
+  const cats = ['All', ...new Set(VH.articles.map(a => a.cat))];
+  let cat = 'All';
+  const feat = VH.articles[0];
+  $('#feat').innerHTML = `<div class="thumb">${VH.thumb(0, feat.title)}</div><div class="copy"><div class="row"><span class="badge badge-dark">Featured</span><span class="muted small">${feat.cat} · ${feat.mins} min read</span></div><h2>${feat.title}</h2><p class="lead" style="color:var(--ink-2)">${feat.ex}</p><span class="link-arrow" style="justify-self:start">Read the guide ${VH.icon('arrow-right')}</span></div>`;
+  const draw = () => {
+    const q = $('#q').value.trim().toLowerCase();
+    $('#cats').innerHTML = cats.map(c => `<button type="button" class="chip" data-c="${c}" aria-pressed="${c === cat}">${c}</button>`).join('');
+    const list = VH.articles.map((a, i) => ({ a, i })).filter(({ a }) => (cat === 'All' || a.cat === cat) && (!q || (a.title + a.ex + a.cat).toLowerCase().includes(q)));
+    $('#count').textContent = `${list.length} ${list.length === 1 ? 'article' : 'articles'}`;
+    $('#grid').innerHTML = list.map(({ a, i }, k) => VH.cards.article(a, i).replace('href="resources.html#' + a.id + '"', `href="#${a.id}" data-open="${a.id}"`)).join('');
+    $('#empty').innerHTML = list.length ? '' : `<div class="empty">${VH.emptyArt('search')}<h3>No articles found</h3><p>Try a different word or choose another topic.</p><button class="btn btn-primary" type="button" id="reset">Show all articles</button></div>`;
+    const r = $('#reset'); if (r) r.onclick = () => { cat = 'All'; $('#q').value = ''; draw(); };
+    VH.reveal();
+  };
+  const open = id => {
+    const a = VH.articles.find(x => x.id === id), i = VH.articles.indexOf(a); if (!a) return;
+    VH.modal(`<div class="read"><span class="badge">${a.cat} · ${a.mins} min read</span><h3>${a.title}</h3>${body[id].map(p => `<p>${p}</p>`).join('')}<div class="alert alert-info" style="margin-top:1.5rem">${VH.icon('info')}<div>General information only, not medical advice. For anything specific to you, talk with your clinician.</div></div><div class="actions"><button class="btn btn-secondary" data-close type="button">Close</button><a class="btn btn-primary" href="book.html">Book a visit</a></div></div>`, { wide: true });
+  };
+  document.addEventListener('click', e => { const o = e.target.closest('[data-open]'); if (o) { e.preventDefault(); open(o.dataset.open); } });
+  $('#cats').addEventListener('click', e => { const b = e.target.closest('.chip'); if (b) { cat = b.dataset.c; draw(); } });
+  $('#q').addEventListener('input', draw);
+  draw();
+
+  /* newsletter: inline validation, success state */
+  $('#news').addEventListener('submit', e => {
+    e.preventDefault();
+    const em = $('#email'), f = em.closest('.field'), err = $('#emailErr');
+    const v = em.value.trim(), good = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+    if (!good || !$('#ok').checked) {
+      f.classList.add('is-invalid'); em.setAttribute('aria-invalid', 'true');
+      err.innerHTML = VH.icon('alert-circle') + `<span>${!good ? (v ? 'Enter an email address like name@example.com.' : 'Enter your email address.') : 'Tick the box so we know you would like to hear from us.'}</span>`;
+      (!good ? em : $('#ok')).focus(); return;
+    }
+    $('#newsBox').innerHTML = `<div class="alert alert-ok" role="status">${VH.icon('check-circle')}<div><b>You're on the list</b>Thanks! Your first email arrives next month. This is a concept form, so nothing was actually sent.</div></div>`;
+  });
+  $('#email').addEventListener('input', e => { e.target.closest('.field').classList.remove('is-invalid'); e.target.removeAttribute('aria-invalid'); });
+</script>
+</body>
+</html>

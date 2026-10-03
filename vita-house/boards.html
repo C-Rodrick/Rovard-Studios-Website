@@ -1,0 +1,558 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vita House: brand and UX boards (portfolio image source) | Rovard Studios</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="Self-initiated concept: brand strategy, visual identity, website, booking flow and patient dashboard for Vita House, a fictional U.S. preventative healthcare company. Designed by Rovard Studios.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,200..600,0..100,0..1;1,9..144,200..600,0..100,0..1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site/vh.css">
+<link rel="stylesheet" href="site/book.css">
+<link rel="stylesheet" href="case.css">
+</head>
+<body class="case">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="cs-bar" id="bar">
+  <div class="container in">
+    <a class="back" href="../index.html#work"><span data-icon="arrow-left"></span> Rovard Studios</a>
+    <div class="where" aria-live="off"><b>Vita House</b><span aria-hidden="true">/</span><span class="cur" id="curCh">Case study</span></div>
+    <div class="acts"><button class="btn btn-secondary btn-sm" type="button" id="toc">Chapters</button><a class="btn btn-primary btn-sm" href="site/index.html">Open live website <span data-icon="arrow-up-right"></span></a></div>
+  </div>
+  <div class="cs-progress" id="prog" aria-hidden="true"></div>
+</header>
+
+<main id="main">
+
+<!-- ====================== BRAND COVER (render-only: ?only=brandcover) ====================== -->
+<section class="bc" id="brandCover" hidden>
+  <div class="bc-in">
+    <div>
+      <span class="stamp-concept">SELF-INITIATED CONCEPT PROJECT</span>
+      <div class="bc-logo" id="bcLogo"></div>
+      <p class="sub">Health, at home <em>in your life.</em></p>
+      <dl class="meta-grid">
+        <div><dt>Client</dt><dd>Vita House <span class="muted">(fictional)</span></dd></div>
+        <div><dt>Industry</dt><dd>Healthcare / Preventative Wellness</dd></div>
+        <div class="wide"><dt>Services</dt><dd>Brand Strategy · Visual Identity · Brand Guidelines</dd></div>
+        <div><dt>Year</dt><dd>2026</dd></div>
+        <div><dt>Project type</dt><dd>Self-Initiated Concept</dd></div>
+      </dl>
+    </div>
+    <div class="bc-art"><div class="bc-scene" id="bcScene"></div><div class="bc-pal" id="bcPal"></div></div>
+  </div>
+</section>
+
+<!-- ====================== COVER ====================== -->
+<section class="cs-hero" id="top">
+  <div class="container grid-hero">
+    <div>
+      <span class="stamp-concept">SELF-INITIATED CONCEPT PROJECT</span>
+      <h1>Vita <em>House</em></h1>
+      <p class="sub">A warmer front door for American healthcare: brand identity, website and patient experience for a fictional preventative-care company.</p>
+      <dl class="meta-grid">
+        <div><dt>Client</dt><dd>Vita House <span class="muted">(fictional)</span></dd></div>
+        <div><dt>Industry</dt><dd>Healthcare / Preventative Wellness</dd></div>
+        <div class="wide"><dt>Services</dt><dd>Brand Strategy · Visual Identity · UX/UI Design · Website Design · Digital Product Design</dd></div>
+        <div><dt>Year</dt><dd>2026</dd></div>
+        <div><dt>Project type</dt><dd>Self-Initiated Concept</dd></div>
+      </dl>
+      <div class="row" style="margin-top:2.25rem"><a class="btn btn-primary btn-lg" href="site/index.html">Explore the website <span data-icon="arrow-up-right"></span></a><a class="btn btn-secondary btn-lg" href="site/book.html">Try the booking flow</a><a class="btn btn-text" href="site/portal.html">Patient dashboard</a></div>
+    </div>
+    <div class="hero-stage">
+      <figure class="frame browser" data-src="site/index.html?static=1" data-w="1440" data-h="940" data-url="vitahouse.example"></figure>
+      <figure class="frame phone" data-src="site/portal.html?embed=1&static=1" data-w="390" data-h="844"></figure>
+      <div class="badge-float"><span id="heroMark"></span><div><b style="display:block">Health, at home</b><span class="muted small">in your life.</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section-sm" style="padding-top:0">
+  <div class="container">
+    <div class="disclaimer reveal"><span class="icon-chip clay" data-icon="info"></span><p><b>This is a self-initiated concept project, not client work.</b> Vita House is a fictional company. Providers, locations, prices, testimonials and articles are invented, and nothing here is medical advice or a claim about real healthcare outcomes. Where the case study refers to audience insight, it is based on desk observation and design assumptions that would be validated with research before launch.</p></div>
+    <nav class="toc-grid" aria-label="Case study chapters" id="tocGrid" style="margin-top:3rem"></nav>
+  </div>
+</section>
+
+<!-- ====================== 01 THE CHALLENGE ====================== -->
+<section class="section ch" id="c01" data-title="01 · The Challenge">
+  <div class="container">
+    <header class="ch-head"><span class="ch-num" aria-hidden="true">01</span><div><span class="eyebrow">The Challenge</span><h2>Healthcare's digital front door still feels like <em>a waiting room.</em></h2><p class="lead">The brief I set myself: reimagine the traditional healthcare digital experience for a modern U.S. primary care and wellness company, one that feels trustworthy and professional, but also warm, calm and human.</p></div></header>
+
+    <div class="sub-h"><span class="k">1.1</span><h3>The brief at a glance</h3></div>
+    <div class="cols c3">
+      <article class="panel reveal"><h4>The company</h4><p>Vita House combines preventative healthcare, primary care and wellness services through an accessible digital experience, with physical “houses” in six U.S. cities and virtual care in twelve states.</p></article>
+      <article class="panel reveal"><h4>The audience</h4><p>Young professionals, families and health-conscious adults who want a more modern, convenient and human healthcare experience.</p></article>
+      <article class="panel reveal"><h4>The ask</h4><p>A complete brand and digital experience: identity system, responsive website, appointment booking, patient dashboard and mobile versions, with accessibility as a first principle.</p></article>
+    </div>
+
+    <div class="sub-h"><span class="k">1.2</span><h3>What the category gets wrong</h3></div>
+    <p class="sub-p">Patterns I noticed across the category, and the design hypotheses they led to. These are observations from desk review, not research findings.</p>
+    <div class="versus">
+      <div class="reveal">
+        <h4><span class="badge badge-err">The typical experience</span></h4>
+        <div class="mock-cold" aria-label="Wireframe of a generic cold, dense healthcare portal">
+          <div class="tb"><i></i><b>PatientPortal Login</b></div>
+          <div class="lg"><b>Please log in to schedule</b><i></i><i></i><span class="btn-c">LOG IN</span><span>Forgot username? · Forgot password? · Register</span></div>
+          <table><tr><th>Dept.</th><th>Prov.</th><th>Appt. type</th><th>Code</th></tr><tr><td>IM-04</td><td>Staff</td><td>NEW PT EST</td><td>99203</td></tr><tr><td>IM-04</td><td>Staff</td><td>F/U 15</td><td>99213</td></tr></table>
+          <span class="tag-c">Call (800) 555-0100 to book</span>
+        </div>
+      </div>
+      <div class="reveal" style="transition-delay:100ms">
+        <h4><span class="badge badge-ok">Vita House</span></h4>
+        <div class="mock-warm" aria-label="Preview of the Vita House experience">
+          <div class="hd"><span id="coldLogo"></span><span class="btn btn-primary btn-sm" style="pointer-events:none">Book a visit</span></div>
+          <div class="bd"><h3 style="font-size:1.9rem">Healthcare that feels like <em>coming home.</em></h3><p class="muted small">Choose a service, meet your clinician and pick a time in about three minutes.</p>
+            <div class="mini-dash" style="box-shadow:var(--shadow-1)"><div class="row-card"><div class="date-tile"><div><b>5</b><span>Oct</span></div></div><div style="flex:1"><b>Primary care</b><div class="muted small">9:30 AM · Dr. Okafor</div></div><span class="badge badge-ok"><span class="dot"></span>Confirmed</span></div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="cols c2" style="margin-top:2rem;column-gap:3rem">
+      <div class="pain reveal"><span class="icon-chip" data-icon="palette"></span><div><h4>Cold, clinical colour</h4><p class="muted">Default medical blue and white signal “institution”, not “someone who cares about me”.</p></div></div>
+      <div class="pain reveal"><span class="icon-chip" data-icon="lock"></span><div><h4>Booking behind a login wall</h4><p class="muted">Basic tasks such as finding a time are hidden behind accounts, phone trees and forms.</p></div></div>
+      <div class="pain reveal"><span class="icon-chip" data-icon="doc"></span><div><h4>Jargon and dense forms</h4><p class="muted">Billing codes and clinical shorthand leak into patient-facing screens.</p></div></div>
+      <div class="pain reveal"><span class="icon-chip" data-icon="grid"></span><div><h4>Portals built for admin, not people</h4><p class="muted">Information is organised around departments and records rather than the next thing a person needs to do.</p></div></div>
+    </div>
+
+    <div class="sub-h"><span class="k">1.3</span><h3>What we set out to achieve</h3></div>
+    <div class="panel dk" style="padding:clamp(1.5rem,4vw,3rem)"><div class="cols c3" id="goals"></div></div>
+  </div>
+</section>
+
+<!-- ====================== 02 AUDIENCE ====================== -->
+<section class="section ch tint" id="c02" data-title="02 · Audience">
+  <div class="container">
+    <header class="ch-head"><span class="ch-num" aria-hidden="true">02</span><div><span class="eyebrow">Audience</span><h2>Designed for people who <em>are busy being well.</em></h2><p class="lead">Young professionals, families and health-conscious adults share a need: care that fits into a full life, explained in plain language, with no hoops.</p></div></header>
+    <div class="alert alert-info reveal" style="margin-bottom:2rem"><span data-icon="info"></span><div><b>Proto-personas</b>These are assumption-based personas drawn from desk observation. They are a starting point for design decisions and would be tested and refined through interviews.</div></div>
+    <div class="cols c3" id="personas"></div>
+
+    <div class="sub-h"><span class="k">2.2</span><h3>Jobs to be done</h3></div>
+    <div class="jtbd reveal">
+      <span>Book without calling</span><span>Find someone who “gets” me</span><span>Understand what happened at my visit</span><span>Keep my whole family organised</span><span>Feel prepared before I arrive</span><span>Know what it will cost</span><span>Reach a person between visits</span><span>Keep my records in one place</span>
+    </div>
+
+    <div class="sub-h"><span class="k">2.3</span><h3>What this meant for the design</h3></div>
+    <div class="cols c3">
+      <article class="panel sage reveal"><span class="icon-chip" style="background:var(--oat)" data-icon="clock"></span><h4 style="margin-top:1rem">Speed, without feeling rushed</h4><p>Booking must be possible in minutes on a phone, while the visit itself feels unhurried.</p></article>
+      <article class="panel sage reveal"><span class="icon-chip" style="background:var(--oat)" data-icon="users"></span><h4 style="margin-top:1rem">One home for everyone</h4><p>Membership, scheduling and records should work for individuals and households.</p></article>
+      <article class="panel sage reveal"><span class="icon-chip" style="background:var(--oat)" data-icon="message"></span><h4 style="margin-top:1rem">Plain, human language</h4><p>Every label, error and summary reads like a considerate person wrote it.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== 03 BRAND STRATEGY ====================== -->
+<section class="section ch" id="c03" data-title="03 · Brand Strategy">
+  <div class="container">
+    <header class="ch-head"><span class="ch-num" aria-hidden="true">03</span><div><span class="eyebrow">Brand Strategy</span><h2>Care that feels like <em>coming home.</em></h2><p class="lead">The strategy is a single idea, expressed consistently in name, symbol, colour, language and interaction.</p></div></header>
+
+    <div class="panel dk reveal" id="positioning" style="padding:clamp(2rem,5vw,4rem)">
+      <span class="eyebrow">Positioning statement</span>
+      <p class="statement-big" style="margin-top:1.25rem">For busy, health-conscious adults and families who want healthcare that fits their lives, Vita House is the primary care and wellness home that pairs <em>unhurried clinicians</em> with <em>effortless digital access</em>, so staying well feels as natural as coming home.</p>
+    </div>
+
+    <div class="sub-h"><span class="k">3.1</span><h3>Name, idea and tagline</h3></div>
+    <div class="cols c3">
+      <article class="panel reveal"><span class="eyebrow plain">Name</span><h3 style="margin:.75rem 0 .5rem;font-size:2rem"><em>Vita</em> + House</h3><p><b>Vita</b> is Latin for “life”. <b>House</b> is where life happens, a place of belonging rather than an institution. Together they say: life, looked after at home.</p></article>
+      <article class="panel reveal"><span class="eyebrow plain">Brand idea</span><h3 style="margin:.75rem 0 .5rem;font-size:2rem">Care that feels like <em>coming home</em></h3><p>Every touchpoint should lower shoulders: warm light, clear words, a door that is always open.</p></article>
+      <article class="panel reveal"><span class="eyebrow plain">Tagline</span><h3 style="margin:.75rem 0 .5rem;font-size:2rem">Health, at home <em>in your life.</em></h3><p>Two meanings on purpose: health that lives comfortably in your day-to-day, and a healthcare home you feel at ease in.</p></article>
+    </div>
+
+    <div class="sub-h"><span class="k">3.2</span><h3>Where Vita House sits</h3></div>
+    <div class="split" style="align-items:center;gap:clamp(2rem,5vw,4rem)">
+      <div class="pos reveal" role="img" aria-label="Positioning map: axes clinical to warm and traditional to contemporary. Vita House occupies warm and contemporary.">
+        <span class="ax t">Warm &amp; human</span><span class="ax b">Clinical &amp; institutional</span><span class="ax l">Traditional</span><span class="ax r">Contemporary</span>
+        <div class="dot" style="left:24%;top:78%"><i></i>Hospital patient portals</div>
+        <div class="dot" style="left:34%;top:58%"><i></i>Big-chain urgent care</div>
+        <div class="dot" style="left:76%;top:70%"><i></i>Telehealth apps</div>
+        <div class="dot" style="left:30%;top:28%"><i></i>Neighbourhood practices</div>
+        <div class="dot" style="left:82%;top:40%"><i></i>Wellness &amp; concierge clubs</div>
+        <div class="dot us" style="left:74%;top:19%"><i id="posMark"></i>Vita House</div>
+      </div>
+      <div class="stack" style="--gap:1.25rem"><p class="lead">The open space is a healthcare brand that is genuinely <b>warm and human</b> yet as <b>modern and convenient</b> as the best digital products, without becoming a boutique club or a clinical utility.</p><ul class="plain stack" style="--gap:.9rem"><li class="row" style="flex-wrap:nowrap;align-items:flex-start;gap:.8rem"><span class="num-badge">1</span><span><b>Warm and professional.</b> Soft colour and kind language, backed by rigorous information design.</span></li><li class="row" style="flex-wrap:nowrap;align-items:flex-start;gap:.8rem"><span class="num-badge">2</span><span><b>Accessible to everyone.</b> Not a premium club: insurance accepted, clear pricing.</span></li><li class="row" style="flex-wrap:nowrap;align-items:flex-start;gap:.8rem"><span class="num-badge">3</span><span><b>One system.</b> The same warmth in the house, on the web and in the app.</span></li></ul><p class="tiny muted">Illustrative positioning of categories (no specific companies).</p></div>
+    </div>
+
+    <div class="sub-h"><span class="k">3.3</span><h3>Brand personality</h3></div>
+    <p class="sub-p">Six traits. Each one has a design rule and a voice rule, so the personality shows up in decisions, not just adjectives.</p>
+    <div class="cols c3" id="pillars"></div>
+
+    <div class="sub-h"><span class="k">3.4</span><h3>Voice &amp; tone</h3></div>
+    <div class="split" style="gap:clamp(2rem,5vw,4rem);align-items:start">
+      <div class="stack" style="--gap:1.25rem"><p class="lead">Vita House sounds like a thoughtful friend who happens to be very good at healthcare: calm, specific and kind. It never scares, scolds or hides behind jargon.</p>
+        <div class="cols c2"><div class="panel"><h4>Principles</h4><ul class="plain stack" style="--gap:.5rem;font-size:.9375rem"><li>Say the useful thing first.</li><li>Use everyday words.</li><li>Name the next step.</li><li>Never blame the reader.</li></ul></div><div class="panel"><h4>Reading level</h4><p>Patient-facing copy aims for roughly an 8th-grade reading level, with short sentences and no unexplained acronyms.</p></div></div></div>
+      <div class="voice">
+        <div class="say yes reveal"><small>We say</small>“You're all set, Maya. We've sent the details to your email.”</div>
+        <div class="say no reveal"><small>We avoid</small>“Appointment confirmed. Reference ID: 7741-A. Please arrive per policy.”</div>
+        <div class="say yes reveal"><small>We say</small>“Enter a phone number like (555) 555-0100 so we can send reminders.”</div>
+        <div class="say no reveal"><small>We avoid</small>“Invalid input.”</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== 04 VISUAL IDENTITY ====================== -->
+<section class="section ch" id="c04" data-title="04 · Visual Identity">
+  <div class="container">
+    <header class="ch-head"><span class="ch-num" aria-hidden="true">04</span><div><span class="eyebrow">Visual Identity</span><h2>A doorway, a sprout and <em>a little sunlight.</em></h2><p class="lead">A sophisticated healthcare identity built from warm neutrals, soft green and deep charcoal, with clay and honey as quiet accents, and not a trace of clinical blue.</p></div></header>
+
+    <div class="sub-h"><span class="k">4.1</span><h3>The logo: “The Open Door”</h3></div>
+    <div class="split" style="align-items:stretch;gap:clamp(1.5rem,4vw,3rem)">
+      <div class="logo-stage reveal" id="logoStage" role="img" aria-label="The Vita House symbol with construction guides"></div>
+      <div class="concept-3 reveal" id="concept3"></div>
+    </div>
+    <p class="cap"><b>Construction.</b> The arch is a half-circle on a rectangle, 52 units wide. The V is a single 7-unit stroke with round caps, centred on the arch. The sun sits one stroke-width above the V, surrounded by a ring of breathing room that becomes the logo's signature “halo”.</p>
+
+    <div class="sub-h"><span class="k">4.2</span><h3>Wordmark and lockups</h3></div>
+    <div class="cols c4" id="lockups"></div>
+    <div class="cols c3" style="margin-top:1.25rem">
+      <article class="panel reveal"><h4>Soft serif</h4><p>Fraunces, with its “soft” optical setting, gives the name warmth without losing professionalism.</p></article>
+      <article class="panel reveal"><h4>Roman + italic</h4><p><b>Vita</b> stands upright; <i style="font-family:var(--font-display);color:var(--moss-700)">House</i> leans in, like a person in a doorway. The pair carries the brand's human voice.</p></article>
+      <article class="panel reveal"><h4>Title case, never all-caps</h4><p>Friendly and legible at every size. The name is never shouted, hyphenated or abbreviated.</p></article>
+    </div>
+
+    <div class="sub-h"><span class="k">4.3</span><h3>Logo on colour</h3></div>
+    <div class="cols c3" id="logoBgs"></div>
+
+    <div class="sub-h"><span class="k">4.4</span><h3>Clear space, minimum size and misuse</h3></div>
+    <div class="cols c3">
+      <div class="reveal"><div class="clear-space" id="clearSpace"></div><p class="cap"><b>Clear space</b> equals twice the stroke width of the V (“x”) on every side.</p></div>
+      <div class="reveal"><div class="panel" style="min-height:100%"><h4>Minimum sizes</h4><div class="stack" style="--gap:1.25rem;margin-top:1rem" id="minSizes"></div></div></div>
+      <div class="reveal"><div class="panel sage" style="min-height:100%"><h4>When the logo is not enough</h4><p>On photography or busy backgrounds, place the logo on a solid Linen or Moss plate. Never place it directly over faces.</p><ul class="plain stack" style="--gap:.5rem;margin-top:1rem;font-size:.9375rem"><li class="row" style="flex-wrap:nowrap;gap:.6rem;align-items:flex-start"><span data-icon="check"></span>Use the symbol alone below 96px wide</li><li class="row" style="flex-wrap:nowrap;gap:.6rem;align-items:flex-start"><span data-icon="check"></span>Use the mono version on single-colour print</li></ul></div></div>
+    </div>
+    <div class="cols c4" id="misuse" style="margin-top:1.25rem"></div>
+
+    <div class="sub-h"><span class="k">4.5</span><h3>Colour system</h3></div>
+    <p class="sub-p">Warm neutrals do the heavy lifting. Soft sage and deep moss carry the brand and every primary action. Clay, honey and blush are used sparingly, for warmth and emphasis, never for status alone.</p>
+    <div class="sw-grid" id="swatches"></div>
+    <div class="cols c2" style="margin-top:2rem;align-items:start">
+      <div class="reveal"><h4 style="margin-bottom:.75rem">Proportion of use</h4><div class="ratio-bar" role="img" aria-label="Colour proportion: 55 percent warm neutrals, 25 percent greens, 12 percent charcoal, 8 percent accents"><div style="flex:55;background:var(--linen)">Neutrals 55%</div><div style="flex:25;background:var(--moss-700);color:#fff">Greens 25%</div><div style="flex:12;background:var(--ink);color:var(--oat)">Ink 12%</div><div style="flex:8;background:var(--honey-400);color:var(--moss-900)">8%</div></div>
+        <h4 style="margin:1.75rem 0 .75rem">Green ramp</h4><div class="ramp" id="rampG" style="grid-template-columns:repeat(8,1fr)"></div><h4 style="margin:1.25rem 0 .75rem">Warm accents</h4><div class="ramp" id="rampW" style="grid-template-columns:repeat(8,1fr)"></div></div>
+      <div class="panel sage reveal"><h4>No blue, by design</h4><p>Status colours stay inside the palette: <b>moss</b> for success, <b>honey</b> for caution, <b>brick</b> for errors, and warm neutrals for information. Every status also carries an icon and a text label, so colour is never the only signal.</p><div class="row" style="margin-top:1.1rem;gap:.6rem"><span class="badge badge-ok"><span class="dot"></span>Confirmed</span><span class="badge badge-warn"><span class="dot"></span>Waitlist</span><span class="badge badge-err"><span class="dot"></span>Cancelled</span><span class="badge"><span class="dot"></span>Completed</span></div></div>
+    </div>
+    <h4 id="pairings" style="margin:2.5rem 0 .75rem">Accessible pairings (live calculation)</h4>
+    <p class="sub-p" style="margin-bottom:1rem">Every text pairing in the system meets WCAG 2.2 AA (4.5:1) and most reach AAA (7:1). These ratios are calculated from the actual hex values.</p>
+    <div style="overflow-x:auto"><table class="contrast" id="contrast"><caption class="sr-only">Contrast ratios for key colour pairings</caption></table></div>
+
+    <div class="sub-h"><span class="k">4.6</span><h3>Typography</h3></div>
+    <div class="split" style="gap:clamp(2rem,5vw,4rem);align-items:start">
+      <div class="specimen reveal"><div><span class="eyebrow plain">Display · Fraunces</span><div class="aa" aria-hidden="true">Aa<em>g</em></div></div><p class="lead" style="max-width:26em">A soft, optical-size serif with a friendly, slightly wonky italic. Used for headlines, numerals and moments of warmth.</p><div class="glyphs" aria-hidden="true" id="glyphsA"></div></div>
+      <div class="specimen reveal"><div><span class="eyebrow plain">Interface · Figtree</span><div class="aa" style="font-family:var(--font-ui);font-weight:600;letter-spacing:-.05em;font-variation-settings:normal" aria-hidden="true">Aa<span style="color:var(--moss-700)">g</span></div></div><p class="lead" style="max-width:26em">A clear, open geometric sans, excellent at small sizes and in forms. Used for body copy, labels and controls.</p><div class="glyphs" aria-hidden="true" id="glyphsB" style="font-family:var(--font-ui);font-weight:600"></div></div>
+    </div>
+    <div class="panel reveal" style="margin-top:2rem" id="typeScale"></div>
+    <div class="cols c4" style="margin-top:1.25rem">
+      <div class="panel"><div class="metric"><b>17px</b><span>minimum body size, scalable to 200%</span></div></div>
+      <div class="panel"><div class="metric"><b>1.62</b><span>body line-height for comfortable reading</span></div></div>
+      <div class="panel"><div class="metric"><b>38em</b><span>maximum line length for long text</span></div></div>
+      <div class="panel"><div class="metric"><b>tnum</b><span>tabular numerals for times, prices and dates</span></div></div>
+    </div>
+
+    <div class="sub-h"><span class="k">4.7</span><h3>Photography direction</h3></div>
+    <div class="alert alert-warn reveal" style="margin-bottom:1.5rem"><span data-icon="info"></span><div><b>Illustrated stand-ins</b>The frames below are illustrated art-direction studies. They show composition, crop and mood for a future photoshoot, and stand in for photography throughout this concept.</div></div>
+    <div class="cols c3" id="photoFrames"></div>
+    <div class="cols c3" style="margin-top:1.25rem" id="photoRules"></div>
+    <div class="cols c2" style="margin-top:1.25rem;align-items:start"><div class="panel reveal"><h4>Do</h4><ul class="plain dd do" id="photoDo"></ul></div><div class="panel reveal"><h4>Don't</h4><ul class="plain dd dont" id="photoDont"></ul></div></div>
+
+    <div class="sub-h"><span class="k">4.8</span><h3>Illustration &amp; graphic system</h3></div>
+    <p class="sub-p">Everything grows out of the logo: arches for doorways, sprigs for growth, sunrise arcs for calm. Shapes are flat, soft-edged and built from the palette.</p>
+    <div class="cols c3" id="gfx"></div>
+
+    <div class="sub-h"><span class="k">4.9</span><h3>Iconography</h3></div>
+    <div class="split" style="gap:clamp(1.5rem,4vw,3rem);align-items:start">
+      <div class="ic-spec reveal" id="iconSpec"></div>
+      <div class="stack" style="--gap:1.25rem"><p class="lead">A custom “soft line” set on a 24px grid: 1.7px strokes, round caps and joins, 2px safe area. Icons always travel with a text label.</p>
+        <div class="cols c2"><div class="panel"><div class="metric"><b>24</b><span>px grid, 2px padding</span></div></div><div class="panel"><div class="metric"><b>1.7</b><span>px stroke, round ends</span></div></div></div>
+        <p class="cap">Sizes: 20px inline, 24px default, 32px in feature tiles, 40px+ in empty states.</p></div>
+    </div>
+    <div class="icon-grid reveal" id="iconGrid" style="margin-top:2rem"></div>
+  </div>
+</section>
+
+<!-- ====================== 05 UX STRATEGY ====================== -->
+<section class="section ch tint" id="c05" data-title="05 · UX Strategy">
+  <div class="container">
+    <header class="ch-head"><span class="ch-num" aria-hidden="true">05</span><div><span class="eyebrow">UX Strategy</span><h2>Clear first. <em>Calm always.</em></h2><p class="lead">The interface should feel extremely clear and accessible. Six principles guided every screen, from the information hierarchy to the wording of an error.</p></div></header>
+
+    <div class="sub-h"><span class="k">5.1</span><h3>Design principles</h3></div>
+    <div class="cols c3" id="principles"></div>
+
+    <div class="sub-h"><span class="k">5.2</span><h3>Patient journey</h3></div>
+    <p class="sub-p">An assumption-based journey for the “Maya” persona, used to find where a calmer, clearer experience would make the biggest difference.</p>
+    <div class="journey reveal" id="journey"></div>
+
+    <div class="sub-h"><span class="k">5.3</span><h3>Accessibility strategy</h3></div>
+    <div class="split" style="gap:clamp(2rem,5vw,4rem);align-items:start">
+      <div class="panel reveal"><ul class="plain wcag" id="wcag"></ul></div>
+      <div class="stack" style="--gap:1.25rem">
+        <div class="spec-card reveal"><h4>Focus &amp; target size <em>WCAG 2.4.7 · 2.5.8</em></h4>
+          <div class="states"><div class="state"><small>Default</small><button class="btn btn-primary" type="button" tabindex="-1">Continue</button></div><div class="state"><small>Keyboard focus</small><button class="btn btn-primary demo-focus" type="button" tabindex="-1">Continue</button></div><div class="state"><small>44px minimum</small><span class="icon-btn" style="outline:1.5px dashed var(--clay-500);outline-offset:3px" data-icon="plus"></span></div></div></div>
+        <div class="spec-card reveal"><h4>Error pattern <em>WCAG 3.3.1 · 3.3.3</em></h4>
+          <div class="alert alert-err err-summary" style="margin:0"><span data-icon="alert-circle"></span><div><b>2 things need your attention</b><ul style="margin:.4rem 0 0;padding-left:1.1rem"><li><a href="#c05" style="color:inherit;font-weight:600">Enter a 10-digit number, like (555) 555-0100.</a></li><li><a href="#c05" style="color:inherit;font-weight:600">Tick the box to agree before confirming.</a></li></ul></div></div>
+          <div class="field is-invalid"><label for="d-ph">Mobile phone <span aria-hidden="true">*</span></label><input class="input" id="d-ph" value="555" aria-invalid="true" tabindex="-1" aria-describedby="d-ph-e"><p class="error-text" id="d-ph-e"><span data-icon="alert-circle"></span><span>Enter a 10-digit number, like (555) 555-0100.</span></p></div></div>
+      </div>
+    </div>
+
+    <div class="sub-h"><span class="k">5.4</span><h3>How we would measure success</h3></div>
+    <p class="sub-p">These are design targets to validate, not results. As a concept project, no live usage data exists.</p>
+    <div class="cols c4">
+      <div class="panel reveal"><div class="metric"><b>&lt; 3 min</b><span>target time to book a first visit on mobile</span></div></div>
+      <div class="panel reveal"><div class="metric"><b>6</b><span>steps, each with a single clear decision</span></div></div>
+      <div class="panel reveal"><div class="metric"><b>100%</b><span>of form fields visibly labelled, with inline help</span></div></div>
+      <div class="panel reveal"><div class="metric"><b>AA</b><span>WCAG 2.2 conformance target, audited with assistive tech</span></div></div>
+    </div>
+    <div class="cols c4" style="margin-top:1.25rem">
+      <article class="panel sage reveal"><h4>1 · Usability testing</h4><p>Moderated sessions with five people per persona, focused on booking and finding a result.</p></article>
+      <article class="panel sage reveal"><h4>2 · Tree testing</h4><p>Validate that people can find services, providers and documents from the navigation labels.</p></article>
+      <article class="panel sage reveal"><h4>3 · Assistive tech audit</h4><p>Keyboard-only, VoiceOver, NVDA and 200% zoom walkthroughs of each flow.</p></article>
+      <article class="panel sage reveal"><h4>4 · Funnel analytics</h4><p>Track completion and drop-off per booking step in a pilot to find friction.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== 06 INFORMATION ARCHITECTURE ====================== -->
+<section class="section ch" id="c06" data-title="06 · Information Architecture">
+  <div class="container">
+    <header class="ch-head"><span class="ch-num" aria-hidden="true">06</span><div><span class="eyebrow">Information Architecture</span><h2>Simple navigation, <em>one obvious next step.</em></h2><p class="lead">Ten website pages, a six-step booking journey and a seven-section dashboard, organised so people can always find what they need and what to do next.</p></div></header>
+
+    <div class="sub-h"><span class="k">6.1</span><h3>Sitemap</h3></div>
+    <div class="tree reveal" role="img" aria-label="Sitemap of the Vita House website and patient dashboard"><div class="tree-in">
+      <div class="node root">Vita House<small>vitahouse.example</small></div>
+      <div class="row-n" style="align-items:flex-start;position:relative"><div class="hbar"></div>
+        <div class="col-n"><div class="node l1">Home</div><div class="sub-n"><div class="node">Hero</div><div class="node">Proposition</div><div class="node">Services</div><div class="node">How it works</div><div class="node">Providers</div><div class="node">Membership</div><div class="node">Dashboard</div><div class="node">Stories</div><div class="node">Locations</div></div></div>
+        <div class="col-n"><div class="node l1">Services<small>9</small></div><div class="sub-n"><div class="node">Primary care</div><div class="node">Wellness exam</div><div class="node">Labs</div><div class="node">Mental wellness</div><div class="node">Nutrition</div><div class="node">Women's health</div><div class="node">Family</div><div class="node">Vaccines</div><div class="node">Sleep</div></div></div>
+        <div class="col-n"><div class="node l1">Providers</div><div class="sub-n"><div class="node">Filter &amp; search</div><div class="node">Provider detail<small>×8</small></div><div class="node">Availability</div></div></div>
+        <div class="col-n"><div class="node l1">Membership</div><div class="sub-n"><div class="node">Plans</div><div class="node">Compare</div><div class="node">FAQs</div></div></div>
+        <div class="col-n"><div class="node l1">Locations</div><div class="sub-n"><div class="node">6 houses</div><div class="node">Map</div><div class="node">Virtual care</div></div></div>
+        <div class="col-n"><div class="node l1">Resources</div><div class="sub-n"><div class="node">Articles<small>×8</small></div><div class="node">Topics &amp; search</div><div class="node">Newsletter</div></div></div>
+        <div class="col-n"><div class="node l1">About</div><div class="sub-n"><div class="node">Values</div><div class="node">Accessibility</div><div class="node">Concept note</div></div></div>
+        <div class="col-n"><div class="node l1">Contact</div><div class="sub-n"><div class="node">Form</div><div class="node">FAQs</div></div></div>
+        <div class="col-n"><div class="node cta">Book appointment</div><div class="sub-n"><div class="node">1 Service</div><div class="node">2 Provider</div><div class="node">3 Location</div><div class="node">4 Date &amp; time</div><div class="node">5 Your details</div><div class="node">6 Confirmed</div></div></div>
+        <div class="col-n"><div class="node pt">Patient dashboard</div><div class="sub-n"><div class="node">Overview</div><div class="node">Appointments</div><div class="node">Care team</div><div class="node">Messages</div><div class="node">Documents</div><div class="node">Membership</div><div class="node">Settings</div></div></div>
+      </div>
+    </div></div>
+
+    <div class="sub-h"><span class="k">6.2</span><h3>Navigation model</h3></div>
+    <div class="cols c3">
+      <article class="panel reveal"><span class="icon-chip" data-icon="menu"></span><h4 style="margin-top:1rem">Six items, never more</h4><p>Services, Providers, Membership, Locations, Resources, About. No mega menus. “Book a visit” is always one tap away and always the only filled button in the header.</p></article>
+      <article class="panel reveal"><span class="icon-chip clay" data-icon="home"></span><h4 style="margin-top:1rem">The dashboard is its own place</h4><p>Signed-in tasks live in a dedicated space with a sidebar on desktop and a bottom tab bar on mobile: Home, Visits, Messages, Records and More.</p></article>
+      <article class="panel reveal"><span class="icon-chip honey" data-icon="compass"></span><h4 style="margin-top:1rem">Breadcrumbs and anchors</h4><p>Inner pages show where you are. Long pages offer anchor chips and a sticky summary, so nobody gets lost.</p></article>
+    </div>
+
+    <div class="sub-h"><span class="k">6.3</span><h3>Appointment flow</h3></div>
+    <p class="sub-p">Every step has one decision. Every branch (empty, error, conflict) has a designed way back.</p>
+    <div class="flow reveal" id="flow"></div>
+    <div class="flow-branch reveal" id="flowBranch"></div>
+
+    <div class="sub-h"><span class="k">6.4</span><h3>Content model</h3></div>
+    <div class="er reveal" id="er"></div>
+  </div>
+</section>
+
+<!-- ====================== 07 DESIGN SYSTEM ====================== -->
+<section class="section ch tint" id="c07" data-title="07 · Design System">
+  <div class="container">
+    <header class="ch-head"><span class="ch-num" aria-hidden="true">07</span><div><span class="eyebrow">Design System</span><h2>Calm components, <em>built to be reused.</em></h2><p class="lead">The website, booking flow and dashboard share one system of tokens and components. Everything below is rendered from the same code as the live product.</p></div></header>
+
+    <div class="sub-h"><span class="k">7.1</span><h3>Foundations</h3></div>
+    <div class="cols c2">
+      <div class="spec-card reveal"><h4>Spacing <em>4px base</em></h4><div class="space-row" id="spacing"></div></div>
+      <div class="spec-card reveal"><h4>Radius <em>soft by default</em></h4><div class="rad-row" id="radius"></div></div>
+      <div class="spec-card reveal"><h4>Elevation <em>warm, low-contrast shadows</em></h4><div class="elev-row"><div style="box-shadow:var(--shadow-1)">shadow-1</div><div style="box-shadow:var(--shadow-2)">shadow-2</div><div style="box-shadow:var(--shadow-3)">shadow-3</div></div></div>
+      <div class="spec-card reveal"><h4>Motion <em>calm, never decorative</em></h4><div class="stack" style="--gap:.7rem;font-size:.9375rem"><div class="row between"><b>Fast · 180ms</b><span class="muted">hover, press, focus</span></div><div class="row between"><b>Base · 320ms</b><span class="muted">cards, dialogs, steps</span></div><div class="row between"><b>Slow · 800ms</b><span class="muted">reveal on scroll</span></div><div class="row between"><b>Easing</b><code style="font-size:.8125rem">cubic-bezier(.22,.8,.3,1)</code></div><p class="tiny muted">All animation is removed when reduced motion is requested.</p></div></div>
+    </div>
+
+    <div class="sub-h"><span class="k">7.2</span><h3>Buttons</h3></div>
+    <div class="spec-card reveal">
+      <div class="states" style="gap:1.75rem 2.5rem">
+        <div class="state"><small>Primary</small><button class="btn btn-primary" type="button" tabindex="-1">Book a visit</button></div>
+        <div class="state"><small>Hover</small><button class="btn btn-primary hov-btn" type="button" tabindex="-1">Book a visit</button></div>
+        <div class="state"><small>Focus</small><button class="btn btn-primary demo-focus" type="button" tabindex="-1">Book a visit</button></div>
+        <div class="state"><small>Loading</small><button class="btn btn-primary is-loading" type="button" tabindex="-1">Sending</button></div>
+        <div class="state"><small>Disabled</small><button class="btn btn-primary" type="button" disabled>Book a visit</button></div>
+      </div>
+      <hr class="divider" style="margin:.25rem 0">
+      <div class="states" style="gap:1.75rem 2.5rem">
+        <div class="state"><small>Secondary</small><button class="btn btn-secondary" type="button" tabindex="-1">See how it works</button></div>
+        <div class="state"><small>Soft</small><button class="btn btn-soft" type="button" tabindex="-1">Details</button></div>
+        <div class="state"><small>Text</small><button class="btn btn-text" type="button" tabindex="-1">Change provider</button></div>
+        <div class="state"><small>Danger</small><button class="btn btn-danger" type="button" tabindex="-1">Yes, cancel it</button></div>
+        <div class="state"><small>Sizes</small><div class="row"><button class="btn btn-primary btn-sm" type="button" tabindex="-1">Small</button><button class="btn btn-primary" type="button" tabindex="-1">Default</button><button class="btn btn-primary btn-lg" type="button" tabindex="-1">Large</button></div></div>
+        <div class="state"><small>Icon</small><span class="icon-btn" data-icon="bell"></span></div>
+      </div>
+      <div class="dark" style="margin:.5rem -.5rem -.5rem;padding:1.5rem;border-radius:20px"><div class="states" style="gap:1.5rem 2.5rem"><div class="state"><small style="color:#AFC0AA">On dark · honey</small><button class="btn btn-honey" type="button" tabindex="-1">Join Everyday</button></div><div class="state"><small style="color:#AFC0AA">On dark · light</small><button class="btn btn-light" type="button" tabindex="-1">Book a visit</button></div><div class="state"><small style="color:#AFC0AA">On dark · outline</small><button class="btn btn-outline-light" type="button" tabindex="-1">Reschedule</button></div></div></div>
+    </div>
+
+    <div class="sub-h"><span class="k">7.3</span><h3>Form fields</h3></div>
+    <div class="cols c3">
+      <div class="spec-card reveal"><h4>Text input <em>states</em></h4>
+        <div class="field"><label for="s1">Default</label><input class="input" id="s1" placeholder="First name" tabindex="-1"></div>
+        <div class="field"><label for="s2">Focus</label><input class="input demo-focus" id="s2" value="Maya" tabindex="-1"></div>
+        <div class="field is-valid"><label for="s3">Filled</label><input class="input" id="s3" value="maya.bennett@example.com" tabindex="-1"></div>
+        <div class="field is-invalid"><label for="s4">Error</label><input class="input" id="s4" value="maya@" aria-invalid="true" tabindex="-1" aria-describedby="s4e"><p class="error-text" id="s4e"><span data-icon="alert-circle"></span><span>Enter an email address like name@example.com.</span></p></div>
+        <div class="field"><label for="s5">Disabled</label><input class="input" id="s5" value="Not available" disabled></div></div>
+      <div class="spec-card reveal"><h4>Select, text area &amp; hint</h4>
+        <div class="field"><label for="s6">Insurance type <span class="opt">(optional)</span></label><select class="select" id="s6" tabindex="-1"><option>Employer plan</option></select></div>
+        <div class="field"><label for="s7">What would you like to talk about?</label><textarea class="textarea" id="s7" tabindex="-1" style="min-height:5.5rem">A check-in, and a question about low energy.</textarea><p class="hint">A sentence or two helps your clinician prepare.</p></div>
+        <div class="field"><label class="check"><input type="checkbox" checked tabindex="-1"><span>Text me reminders 24 hours before my visit.</span></label></div>
+        <label class="switch"><span><b>Reduce motion</b></span><input type="checkbox" role="switch" checked tabindex="-1"></label>
+        <div class="segmented" style="width:fit-content"><label><input type="radio" name="sg1" checked tabindex="-1"><span>I'm new here</span></label><label><input type="radio" name="sg1" tabindex="-1"><span>Returning</span></label></div></div>
+      <div class="spec-card reveal"><h4>Choice cards</h4>
+        <label class="choice"><input type="radio" name="cc1" checked tabindex="-1"><span class="icon-chip" data-icon="stethoscope"></span><span class="ct"><b>Primary care</b><span>30–45 min · In person or video</span></span><span class="tick"><span data-icon="check"></span></span></label>
+        <label class="choice"><input type="radio" name="cc1" tabindex="-1"><span class="icon-chip" data-icon="smile"></span><span class="ct"><b>Mental wellness</b><span>50 min · In person or video</span></span><span class="tick"><span data-icon="check"></span></span></label>
+        <label class="choice is-disabled"><input type="radio" name="cc1" disabled><span class="avatar lg" id="dsAv"></span><span class="ct"><b>Dr. Elena Vasquez</b><span>Not accepting new patients</span></span><span class="badge badge-warn">Waitlist</span></label></div>
+    </div>
+
+    <div class="sub-h"><span class="k">7.4</span><h3>Date &amp; time picker</h3></div>
+    <div class="spec-card reveal">
+      <ol class="stepper" id="dsStepper" style="margin-bottom:.5rem"></ol>
+      <div class="days" id="dsDays"></div>
+      <div class="slot-group fieldset" style="margin-top:.5rem"><legend>Morning</legend><div class="slots" id="dsSlots"></div></div>
+    </div>
+
+    <div class="sub-h"><span class="k">7.5</span><h3>Status, feedback &amp; empty states</h3></div>
+    <div class="cols c2">
+      <div class="spec-card reveal"><h4>Badges &amp; tabs</h4><div class="row" style="gap:.6rem"><span class="badge badge-ok"><span class="dot"></span>Confirmed</span><span class="badge badge-warn"><span class="dot"></span>Waitlist</span><span class="badge badge-err"><span class="dot"></span>Cancelled</span><span class="badge"><span class="dot"></span>Completed</span><span class="badge badge-clay">New</span></div>
+        <div class="tabs" role="presentation"><span class="tab" aria-selected="true">Upcoming<span class="count">2</span></span><span class="tab">Past<span class="count">3</span></span><span class="tab">Cancelled<span class="count">1</span></span></div>
+        <div class="chips"><span class="chip is-on">All</span><span class="chip">Lab results</span><span class="chip">Forms</span></div>
+        <div class="progress"><i style="width:60%"></i></div></div>
+      <div class="spec-card reveal"><h4>Alerts &amp; toast</h4>
+        <div class="alert alert-ok"><span data-icon="check-circle"></span><div><b>You're on the list</b>Your first email arrives next month.</div></div>
+        <div class="alert alert-warn"><span data-icon="alert"></span><div><b>Check your times</b>Times are shown in local time at the house you chose.</div></div>
+        <div class="alert alert-err"><span data-icon="alert-circle"></span><div><b>That time was just taken</b>Here are the closest openings.</div></div>
+        <div class="toast" style="width:fit-content;animation:none"><span data-icon="check-circle"></span><span>Appointment rescheduled</span></div></div>
+      <div class="spec-card reveal"><h4>Empty state</h4><div class="empty" id="dsEmpty"></div></div>
+      <div class="spec-card reveal"><h4>Loading skeleton</h4><div class="stack" style="--gap:.8rem"><div class="row" style="flex-wrap:nowrap;gap:1rem"><div class="skeleton" style="width:3.5rem;height:3.75rem;border-radius:16px"></div><div style="flex:1;display:grid;gap:.5rem"><div class="skeleton" style="height:1rem;width:60%"></div><div class="skeleton" style="height:.85rem;width:85%"></div></div></div><div class="row" style="flex-wrap:nowrap;gap:1rem"><div class="skeleton" style="width:3.5rem;height:3.75rem;border-radius:16px"></div><div style="flex:1;display:grid;gap:.5rem"><div class="skeleton" style="height:1rem;width:45%"></div><div class="skeleton" style="height:.85rem;width:70%"></div></div></div></div></div>
+    </div>
+
+    <div class="sub-h"><span class="k">7.6</span><h3>Cards</h3></div>
+    <div class="cols c4" id="dsCards"></div>
+
+    <div class="sub-h"><span class="k">7.7</span><h3>Writing patterns</h3></div>
+    <div class="cols c3">
+      <article class="panel reveal"><span class="eyebrow plain">Error</span><h4 style="margin:.6rem 0 .4rem">What happened + how to fix it</h4><p>“Enter a 10-digit number, like (555) 555-0100.”</p></article>
+      <article class="panel reveal"><span class="eyebrow plain">Empty</span><h4 style="margin:.6rem 0 .4rem">What belongs here + what to do next</h4><p>“No upcoming visits. Book a visit whenever you're ready.”</p></article>
+      <article class="panel reveal"><span class="eyebrow plain">Confirmation</span><h4 style="margin:.6rem 0 .4rem">Reassurance + what happens next</h4><p>“You're all set, Maya. We've sent the details to your email.”</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== 08 WEBSITE ====================== -->
+<section class="section ch dark" id="c08" data-title="08 · Website">
+  <div class="container">
+    <header class="ch-head"><span class="ch-num" aria-hidden="true">08</span><div><span class="eyebrow">Website</span><h2>A warm, responsive website <em>that explains itself.</em></h2><p class="lead">Ten pages that answer the questions people have before they book: who will I see, where, how much, and what will it be like. Every frame below is the live site, scaled down.</p></div></header>
+
+    <div class="sub-h"><span class="k">8.1</span><h3>Homepage</h3></div>
+    <div class="split" style="grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);align-items:start;gap:clamp(1.5rem,4vw,3.5rem)">
+      <div id="homeFrames" class="stack" style="--gap:1.5rem"></div>
+      <div>
+        <p class="sub-p" style="margin-top:0">The home page is a story in ten beats, each with one job. The page ends where it should: on a single, calm call to action.</p>
+        <ol class="plain annot" id="anatomy"></ol>
+      </div>
+    </div>
+
+    <div class="sub-h"><span class="k">8.2</span><h3>Page by page</h3></div>
+    <div class="frames f3" id="pageFrames"></div>
+
+    <div class="sub-h"><span class="k">8.3</span><h3>Responsive behaviour</h3></div>
+    <p class="sub-p">One layout system flexes from a 1440px desktop to a 390px phone: the navigation collapses into a full-screen menu, grids reflow to a single column, and tap targets stay at 44px or larger.</p>
+    <div class="resp" id="resp"></div>
+  </div>
+</section>
+
+<!-- ====================== 09 APPOINTMENT EXPERIENCE ====================== -->
+<section class="section ch" id="c09" data-title="09 · Appointment Experience">
+  <div class="container">
+    <header class="ch-head"><span class="ch-num" aria-hidden="true">09</span><div><span class="eyebrow">Appointment Experience</span><h2>Six steps. <em>One decision each.</em></h2><p class="lead">A complete booking journey: choose a service, a provider, a location and a time, tell us a little about you, and receive a clear confirmation. It works end to end, and saves your appointment to the dashboard.</p></div></header>
+
+    <div class="sub-h"><span class="k">9.1</span><h3>The journey</h3></div>
+    <div class="steps-strip" id="bookSteps"></div>
+    <div class="row" style="margin-top:2rem"><a class="btn btn-primary btn-lg" href="site/book.html" target="_blank" rel="noopener">Try the booking flow <span data-icon="arrow-up-right"></span></a><span class="muted small">Opens the live prototype. Nothing is sent anywhere.</span></div>
+
+    <div class="sub-h"><span class="k">9.2</span><h3>Designed states: empty, error and conflict</h3></div>
+    <p class="sub-p">Real healthcare booking is mostly edge cases. Each of these has a considered, kind way forward.</p>
+    <div class="frames f2" id="bookStates"></div>
+
+    <div class="sub-h"><span class="k">9.3</span><h3>Details that make it feel calm</h3></div>
+    <div class="cols c3">
+      <article class="panel reveal"><span class="icon-chip" data-icon="eye"></span><h4 style="margin-top:1rem">Always know where you are</h4><p>A six-part progress bar, a step counter on mobile, and a sticky “Your visit” summary with Edit links.</p></article>
+      <article class="panel reveal"><span class="icon-chip clay" data-icon="access"></span><h4 style="margin-top:1rem">Focus and announcements</h4><p>Each step moves focus to its heading and announces “Step 3 of 6” to screen readers. Errors are summarised and linked.</p></article>
+      <article class="panel reveal"><span class="icon-chip honey" data-icon="calendar-check"></span><h4 style="margin-top:1rem">After you book</h4><p>Download a calendar file, tick off a preparation checklist, and see the appointment in your dashboard straight away.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== 10 PATIENT DASHBOARD ====================== -->
+<section class="section ch tint" id="c10" data-title="10 · Patient Dashboard">
+  <div class="container">
+    <header class="ch-head"><span class="ch-num" aria-hidden="true">10</span><div><span class="eyebrow">Patient Dashboard</span><h2>Everything about your care, <em>in one calm place.</em></h2><p class="lead">Upcoming appointments, history, provider information, messages, documents, membership and settings, organised around the next thing a person needs to do.</p></div></header>
+
+    <div class="sub-h"><span class="k">10.1</span><h3>Overview</h3></div>
+    <div class="split" style="grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);align-items:start;gap:clamp(1.5rem,4vw,3.5rem)">
+      <div id="dashHero"></div>
+      <ol class="plain annot" id="dashNotes"></ol>
+    </div>
+
+    <div class="sub-h"><span class="k">10.2</span><h3>Every section</h3></div>
+    <div class="frames f3" id="dashFrames"></div>
+
+    <div class="sub-h"><span class="k">10.3</span><h3>States: new patient and message failure</h3></div>
+    <div class="frames f3" id="dashStates"></div>
+
+    <div class="sub-h"><span class="k">10.4</span><h3>Personal accessibility settings</h3></div>
+    <div class="cols c3">
+      <article class="panel reveal"><span class="icon-chip" data-icon="type"></span><h4 style="margin-top:1rem">Text size</h4><p>Standard, Large and Extra large scale the whole product, with a live preview. The setting is remembered across the website and dashboard.</p></article>
+      <article class="panel reveal"><span class="icon-chip clay" data-icon="sliders"></span><h4 style="margin-top:1rem">Reduce motion</h4><p>Turns off animation everywhere. The system also follows the device's reduced-motion setting automatically.</p></article>
+      <article class="panel reveal"><span class="icon-chip honey" data-icon="bell"></span><h4 style="margin-top:1rem">Notification control</h4><p>Choose text, email or both for reminders, messages and results, with appointment confirmations always sent.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== 11 MOBILE EXPERIENCE ====================== -->
+<section class="section ch dark" id="c11" data-title="11 · Mobile Experience">
+  <div class="container">
+    <header class="ch-head"><span class="ch-num" aria-hidden="true">11</span><div><span class="eyebrow">Mobile Experience</span><h2>Thumb-first, <em>from booking to bedside.</em></h2><p class="lead">Most people will book on a phone, often at night or on a lunch break. The mobile versions of the booking flow and dashboard are designed for one hand and short attention.</p></div></header>
+
+    <div class="sub-h"><span class="k">11.1</span><h3>Booking on mobile</h3></div>
+    <div class="frames phones" id="mBook"></div>
+
+    <div class="sub-h"><span class="k">11.2</span><h3>Dashboard on mobile</h3></div>
+    <div class="frames phones" id="mDash"></div>
+
+    <div class="sub-h"><span class="k">11.3</span><h3>Mobile principles</h3></div>
+    <div class="split" style="gap:clamp(2rem,5vw,4rem);align-items:center">
+      <div class="cols c2" id="mPrinciples"></div>
+      <div class="stack" style="--gap:1rem;justify-items:center"><div id="tzWrap" style="width:min(100%,290px)"></div><div class="tz-legend"><span><i style="background:#8DA886"></i>Easy reach: primary actions and the tab bar</span><span><i style="background:#E8BC5E"></i>Natural reach: lists and content</span><span><i style="background:#D98E6B"></i>Stretch: titles and secondary info</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== 12 FINAL BRAND ECOSYSTEM ====================== -->
+<section class="section ch" id="c12" data-title="12 · Final Brand Ecosystem">
+  <div class="container">
+    <header class="ch-head"><span class="ch-num" aria-hidden="true">12</span><div><span class="eyebrow">Final Brand Ecosystem</span><h2>One idea, <em>everywhere you meet it.</em></h2><p class="lead">From the front door to the phone in your pocket, Vita House looks, sounds and behaves like one warm, calm place.</p></div></header>
+    <div class="eco" id="eco"></div>
+    <p class="cap" style="margin-top:1.25rem">Flat, illustrative mock-ups built from the identity system. Not photographs of real objects.</p>
+
+    <div class="sub-h"><span class="k">12.1</span><h3>Reflection and next steps</h3></div>
+    <div class="reflect">
+      <article class="panel reveal"><h4>What worked</h4><p>One simple idea (the open door) gave every decision a test. The warm palette, soft serif and arch graphic system made a healthcare brand that feels distinctive without being cold.</p></article>
+      <article class="panel reveal"><h4>What I'd do next</h4><p>Test the booking flow with real people from each persona, commission photography from the art-direction studies, and review all copy with clinical and legal advisors.</p></article>
+      <article class="panel reveal"><h4>What this demonstrates</h4><p>Identity work and complex, user-centred product design can come from the same system: strategy, brand, UX, UI and a working front-end, all connected.</p></article>
+    </div>
+    <div class="panel reveal" style="margin-top:1.25rem;display:grid;grid-template-columns:auto 1fr;gap:1.25rem;align-items:center"><span class="stamp-concept" style="transform:none">SELF-INITIATED CONCEPT PROJECT</span><p class="small muted">Vita House is a fictional company. This work is not for a real client, and no part of it is medical advice or a claim about healthcare outcomes. Illustrations, copy, prices, people and places are invented for portfolio purposes.</p></div>
+  </div>
+</section>
+
+<section class="cs-foot" id="end">
+  <div class="container"><span class="eyebrow">Rovard Studios</span><h2>Need a brand and product experience <em>this considered?</em></h2><p class="lead" style="margin-inline:auto">Strategy, identity, UX/UI and a working front-end, designed as one system.</p>
+    <div class="row" style="justify-content:center;margin-top:2rem"><a class="btn btn-honey btn-lg" href="../index.html#contact">Start a project <span data-icon="arrow-up-right"></span></a><a class="btn btn-outline-light btn-lg" href="../index.html#work">Back to portfolio</a></div>
+    <p class="tiny" style="margin-top:2.5rem;color:#AFC0AA">Vita House · Self-initiated concept · 2026 · Designed by Rovard Studios</p></div>
+</section>
+
+<!--CH-NEXT-->
+
+</main>
+
+<script src="site/vh.js"></script><script src="site/data.js"></script><script src="case.js"></script>
+</body>
+</html>

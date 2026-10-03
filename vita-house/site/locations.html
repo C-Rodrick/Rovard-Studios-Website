@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Locations — Vita House</title>
+<meta name="description" content="Six fictional Vita House locations across the United States, plus video visits. A concept project by Rovard Studios.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..600,0..100,0..1;1,9..144,300..600,0..100,0..1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="vh.css">
+<style>
+  .loc-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(2rem, 5vw, 4rem); align-items: start; }
+  .loc-map { position: sticky; top: calc(var(--header-h) + 1rem); background: var(--oat); border: 1px solid var(--line); border-radius: var(--r-xl); padding: 1.5rem; }
+  .loc-list { display: grid; gap: 1.25rem; }
+  .loc { display: grid; gap: 1.1rem; scroll-margin-top: 6.5rem; transition: box-shadow var(--t), border-color var(--t); }
+  .loc:target, .loc.is-active { border-color: var(--moss-700); box-shadow: 0 0 0 2px var(--moss-700); }
+  .loc-head { display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: start; }
+  .loc h2 { font-size: 1.6rem; font-weight: 400; }
+  .loc .map-tile { aspect-ratio: 21 / 8; }
+  .amen { display: flex; flex-wrap: wrap; gap: .5rem; }
+  .amen li { display: inline-flex; align-items: center; gap: .45rem; font-size: .875rem; padding: .35rem .8rem; border-radius: 99px; background: var(--sand-100); color: var(--ink-2); }
+  .hours { display: grid; gap: .25rem; font-size: .9375rem; color: var(--text-2); }
+  .loc-foot { display: flex; flex-wrap: wrap; gap: .6rem; padding-top: 1rem; border-top: 1px solid var(--line); }
+  .team { display: flex; align-items: center; gap: .6rem; }
+  .team .avatar { margin-left: -.55rem; border: 2px solid var(--oat); }
+  .team .avatar:first-child { margin-left: 0; }
+  @media (max-width: 960px) { .loc-layout { grid-template-columns: 1fr; } .loc-map { position: static; order: -1; } }
+</style>
+</head>
+<body>
+<main id="main">
+  <section class="page-hero">
+    <div class="container inner">
+      <div>
+        <nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="index.html">Home</a></li><li aria-current="page">Locations</li></ol></nav>
+        <span class="eyebrow">Locations</span>
+        <h1>A house near you, <em>or a screen away.</em></h1>
+        <p class="lead">Six warm, welcoming houses in six cities, plus video visits in 12 states. All locations accept insurance and offer step-free access.</p>
+      </div>
+      <div class="art" id="art"></div>
+    </div>
+  </section>
+
+  <section class="section-sm" style="padding-top:0">
+    <div class="container">
+      <div class="row between" style="margin-bottom:1.5rem"><div class="chips" id="filter" role="group" aria-label="Filter locations"></div><p class="muted small" id="count" role="status" aria-live="polite"></p></div>
+      <div class="loc-layout">
+        <div class="loc-list" id="list"></div>
+        <aside class="loc-map" aria-label="Map of locations"><div id="map"></div><p class="tiny muted" style="margin-top:1rem">Stylised map. Addresses and locations are fictional.</p></aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tint">
+    <div class="container split">
+      <div class="stack reveal" style="--gap:1.25rem"><span class="eyebrow">Virtual care</span><h2>Can't make it in? <em>We'll come to you.</em></h2><p class="lead">Video visits are available for most services in 12 states, including evenings and weekends. No app to download: just a secure link.</p><a class="btn btn-primary" href="book.html?location=virtual">Book a video visit</a></div>
+      <ul class="plain list-stack reveal" role="list">
+        <li class="card row" style="flex-wrap:nowrap;align-items:flex-start"><span class="icon-chip" data-icon="wifi"></span><div><b>Works on any device</b><p class="muted small">Phone, tablet or computer. We'll send a test link beforehand.</p></div></li>
+        <li class="card row" style="flex-wrap:nowrap;align-items:flex-start"><span class="icon-chip clay" data-icon="lock"></span><div><b>Private and secure</b><p class="muted small">Visits are encrypted and never recorded.</p></div></li>
+        <li class="card row" style="flex-wrap:nowrap;align-items:flex-start"><span class="icon-chip honey" data-icon="access"></span><div><b>Captions and accessibility</b><p class="muted small">Live captions and large-text options on every call.</p></div></li>
+      </ul>
+    </div>
+  </section>
+</main>
+<script src="vh.js"></script><script src="data.js"></script>
+<script>
+  VH.shell({ active: 'locations.html' }); VH.hydrate();
+  const $ = VH.$;
+  $('#art').innerHTML = VH.pageArt('pin', 1);
+  const amenIcon = { 'Step-free entrance': 'wheelchair', 'On-site lab': 'flask', 'Bike parking': 'parking', 'Quiet room': 'moon', 'Lactation room': 'heart', 'Near transit': 'train' };
+  const states = [...new Set(VH.locations.map(l => l.state))];
+  let current = 'all';
+  const draw = () => {
+    const list = VH.locations.filter(l => current === 'all' || l.state === current);
+    $('#count').textContent = `${list.length} ${list.length === 1 ? 'location' : 'locations'}`;
+    $('#filter').innerHTML = [['all', 'All']].concat(states.map(s => [s, s])).map(([v, t]) => `<button class="chip" type="button" data-v="${v}" aria-pressed="${v === current}">${t}</button>`).join('');
+    $('#list').innerHTML = list.map(l => {
+      const team = VH.providers.filter(p => p.locations.includes(l.id));
+      return `<article class="card loc" id="${l.id}">
+        <div class="map-tile">${VH.mapTile(l.seed)}</div>
+        <div class="loc-head"><div><h2>${l.name}</h2><address style="font-style:normal;color:var(--text-2)">${l.addr}, ${l.city}, ${l.state} ${l.zip}</address><p class="small muted" style="margin-top:.35rem">${l.note}</p></div><span class="badge badge-ok"><span class="dot"></span>Open today</span></div>
+        <ul class="plain amen" role="list">${l.amen.map(a => `<li>${VH.icon(amenIcon[a] || 'check')}${a}</li>`).join('')}</ul>
+        <div class="split" style="gap:1.5rem;align-items:start;grid-template-columns:1fr 1fr">
+          <div class="hours"><b style="color:var(--ink)">Hours</b>${l.hours.map(h => `<span>${h}</span>`).join('')}</div>
+          <div class="hours"><b style="color:var(--ink)">Care team</b><span class="team">${team.slice(0, 4).map(p => `<a class="avatar" href="provider.html?id=${p.id}" title="${p.name}">${VH.portrait({ ...p.look, shape: 'circle', alt: p.name })}</a>`).join('')}<span class="muted small" style="margin-left:.6rem">${team.length} providers</span></span></div>
+        </div>
+        <div class="loc-foot"><a class="btn btn-primary btn-sm" href="book.html?location=${l.id}">Book here</a><a class="btn btn-soft btn-sm" href="tel:${l.phone.replace(/\D/g, '')}">${VH.icon('phone')} ${l.phone}</a><button class="btn btn-text btn-sm" type="button" data-copy="${l.addr}, ${l.city}, ${l.state} ${l.zip}">${VH.icon('copy')} Copy address</button></div>
+      </article>`;
+    }).join('');
+    $('#map').innerHTML = VH.usMap(list.map((l, i) => ({ ...l, i, label: l.city })), { alt: 'Map of the United States with Vita House locations' });
+    VH.reveal();
+  };
+  $('#filter').addEventListener('click', e => { const b = e.target.closest('.chip'); if (b) { current = b.dataset.v; draw(); } });
+  $('#list').addEventListener('click', e => {
+    const b = e.target.closest('[data-copy]'); if (!b) return;
+    (navigator.clipboard ? navigator.clipboard.writeText(b.dataset.copy) : Promise.reject()).then(() => VH.toast('Address copied'), () => VH.toast('Copy is unavailable here. Select the address instead.', 'info'));
+  });
+  draw();
+  if (location.hash) setTimeout(() => { const t = $(location.hash); if (t) t.scrollIntoView({ block: 'center' }); }, 100);
+</script>
+</body>
+</html>
