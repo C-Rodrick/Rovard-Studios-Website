@@ -1367,37 +1367,21 @@ form.addEventListener('submit', async e => {
     else payload[key] = value;
   });
 
-  /*
-    PRODUCTION SETUP:
-    Replace FORM_ENDPOINT below with your real endpoint.
-    Recommended: Formspree, Basin, a serverless function, or your own API.
-    Example:
-    const FORM_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
-  */
-  const FORM_ENDPOINT = "";
+  // Formspree: emails each inquiry to the studio inbox; the "email" field becomes the reply-to address.
+  const FORM_ENDPOINT = "https://formspree.io/f/xvkgepeo";
+  payload._subject = `New project inquiry from ${payload.name || 'the website'}${payload.company ? ' (' + payload.company + ')' : ''}`;
 
   const submitButton = $('#submitForm');
   submitButton.disabled = true;
   submitButton.innerHTML = 'Sending…';
 
   try {
-    if (FORM_ENDPOINT) {
-      const response = await fetch(FORM_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-      if (!response.ok) throw new Error('Submission failed');
-    } else {
-      /*
-        Demo mode: saves the inquiry locally so the interface can be tested.
-        Connect FORM_ENDPOINT before launch.
-      */
-      localStorage.setItem('rovard_last_inquiry', JSON.stringify({
-        ...payload,
-        submittedAt: new Date().toISOString()
-      }));
-    }
+    const response = await fetch(FORM_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    if (!response.ok) throw new Error('Submission failed');
 
     form.innerHTML = `
       <div class="form-step active" style="display:block;min-height:auto;padding:80px 0;text-align:center">
