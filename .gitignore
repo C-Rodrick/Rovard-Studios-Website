@@ -9,3 +9,6 @@ mason-rowe/_art/_preview/
 mason-rowe/_art/_shots/
 mason-rowe/_art/shots/
 mason-rowe/_art/__pycache__/
+__pycache__/
+*.pyc
+tools/*.log

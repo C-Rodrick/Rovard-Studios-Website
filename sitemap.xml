@@ -1,8 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://rovardstudios.com/</loc>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-  </url>
+  <url><loc>https://rovardstudios.com/</loc></url>
+  <url><loc>https://rovardstudios.com/services/</loc></url>
+  <url><loc>https://rovardstudios.com/work/</loc></url>
+  <url><loc>https://rovardstudios.com/about/</loc></url>
+  <url><loc>https://rovardstudios.com/start/</loc></url>
+  <url><loc>https://rovardstudios.com/work/green-blueprint/</loc></url>
+  <url><loc>https://rovardstudios.com/work/design-eigen/</loc></url>
+  <url><loc>https://rovardstudios.com/work/bitefort/</loc></url>
+  <url><loc>https://rovardstudios.com/work/linkrithm/</loc></url>
+  <url><loc>https://rovardstudios.com/work/vita-house/</loc></url>
+  <url><loc>https://rovardstudios.com/work/northstar-capital/</loc></url>
+  <url><loc>https://rovardstudios.com/work/mason-and-rowe/</loc></url>
+  <url><loc>https://rovardstudios.com/work/shorteeme/</loc></url>
+  <url><loc>https://rovardstudios.com/work/kymela-2026/</loc></url>
+  <url><loc>https://rovardstudios.com/work/pdoca/</loc></url>
+  <url><loc>https://rovardstudios.com/work/dress-doctor/</loc></url>
+  <url><loc>https://rovardstudios.com/work/gce-study-app/</loc></url>
+  <url><loc>https://rovardstudios.com/work/proxima-exchange/</loc></url>
+  <url><loc>https://rovardstudios.com/work/afaa-pay/</loc></url>
+  <url><loc>https://rovardstudios.com/work/vita-house-care/</loc></url>
+  <url><loc>https://rovardstudios.com/work/northstar-capital-website/</loc></url>
+  <url><loc>https://rovardstudios.com/work/mason-and-rowe-residences/</loc></url>
+  <url><loc>https://rovardstudios.com/work/book-cover-design/</loc></url>
+  <url><loc>https://rovardstudios.com/work/jojo-foods/</loc></url>
+  <url><loc>https://rovardstudios.com/work/proxima-exchange-films/</loc></url>
+  <url><loc>https://rovardstudios.com/work/rovard-studios-brand-film/</loc></url>
+  <url><loc>https://rovardstudios.com/work/northstar-capital-ad/</loc></url>
 </urlset>
