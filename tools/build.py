@@ -12,7 +12,7 @@ from PIL import Image
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from content import *  # noqa
 from blogdata import POSTS
-from legal import PAGES as LEGAL, UPDATED as LEGAL_UPDATED
+from legal import PAGES as LEGAL, UPDATED as LEGAL_UPDATED, ANALYTICS_NOTE
 
 VERSION = time.strftime('%Y%m%d%H%M')
 MANIFEST = json.load(open(os.path.join(ROOT, 'tools', 'manifest.json')))
@@ -68,6 +68,7 @@ def head(title, desc, path, base):
         '@context': 'https://schema.org', '@type': 'ProfessionalService', 'name': BRAND, 'url': SITE['url'] + '/',
         'logo': f"{SITE['url']}/{LOGO_BLUE}", 'email': SITE['email'], 'areaServed': 'Worldwide', 'description': META['home'][1],
     }, ensure_ascii=False)
+    analytics = f'<script defer data-domain="{SITE["plausible"]}" src="https://plausible.io/js/script.js"></script>' + chr(10) if SITE.get('plausible') else ''
     return f'''<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -92,7 +93,7 @@ def head(title, desc, path, base):
 <link rel="icon" type="image/png" sizes="32x32" href="{base}assets/favicon/icon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="{base}assets/favicon/icon-192.png">
 <link rel="apple-touch-icon" href="{base}assets/favicon/icon-180.png">
-<link rel="preload" href="{base}css/fonts/Syne.woff2" as="font" type="font/woff2" crossorigin>
+{analytics}<link rel="preload" href="{base}css/fonts/Syne.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="{base}css/fonts/SpaceGrotesk.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{base}css/site.css?v={VERSION}">
 <script>document.documentElement.classList.add('js')</script>
@@ -119,6 +120,11 @@ def header(base):
 </div>'''
 
 
+def wa_fab():
+    h = wa_href()
+    return f'<a class="wa-fab" href="{h}" target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">{WA_ICON}<span>WhatsApp</span></a>' if h else ''
+
+
 def footer(base, path=''):
     pick = ['Logo design', 'Brand refresh', 'Brand guidelines', 'Business cards', 'Flyers', 'Posters', 'Invitations', 'Brochures', 'Social media posts', 'Church and ministry graphics',
             'Business websites', 'Landing pages', 'Billboards', 'Banners', 'Full vehicle wraps', 'Product packaging', 'Pitch decks', 'Presentations', 'Photo editing and retouching', 'Video editing']
@@ -140,7 +146,8 @@ def footer(base, path=''):
     <span class="lang" data-lang aria-label="Language"><a href="{base}{path}" aria-current="true">EN</a><a href="{base}fr/{path}" hreflang="fr" lang="fr">FR</a></span>
     <nav class="foot-legal" aria-label="Legal"><a href="{base}privacy/">Privacy Policy</a><a href="{base}cookies/">Cookie Preferences</a><a href="{base}terms/">Terms</a></nav></div>
 </footer>
-{pill('Start a project', base + 'start/', 'sticky-cta pill-lg')}'''
+{pill('Start a project', base + 'start/', 'sticky-cta pill-lg')}
+{wa_fab()}'''
 
 
 BUILT = []
@@ -166,6 +173,14 @@ def page(path, key, body, title=None, desc=None, body_class=''):
     dest = os.path.join(ROOT, path, 'index.html') if path else os.path.join(ROOT, 'index.html')
     os.makedirs(os.path.dirname(dest), exist_ok=True)
     open(dest, 'w', encoding='utf-8').write(out)
+
+
+WA_ICON = '<svg viewBox="0 0 32 32" width="26" height="26" fill="currentColor" aria-hidden="true"><path d="M5 4h22a3 3 0 0 1 3 3v15a3 3 0 0 1-3 3H15l-7 5v-5H5a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3Z"/><circle cx="10" cy="14.500" r="1.800" fill="#1FAF53"/><circle cx="16" cy="14.500" r="1.800" fill="#1FAF53"/><circle cx="22" cy="14.500" r="1.800" fill="#1FAF53"/></svg>'
+WA_MSG = "Hi ROVARD STUDIOS, I'd like to talk about a project."
+
+
+def wa_href():
+    return f"https://wa.me/{SITE['whatsapp']}?text={urllib.parse.quote(WA_MSG)}" if SITE.get('whatsapp') else ''
 
 
 def faces(base):
@@ -537,6 +552,8 @@ def legal():
                 parts.append('<ul>' + ''.join(f'<li>{esc(x)}</li>' for x in val) + '</ul>')
             else:
                 parts.append(f'<p>{esc(val)}</p>')
+            if SITE.get('plausible') and pg['slug'] in ('privacy', 'cookies') and kind == 'p' and val.startswith(('We do not run advertising', 'Our hosting provider')):
+                parts.append(f'<p>{esc(ANALYTICS_NOTE)}</p>')
         body = f'''<section class="ph post-ph"><div class="wrap"><p class="eyebrow" data-r="fade" data-intro>Legal</p>
   <h1 class="h1" data-r="words" data-intro>{esc(pg['title'])}</h1>
   <p class="lead" data-r data-intro data-d=".3">{esc(pg['intro'])}</p><p class="post-meta">Last updated: {LEGAL_UPDATED}</p></div></section>
@@ -549,6 +566,11 @@ def legal():
 # ── START ─────────────────────────────────────────────────────────────────
 def start():
     base = '../'
+    extra_alt = ''
+    if wa_href():
+        extra_alt += f'<a class="alt-card" href="{wa_href()}" target="_blank" rel="noopener"><small>Prefer to chat?</small><b>Message us on WhatsApp</b><i class="arrow-c">{ARROW}</i></a>'
+    if SITE.get('booking'):
+        extra_alt += f'<a class="alt-card" href="{SITE["booking"]}" target="_blank" rel="noopener"><small>Prefer to talk?</small><b>Book a call</b><i class="arrow-c">{ARROW}</i></a>'
     budgets = ''.join(f'<label class="pick"><input type="radio" name="budget" value="{esc(b)}"><span>{esc(b)}</span></label>' for b in BUDGETS)
     picks = ''.join(f'<label class="pick"><input type="checkbox" name="need" value="{k}"><span>{esc(t)}</span></label>' for k, t in NEEDS)
     arc = ''.join(f'<i style="background-image:url({base}img/people/{n:02d}-560.webp);background-size:230% auto;background-position:50% 9%"></i>' for n in HERO_FACES)
@@ -579,7 +601,7 @@ def start():
     <div class="cta-row">{pill('See some of our work', base + 'work/')}</div></div>
   <div class="or" data-r><span>or</span></div>
   <div class="alt" data-r><a class="alt-card" href="mailto:{SITE['email']}"><small>Email us</small><b>{SITE['email']}</b><i class="arrow-c">{ARROW}</i></a>
-    <a class="alt-card" href="{base}work/"><small>Not ready yet?</small><b>See what we've made</b><i class="arrow-c">{ARROW}</i></a></div>
+    <a class="alt-card" href="{base}work/"><small>Not ready yet?</small><b>See what we've made</b><i class="arrow-c">{ARROW}</i></a>{extra_alt}</div>
 </div></section>"""
     page('start/', 'start', body, body_class='start')
 

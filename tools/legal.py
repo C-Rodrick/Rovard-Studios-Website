@@ -87,3 +87,8 @@ PAGES = [
              ('p', "Questions? Email hello@rovardstudios.com."),
          ]),
 ]
+
+
+# Added to the Privacy and Cookie pages only when SITE["plausible"] is set (privacy-friendly analytics).
+ANALYTICS_NOTE = ("We use Plausible Analytics to count visits. It does not use cookies and does not follow you across other websites. "
+                  "It records anonymous information such as which pages are viewed, the site you came from, your country, and your device and browser type.")

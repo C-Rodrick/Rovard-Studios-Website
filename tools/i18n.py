@@ -7,7 +7,7 @@ How it works
 - Anything without a French entry stays English and is listed in tools/fr-missing.json so nothing is silently skipped.
 - Asset URLs get one more "../" because the French pages sit one folder deeper.
 """
-import glob, html, json, os, re
+import glob, html, json, os, re, urllib.parse
 from html.parser import HTMLParser
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -162,6 +162,8 @@ class Tr:
 
 
 def tr_attr_value(T, name, val, tag, attrs):
+    if name == 'href' and 'wa.me/' in val:
+        return re.sub(r'text=[^&]*', 'text=' + urllib.parse.quote("Bonjour ROVARD STUDIOS, j'aimerais parler d'un projet."), val)
     if name in TRANSLATE_ATTRS:
         return T.get(val) or val
     if name == 'content' and tag == 'meta':
