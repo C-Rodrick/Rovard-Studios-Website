@@ -696,3 +696,28 @@ ul, ol { list-style: none; }
 .svc-page .sec[style*="padding-top:0"] { padding-top: 0; }
 
 body { padding-top: var(--head-h); }
+
+/* Start page: larger type and controls, closer to the reference */
+.talk .big { font-size: clamp(3.6rem, 9vw, 8rem); line-height: 1; }
+.talk-head { max-width: 900px; }
+.nrf { font-size: clamp(1.4rem, 2.1vw, 2rem); }
+.talk-sub { font-size: clamp(1.15rem, 1.5vw, 1.4rem); max-width: 40ch; margin-top: 26px; }
+.arc { width: 240px; height: 120px; padding-top: 28px; }
+.arc::before { height: 240px; clip-path: inset(0 0 118px 0); }
+.arc i { width: 52px; height: 52px; margin-left: -14px; }
+.tform { max-width: 880px; gap: 30px; margin-top: clamp(44px, 5.5vw, 72px); }
+.f label, .f .lab { font-size: 16px; margin: 0 0 12px 26px; }
+.f input, .f textarea { padding: 22px 30px; font-size: 19px; border-radius: 32px; }
+.f textarea { min-height: 170px; border-radius: 34px; }
+.f-row { gap: 22px; }
+.seg { gap: 8px; padding: 10px; border-radius: 34px; }
+.pick span { padding: 15px 24px; font-size: 17px; }
+.form-error { font-size: 17px; }
+.tform-foot .small { font-size: 16px; }
+.tform-foot .pill, .tform-foot .pill-lg { font-size: 17px; }
+.or { max-width: 880px; font-size: 17px; }
+.alt { max-width: 880px; gap: 18px; }
+.alt-card { padding: 28px 76px 28px 30px; border-radius: 26px; }
+.alt-card small { font-size: 13px; }
+.alt-card b { font-size: 21px; }
+@media (max-width: 900px) { .f label, .f .lab { margin-left: 18px; } .f input, .f textarea { padding: 18px 24px; font-size: 17px; } .pick span { padding: 13px 20px; font-size: 16px; } }
