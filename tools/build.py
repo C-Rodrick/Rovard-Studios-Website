@@ -518,6 +518,7 @@ def blog_post(b):
 # ── START ─────────────────────────────────────────────────────────────────
 def start():
     base = '../'
+    budgets = ''.join(f'<label class="pick"><input type="radio" name="budget" value="{esc(b)}"><span>{esc(b)}</span></label>' for b in BUDGETS)
     picks = ''.join(f'<label class="pick"><input type="checkbox" name="need" value="{k}"><span>{esc(t)}</span></label>' for k, t in NEEDS)
     arc = ''.join(f'<i style="background-image:url({base}img/people/{n:02d}-560.webp);background-size:230% auto;background-position:50% 9%"></i>' for n in HERO_FACES)
     body = f"""<section class="talk"><div class="wrap">
@@ -537,6 +538,7 @@ def start():
     </div>
     <div class="f"><span class="lab" id="needs-l">What do you need? <em>Tick everything that applies</em></span><div class="seg" role="group" aria-labelledby="needs-l">{picks}</div></div>
     <div class="f"><label for="f-idea">Tell us a little about it</label><textarea id="f-idea" name="idea" rows="4" placeholder="For example: I'm starting a bakery and need a logo and a flyer for the opening."></textarea></div>
+    <div class="f"><span class="lab" id="budget-l">Roughly what's your budget? <em>(optional, in USD)</em></span><div class="seg" role="radiogroup" aria-labelledby="budget-l">{budgets}</div></div>
     <div class="f"><label for="f-date">Is there a date you need it by? <em>(optional)</em></label><input id="f-date" name="deadline" type="text" placeholder="For example: end of next month"></div>
     <p class="form-error" role="alert" aria-live="assertive"></p>
     <div class="tform-foot"><p class="small muted">One flyer is a real project. No brief needed.</p>

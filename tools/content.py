@@ -359,3 +359,6 @@ BRAND_LOGOS = [('design-eigen', 'Design Eigen', 40), ('northstar-capital', 'Nort
 LOGO_COLOURS = {'design-eigen': '#111322', 'northstar-capital': '#0A0C24', 'bitefort': '#4A2A8F', 'vita-house': '#2F5A44', 'green-blueprint': '#1B4839',
                 'mason-and-rowe': '#2A241E', 'linkrithm': '#7B4DF0', 'proxima-exchange': '#1C39BB', 'gce-study-app': '#0E9F6E', 'afaa-pay': '#2F43E8',
                 'jojo-foods': '#D8352C', 'shorteeme': '#1E3FA8'}
+
+# Budget choices on the start form: what the visitor picks from, not our prices.
+BUDGETS = ['Under $250', '$250 – $1,000', '$1,000 – $3,000', '$3,000 and up', 'Not sure yet']
