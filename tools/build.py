@@ -11,6 +11,7 @@ from PIL import Image
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from content import *  # noqa
+from blogdata import POSTS
 
 VERSION = time.strftime('%Y%m%d%H%M')
 MANIFEST = json.load(open(os.path.join(ROOT, 'tools', 'manifest.json')))
@@ -95,7 +96,7 @@ def head(title, desc, path, base):
 </head>'''
 
 
-MENU = [('services', 'Services'), ('work', 'Work'), ('about', 'About'), ('start', 'Contact')]
+MENU = [('services', 'Services'), ('work', 'Work'), ('blog', 'Blog'), ('about', 'About'), ('start', 'Contact')]
 
 
 def header(base):
@@ -115,11 +116,10 @@ def header(base):
 
 
 def footer(base):
-    seen, svc = set(), []
-    for g in SERVICES:
-        for ask in g['asks']:
-            if ask not in seen:
-                seen.add(ask); svc.append(f'<a href="{base}services/#{g["id"]}">{esc(ask)}</a>')
+    pick = ['Logo design', 'Brand refresh', 'Brand guidelines', 'Business cards', 'Flyers', 'Posters', 'Invitations', 'Brochures', 'Social media posts', 'Church and ministry graphics',
+            'Business websites', 'Landing pages', 'Billboards', 'Banners', 'Full vehicle wraps', 'Product packaging', 'Pitch decks', 'Presentations', 'Photo editing and retouching', 'Video editing']
+    where = {ask: g['id'] for g in SERVICES for ask in g['asks']}
+    svc = [f'<a href="{base}services/#{where[a]}">{esc(a)}</a>' for a in pick if a in where]
     return f'''<footer class="site-footer">
   <div class="wrap foot">
     <div class="foot-brand">
@@ -129,7 +129,7 @@ def footer(base):
       <p class="foot-contact"><a href="mailto:{SITE['email']}">{SITE['email']}</a><br>{SITE['location']}</p>
     </div>
     <nav class="foot-col" aria-label="Company"><h2>Company</h2>
-      <a href="{base or './'}">Home</a><a href="{base}services/">Services</a><a href="{base}work/">Our work</a><a href="{base}about/">About</a><a href="{base}start/">Start a project</a></nav>
+      <a href="{base or './'}">Home</a><a href="{base}services/">Services</a><a href="{base}work/">Our work</a><a href="{base}blog/">Blog</a><a href="{base}about/">About</a><a href="{base}start/">Start a project</a></nav>
     <nav class="foot-col foot-svc" aria-label="Services"><h2>Services</h2><div class="svc-cols">{''.join(svc)}</div></nav>
   </div>
   <div class="wrap foot-base"><span>© {SITE['year']} {BRAND}. All rights reserved.</span></div>
@@ -158,10 +158,21 @@ def page(path, key, body, title=None, desc=None, body_class=''):
     open(dest, 'w', encoding='utf-8').write(out)
 
 
-def close_cta(base, headline='Have an idea? Let\'s make it <span class="grad">real</span>.', sub="Tell us what you're working on. A few words is plenty.", href=None, label='Start a Project'):
-    return f'''<section class="sec close"><div class="wrap">
-  <h2 class="big" data-r="words">{headline}</h2><p class="sub" data-r data-d=".25">{sub}</p>
-  <div class="cta-row" data-r data-d=".35">{pill(label, href or base + 'start/', 'pill-lg')}</div></div></section>'''
+def faces(base):
+    return ''.join(f'<i style="background-image:url({base}img/people/{n:02d}-560.webp);background-size:230% auto;background-position:50% 9%"></i>' for n in HERO_FACES)
+
+
+CTA_POOL = ['linkrithm', 'green-blueprint', 'design-eigen', 'jojo-foods', 'bitefort', 'shorteeme']
+
+
+def close_cta(base, headline="Have an idea? Let's make it <span class=\"grad\">real</span>.", sub="Tell us what you're working on. A few words is plenty.", href=None, label='Start a Project'):
+    slug = CTA_POOL[len(headline) % len(CTA_POOL)]
+    return f'''<section class="sec close"><div class="wrap close-grid">
+  <div class="close-l"><h2 class="big" data-r="words">{headline}</h2><p class="sub" data-r data-d=".25">{sub}</p>
+  <div class="cta-row" data-r data-d=".35"><a class="pill pill-talk" href="{href or base + 'start/'}"><span>{label}</span><span class="thumbs" aria-hidden="true">{faces(base)}</span></a>{pill('See our work', base + 'work/', 'pill-outline pill-sm', ico=False)}</div>
+  <p class="close-note" data-r="fade" data-d=".5">*A few words is plenty. Even one flyer is a real project.</p></div>
+  <div class="close-r" data-r="fade" data-d=".2"><div class="wc-media">{img(slug, 0, '', base, sizes='(min-width: 900px) 560px, 94vw', want=1100)}</div></div>
+</div></section>'''
 
 
 # ── HOME ──────────────────────────────────────────────────────────────────
@@ -170,7 +181,7 @@ def home():
     rot = [{'verb': WEDO[i][0], 'thing': WEDO[i][1], 'for': WEDO[i][2]} for i in HERO_ROTATION]
     f0 = rot[0]
     all_things = ', '.join(w[1] for w in WEDO)
-    thumbs = ''.join(f'<i style="background-image:url({base}img/people/{n:02d}-560.webp);background-size:230% auto;background-position:50% 9%"></i>' for n in HERO_FACES)
+    thumbs = faces(base)
     hero = f'''<section class="hero" aria-labelledby="hero-title">
   <div class="hero-l">
     <p class="eyebrow" data-r="fade" data-intro>{BRAND}</p>
@@ -189,9 +200,9 @@ def home():
 </section>'''
 
     def logo_item(f, name, h, first):
-        w, hh = Image.open(os.path.join(ROOT, 'img', 'logos', f + '.png')).size
-        return (f'<span class="lg-item{" on" if first else ""}"><span class="lg" role="img" aria-label="{esc(name)}" style="-webkit-mask-image:url({base}img/logos/{f}.png);mask-image:url({base}img/logos/{f}.png);'
-                f'background:{LOGO_COLOURS[f]};width:{round(h * w / hh)}px;height:{h}px"></span></span>')
+        w, hh = Image.open(os.path.join(ROOT, 'img', 'logos', f + '-c.png')).size
+        return (f'<span class="lg-item{" on" if first else ""}"><img class="lg" src="{base}img/logos/{f}-c.png" alt="{esc(name)}" '
+                f'width="{round(h * w / hh)}" height="{h}" loading="eager" decoding="async"></span>')
     slots = ''.join('<div class="lg-slot">' + ''.join(logo_item(*b, i == 0) for i, b in enumerate(BRAND_LOGOS[k::4])) + '</div>' for k in range(4))
     logos = f'''<section class="logos" aria-label="Brands we have designed"><p class="eyebrow" data-r="fade">Brands we've designed</p>
   <div class="lg-band" data-r><div class="wrap lg-slots" data-logo-slots>{slots}</div></div></section>'''
@@ -462,6 +473,48 @@ def about():
     page('about/', 'about', body, body_class='about')
 
 
+# ── BLOG ──────────────────────────────────────────────────────────────────
+def bcard(b, base):
+    return f'''<article class="bcard" data-r><a class="wc-media" href="{base}blog/{b['slug']}/" aria-label="{esc(b['title'])}">{img(b['cover'], 0, '', base, sizes='(min-width: 900px) 380px, 94vw', want=560)}</a>
+  <div class="bmeta"><p>{esc(b['date'])} · {esc(b['tag'])}</p><h2><a href="{base}blog/{b['slug']}/">{esc(b['title'])}</a></h2></div></article>'''
+
+
+def blog():
+    base = '../'
+    cards = [bcard(b, base) for b in POSTS]
+    band = f'''<aside class="bband" data-r><div><h2 class="h3">Need something designed?</h2><p>A few words about your idea is plenty. We'll take it from there.</p></div>{pill("Start a project", base + "start/")}</aside>'''
+    grid = ''.join(cards[:3]) + band + ''.join(cards[3:])
+    body = f'''<section class="ph blog-ph"><div class="wrap blog-hd"><h1 class="h1" data-r="words" data-intro><span class="grad">Our</span> Blog</h1>
+  <p class="lead" data-r data-intro data-d=".3">Plain advice from the studio: how to ask for the right thing, get it made well, and make it look right.</p></div></section>
+<section class="wrap blog-grid">{grid}</section>
+{close_cta(base, "Have a question? <span class=\"grad\">Ask us.</span>", "Tell us what you're working on. A few words is plenty.")}'''
+    page('blog/', 'blog', body, body_class='blog')
+
+
+def blog_post(b):
+    base = '../../'
+    parts = []
+    for kind, val in b['body']:
+        if kind == 'h':
+            parts.append(f'<h2>{esc(val)}</h2>')
+        elif kind == 'ul':
+            parts.append('<ul>' + ''.join(f'<li>{esc(x)}</li>' for x in val) + '</ul>')
+        else:
+            parts.append(f'<p>{esc(val)}</p>')
+    rel = ''.join(bcard(x, base) for x in POSTS if x['slug'] != b['slug'])[:0]
+    others = [x for x in POSTS if x['slug'] != b['slug']][:3]
+    rel = ''.join(bcard(x, base) for x in others)
+    body = f'''<article><section class="ph post-ph"><div class="wrap"><p class="eyebrow" data-r="fade" data-intro><a href="{base}blog/">Blog</a> · {esc(b['tag'])}</p>
+  <h1 class="h1" data-r="words" data-intro>{esc(b['title'])}</h1>
+  <p class="post-meta" data-r="fade" data-intro data-d=".3">{esc(b['date'])} · {b['read']} min read · by {BRAND}</p></div></section>
+<div class="wrap post-cover" data-r><div class="wc-media">{img(b['cover'], 0, '', base, sizes='(min-width: 1200px) 1100px, 94vw', want=1100, eager=True)}</div></div>
+<div class="wrap post-body" data-r>{''.join(parts)}</div></article>
+<section class="sec" style="padding-top:0"><div class="wrap"><h2 class="h3" data-r style="margin-bottom:28px">More from the blog</h2><div class="blog-grid blog-rel">{rel}</div></div></section>
+{close_cta(base, "Let's make yours <span class=\"grad\">look right.</span>")}'''
+    page(f'blog/{b["slug"]}/', 'blog', body, title=f"{b['title']} | {BRAND}", desc=b['excerpt'], body_class='blog')
+
+
+
 # ── START ─────────────────────────────────────────────────────────────────
 def start():
     base = '../'
@@ -506,7 +559,7 @@ def extras():
 h1{{font-size:clamp(2.2rem,6vw,4rem);margin:0 0 12px;letter-spacing:-.03em}}p{{margin:0 0 24px;color:#5F6485;font-size:1.1rem}}a{{display:inline-block;background:#162DAF;color:#fff;padding:16px 30px;border-radius:999px;text-decoration:none;font-weight:600}}</style></head>
 <body><main><h1>That page isn't here.</h1><p>But we can help you find what you need.</p><a id="home" href="/">Back to {BRAND}</a></main>
 <script>var p=location.pathname.split('/');document.getElementById('home').href=(location.hostname.indexOf('github.io')>-1?'/'+p[1]:'')+'/';</script></body></html>''')
-    urls = ['', 'services/', 'work/', 'about/', 'start/'] + [f'work/{p["slug"]}/' for p in PROJECTS]
+    urls = ['', 'services/', 'work/', 'blog/', 'about/', 'start/'] + [f'work/{p["slug"]}/' for p in PROJECTS] + [f'blog/{b["slug"]}/' for b in POSTS]
     sm = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + ''.join(
         f'  <url><loc>{SITE["url"]}/{u}</loc></url>\n' for u in urls) + '</urlset>\n'
     open(os.path.join(ROOT, 'sitemap.xml'), 'w', encoding='utf-8').write(sm)
@@ -514,7 +567,9 @@ h1{{font-size:clamp(2.2rem,6vw,4rem);margin:0 0 12px;letter-spacing:-.03em}}p{{m
 
 
 if __name__ == '__main__':
-    home(); services(); work_index(); about(); start()
+    home(); services(); work_index(); about(); start(); blog()
+    for b in POSTS:
+        blog_post(b)
     for p in PROJECTS:
         project(p)
     extras()

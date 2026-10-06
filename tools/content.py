@@ -175,6 +175,7 @@ META = {
                  f"Logos, flyers, social media graphics, websites, billboards, banners, vehicle branding, presentations, packaging, photo and video. See what {BRAND} can design for you."),
     'work': (f"Our work | {BRAND}",
              f"Logos, brand identities, websites, social media graphics, packaging and films made by {BRAND}."),
+    'blog': (f"Blog | {BRAND}", f"Plain advice from {BRAND}: how to brief a designer, what a flyer needs, logo or full brand, and more."),
     'about': (f"About | {BRAND}",
               f"{BRAND} helps people turn their ideas into things that look professional, memorable and ready to be seen."),
     'start': (f"Start a project | {BRAND}",

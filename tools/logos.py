@@ -48,3 +48,14 @@ for name, (src, box, mode, *opt) in LOGOS.items():
     out = out.resize((min(a.width, 520), round(a.height * min(a.width, 520) / a.width)), Image.LANCZOS)
     out.save(os.path.join(ROOT, 'img', 'logos', name + '.png'), optimize=True)
     print(name, out.size)
+
+# Coloured copies (img/logos/<name>-c.png) used by the site: plain <img>, no CSS masking needed.
+sys_path = os.path.join(ROOT, 'tools')
+import sys; sys.path.insert(0, sys_path)
+from content import LOGO_COLOURS
+for name, hexcol in LOGO_COLOURS.items():
+    m = Image.open(os.path.join(ROOT, 'img', 'logos', name + '.png'))
+    rgb = tuple(int(hexcol[i:i + 2], 16) for i in (1, 3, 5))
+    c = Image.new('RGBA', m.size, rgb + (255,)); c.putalpha(m.getchannel('A'))
+    c.save(os.path.join(ROOT, 'img', 'logos', name + '-c.png'), optimize=True)
+print('coloured copies written')
