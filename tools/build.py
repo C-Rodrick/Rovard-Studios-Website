@@ -206,7 +206,7 @@ def home():
   <div class="sh"><div><p class="eyebrow" data-r="fade">Selected work</p><h2 class="h2" data-r="words">Recent <span class="grad">work</span></h2></div>
   <div class="sh-r"><p class="sub" data-r>A selection of logos, brands, websites, graphics, packaging and films. Drag to explore.</p></div></div></div>
   <div class="car" data-car data-r><div class="car-track">{cards}</div></div>
-  <div class="wrap car-ctl" data-r><button class="car-btn" type="button" data-prev aria-label="Previous projects">{LEFT}</button><div class="car-bar"><i></i></div><button class="car-btn" type="button" data-next aria-label="Next projects">{RIGHT}</button>{pill('All ' + str(len(PROJECTS)) + ' projects', 'work/', 'pill-ghost')}</div>
+  <div class="wrap car-ctl" data-r><button class="car-btn" type="button" data-prev aria-label="Previous projects">{LEFT}</button><div class="car-bar"><i></i></div><button class="car-btn" type="button" data-next aria-label="Next projects">{RIGHT}</button>{pill('See all work', 'work/', 'pill-ghost')}</div>
 </section>'''
 
     ways = ''
@@ -338,13 +338,13 @@ def services():
 # ── WORK INDEX ────────────────────────────────────────────────────────────
 def work_index():
     base = '../'
-    chips = f'<button class="pf is-on" data-filter="all" type="button" aria-pressed="true">All <span class="count">{len(PROJECTS)}</span></button>'
+    chips = f'<button class="pf is-on" data-filter="all" type="button" aria-pressed="true">All</button>'
     for k, label in KIND.items():
         n = sum(1 for p in PROJECTS if p['kind'] == k)
-        chips += f'<button class="pf" data-filter="{k}" type="button" aria-pressed="false">{esc(label)} <span class="count">{n}</span></button>'
+        chips += f'<button class="pf" data-filter="{k}" type="button" aria-pressed="false">{esc(label)}</button>'
     cards = ''.join(f'''<article class="wcard" data-kind="{p['kind']}" data-r><a class="wc-media" href="{p['slug']}/" aria-label="{esc(p['title'])}">{img(p['slug'], 0, p['title'], base, sizes='(min-width: 900px) 580px, 94vw', want=1100)}{concept(p)}</a>
   <div class="wc-meta"><h2><a href="{p['slug']}/">{esc(p['title'])}</a></h2><p>{esc(p['plain'])}</p><span class="kt">{esc(KIND[p['kind']])}</span></div></article>''' for p in PROJECTS)
-    body = f'''<section class="ph"><div class="wrap"><p class="eyebrow" data-r="fade" data-intro>Our work</p>
+    body = f'''<section class="ph"><div class="wrap"><p class="eyebrow" data-r="fade" data-intro>Selected work</p>
   <h1 class="h1" data-r="words" data-intro>Things <span class="grad">we've made</span></h1>
   <p class="lead" data-r data-intro data-d=".3">Logos, brands, websites, social graphics, packaging and films. Projects marked <span class="concept">Concept</span> are self-initiated and fictional. Click any project to see it up close.</p>
   <div class="pills" role="group" aria-label="Filter projects" data-r data-intro data-d=".4">{chips}</div></div></section>
