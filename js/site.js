@@ -267,4 +267,10 @@
     if ('IntersectionObserver' in window) new IntersectionObserver(es => es.forEach(e => (e.isIntersecting ? run() : stop())), { threshold: .2 }).observe(slotsWrap);
     else run();
   }
+
+  /* ── Showreel: still frame for reduced motion, pause when off screen ── */
+  $$('[data-reel]').forEach(v => {
+    if (reduce) { v.removeAttribute('autoplay'); v.pause(); return; }
+    if ('IntersectionObserver' in window) new IntersectionObserver(es => es.forEach(e => (e.isIntersecting ? v.play().catch(() => {}) : v.pause())), { threshold: .25 }).observe(v);
+  });
 })();

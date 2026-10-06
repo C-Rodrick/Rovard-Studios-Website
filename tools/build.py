@@ -171,7 +171,7 @@ def close_cta(base, headline="Have an idea? Let's make it <span class=\"grad\">r
   <div class="close-l"><h2 class="big" data-r="words">{headline}</h2><p class="sub" data-r data-d=".25">{sub}</p>
   <div class="cta-row" data-r data-d=".35"><a class="pill pill-talk" href="{href or base + 'start/'}"><span>{label}</span><span class="thumbs" aria-hidden="true">{faces(base)}</span></a>{pill('See our work', base + 'work/', 'pill-outline pill-sm', ico=False)}</div>
   <p class="close-note" data-r="fade" data-d=".5">*A few words is plenty. Even one flyer is a real project.</p></div>
-  <div class="close-r" data-r="fade" data-d=".2"><div class="wc-media">{img(slug, 0, '', base, sizes='(min-width: 900px) 560px, 94vw', want=1100)}</div></div>
+  <div class="close-r" data-r="fade" data-d=".2"><div class="wc-media reel"><video src="{base}video/showreel.mp4" poster="{base}video/showreel-poster.webp" autoplay muted loop playsinline preload="metadata" aria-label="A short reel of recent ROVARD STUDIOS work" data-reel></video></div></div>
 </div></section>'''
 
 
