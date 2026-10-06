@@ -332,6 +332,9 @@ PEOPLE = {
     5: ('Entrepreneurs', '50% 24%'),
     6: ('Organizations & institutions', '50% 28%'),
     7: ('Individuals with an idea', '50% 26%'),
+    8: ('Companies & teams', '50% 30%'),
+    9: ('Agencies & partners', '50% 35%'),
+    10: ('Business owners', '58% 40%'),
 }
 PEOPLE_NOTE = "Photography is illustrative. It does not show our clients."
 

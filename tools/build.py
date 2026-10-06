@@ -244,8 +244,8 @@ def home():
         return (f'<figure class="acard photo">{img("people", n, label, base, sizes="360px", want=560, extra=f" style=\"object-position:{pos}\"")}'
                 f'<figcaption>{esc(label)}</figcaption></figure>')
     blue = '<div class="acard blue"><h3>No project is too small.</h3><p>One flyer, one logo, one card. They all count here.</p></div>'
-    r1 = [person(1), acard(0), acard(1), person(4), acard(2), person(3), acard(3), blue]
-    r2 = [person(6), acard(4), person(5), acard(5), person(2), acard(6), person(7), acard(7)]
+    r1 = [person(1), acard(0), acard(1), person(4), person(8), acard(2), person(3), acard(3), person(10), blue]
+    r2 = [person(6), acard(4), person(5), acard(5), person(9), person(2), acard(6), person(7), acard(7)]
     row = lambda items, cls='': f'<div class="cards-row {cls}">{"".join(items)}{"".join(items)}</div>'
     who = f'''<section class="sec" id="who" style="padding-top:0"><div class="wrap">
   <div class="sh"><div><p class="eyebrow" data-r="fade">Who we work with</p><h2 class="h2" data-r="words">Big idea or small one, <span class="grad">we're glad you're here</span></h2></div>
