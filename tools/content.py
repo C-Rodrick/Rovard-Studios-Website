@@ -76,7 +76,7 @@ SERVICES = [
          intro="Not a small logo on a door. A full design that wraps the whole vehicle, so people notice it and remember it.",
          asks=['Full vehicle wraps', 'Cars', 'Vans', 'Delivery vehicles', 'Company and commercial vehicles'],
          production=True, cta="Want your vehicle to look like this?",
-         work=[], note="Vehicle concept mockups are coming soon."),
+         work=[], note="Vehicle mockups are coming soon."),
     dict(id='docs', need='docs', title='Presentations & documents', kind='brand',
          line="Make the important papers look important.",
          intro="The things people read, sign or present from. We make them clear, tidy and good-looking.",
@@ -104,11 +104,11 @@ WEDO = [
     ('design', 'logos', 'new business', 'design-eigen', 'imgi_200', 'Logo, Design Eigen', 'brand'),
     ('create', 'flyers', 'next event', 'dress-doctor', 'BOOK PICKUP_DD.jpg', 'Flyer, Dress Doctor', 'design'),
     ('design', 'social media graphics', 'brand', 'shorteeme', 'Make something amazing', 'Social post, ShorteeMe', 'social'),
-    ('build', 'websites', 'business, organization or personal brand', 'mason-and-rowe-residences', 'mr-ui-04-home', 'Website design, Mason & Rowe Residences (concept)', 'website'),
+    ('build', 'websites', 'business, organization or personal brand', 'mason-and-rowe-residences', 'mr-ui-04-home', 'Website design, Mason & Rowe Residences', 'website'),
     ('design', 'business cards and stationery', 'company', 'linkrithm', 'gallery-02', 'Business cards, LinkRithm', 'print'),
     ('design', 'billboards and banners', 'campaign', 'green-blueprint', 'Cover 7 - Copy', 'Billboard mockup, Green Blueprint', 'ads'),
     ('brand', 'vehicles', 'business', None, None, None, 'vehicle'),
-    ('design', 'presentations and documents', 'big idea', 'northstar-capital', 'northstar-brand-02-strategy', 'Brand guidelines, Northstar Capital (concept)', 'docs'),
+    ('design', 'presentations and documents', 'big idea', 'northstar-capital', 'northstar-brand-02-strategy', 'Brand guidelines, Northstar Capital', 'docs'),
     ('design', 'packaging', 'product', 'jojo-foods', None, 'Packaging, JoJo Foods', 'packaging'),
     ('edit', 'photos and videos', 'launch', 'rovard-studios-brand-film', 'film-09', 'Film, ROVARD STUDIOS', 'media'),
 ]
@@ -212,14 +212,14 @@ PLAIN = {
     'pdoca': 'Event flyers and social posts for a coaching academy',
     'dress-doctor': 'Promotional flyers for a laundry service',
     'gce-study-app': 'Launch graphics for a study app',
-    'proxima-exchange': 'Website design for a concept trading platform',
-    'afaa-pay': 'Brand and working website for a concept payments company',
+    'proxima-exchange': 'Website design for a trading platform',
+    'afaa-pay': 'Brand and working website for a payments company',
     'vita-house-care': 'Website and booking flow for a fictional health company',
     'northstar-capital-website': 'Website and dashboard for a fictional finance app',
     'mason-and-rowe-residences': 'Website for a fictional luxury home developer',
     'book-cover-design': 'Book cover design',
     'jojo-foods': 'Potato chip packaging',
-    'proxima-exchange-films': 'Two launch films for a concept trading platform',
+    'proxima-exchange-films': 'Two launch films for a trading platform',
     'rovard-studios-brand-film': f'A 90-second film about {BRAND}',
     'northstar-capital-ad': 'A 30-second launch ad for a fictional finance app',
 }
@@ -275,7 +275,7 @@ def load_projects():
             vids = [dict(title='', src=urllib.parse.unquote(p['video']), poster=urllib.parse.unquote(p.get('poster', '')))]
         q['vids'] = vids
         q['live'] = p.get('liveUrl')
-        q['live_label'] = (p.get('liveLabel') or 'Explore the live concept').replace(' ↗', '').strip()
+        q['live_label'] = (p.get('liveLabel') or 'Explore the live site').replace(' ↗', '').strip()
         srcs = [urllib.parse.unquote(p['coverImage'])] + [urllib.parse.unquote(g) for g in p.get('galleryImages', [])]
         q['srcs'] = srcs
         out.append(q)
@@ -350,4 +350,6 @@ def load_testimonials():
 
 
 # Logos cut from our own project artwork (tools/logos.py). (file, brand name, display height px)
-BRAND_LOGOS = [('design-eigen', 'Design Eigen', 40), ('bitefort', 'Bitefort', 34), ('green-blueprint', 'Green Blueprint', 74), ('linkrithm', 'LinkRithm', 30), ('gce-study-app', 'GCE Study App', 50), ('jojo-foods', 'JoJo Foods', 64), ('shorteeme', 'ShorteeMe', 58)]
+BRAND_LOGOS = [('design-eigen', 'Design Eigen', 40), ('northstar-capital', 'Northstar Capital', 36), ('bitefort', 'Bitefort', 34), ('vita-house', 'Vita House', 40),
+               ('green-blueprint', 'Green Blueprint', 74), ('mason-and-rowe', 'Mason & Rowe', 22), ('linkrithm', 'LinkRithm', 30), ('proxima-exchange', 'Proxima Exchange', 36),
+               ('gce-study-app', 'GCE Study App', 50), ('afaa-pay', "Afa'a Pay", 34), ('jojo-foods', 'JoJo Foods', 64), ('shorteeme', 'ShorteeMe', 58)]

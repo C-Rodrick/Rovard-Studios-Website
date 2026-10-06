@@ -13,6 +13,11 @@ LOGOS = {
     'gce-study-app': ('Social Media/6_GCE Study App/1.jpg', (218, 112, 582, 292), 'knock', 50, 130),
     'jojo-foods': ('Packaging Design/2_JoJo Foods/jojo-04-colour.jpg', (275, 585, 740, 1040), 'dark-oval', 95, 190),
     'bitefort': ('Brand Identitities/3_Bitefort/6.jpg', (640, 230, 890, 770), 'light-rot', None, None, (0, 0, .955, .76)),
+    'northstar-capital': ('Brand Identitities/6_Northstar Capital/northstar-brand-05-logo-suite.jpg', (240, 480, 1020, 700), 'dark', 60, 170),
+    'vita-house': ('Brand Identitities/5_Vita House/vita-brand-06-lockups.jpg', (340, 250, 680, 370), 'dark', 60, 170),
+    'mason-and-rowe': ('Brand Identitities/7_Mason and Rowe/mr-brand-05-wordmark.jpg', (280, 290, 2090, 480), 'dark', 60, 170),
+    'afaa-pay': ('UI Design/2_Afaa Pay/afaa-02-logo.jpg', (1340, 740, 1990, 935), 'light', 70, 190),
+    'proxima-exchange': ('UI Design/1_Proxima Exchange/proxima-01-cover.jpg', (95, 80, 430, 190), 'light', 70, 170),
 }
 os.makedirs(os.path.join(ROOT, 'img', 'logos'), exist_ok=True)
 for name, (src, box, mode, *opt) in LOGOS.items():

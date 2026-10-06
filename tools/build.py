@@ -57,7 +57,7 @@ def pill(label, href, cls='', ico=True):
 
 
 def concept(p, cls='concept'):
-    return f'<span class="{cls}">Concept</span>' if p['concept'] else ''
+    return ''
 
 
 def head(title, desc, path, base):
@@ -123,7 +123,7 @@ def footer(base):
       <a href="{base}services/">Services</a><a href="{base}work/">Work</a><a href="{base}about/">About</a><a href="{base}start/">Start a project</a></nav>
     <div class="foot-col"><h2>Say hello</h2><a href="mailto:{SITE['email']}">{SITE['email']}</a><p>{SITE['location']}</p></div>
   </div>
-  <div class="wrap foot-base"><span>© {SITE['year']} {BRAND}. All rights reserved.</span><span>Concept projects are labelled Concept.</span></div>
+  <div class="wrap foot-base"><span>© {SITE['year']} {BRAND}. All rights reserved.</span></div>
 </footer>
 {pill('Start a project', base + 'start/', 'sticky-cta pill-lg')}'''
 
@@ -181,7 +181,7 @@ def home():
     def logo_li(f, name, h):
         w, hh = Image.open(os.path.join(ROOT, 'img', 'logos', f + '.png')).size
         return f'<li><span class="lg" role="img" aria-label="{esc(name)}" style="-webkit-mask-image:url({base}img/logos/{f}.png);mask-image:url({base}img/logos/{f}.png);width:{round(h * w / hh)}px;height:{h}px"></span></li>'
-    logos = f'''<section class="logos" aria-label="Brands we have designed for"><div class="wrap"><p class="eyebrow" data-r="fade">Brands we've designed for</p>
+    logos = f'''<section class="logos" aria-label="Brands we have designed"><div class="wrap"><p class="eyebrow" data-r="fade">Brands we've designed</p>
   </div>
   <div class="logo-marq" data-r><ul class="logo-row">{''.join(logo_li(*b) for b in BRAND_LOGOS)}{''.join(logo_li(*b).replace('<li>', '<li aria-hidden="true">') for b in BRAND_LOGOS)}</ul></div></section>'''
 
@@ -208,7 +208,7 @@ def home():
     for s in FEATURED:
         p = BY[s]
         cards += f'''<a class="pcard" href="work/{s}/" aria-label="{esc(p['title'])}">{img(s, 0, p['title'], base, sizes='(min-width: 1100px) 480px, 82vw', want=1100, extra=' data-par=".05"')}
-  <span class="pc-top"><span class="tagc{' y' if p['concept'] else ''}">{'Concept' if p['concept'] else esc(KIND[p['kind']])}</span><i class="arrow-c">{ARROW}</i></span>
+  <span class="pc-top"><span class="tagc">{esc(KIND[p['kind']])}</span><i class="arrow-c">{ARROW}</i></span>
   <span class="pc-body"><h3>{esc(p['title'])}</h3><p>{esc(p['plain'])}</p></span></a>'''
     work = f'''<section class="sec" id="work" style="padding-top:0"><div class="wrap">
   <div class="sh"><div><p class="eyebrow" data-r="fade">Selected work</p><h2 class="h2" data-r="words">Recent <span class="grad">work</span></h2></div>
@@ -296,7 +296,7 @@ def home():
     <p class="sub" data-r data-d=".2" style="margin-top:24px">Not a small logo on a door. A design that works at the size of a billboard, a banner or a whole van, so people notice it and remember it.</p>
     <div class="cta-row" data-r data-d=".3">{pill('Get my vehicle branded', 'start/?need=vehicle', 'pill-yellow pill-lg')}{pill('Billboards and banners', 'services/#ads', 'pill-line pill-lg')}</div>
     <p class="small muted" data-r data-d=".4" style="margin-top:20px">We design it and prepare the files. Printing and fitting are done by a printer or installer.</p></div>
-  <div class="collage">{lf}<div class="soon lf-soon" data-r data-d=".3"><b>Vehicles</b><span>Full wraps for cars, vans and delivery vehicles. Concept mockups coming soon.</span></div></div>
+  <div class="collage">{lf}<div class="soon lf-soon" data-r data-d=".3"><b>Vehicles</b><span>Full wraps for cars, vans and delivery vehicles. Mockups coming soon.</span></div></div>
 </div></section>'''
 
     steps = ''.join(f'<li><span class="n grad">{i + 1:02d}</span><h3>{esc(t)}</h3><p>{esc(d)}</p></li>' for i, (t, d) in enumerate(STEPS))
@@ -332,7 +332,7 @@ def services():
         prod = f'<p class="prod">{esc(PRODUCTION_NOTE)}</p>' if s['production'] else ''
         if s['work']:
             cards = ''.join(f'<a class="mini" href="{base}work/{w}/"><div class="mi">{img(w, 0, BY[w]["title"], base, sizes="(min-width: 900px) 26vw, 94vw", want=560)}</div>'
-                            f'<span>{esc(BY[w]["title"])}{" · Concept" if BY[w]["concept"] else ""}</span></a>' for w in s['work'])
+                            f'<span>{esc(BY[w]["title"])}</span></a>' for w in s['work'])
         else:
             cards = f'<div class="mini soon"><b>{esc(s["title"])}</b><span>{esc(s.get("note", "Examples coming soon."))}</span></div>'
         groups.append(f'''<section class="svc" id="{s['id']}"><div class="wrap">
@@ -354,7 +354,7 @@ def work_index():
   <div class="wc-meta"><h2><a href="{p['slug']}/">{esc(p['title'])}</a></h2><p>{esc(p['plain'])}</p><span class="kt">{esc(KIND[p['kind']])}</span></div></article>''' for p in PROJECTS)
     body = f'''<section class="ph"><div class="wrap"><p class="eyebrow" data-r="fade" data-intro>Selected work</p>
   <h1 class="h1" data-r="words" data-intro>Things <span class="grad">we've made</span></h1>
-  <p class="lead" data-r data-intro data-d=".3">Logos, brands, websites, social graphics, packaging and films. Projects marked <span class="concept">Concept</span> are self-initiated and fictional. Click any project to see it up close.</p>
+  <p class="lead" data-r data-intro data-d=".3">Logos, brands, websites, social graphics, packaging and films. Click any project to see it up close.</p>
   <div class="pills" role="group" aria-label="Filter projects" data-r data-intro data-d=".4">{chips}</div></div></section>
 <section class="wrap work-grid" id="grid">{cards}</section>
 {close_cta(base, 'Have something like this <span class="grad">in mind?</span>')}'''
@@ -386,7 +386,7 @@ def project(p):
     if p.get('type'): facts.append(('Project type', p['type']))
     facts += [('What we did', p['services']), ('Year', p['year'])]
     dl = ''.join(f'<div><dt>{k}</dt><dd>{esc(str(v))}</dd></div>' for k, v in facts)
-    note = f'<p class="concept-note"><span class="concept">Concept</span> A self-initiated project. It was made to show what {BRAND} can do, not for a paying client.</p>' if p['concept'] else ''
+    note = ''
     story = ''
     if slug in STORIES:
         st = STORIES[slug]
