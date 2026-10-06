@@ -350,4 +350,4 @@ def load_testimonials():
 
 
 # Logos cut from our own project artwork (tools/logos.py). (file, brand name, display height px)
-BRAND_LOGOS = [('design-eigen', 'Design Eigen', 40), ('linkrithm', 'LinkRithm', 30), ('green-blueprint', 'Green Blueprint', 74), ('shorteeme', 'ShorteeMe', 58)]
+BRAND_LOGOS = [('design-eigen', 'Design Eigen', 40), ('bitefort', 'Bitefort', 34), ('green-blueprint', 'Green Blueprint', 74), ('linkrithm', 'LinkRithm', 30), ('gce-study-app', 'GCE Study App', 50), ('jojo-foods', 'JoJo Foods', 64), ('shorteeme', 'ShorteeMe', 58)]

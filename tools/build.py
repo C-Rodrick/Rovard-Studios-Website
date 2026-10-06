@@ -182,7 +182,8 @@ def home():
         w, hh = Image.open(os.path.join(ROOT, 'img', 'logos', f + '.png')).size
         return f'<li><span class="lg" role="img" aria-label="{esc(name)}" style="-webkit-mask-image:url({base}img/logos/{f}.png);mask-image:url({base}img/logos/{f}.png);width:{round(h * w / hh)}px;height:{h}px"></span></li>'
     logos = f'''<section class="logos" aria-label="Brands we have designed for"><div class="wrap"><p class="eyebrow" data-r="fade">Brands we've designed for</p>
-  <ul class="logo-row" data-stagger="90">{''.join(logo_li(*b) for b in BRAND_LOGOS)}</ul></div></section>'''
+  </div>
+  <div class="logo-marq" data-r><ul class="logo-row">{''.join(logo_li(*b) for b in BRAND_LOGOS)}{''.join(logo_li(*b).replace('<li>', '<li aria-hidden="true">') for b in BRAND_LOGOS)}</ul></div></section>'''
 
     film_idx = find_img(PROJECTS, FILM['slug'], FILM['poster'])
     film = f'''<section class="showcase wide"><div class="film" data-r>
