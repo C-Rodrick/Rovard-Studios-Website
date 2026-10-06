@@ -115,16 +115,22 @@ def header(base):
 
 
 def footer(base):
+    seen, svc = set(), []
+    for g in SERVICES:
+        for ask in g['asks']:
+            if ask not in seen:
+                seen.add(ask); svc.append(f'<a href="{base}services/#{g["id"]}">{esc(ask)}</a>')
     return f'''<footer class="site-footer">
   <div class="wrap foot">
     <div class="foot-brand">
       <a href="{base or './'}" aria-label="{BRAND} home"><img src="{base}{LOGO_BLUE}" alt="{BRAND}" width="150" height="57" loading="lazy"></a>
       <p>Whatever you're putting out there, we'll make it look right.</p>
-      {pill('Start a project', base + 'start/')}
+      <a class="pill pill-outline" href="{base}start/"><span>Say hello</span></a>
+      <p class="foot-contact"><a href="mailto:{SITE['email']}">{SITE['email']}</a><br>{SITE['location']}</p>
     </div>
-    <nav class="foot-col" aria-label="Footer"><h2>Explore</h2>
-      <a href="{base}services/">Services</a><a href="{base}work/">Work</a><a href="{base}about/">About</a><a href="{base}start/">Start a project</a></nav>
-    <div class="foot-col"><h2>Say hello</h2><a href="mailto:{SITE['email']}">{SITE['email']}</a><p>{SITE['location']}</p></div>
+    <nav class="foot-col" aria-label="Company"><h2>Company</h2>
+      <a href="{base or './'}">Home</a><a href="{base}services/">Services</a><a href="{base}work/">Our work</a><a href="{base}about/">About</a><a href="{base}start/">Start a project</a></nav>
+    <nav class="foot-col foot-svc" aria-label="Services"><h2>Services</h2><div class="svc-cols">{''.join(svc)}</div></nav>
   </div>
   <div class="wrap foot-base"><span>© {SITE['year']} {BRAND}. All rights reserved.</span></div>
 </footer>
@@ -175,7 +181,8 @@ def home():
       <span class="sr-only">We design {all_things} for your ideas.</span>
       <span aria-hidden="true">We <span class="rv">{f0['verb']}</span> <b class="rt grad">{f0['thing']}</b> for your <span class="rf">{f0['for']}</span>.</span></p>
     <p class="lead" data-r data-intro data-d=".55">{BRAND} designs logos, flyers, websites, billboards, vehicle branding and everything in between, for people, businesses, churches, organizations and events.</p>
-    <div class="hero-cta" data-r data-intro data-d=".65">{pill('Start a project', 'start/')}<span class="thumbs" aria-hidden="true">{thumbs}</span></div>
+    <div class="hero-cta" data-r data-intro data-d=".65"><a class="pill pill-talk" href="start/"><span>Let's talk</span><span class="thumbs" aria-hidden="true">{thumbs}</span></a>
+      <span class="hand" aria-hidden="true"><svg viewBox="0 0 70 40" width="56" height="32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M66 30C48 36 24 30 8 12"/><path d="M7 21L7 11L17 13"/></svg><span>Tell us what you're making</span></span></div>
     <p class="hero-proof" data-r="fade" data-intro data-d=".75"><b>7+ years</b> of experience <i></i> <b>200+ projects</b> completed</p>
     <p class="hero-note" data-r="fade" data-intro data-d=".8">Need just one thing? That's fine. One flyer is a real project.</p>
   </div>

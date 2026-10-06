@@ -560,3 +560,24 @@ ul, ol { list-style: none; }
 .lg { display: block; -webkit-mask-position: center; mask-position: center; -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; max-width: 80%; }
 @media (max-width: 760px) { .lg-slots { grid-template-columns: repeat(2, minmax(0, 1fr)); } .lg-slot { height: 104px; } .lg-slot .lg { transform: scale(.8); } }
 @media (prefers-reduced-motion: reduce) { .lg-item { transition: none; } }
+
+/* hero "Let's talk" pill with faces + handwritten note */
+.pill-talk { padding: 10px 10px 10px 30px; gap: 22px; }
+.pill-talk .thumbs { margin: 0; }
+.pill-talk .thumbs i { width: 44px; height: 44px; border-color: rgba(255, 255, 255, .95); }
+.pill-talk:hover .thumbs i { transform: translateY(-2px); transition: transform .3s var(--out); }
+.hand { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); font: 400 20px/1.15 "Bradley Hand", "Segoe Print", "Segoe Script", "Comic Sans MS", cursive; transform: rotate(-3deg); max-width: 250px; }
+.hand svg { flex: none; transform: scaleX(-1); }
+@media (max-width: 560px) { .hand { display: none; } }
+
+/* footer, wide */
+.foot { grid-template-columns: minmax(0, 1.25fr) minmax(0, .6fr) minmax(0, 2.6fr); align-items: start; }
+.pill-outline { background: transparent; color: var(--blue); border: 1px solid var(--blue); box-shadow: none; padding: 16px 34px; }
+.pill-outline:hover { background: var(--blue); color: #fff; }
+.foot-brand .foot-contact { font: 400 15px/1.6 var(--body); letter-spacing: 0; max-width: none; margin: 26px 0 0; color: var(--muted); }
+.foot-brand .foot-contact a { color: var(--ink); font-weight: 500; }
+.svc-cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px 28px; }
+.svc-cols a { font-size: 15px; font-weight: 400; line-height: 1.35; color: var(--ink); }
+@media (max-width: 1100px) { .foot { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } .foot-brand { grid-column: 1 / -1; } .foot-svc { grid-column: 1 / -1; } }
+@media (max-width: 760px) { .svc-cols { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 480px) { .svc-cols { grid-template-columns: minmax(0, 1fr); } .foot { grid-template-columns: minmax(0, 1fr); } .foot-brand, .foot-svc { grid-column: auto; } }
