@@ -172,6 +172,7 @@ def home():
       <span aria-hidden="true">We <span class="rv">{f0['verb']}</span> <b class="rt grad">{f0['thing']}</b> for your <span class="rf">{f0['for']}</span>.</span></p>
     <p class="lead" data-r data-intro data-d=".55">{BRAND} designs logos, flyers, websites, billboards, vehicle branding and everything in between, for people, businesses, churches, organizations and events.</p>
     <div class="hero-cta" data-r data-intro data-d=".65">{pill('Start a project', 'start/')}<span class="thumbs" aria-hidden="true">{thumbs}</span></div>
+    <p class="hero-proof" data-r="fade" data-intro data-d=".75"><b>7+ years</b> of experience <i></i> <b>200+ projects</b> completed</p>
     <p class="hero-note" data-r="fade" data-intro data-d=".8">Need just one thing? That's fine. One flyer is a real project.</p>
   </div>
 </section>'''
@@ -428,9 +429,10 @@ def about():
     why = ''.join(f'<li><h3>{esc(t)}</h3><p>{esc(d)}</p></li>' for t, d in WHY)
     body = f'''<section class="ph"><div class="wrap"><p class="eyebrow" data-r="fade" data-intro>About {BRAND}</p>
   <h1 class="h1" data-r="words" data-intro>We help ideas look like <span class="grad">they deserve to be seen.</span></h1></div></section>
-<section class="sec"><div class="wrap about-grid"><h2 class="h3" data-r>Who we are</h2>
+<section class="sec" style="padding-bottom:70px"><div class="wrap about-grid"><h2 class="h3" data-r>Who we are</h2>
   <div class="prose" data-r data-d=".1"><p>{BRAND} is a design studio. We help people turn their ideas into things that look professional, memorable and ready to be seen: logos, flyers, social media graphics, websites, campaigns, vehicle branding and more.</p>
   <p>We work with individuals, small businesses, churches, organizations and companies. We're based in Canada and work with people around the world. Some of what we do is big and some of it is one flyer. We treat them with the same care.</p></div></div></section>
+<section class="sec" style="padding-top:0"><div class="wrap"><div class="stats" data-r><div class="stat"><b data-count="7" data-suffix="+">7+</b><span>years of experience</span></div><div class="stat"><b data-count="200" data-suffix="+">200+</b><span>projects completed</span></div><div class="stat"><b data-count="{len(SERVICES)}" data-suffix="">{len(SERVICES)}</b><span>kinds of work you can ask for</span></div><div class="stat"><b data-count="3" data-suffix="">3</b><span>short steps to get started</span></div></div></div></section>
 <section class="sec dark"><div class="wrap vm"><div data-r><p class="eyebrow">Our vision</p><p class="statement">A world where anyone with a good idea can put it out there looking <span class="grad">as good as it deserves.</span></p></div>
   <div data-r data-d=".15"><p class="eyebrow">Our mission</p><p class="statement sm">To make professional design easy to ask for, by bringing together creativity, careful design, technology and honest collaboration, and by giving every request, big or small, the same care.</p></div></div></section>
 <section class="sec"><div class="wrap"><div class="sh"><div><p class="eyebrow" data-r="fade">How we work</p><h2 class="h2" data-r="words">Simple, <span class="grad">from the first message</span></h2></div></div>

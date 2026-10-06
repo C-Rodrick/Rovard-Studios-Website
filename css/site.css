@@ -162,6 +162,9 @@ ul, ol { list-style: none; }
 .hero-cta { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
 .thumbs { display: flex; margin-left: 6px; }
 .thumbs i { width: 38px; height: 38px; border-radius: 50%; border: 2px solid #fff; margin-left: -10px; background-size: cover; background-position: center; box-shadow: 0 4px 12px rgba(10, 12, 36, .18); }
+.hero-proof { font-size: 15px; color: var(--muted); display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; margin: 0 0 10px; }
+.hero-proof b { color: var(--ink); font-weight: 600; }
+.hero-proof i { width: 4px; height: 4px; border-radius: 50%; background: var(--blue-3); display: inline-block; }
 .hero-note { font-size: 14px; color: var(--muted); }
 
 /* ── Showcase (film) ──────────────────────────────────────────────────── */
