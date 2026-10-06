@@ -221,6 +221,16 @@ def walk(n, T):
                 v = fix_style(v)
         new.append((k, v))
     n.attrs = new
+    if n.tag == 'script' and any(k == 'type' and v == 'application/ld+json' for k, v in n.attrs) and n.kids:
+        try:
+            data = json.loads(n.kids[0].s)
+            if data.get('@type') == 'FAQPage':
+                for q in data['mainEntity']:
+                    q['name'] = T.get(q['name']) or q['name']
+                    q['acceptedAnswer']['text'] = T.get(q['acceptedAnswer']['text']) or q['acceptedAnswer']['text']
+                n.kids[0].s = json.dumps(data, ensure_ascii=False)
+        except (ValueError, KeyError, AttributeError):
+            pass
     if n.tag in RAW:
         return
     direct_text = any(isinstance(k, Text) and norm(k.s) for k in n.kids)

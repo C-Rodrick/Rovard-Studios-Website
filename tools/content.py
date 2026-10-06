@@ -178,6 +178,7 @@ META = {
     'work': (f"Our work | {BRAND}",
              f"Logos, brand identities, websites, social media graphics, packaging and films made by {BRAND}."),
     'blog': (f"Blog | {BRAND}", f"Plain advice from {BRAND}: how to brief a designer, what a flyer needs, logo or full brand, and more."),
+    'pricing': (f"Pricing | {BRAND}", f"What each kind of project with {BRAND} usually includes, how quotes work, and answers to common questions."),
     'about': (f"About | {BRAND}",
               f"{BRAND} helps people turn their ideas into things that look professional, memorable and ready to be seen."),
     'start': (f"Start a project | {BRAND}",
@@ -364,3 +365,33 @@ LOGO_COLOURS = {'design-eigen': '#111322', 'northstar-capital': '#0A0C24', 'bite
 
 # Budget choices on the start form: what the visitor picks from, not our prices.
 BUDGETS = ['Under $250', '$250 – $1,000', '$1,000 – $3,000', '$3,000 – $5,000', '$5,000 – $10,000', '$10,000+', 'Not sure yet']
+
+
+# ── Pricing packages. Leave price as None until you decide; then it shows "From $X" ──────────────────
+# `price` is a number in USD, e.g. 250. None shows "Tell us your budget".
+PACKAGES = [
+    dict(id='logo', name='Logo', who="You're starting something and need a clean mark to begin with.",
+         includes=['Logo design', 'Two rounds of changes', 'Files for print and screen', 'A short note on your colours and fonts'], need='brand', price=None),
+    dict(id='flyer', name='Flyers & social', who="One flyer, one poster, one invitation, or a set of posts for your page.",
+         includes=['Flyer, poster, invitation or a set of social graphics', 'Two rounds of changes', 'Print-ready and screen-ready files', 'Templates, if you will post often'], need='design', price=None),
+    dict(id='brand', name='Brand identity', who="You want everything you make to look like it belongs together.",
+         includes=['Logo and variations', 'Colours, fonts and how to use them', 'Brand guidelines you can hand to anyone', 'Business card and social profile designs'], need='brand', price=None, featured=True),
+    dict(id='web', name='Website', who="You need a website or landing page people can actually understand.",
+         includes=['Page design that works on phones', 'Layout for your words and images', 'A contact form that reaches you', 'Files ready to publish'], need='website', price=None),
+    dict(id='big', name='Billboards & vehicles', who="Something that has to be read from across the road.",
+         includes=['Billboard, banner, sign or vehicle artwork', "Made to your supplier's sizes and specs", 'Print-ready files', 'Help finding the right printer or installer'], need='ads', price=None),
+]
+
+# ── FAQ (answers match the Terms page) ───────────────────────────────────────────────────────────────
+FAQ = [
+    ("How do I get started?", "Fill in the Start a project form, or message us. A few words about your idea is plenty. We reply with a few questions and, when we know enough, a written quote."),
+    ("Do you take small jobs, like one flyer?", "Yes. One flyer, one logo or one card is a real project here."),
+    ("How much will it cost?", "It depends on what you need and how big it is. We send a written quote before any work starts, so there are no surprises. If you tell us a budget range, we'll tell you honestly what it can cover."),
+    ("How long does it take?", "It depends on the size of the project and how quickly we get your feedback. The timeline is written in your quote."),
+    ("How many changes can I ask for?", "Two rounds of changes are included with each piece of work. If you want more, or change direction after approving a stage, we quote it separately."),
+    ("What do I receive at the end?", "The final approved files, ready for print or screen. If you want the original working files too, we agree that in the quote."),
+    ("Do you also print things?", "We design the artwork and prepare print-ready files. Printing, signage and vehicle wraps are made by a printer or installer, and we're happy to point you to the right one."),
+    ("Who owns the design?", "You do, once the project is paid in full. The details are in our Terms."),
+    ("Can you work with people outside Canada?", "Yes. We're based in Canada and work with people all over the world."),
+    ("I don't know what I need. Can you still help?", "Yes. Tell us about your idea in your own words, or choose \"I'm not sure\" on the form, and we'll work out the rest together."),
+]

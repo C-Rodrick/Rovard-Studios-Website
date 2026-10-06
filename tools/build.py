@@ -101,7 +101,7 @@ def head(title, desc, path, base):
 </head>'''
 
 
-MENU = [('services', 'Services'), ('work', 'Work'), ('blog', 'Blog'), ('about', 'About'), ('start', 'Contact')]
+MENU = [('services', 'Services'), ('work', 'Work'), ('pricing', 'Pricing'), ('blog', 'Blog'), ('about', 'About'), ('start', 'Contact')]
 
 
 def header(base):
@@ -139,7 +139,7 @@ def footer(base, path=''):
       <p class="foot-contact"><a href="mailto:{SITE['email']}">{SITE['email']}</a><br>{SITE['location']}</p>
     </div>
     <nav class="foot-col" aria-label="Company"><h2>Company</h2>
-      <a href="{base or './'}">Home</a><a href="{base}services/">Services</a><a href="{base}work/">Our work</a><a href="{base}blog/">Blog</a><a href="{base}about/">About</a><a href="{base}start/">Start a project</a></nav>
+      <a href="{base or './'}">Home</a><a href="{base}services/">Services</a><a href="{base}work/">Our work</a><a href="{base}pricing/">Pricing</a><a href="{base}blog/">Blog</a><a href="{base}about/">About</a><a href="{base}start/">Start a project</a></nav>
     <nav class="foot-col foot-svc" aria-label="Services"><h2>Services</h2><div class="svc-cols">{''.join(svc)}</div></nav>
   </div>
   <div class="wrap foot-base"><span>© {SITE['year']} {BRAND}. All rights reserved.</span>
@@ -360,7 +360,7 @@ def home():
   <div class="sh-r" data-r>{pill('See all services', 'services/', 'pill-ghost')}</div></div>
   <div class="rows" data-stagger="45">{srows}</div><ul class="asks-list" data-r>{asks}</ul></div></section>'''
 
-    page('', 'home', hero + logos + film + marquee + need + work + two + story + who + reviews + why + large + how + serv + close_cta(base), body_class='home')
+    page('', 'home', hero + logos + film + marquee + need + work + two + story + who + reviews + why + large + how + serv + faq_section(base) + close_cta(base), body_class='home')
 
 
 # ── SERVICES ──────────────────────────────────────────────────────────────
@@ -563,6 +563,42 @@ def legal():
 
 
 
+# ── FAQ + PRICING ─────────────────────────────────────────────────────────
+def faq_section(base, items=None, heading='Questions, <span class="grad">answered</span>', eyebrow='FAQ'):
+    items = items or FAQ
+    qa = ''.join(f'<details class="faq-i"><summary><span>{esc(q)}</span><i class="faq-ico"></i></summary><p>{esc(a)}</p></details>' for q, a in items)
+    ld = json.dumps({'@context': 'https://schema.org', '@type': 'FAQPage', 'mainEntity': [
+        {'@type': 'Question', 'name': q, 'acceptedAnswer': {'@type': 'Answer', 'text': a}} for q, a in items]}, ensure_ascii=False)
+    return f"""<section class="sec faq-sec" id="faq"><div class="wrap faq-grid">
+  <div class="faq-head"><p class="eyebrow" data-r="fade">{eyebrow}</p><h2 class="h2" data-r="words">{heading}</h2>
+    <p class="sub" data-r data-d=".2">Can't find yours? Ask us. A few words is plenty.</p>{pill('Ask us', base + 'start/', 'pill-outline pill-sm', ico=False)}</div>
+  <div class="faq-list" data-r>{qa}</div></div>
+<script type="application/ld+json">{ld}</script></section>"""
+
+
+def pricing():
+    base = '../'
+    cards = ''
+    for pk in PACKAGES:
+        price = f'From <b>${pk["price"]:,}</b>' if pk.get('price') else '<b>Tell us your budget</b>'
+        feat = ' pk-feat' if pk.get('featured') else ''
+        lis = ''.join(f'<li>{esc(x)}</li>' for x in pk['includes'])
+        btn = pill('Get a quote', f"{base}start/?need={pk['need']}", '' if pk.get('featured') else 'pill-outline pill-sm', ico=bool(pk.get('featured')))
+        cards += f"""<article class="pk{feat}" data-r>
+  <h2>{esc(pk['name'])}</h2><p class="pk-who">{esc(pk['who'])}</p>
+  <ul>{lis}</ul>
+  <p class="pk-price">{price}</p>{btn}</article>"""
+    body = f"""<section class="ph"><div class="wrap"><p class="eyebrow" data-r="fade" data-intro>Pricing</p>
+  <h1 class="h1" data-r="words" data-intro>Clear, <span class="grad">no surprises</span></h1>
+  <p class="lead" data-r data-intro data-d=".3">Every project gets a written quote before any work starts. Here is what each kind of project usually includes, so you know what to ask for.</p></div></section>
+<section class="wrap pk-grid">{cards}</section>
+<section class="wrap pk-note" data-r><p>Not sure which fits? Pick a budget range on the project form and we'll tell you honestly what it can cover. Final prices, timelines and what's included are always in your written quote.</p></section>
+{faq_section(base)}
+{close_cta(base, "Ready when <span class=\"grad\">you are.</span>")}"""
+    page('pricing/', 'pricing', body, body_class='pricing')
+
+
+
 # ── START ─────────────────────────────────────────────────────────────────
 def start():
     base = '../'
@@ -614,7 +650,7 @@ def extras():
 h1{{font-size:clamp(2.2rem,6vw,4rem);margin:0 0 12px;letter-spacing:-.03em}}p{{margin:0 0 24px;color:#5F6485;font-size:1.1rem}}a{{display:inline-block;background:#162DAF;color:#fff;padding:16px 30px;border-radius:999px;text-decoration:none;font-weight:600}}</style></head>
 <body><main><h1>That page isn't here.</h1><p>But we can help you find what you need.</p><a id="home" href="/">Back to {BRAND}</a></main>
 <script>var p=location.pathname.split('/');document.getElementById('home').href=(location.hostname.indexOf('github.io')>-1?'/'+p[1]:'')+'/';</script></body></html>''')
-    urls = ['', 'services/', 'work/', 'blog/', 'about/', 'start/', 'privacy/', 'cookies/', 'terms/'] + [f'work/{p["slug"]}/' for p in PROJECTS] + [f'blog/{b["slug"]}/' for b in POSTS]
+    urls = ['', 'services/', 'work/', 'pricing/', 'blog/', 'about/', 'start/', 'privacy/', 'cookies/', 'terms/'] + [f'work/{p["slug"]}/' for p in PROJECTS] + [f'blog/{b["slug"]}/' for b in POSTS]
     sm = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + ''.join(
         f'  <url><loc>{SITE["url"]}/{u}</loc></url>\n' for u in urls) + '</urlset>\n'
     open(os.path.join(ROOT, 'sitemap.xml'), 'w', encoding='utf-8').write(sm)
@@ -622,7 +658,7 @@ h1{{font-size:clamp(2.2rem,6vw,4rem);margin:0 0 12px;letter-spacing:-.03em}}p{{m
 
 
 if __name__ == '__main__':
-    home(); services(); work_index(); about(); start(); blog(); legal()
+    home(); services(); work_index(); about(); start(); blog(); legal(); pricing()
     for b in POSTS:
         blog_post(b)
     for p in PROJECTS:
