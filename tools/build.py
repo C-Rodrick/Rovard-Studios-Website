@@ -181,12 +181,13 @@ def home():
   </div>
 </section>'''
 
-    def logo_li(f, name, h):
+    def logo_item(f, name, h, first):
         w, hh = Image.open(os.path.join(ROOT, 'img', 'logos', f + '.png')).size
-        return f'<li><span class="lg" role="img" aria-label="{esc(name)}" style="-webkit-mask-image:url({base}img/logos/{f}.png);mask-image:url({base}img/logos/{f}.png);width:{round(h * w / hh)}px;height:{h}px"></span></li>'
-    logos = f'''<section class="logos" aria-label="Brands we have designed"><div class="wrap"><p class="eyebrow" data-r="fade">Brands we've designed</p>
-  </div>
-  <div class="logo-marq" data-r><ul class="logo-row">{''.join(logo_li(*b) for b in BRAND_LOGOS)}{''.join(logo_li(*b).replace('<li>', '<li aria-hidden="true">') for b in BRAND_LOGOS)}</ul></div></section>'''
+        return (f'<span class="lg-item{" on" if first else ""}"><span class="lg" role="img" aria-label="{esc(name)}" style="-webkit-mask-image:url({base}img/logos/{f}.png);mask-image:url({base}img/logos/{f}.png);'
+                f'background:{LOGO_COLOURS[f]};width:{round(h * w / hh)}px;height:{h}px"></span></span>')
+    slots = ''.join('<div class="lg-slot">' + ''.join(logo_item(*b, i == 0) for i, b in enumerate(BRAND_LOGOS[k::4])) + '</div>' for k in range(4))
+    logos = f'''<section class="logos" aria-label="Brands we have designed"><p class="eyebrow" data-r="fade">Brands we've designed</p>
+  <div class="lg-band" data-r><div class="wrap lg-slots" data-logo-slots>{slots}</div></div></section>'''
 
     film_idx = find_img(PROJECTS, FILM['slug'], FILM['poster'])
     film = f'''<section class="showcase wide"><div class="film" data-r>

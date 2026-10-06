@@ -353,3 +353,8 @@ def load_testimonials():
 BRAND_LOGOS = [('design-eigen', 'Design Eigen', 40), ('northstar-capital', 'Northstar Capital', 36), ('bitefort', 'Bitefort', 34), ('vita-house', 'Vita House', 40),
                ('green-blueprint', 'Green Blueprint', 74), ('mason-and-rowe', 'Mason & Rowe', 22), ('linkrithm', 'LinkRithm', 30), ('proxima-exchange', 'Proxima Exchange', 36),
                ('gce-study-app', 'GCE Study App', 50), ('afaa-pay', "Afa'a Pay", 34), ('jojo-foods', 'JoJo Foods', 64), ('shorteeme', 'ShorteeMe', 58)]
+
+# Logo colours, taken from each brand's own artwork (the logos are cut out as masks and re-coloured)
+LOGO_COLOURS = {'design-eigen': '#111322', 'northstar-capital': '#0A0C24', 'bitefort': '#4A2A8F', 'vita-house': '#2F5A44', 'green-blueprint': '#1B4839',
+                'mason-and-rowe': '#2A241E', 'linkrithm': '#7B4DF0', 'proxima-exchange': '#1C39BB', 'gce-study-app': '#0E9F6E', 'afaa-pay': '#2F43E8',
+                'jojo-foods': '#D8352C', 'shorteeme': '#1E3FA8'}

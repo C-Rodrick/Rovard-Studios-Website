@@ -249,4 +249,22 @@
       }
     });
   }
+
+  /* ── Logo slots: one slot swaps at a time ─────────────────────────── */
+  const slotsWrap = document.querySelector('[data-logo-slots]');
+  if (slotsWrap && !reduce) {
+    const slots = $$('.lg-slot', slotsWrap).map(el => ({ items: $$('.lg-item', el), i: 0 })).filter(s => s.items.length > 1);
+    let k = 0, timer = null;
+    const swap = () => {
+      const s = slots[k % slots.length]; k++;
+      const cur = s.items[s.i], nxt = s.items[(s.i + 1) % s.items.length];
+      nxt.classList.remove('out'); cur.classList.remove('on'); cur.classList.add('out'); nxt.classList.add('on');
+      setTimeout(() => { cur.classList.remove('out'); }, 900);
+      s.i = (s.i + 1) % s.items.length;
+    };
+    const run = () => { if (!timer) timer = setInterval(swap, 1500); };
+    const stop = () => { clearInterval(timer); timer = null; };
+    if ('IntersectionObserver' in window) new IntersectionObserver(es => es.forEach(e => (e.isIntersecting ? run() : stop())), { threshold: .2 }).observe(slotsWrap);
+    else run();
+  }
 })();
