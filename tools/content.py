@@ -347,3 +347,7 @@ def load_testimonials():
     except (OSError, ValueError):
         return []
     return [t for t in data if t.get('quote') and t.get('name')]
+
+
+# Logos cut from our own project artwork (tools/logos.py). (file, brand name, display height px)
+BRAND_LOGOS = [('design-eigen', 'Design Eigen', 40), ('linkrithm', 'LinkRithm', 30), ('green-blueprint', 'Green Blueprint', 74), ('shorteeme', 'ShorteeMe', 58)]

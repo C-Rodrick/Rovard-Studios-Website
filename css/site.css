@@ -547,3 +547,11 @@ ul, ol { list-style: none; }
   .marquee-track, .cards-row { animation: none; }
 }
 @media print { .site-header, .sticky-cta, .lightbox, .menu-panel { display: none; } }
+
+/* brand logo strip */
+.logos { padding: 56px 0 0; text-align: center; }
+.logos .eyebrow { display: block; text-align: center; }
+.logo-row { list-style: none; margin: 22px 0 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 28px 64px; }
+.lg { display: block; background: #7E85A8; -webkit-mask-position: center; mask-position: center; -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; transition: background .4s var(--out), transform .4s var(--out); }
+.logo-row li:hover .lg { background: var(--blue); transform: translateY(-2px); }
+@media (max-width: 560px) { .logo-row { gap: 24px 40px; } .lg { transform: scale(.82); } }

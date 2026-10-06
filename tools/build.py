@@ -7,6 +7,7 @@ Pages: / , /services/ , /work/ , /work/<slug>/ (x22) , /about/ , /start/ , 404.h
 Env: NOLAZY=1 renders images eagerly (for review screenshots only).
 """
 import html, json, os, sys, time, urllib.parse
+from PIL import Image
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from content import *  # noqa
@@ -177,6 +178,12 @@ def home():
   </div>
 </section>'''
 
+    def logo_li(f, name, h):
+        w, hh = Image.open(os.path.join(ROOT, 'img', 'logos', f + '.png')).size
+        return f'<li><span class="lg" role="img" aria-label="{esc(name)}" style="-webkit-mask-image:url({base}img/logos/{f}.png);mask-image:url({base}img/logos/{f}.png);width:{round(h * w / hh)}px;height:{h}px"></span></li>'
+    logos = f'''<section class="logos" aria-label="Brands we have designed for"><div class="wrap"><p class="eyebrow" data-r="fade">Brands we've designed for</p>
+  <ul class="logo-row" data-stagger="90">{''.join(logo_li(*b) for b in BRAND_LOGOS)}</ul></div></section>'''
+
     film_idx = find_img(PROJECTS, FILM['slug'], FILM['poster'])
     film = f'''<section class="showcase wide"><div class="film" data-r>
   {img(FILM['slug'], film_idx, f'A still from the {BRAND} film', base, sizes='(min-width: 1280px) 1160px, 94vw', eager=True, want=1600, cls='poster', extra=' data-par=".06"')}
@@ -305,7 +312,7 @@ def home():
   <div class="sh-r" data-r>{pill('See all services', 'services/', 'pill-ghost')}</div></div>
   <div class="rows" data-stagger="45">{srows}</div><ul class="asks-list" data-r>{asks}</ul></div></section>'''
 
-    page('', 'home', hero + film + marquee + need + work + two + story + who + reviews + why + large + how + serv + close_cta(base), body_class='home')
+    page('', 'home', hero + logos + film + marquee + need + work + two + story + who + reviews + why + large + how + serv + close_cta(base), body_class='home')
 
 
 # ── SERVICES ──────────────────────────────────────────────────────────────
