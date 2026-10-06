@@ -320,3 +320,27 @@ WHY_IMGS = [('green-blueprint', 'Cover 7 - Copy'), ('linkrithm', 'gallery-02'), 
 AUD_PHOTOS = [('linkrithm', 'gallery-13'), ('shorteeme', None), ('green-blueprint', 'Cover 1.jpg')]
 HERO_THUMBS = [('linkrithm', 'gallery-02'), ('green-blueprint', 'Cover 7 - Copy'), ('jojo-foods', None)]
 FILM = dict(src='assets/Motion%20Design/1_Rovard%20Brand%20Film/rovard-brand-film.mp4', slug='rovard-studios-brand-film', poster='film-02')
+
+
+# ── Supplied people photography (illustrative only: these are NOT our clients or team) ──
+# (photo number, audience label shown on the card, object-position of the face)
+PEOPLE = {
+    1: ('Founders & small businesses', '50% 26%'),
+    2: ('Professionals & personal brands', '50% 18%'),
+    3: ('Startups & teams', '50% 22%'),
+    4: ('Creators & freelancers', '34% 28%'),
+    5: ('Entrepreneurs', '50% 24%'),
+    6: ('Organizations & institutions', '50% 28%'),
+    7: ('Individuals with an idea', '50% 26%'),
+}
+PEOPLE_NOTE = "Photography is illustrative. It does not show our clients."
+
+
+def load_testimonials():
+    """Real quotes only. Add entries to tools/testimonials.json (see README). Empty file = section is not shown."""
+    path = os.path.join(ROOT, 'tools', 'testimonials.json')
+    try:
+        data = json.load(open(path, encoding='utf-8'))
+    except (OSError, ValueError):
+        return []
+    return [t for t in data if t.get('quote') and t.get('name')]

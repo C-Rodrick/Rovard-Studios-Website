@@ -218,49 +218,35 @@
     });
   }
 
-  /* ── Start a project: three short steps, deep-linkable ────────────── */
+  /* ── Start a project: one short page, deep-linkable (?need=flyer,website) ─ */
   const form = $('#start-form');
   if (form) {
-    const steps = $$('.step', form), crumbs = $$('.progress li', form);
-    const back = $('[data-back]', form), nextBtn = $('[data-next]', form), err = $('.form-error', form);
-    let cur = 0;
-    const want = (new URLSearchParams(location.search).get('need') || '').split(',').filter(Boolean);
-    want.forEach(v => { const c = $(`input[name="need"][value="${CSS.escape(v)}"]`, form); if (c) c.checked = true; });
-    const show = (n, init) => {
-      cur = n; err.textContent = '';
-      steps.forEach((s, i) => s.classList.toggle('is-on', i === n));
-      crumbs.forEach((c, i) => { c.classList.toggle('on', i === n); c.classList.toggle('done', i < n); });
-      back.hidden = n === 0; form.classList.toggle('last', n === steps.length - 1);
-      if (init) return;
-      const lg = $('legend', steps[n]); if (lg) { lg.tabIndex = -1; lg.focus({ preventScroll: true }); }
-      goto(form, -40);
-    };
-    const validate = n => {
+    const err = $('.form-error', form);
+    (new URLSearchParams(location.search).get('need') || '').split(',').filter(Boolean).forEach(v => {
+      const c = $(`input[name="need"][value="${CSS.escape(v)}"]`, form); if (c) c.checked = true;
+    });
+    const check = () => {
+      if (!form.name.value.trim()) return [form.name, 'Please tell us your name.'];
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.value.trim())) return [form.email, 'Please check your email address.'];
       const needs = $$('input[name="need"]:checked', form).map(x => x.value);
-      if (n === 0 && !needs.length) return 'Pick at least one, or choose “I’m not sure”.';
-      if (n === 1 && needs.includes('unsure') && !form.idea.value.trim()) return 'Tell us a little about your idea, in your own words.';
-      if (n === 2) {
-        if (!form.name.value.trim()) return 'Please tell us your name.';
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.value.trim())) return 'Please check your email address.';
-      }
-      return '';
+      if (!needs.length) return [$('.seg', form), 'Pick at least one thing you need, or choose “I’m not sure”.'];
+      if (needs.includes('unsure') && !form.idea.value.trim()) return [form.idea, 'Tell us a little about your idea, in your own words.'];
+      return null;
     };
-    nextBtn.addEventListener('click', () => { const m = validate(cur); if (m) { err.textContent = m; return; } show(cur + 1); });
-    back.addEventListener('click', () => show(cur - 1));
-    form.addEventListener('keydown', e => { if (e.key === 'Enter' && e.target.tagName === 'INPUT' && cur < steps.length - 1) { e.preventDefault(); nextBtn.click(); } });
     form.addEventListener('submit', async e => {
       e.preventDefault();
-      const m = validate(2) || validate(0); if (m) { err.textContent = m; if (validate(0)) show(0); return; }
+      const bad = check();
+      if (bad) { err.textContent = bad[1]; bad[0].focus && bad[0].focus(); return; }
+      err.textContent = '';
       const sub = $('[data-submit]', form), label = sub.querySelector('span'); sub.disabled = true; label.textContent = 'Sending…';
       try {
         const r = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
         if (!r.ok) throw new Error('bad status');
-        form.hidden = true; $('.form-done').hidden = false; goto($('.form-done'), -40);
+        form.hidden = true; $('.form-done').hidden = false; goto($('.form-done'), -120);
       } catch (_) {
         err.innerHTML = 'Something went wrong. Please try again, or email us at <a href="mailto:hello@rovardstudios.com">hello@rovardstudios.com</a>.';
         sub.disabled = false; label.textContent = 'Send it to us';
       }
     });
-    show(0, true);
   }
 })();

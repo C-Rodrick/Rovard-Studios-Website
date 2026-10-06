@@ -239,17 +239,35 @@ def home():
         t, d = AUDIENCES[i]
         return f'<div class="acard"><h3>{esc(t)}</h3><p>{esc(d)}</p></div>'
 
-    def photo(ref):
-        slug, fr = ref
-        return f'<div class="acard photo">{img(slug, find_img(PROJECTS, slug, fr), BY[slug]["title"], base, sizes="360px", want=560)}</div>'
+    def person(n):
+        label, pos = PEOPLE[n]
+        return (f'<figure class="acard photo">{img("people", n, label, base, sizes="360px", want=560, extra=f" style=\"object-position:{pos}\"")}'
+                f'<figcaption>{esc(label)}</figcaption></figure>')
     blue = '<div class="acard blue"><h3>No project is too small.</h3><p>One flyer, one logo, one card. They all count here.</p></div>'
-    r1 = [acard(0), acard(1), photo(AUD_PHOTOS[0]), acard(2), acard(3), blue, acard(4)]
-    r2 = [acard(5), photo(AUD_PHOTOS[1]), acard(6), acard(7), photo(AUD_PHOTOS[2]), acard(0), acard(3)]
+    r1 = [person(1), acard(0), acard(1), person(4), acard(2), person(3), acard(3), blue]
+    r2 = [person(6), acard(4), person(5), acard(5), person(2), acard(6), person(7), acard(7)]
     row = lambda items, cls='': f'<div class="cards-row {cls}">{"".join(items)}{"".join(items)}</div>'
     who = f'''<section class="sec" id="who" style="padding-top:0"><div class="wrap">
   <div class="sh"><div><p class="eyebrow" data-r="fade">Who we work with</p><h2 class="h2" data-r="words">Big idea or small one, <span class="grad">we're glad you're here</span></h2></div>
   <div class="sh-r"><p class="sub" data-r>You don't need to know design words. You just need something you want people to see.</p></div></div></div>
-  <div class="cards-wrap" data-r aria-label="Who we work with">{row(r1)}{row(r2, 'rev')}</div></section>'''
+  <div class="cards-wrap" data-r aria-label="Who we work with">{row(r1)}{row(r2, 'rev')}</div>
+  <p class="small muted illus" data-r>{PEOPLE_NOTE}</p></section>'''
+
+    tms = load_testimonials()
+    if tms:
+        def tcard(t):
+            who_ = esc(t['name']) + (f', {esc(t["role"])}' if t.get('role') else '')
+            av = f'<img class="tav" src="{base}{t["photo"]}" alt="" width="36" height="36" loading="lazy">' if t.get('photo') else ''
+            return f'<figure class="acard tcard"><blockquote>{esc(t["quote"])}</blockquote><figcaption>{av}<span>{who_}</span></figcaption></figure>'
+        cards_t = [tcard(t) for t in tms]
+        while len(cards_t) < 6:
+            cards_t = cards_t + cards_t
+        half = len(cards_t) // 2
+        reviews = f'''<section class="sec" id="reviews" style="padding-top:0"><div class="wrap">
+  <div class="sh"><div><p class="eyebrow" data-r="fade">Word on the street</p><h2 class="h2" data-r="words">What people <span class="grad">say</span></h2></div></div></div>
+  <div class="cards-wrap" data-r>{row(cards_t[:half])}{row(cards_t[half:], 'rev')}</div></section>'''
+    else:
+        reviews = ''
 
     pans = ''
     for n, ((t, d), ref) in enumerate(zip(WHY, WHY_IMGS)):
@@ -287,7 +305,7 @@ def home():
   <div class="sh-r" data-r>{pill('See all services', 'services/', 'pill-ghost')}</div></div>
   <div class="rows" data-stagger="45">{srows}</div><ul class="asks-list" data-r>{asks}</ul></div></section>'''
 
-    page('', 'home', hero + film + marquee + need + work + two + story + who + why + large + how + serv + close_cta(base), body_class='home')
+    page('', 'home', hero + film + marquee + need + work + two + story + who + reviews + why + large + how + serv + close_cta(base), body_class='home')
 
 
 # ── SERVICES ──────────────────────────────────────────────────────────────
@@ -427,33 +445,36 @@ def about():
 # ── START ─────────────────────────────────────────────────────────────────
 def start():
     base = '../'
-    chips = ''.join(f'<label class="pick"><input type="checkbox" name="need" value="{k}"><span>{esc(t)}</span></label>' for k, t in NEEDS)
-    body = f'''<section class="ph"><div class="wrap"><p class="eyebrow" data-r="fade" data-intro>Start a project</p>
-  <h1 class="h1" data-r="words" data-intro>Tell us what <span class="grad">you're working on.</span></h1>
-  <p class="lead" data-r data-intro data-d=".3">No brief needed. A few words is plenty. We'll take it from there.</p></div></section>
-<section class="wrap start-wrap">
-  <form id="start-form" class="start-form" action="{SITE['formspree']}" method="POST" novalidate>
+    picks = ''.join(f'<label class="pick"><input type="checkbox" name="need" value="{k}"><span>{esc(t)}</span></label>' for k, t in NEEDS)
+    arc = ''.join(f'<i style="background-image:url({base}img/{sl}/{find_img(PROJECTS, sl, fr):02d}-560.webp)"></i>' for sl, fr in HERO_THUMBS)
+    body = f"""<section class="talk"><div class="wrap">
+  <div class="talk-head">
+    <div class="arc" aria-hidden="true" data-r="fade" data-intro>{arc}</div>
+    <p class="nrf" data-r data-intro data-d=".1">Not sure how to put it? <b>Messy is fine.</b></p>
+    <h1 class="big" data-r="words" data-intro data-d=".15">Let's <span class="grad">talk!</span></h1>
+    <p class="talk-sub" data-r data-intro data-d=".35">Share what you're working on here, or send us an email at <a href="mailto:{SITE['email']}">{SITE['email']}</a>. A few words is plenty.</p>
+  </div>
+  <form id="start-form" class="tform" action="{SITE['formspree']}" method="POST" novalidate data-r data-intro data-d=".45">
     <input type="hidden" name="_subject" value="New project enquiry from the {BRAND} website">
     <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="trap" aria-hidden="true">
-    <ol class="progress" aria-hidden="true"><li class="on"><i>1</i> What you need</li><li><i>2</i> Your idea</li><li><i>3</i> How to reach you</li></ol>
-    <fieldset class="step is-on" data-step="1"><legend>What do you need?</legend><p class="hint">Tick everything that applies.</p><div class="picks">{chips}</div></fieldset>
-    <fieldset class="step" data-step="2"><legend>Tell us a little about it.</legend>
-      <label class="field"><span>What's the idea?</span><textarea name="idea" rows="6" placeholder="For example: I'm starting a bakery and need a logo and a flyer for the opening. Messy is fine."></textarea></label>
-      <label class="field"><span>A link to anything that helps (optional)</span><input type="url" name="link" placeholder="https://"></label></fieldset>
-    <fieldset class="step" data-step="3"><legend>How can we reach you?</legend>
-      <label class="field"><span>Your name</span><input type="text" name="name" autocomplete="name" required></label>
-      <label class="field"><span>Email</span><input type="email" name="email" autocomplete="email" required></label>
-      <label class="field"><span>Phone or WhatsApp (optional)</span><input type="tel" name="phone" autocomplete="tel"></label>
-      <label class="field"><span>Is there a date you need it by? (optional)</span><input type="text" name="deadline" placeholder="For example: end of next month"></label></fieldset>
+    <div class="f"><label for="f-name">Name &amp; company</label><input id="f-name" name="name" type="text" autocomplete="name" placeholder="Your name, and your business if you have one" required></div>
+    <div class="f-row">
+      <div class="f"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required></div>
+      <div class="f"><label for="f-phone">Phone or WhatsApp <em>(optional)</em></label><input id="f-phone" name="phone" type="tel" autocomplete="tel" placeholder="+1 555 555 5555"></div>
+    </div>
+    <div class="f"><span class="lab" id="needs-l">What do you need? <em>Tick everything that applies</em></span><div class="seg" role="group" aria-labelledby="needs-l">{picks}</div></div>
+    <div class="f"><label for="f-idea">Tell us a little about it</label><textarea id="f-idea" name="idea" rows="4" placeholder="For example: I'm starting a bakery and need a logo and a flyer for the opening."></textarea></div>
+    <div class="f"><label for="f-date">Is there a date you need it by? <em>(optional)</em></label><input id="f-date" name="deadline" type="text" placeholder="For example: end of next month"></div>
     <p class="form-error" role="alert" aria-live="assertive"></p>
-    <div class="form-actions"><button type="button" class="btn-plain" data-back hidden>← Back</button>
-      <button type="button" class="pill pill-lg" data-next><span>Continue</span><i class="ico">{ARROW}</i></button>
+    <div class="tform-foot"><p class="small muted">One flyer is a real project. No brief needed.</p>
       <button type="submit" class="pill pill-lg" data-submit><span>Send it to us</span><i class="ico">{ARROW}</i></button></div>
-    <p class="hint">Prefer email? <a href="mailto:{SITE['email']}">{SITE['email']}</a></p>
   </form>
   <div class="form-done" hidden><h2 class="h2">Thank you. <span class="grad">We've got it.</span></h2><p class="lead">We'll read what you sent and get back to you.</p>
-    {pill('See some of our work', base + 'work/')}</div>
-</section>'''
+    <div class="cta-row">{pill('See some of our work', base + 'work/')}</div></div>
+  <div class="or" data-r><span>or</span></div>
+  <div class="alt" data-r><a class="alt-card" href="mailto:{SITE['email']}"><small>Email us</small><b>{SITE['email']}</b><i class="arrow-c">{ARROW}</i></a>
+    <a class="alt-card" href="{base}work/"><small>Not ready yet?</small><b>See what we've made</b><i class="arrow-c">{ARROW}</i></a></div>
+</div></section>"""
     page('start/', 'start', body, body_class='start')
 
 

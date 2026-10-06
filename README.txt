@@ -42,3 +42,10 @@ Before launch
   - Add real testimonials when available (none are shown now).
 
 Preview locally:  double-click preview.bat   (or: python -m http.server 8000, then open http://localhost:8000)
+
+PEOPLE PHOTOS & TESTIMONIALS
+- Drop photos in assets/People/person-N.jpg, run `python tools/people.py`, then `python tools/build.py`.
+  Labels/face focus live in PEOPLE in tools/content.py. They are shown as illustrative (not clients).
+- Real quotes only: add entries to tools/testimonials.json, e.g.
+  [{"quote": "...", "name": "Jane Doe", "role": "Owner, Acme", "photo": "img/people/jane.webp"}]
+  ("photo" optional, only with the person's permission). Empty list = the section is hidden.

@@ -18,7 +18,7 @@
 <link rel="icon" href="../assets/rovard-mark.svg">
 <link rel="preload" href="../css/fonts/Syne.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../css/fonts/SpaceGrotesk.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../css/site.css?v=202610060941">
+<link rel="stylesheet" href="../css/site.css?v=202610061106">
 <script>document.documentElement.classList.add('js')</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "ProfessionalService", "name": "ROVARD STUDIOS", "url": "https://rovardstudios.com/", "logo": "https://rovardstudios.com/assets/Combined%20Logo%20-%20Rovard%20Studios%20-%20Blue.svg", "email": "hello@rovardstudios.com", "areaServed": "Worldwide", "description": "ROVARD STUDIOS designs logos, flyers, websites, billboards, vehicle branding and more for people, businesses, churches, organizations and events. Tell us what you need."}</script>
 </head>
@@ -36,32 +36,34 @@
   <div class="menu-foot"><span>Canada · Worldwide</span><a href="mailto:hello@rovardstudios.com">hello@rovardstudios.com</a><a class="pill pill-yellow" href="../start/"><span>Start a project</span><i class="ico"><svg viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 11 11 3M5 3h6v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a></div>
 </div>
 <main id="main">
-<section class="ph"><div class="wrap"><p class="eyebrow" data-r="fade" data-intro>Start a project</p>
-  <h1 class="h1" data-r="words" data-intro>Tell us what <span class="grad">you're working on.</span></h1>
-  <p class="lead" data-r data-intro data-d=".3">No brief needed. A few words is plenty. We'll take it from there.</p></div></section>
-<section class="wrap start-wrap">
-  <form id="start-form" class="start-form" action="https://formspree.io/f/xvkgepeo" method="POST" novalidate>
+<section class="talk"><div class="wrap">
+  <div class="talk-head">
+    <div class="arc" aria-hidden="true" data-r="fade" data-intro><i style="background-image:url(../img/linkrithm/02-560.webp)"></i><i style="background-image:url(../img/green-blueprint/09-560.webp)"></i><i style="background-image:url(../img/jojo-foods/00-560.webp)"></i></div>
+    <p class="nrf" data-r data-intro data-d=".1">Not sure how to put it? <b>Messy is fine.</b></p>
+    <h1 class="big" data-r="words" data-intro data-d=".15">Let's <span class="grad">talk!</span></h1>
+    <p class="talk-sub" data-r data-intro data-d=".35">Share what you're working on here, or send us an email at <a href="mailto:hello@rovardstudios.com">hello@rovardstudios.com</a>. A few words is plenty.</p>
+  </div>
+  <form id="start-form" class="tform" action="https://formspree.io/f/xvkgepeo" method="POST" novalidate data-r data-intro data-d=".45">
     <input type="hidden" name="_subject" value="New project enquiry from the ROVARD STUDIOS website">
     <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="trap" aria-hidden="true">
-    <ol class="progress" aria-hidden="true"><li class="on"><i>1</i> What you need</li><li><i>2</i> Your idea</li><li><i>3</i> How to reach you</li></ol>
-    <fieldset class="step is-on" data-step="1"><legend>What do you need?</legend><p class="hint">Tick everything that applies.</p><div class="picks"><label class="pick"><input type="checkbox" name="need" value="brand"><span>A logo or a whole brand</span></label><label class="pick"><input type="checkbox" name="need" value="design"><span>A flyer, poster or invitation</span></label><label class="pick"><input type="checkbox" name="need" value="social"><span>Social media graphics</span></label><label class="pick"><input type="checkbox" name="need" value="website"><span>A website or landing page</span></label><label class="pick"><input type="checkbox" name="need" value="ads"><span>A billboard, banner or sign</span></label><label class="pick"><input type="checkbox" name="need" value="vehicle"><span>My vehicle branded</span></label><label class="pick"><input type="checkbox" name="need" value="print"><span>Business cards or stationery</span></label><label class="pick"><input type="checkbox" name="need" value="docs"><span>A presentation or document</span></label><label class="pick"><input type="checkbox" name="need" value="packaging"><span>Packaging</span></label><label class="pick"><input type="checkbox" name="need" value="media"><span>Photo or video editing</span></label><label class="pick"><input type="checkbox" name="need" value="unsure"><span>I&#x27;m not sure. I just have an idea.</span></label></div></fieldset>
-    <fieldset class="step" data-step="2"><legend>Tell us a little about it.</legend>
-      <label class="field"><span>What's the idea?</span><textarea name="idea" rows="6" placeholder="For example: I'm starting a bakery and need a logo and a flyer for the opening. Messy is fine."></textarea></label>
-      <label class="field"><span>A link to anything that helps (optional)</span><input type="url" name="link" placeholder="https://"></label></fieldset>
-    <fieldset class="step" data-step="3"><legend>How can we reach you?</legend>
-      <label class="field"><span>Your name</span><input type="text" name="name" autocomplete="name" required></label>
-      <label class="field"><span>Email</span><input type="email" name="email" autocomplete="email" required></label>
-      <label class="field"><span>Phone or WhatsApp (optional)</span><input type="tel" name="phone" autocomplete="tel"></label>
-      <label class="field"><span>Is there a date you need it by? (optional)</span><input type="text" name="deadline" placeholder="For example: end of next month"></label></fieldset>
+    <div class="f"><label for="f-name">Name &amp; company</label><input id="f-name" name="name" type="text" autocomplete="name" placeholder="Your name, and your business if you have one" required></div>
+    <div class="f-row">
+      <div class="f"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required></div>
+      <div class="f"><label for="f-phone">Phone or WhatsApp <em>(optional)</em></label><input id="f-phone" name="phone" type="tel" autocomplete="tel" placeholder="+1 555 555 5555"></div>
+    </div>
+    <div class="f"><span class="lab" id="needs-l">What do you need? <em>Tick everything that applies</em></span><div class="seg" role="group" aria-labelledby="needs-l"><label class="pick"><input type="checkbox" name="need" value="brand"><span>A logo or a whole brand</span></label><label class="pick"><input type="checkbox" name="need" value="design"><span>A flyer, poster or invitation</span></label><label class="pick"><input type="checkbox" name="need" value="social"><span>Social media graphics</span></label><label class="pick"><input type="checkbox" name="need" value="website"><span>A website or landing page</span></label><label class="pick"><input type="checkbox" name="need" value="ads"><span>A billboard, banner or sign</span></label><label class="pick"><input type="checkbox" name="need" value="vehicle"><span>My vehicle branded</span></label><label class="pick"><input type="checkbox" name="need" value="print"><span>Business cards or stationery</span></label><label class="pick"><input type="checkbox" name="need" value="docs"><span>A presentation or document</span></label><label class="pick"><input type="checkbox" name="need" value="packaging"><span>Packaging</span></label><label class="pick"><input type="checkbox" name="need" value="media"><span>Photo or video editing</span></label><label class="pick"><input type="checkbox" name="need" value="unsure"><span>I&#x27;m not sure. I just have an idea.</span></label></div></div>
+    <div class="f"><label for="f-idea">Tell us a little about it</label><textarea id="f-idea" name="idea" rows="4" placeholder="For example: I'm starting a bakery and need a logo and a flyer for the opening."></textarea></div>
+    <div class="f"><label for="f-date">Is there a date you need it by? <em>(optional)</em></label><input id="f-date" name="deadline" type="text" placeholder="For example: end of next month"></div>
     <p class="form-error" role="alert" aria-live="assertive"></p>
-    <div class="form-actions"><button type="button" class="btn-plain" data-back hidden>← Back</button>
-      <button type="button" class="pill pill-lg" data-next><span>Continue</span><i class="ico"><svg viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 11 11 3M5 3h6v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></button>
+    <div class="tform-foot"><p class="small muted">One flyer is a real project. No brief needed.</p>
       <button type="submit" class="pill pill-lg" data-submit><span>Send it to us</span><i class="ico"><svg viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 11 11 3M5 3h6v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></button></div>
-    <p class="hint">Prefer email? <a href="mailto:hello@rovardstudios.com">hello@rovardstudios.com</a></p>
   </form>
   <div class="form-done" hidden><h2 class="h2">Thank you. <span class="grad">We've got it.</span></h2><p class="lead">We'll read what you sent and get back to you.</p>
-    <a class="pill " href="../work/"><span>See some of our work</span><i class="ico"><svg viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 11 11 3M5 3h6v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a></div>
-</section>
+    <div class="cta-row"><a class="pill " href="../work/"><span>See some of our work</span><i class="ico"><svg viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 11 11 3M5 3h6v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a></div></div>
+  <div class="or" data-r><span>or</span></div>
+  <div class="alt" data-r><a class="alt-card" href="mailto:hello@rovardstudios.com"><small>Email us</small><b>hello@rovardstudios.com</b><i class="arrow-c"><svg viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 11 11 3M5 3h6v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
+    <a class="alt-card" href="../work/"><small>Not ready yet?</small><b>See what we've made</b><i class="arrow-c"><svg viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 11 11 3M5 3h6v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a></div>
+</div></section>
 </main>
 <footer class="site-footer">
   <div class="wrap foot">
@@ -78,6 +80,6 @@
 </footer>
 <a class="pill sticky-cta pill-lg" href="../start/"><span>Start a project</span><i class="ico"><svg viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 11 11 3M5 3h6v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></i></a>
 <script src="../js/lenis.min.js" defer></script>
-<script src="../js/site.js?v=202610060941" defer></script>
+<script src="../js/site.js?v=202610061106" defer></script>
 </body>
 </html>
