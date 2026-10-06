@@ -721,3 +721,23 @@ body { padding-top: var(--head-h); }
 .alt-card small { font-size: 13px; }
 .alt-card b { font-size: 21px; }
 @media (max-width: 900px) { .f label, .f .lab { margin-left: 18px; } .f input, .f textarea { padding: 18px 24px; font-size: 17px; } .pick span { padding: 13px 20px; font-size: 16px; } }
+
+/* Pricing: three per row, each row with its own colour */
+.pk-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+.pk-grid .pk { background: #fff; color: var(--ink); border: 1px solid var(--line); }
+.pk-grid .pk-who { color: var(--muted); }
+.pk-grid .pk li::before { border-color: var(--blue-2); }
+.pk-grid .pk .pill { background: initial; }
+/* row 1: soft blue */
+.pk-grid .pk:nth-child(-n+3) { background: linear-gradient(160deg, #F2F6FF, #E4ECFF); border-color: #D5E1FF; }
+/* row 2: warm yellow */
+.pk-grid .pk:nth-child(n+4):nth-child(-n+6) { background: linear-gradient(160deg, #FFFBE8, #FFF1B8); border-color: #F6E28A; }
+.pk-grid .pk:nth-child(n+4):nth-child(-n+6) li::before { border-color: #B58900; }
+/* row 3: deep blue */
+.pk-grid .pk:nth-child(n+7) { background: linear-gradient(160deg, var(--blue), var(--deep)); color: #fff; border-color: transparent; }
+.pk-grid .pk:nth-child(n+7) .pk-who { color: rgba(255, 255, 255, .78); }
+.pk-grid .pk:nth-child(n+7) li::before { border-color: var(--yellow); }
+.pk-grid .pk:nth-child(n+7) .pill { background: #fff; color: var(--blue); }
+.pk-grid .pk:nth-child(n+7) .pill-outline { background: #fff; border-color: #fff; }
+@media (max-width: 1100px) { .pk-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 700px) { .pk-grid { grid-template-columns: minmax(0, 1fr); } }

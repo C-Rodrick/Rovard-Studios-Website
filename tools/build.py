@@ -618,9 +618,9 @@ def pricing():
     cards = ''
     for pk in sorted(PACKAGES, key=lambda x: (x.get('price') is None, x.get('price') or 0)):
         price = f'From <b>${pk["price"]:,}</b>' if pk.get('price') else '<b>Tell us your budget</b>'
-        feat = ' pk-feat' if pk.get('featured') else ''
+        feat = ''
         lis = ''.join(f'<li>{esc(x)}</li>' for x in pk['includes'])
-        btn = pill('Get a quote', f"{base}start/?need={pk['need']}", '' if pk.get('featured') else 'pill-outline pill-sm', ico=bool(pk.get('featured')))
+        btn = pill('Get a quote', f"{base}start/?need={pk['need']}", 'pill-outline pill-sm', ico=False)
         cards += f"""<article class="pk{feat}" data-r>
   <h2>{esc(pk['name'])}</h2><p class="pk-who">{esc(pk['who'])}</p>
   <ul>{lis}</ul>
