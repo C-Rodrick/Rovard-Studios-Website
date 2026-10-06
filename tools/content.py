@@ -360,4 +360,4 @@ LOGO_COLOURS = {'design-eigen': '#111322', 'northstar-capital': '#0A0C24', 'bite
                 'jojo-foods': '#D8352C', 'shorteeme': '#1E3FA8'}
 
 # Budget choices on the start form: what the visitor picks from, not our prices.
-BUDGETS = ['Under $250', '$250 – $1,000', '$1,000 – $3,000', '$3,000 – $5,000', '$5,000 – $10,000', '$10,000 and up', 'Not sure yet']
+BUDGETS = ['Under $250', '$250 – $1,000', '$1,000 – $3,000', '$3,000 – $5,000', '$5,000 – $10,000', '$10,000+', 'Not sure yet']
