@@ -12,6 +12,7 @@ from PIL import Image
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from content import *  # noqa
 from blogdata import POSTS
+from landing import LANDING
 from legal import PAGES as LEGAL, UPDATED as LEGAL_UPDATED, ANALYTICS_NOTE
 
 VERSION = time.strftime('%Y%m%d%H%M')
@@ -129,7 +130,7 @@ def footer(base, path=''):
     pick = ['Logo design', 'Brand refresh', 'Brand guidelines', 'Business cards', 'Flyers', 'Posters', 'Invitations', 'Brochures', 'Social media posts', 'Church and ministry graphics',
             'Business websites', 'Landing pages', 'Billboards', 'Banners', 'Full vehicle wraps', 'Product packaging', 'Pitch decks', 'Presentations', 'Photo editing and retouching', 'Video editing']
     where = {ask: g['id'] for g in SERVICES for ask in g['asks']}
-    svc = [f'<a href="{base}services/#{where[a]}">{esc(a)}</a>' for a in pick if a in where]
+    svc = [f'<a href="{base}services/{LANDING[where[a]]["slug"]}/">{esc(a)}</a>' for a in pick if a in where]
     return f'''<footer class="site-footer">
   <div class="wrap foot">
     <div class="foot-brand">
@@ -385,9 +386,43 @@ def services():
         groups.append(f'''<section class="svc" id="{s['id']}"><div class="wrap">
   <div class="svc-grid"><div class="svc-head"><span class="svc-n">{n + 1:02d}</span><h2 class="h2" data-r="words">{esc(s['title'])}</h2>
     <p class="svc-line" data-r>{esc(s['line'])}</p><p class="muted" data-r>{esc(s['intro'])}</p></div>
-  <div class="svc-body" data-r><h3 class="eyebrow">What people ask us for</h3><ul class="asks">{asks}</ul>{prod}{pill(esc(s['cta']), f"{base}start/?need={s['need']}")}</div></div>
+  <div class="svc-body" data-r><h3 class="eyebrow">What people ask us for</h3><ul class="asks">{asks}</ul>{prod}{pill(esc(s['cta']), f"{base}start/?need={s['need']}")}<a class="more" href="{LANDING[s['id']]['slug']}/">Learn more</a></div></div>
   <div class="mini-row" data-r>{cards}</div></div></section>''')
     page('services/', 'services', intro + ''.join(groups) + close_cta(base, "Don't see it? <span class=\"grad\">Ask anyway.</span>", "Other creative requests are welcome. Tell us what you have in mind.", label='Tell Us What You Need'), body_class='services')
+
+
+# ── SERVICE PAGES ─────────────────────────────────────────────────────────
+def service_pages():
+    base = '../../'
+    for s in SERVICES:
+        L = LANDING[s['id']]
+        asks = ''.join(f'<li>{esc(a)}</li>' for a in s['asks'])
+        who = ''.join(f'<li>{esc(x)}</li>' for x in L['who'])
+        get = ''.join(f'<li>{esc(x)}</li>' for x in L['get'])
+        cards = ''.join(f'<a class="mini" href="{base}work/{w}/"><div class="mi">{img(w, 0, BY[w]["title"], base, sizes="(min-width: 900px) 26vw, 94vw", want=560)}</div>'
+                        f'<span>{esc(BY[w]["title"])}</span></a>' for w in s['work']) if s['work'] else ''
+        work = f'<section class="sec" style="padding-top:0"><div class="wrap"><h2 class="h3" data-r style="margin-bottom:28px">Some of our work</h2><div class="mini-row" data-r>{cards}</div></div></section>' if cards else ''
+        steps = ''.join(f'<li><span class="n grad">{i + 1:02d}</span><h3>{esc(t)}</h3><p>{esc(d)}</p></li>' for i, (t, d) in enumerate(STEPS))
+        others = ''.join(f'<a class="pf" href="{base}services/{LANDING[o["id"]]["slug"]}/">{esc(o["title"])}</a>' for o in SERVICES if o['id'] != s['id'])
+        ld = json.dumps({'@context': 'https://schema.org', '@type': 'Service', 'name': L['title'], 'description': L['desc'],
+                         'provider': {'@type': 'ProfessionalService', 'name': BRAND, 'url': SITE['url'] + '/'}, 'areaServed': 'Worldwide'}, ensure_ascii=False)
+        body = f"""<section class="ph"><div class="wrap"><p class="eyebrow" data-r="fade" data-intro><a href="{base}services/">Services</a> · {esc(s['title'])}</p>
+  <h1 class="h1" data-r="words" data-intro>{L['h1']}</h1>
+  <p class="lead" data-r data-intro data-d=".3">{esc(L['lead'])}</p>
+  <div class="cta-row" data-r data-intro data-d=".4">{pill('Start a project', f"{base}start/?need={s['need']}", 'pill-lg')}{pill('See our work', base + 'work/', 'pill-outline pill-sm', ico=False)}</div></div></section>
+<section class="sec"><div class="wrap sv-two">
+  <div data-r><h2 class="h3">Who it's for</h2><ul class="tick">{who}</ul></div>
+  <div data-r data-d=".1"><h2 class="h3">What you get</h2><ul class="tick">{get}</ul></div></div></section>
+<section class="sec" style="padding-top:0"><div class="wrap"><h2 class="h3" data-r style="margin-bottom:20px">What people ask us for</h2><ul class="asks asks-wide" data-r>{asks}</ul></div></section>
+{work}
+<section class="sec" style="padding-top:0"><div class="wrap"><div class="sh"><div><p class="eyebrow" data-r="fade">How we work</p><h2 class="h2" data-r="words">Simple, <span class="grad">from the first message</span></h2></div></div>
+  <ol class="steps" data-stagger="90">{steps}</ol></div></section>
+{faq_section(base, L['faq'], heading='Good to <span class="grad">know</span>', eyebrow='Questions')}
+<section class="sec" style="padding-top:0"><div class="wrap"><h2 class="h3" data-r style="margin-bottom:20px">Other things we design</h2><div class="pills" data-r>{others}</div></div></section>
+<script type="application/ld+json">{ld}</script>
+{close_cta(base, "Let's talk about <span class=\"grad\">your project.</span>", href=f"{base}start/?need={s['need']}")}"""
+        page(f"services/{L['slug']}/", 'services', body, title=f"{L['title']} | {BRAND}", desc=L['desc'], body_class='services svc-page')
+
 
 
 # ── WORK INDEX ────────────────────────────────────────────────────────────
@@ -650,7 +685,7 @@ def extras():
 h1{{font-size:clamp(2.2rem,6vw,4rem);margin:0 0 12px;letter-spacing:-.03em}}p{{margin:0 0 24px;color:#5F6485;font-size:1.1rem}}a{{display:inline-block;background:#162DAF;color:#fff;padding:16px 30px;border-radius:999px;text-decoration:none;font-weight:600}}</style></head>
 <body><main><h1>That page isn't here.</h1><p>But we can help you find what you need.</p><a id="home" href="/">Back to {BRAND}</a></main>
 <script>var p=location.pathname.split('/');document.getElementById('home').href=(location.hostname.indexOf('github.io')>-1?'/'+p[1]:'')+'/';</script></body></html>''')
-    urls = ['', 'services/', 'work/', 'pricing/', 'blog/', 'about/', 'start/', 'privacy/', 'cookies/', 'terms/'] + [f'work/{p["slug"]}/' for p in PROJECTS] + [f'blog/{b["slug"]}/' for b in POSTS]
+    urls = ['', 'services/'] + [f'services/{v["slug"]}/' for v in LANDING.values()] + [ 'work/', 'pricing/', 'blog/', 'about/', 'start/', 'privacy/', 'cookies/', 'terms/'] + [f'work/{p["slug"]}/' for p in PROJECTS] + [f'blog/{b["slug"]}/' for b in POSTS]
     sm = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + ''.join(
         f'  <url><loc>{SITE["url"]}/{u}</loc></url>\n' for u in urls) + '</urlset>\n'
     open(os.path.join(ROOT, 'sitemap.xml'), 'w', encoding='utf-8').write(sm)
@@ -658,7 +693,7 @@ h1{{font-size:clamp(2.2rem,6vw,4rem);margin:0 0 12px;letter-spacing:-.03em}}p{{m
 
 
 if __name__ == '__main__':
-    home(); services(); work_index(); about(); start(); blog(); legal(); pricing()
+    home(); services(); work_index(); about(); start(); blog(); legal(); pricing(); service_pages()
     for b in POSTS:
         blog_post(b)
     for p in PROJECTS:

@@ -675,3 +675,20 @@ ul, ol { list-style: none; }
 .pk-note { padding-bottom: clamp(40px, 5vw, 72px); color: var(--muted); max-width: 70ch; font-size: 17px; }
 @media (max-width: 1100px) { .pk-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 700px) { .pk-grid { grid-template-columns: minmax(0, 1fr); } }
+
+/* service pages */
+.sv-two { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 5vw, 80px); }
+.tick { list-style: none; padding: 0; margin: 20px 0 0; display: grid; gap: 14px; }
+.tick li { position: relative; padding-left: 32px; font-size: clamp(1.05rem, 1.3vw, 1.2rem); line-height: 1.5; }
+.tick li::before { content: ""; position: absolute; left: 2px; top: .45em; width: 14px; height: 8px; border-left: 2px solid var(--blue-2); border-bottom: 2px solid var(--blue-2); transform: rotate(-45deg); }
+.asks-wide { display: flex; flex-wrap: wrap; gap: 10px; list-style: none; padding: 0; }
+.asks-wide li { padding: 10px 18px; border: 1px solid var(--line); border-radius: 99px; font-size: 15px; background: #fff; }
+.svc-page .ph .eyebrow a:hover { color: var(--blue); }
+.svc-page .ph .cta-row { margin-top: 28px; }
+@media (max-width: 760px) { .sv-two { grid-template-columns: minmax(0, 1fr); } }
+
+.svc-body .more { display: inline-block; margin: 18px 0 0 18px; font-weight: 600; color: var(--blue); }
+.svc-body .more::after { content: ' →'; }
+.svc-body .more:hover { text-decoration: underline; }
+.svc-page .sec:not(.close) { padding-block: clamp(40px, 5vw, 80px); }
+.svc-page .sec[style*="padding-top:0"] { padding-top: 0; }
