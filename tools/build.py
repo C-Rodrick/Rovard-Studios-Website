@@ -4,6 +4,7 @@
     python tools/build.py
 
 Pages: / , /services/ , /work/ , /work/<slug>/ (x22) , /about/ , /start/ , 404.html , sitemap.xml , robots.txt
+Env: NOLAZY=1 renders images eagerly (for review screenshots only).
 """
 import html, json, os, sys, time, urllib.parse
 
@@ -16,8 +17,14 @@ PROJECTS = load_projects()
 BY = {p['slug']: p for p in PROJECTS}
 LOGO_BLUE = 'assets/Combined%20Logo%20-%20Rovard%20Studios%20-%20Blue.svg'
 LOGO_WHITE = 'assets/Combined%20Logo%20-%20Rovard%20Studios%20-%20White.svg'
-
 esc = html.escape
+
+ARROW = '<svg viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 11 11 3M5 3h6v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+CHECK = '<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m3 8.5 3.2 3.2L13 4.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+PLUS = '<svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M6 1v10M1 6h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>'
+PLAY = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg>'
+LEFT = '<svg viewBox="0 0 14 14" fill="none" aria-hidden="true" width="16" height="16"><path d="M12 7H2m4-4L2 7l4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+RIGHT = '<svg viewBox="0 0 14 14" fill="none" aria-hidden="true" width="16" height="16"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>'
 
 
 def q(path):
@@ -25,7 +32,7 @@ def q(path):
 
 
 # ── helpers ───────────────────────────────────────────────────────────────
-def img(slug, idx, alt, base, sizes='100vw', cls='', eager=False, want=None):
+def img(slug, idx, alt, base, sizes='100vw', cls='', eager=False, want=None, extra=''):
     m = MANIFEST[slug][str(idx)]
     ws = m['sizes']
     srcset = ', '.join(f'{base}img/{slug}/{idx:02d}-{w}.webp {w}w' for w in ws)
@@ -35,38 +42,41 @@ def img(slug, idx, alt, base, sizes='100vw', cls='', eager=False, want=None):
     load = 'fetchpriority="high"' if eager else ('decoding="async"' if os.environ.get('NOLAZY') else 'loading="lazy" decoding="async"')
     c = f' class="{cls}"' if cls else ''
     return (f'<img{c} src="{base}img/{slug}/{idx:02d}-{mid}.webp" srcset="{srcset}" sizes="{sizes}" '
-            f'width="{wmax}" height="{h}" alt="{esc(alt)}" {load}>')
+            f'width="{wmax}" height="{h}" alt="{esc(alt)}" {load}{extra}>')
 
 
 def ref_img(ref, alt, base, **kw):
-    slug, frag, _label = ref[:3]
+    slug, frag = ref[0], ref[1]
     return img(slug, find_img(PROJECTS, slug, frag), alt, base, **kw)
 
 
-def concept_chip(p):
-    return '<span class="chip-concept">Concept</span>' if p['concept'] else ''
+def pill(label, href, cls='', ico=True):
+    i = f'<i class="ico">{ARROW}</i>' if ico else ''
+    return f'<a class="pill {cls}" href="{href}"><span>{label}</span>{i}</a>'
 
 
-def head(title, desc, path, base, og_title=None):
+def concept(p, cls='concept'):
+    return f'<span class="{cls}">Concept</span>' if p['concept'] else ''
+
+
+def head(title, desc, path, base):
     url = f"{SITE['url']}/{path}"
-    canon = f'<link rel="canonical" href="{url}">'
     ld = json.dumps({
         '@context': 'https://schema.org', '@type': 'ProfessionalService', 'name': BRAND, 'url': SITE['url'] + '/',
-        'logo': f"{SITE['url']}/{LOGO_BLUE}", 'email': SITE['email'], 'areaServed': 'Worldwide',
-        'description': META['home'][1],
+        'logo': f"{SITE['url']}/{LOGO_BLUE}", 'email': SITE['email'], 'areaServed': 'Worldwide', 'description': META['home'][1],
     }, ensure_ascii=False)
     return f'''<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#F6F2EA">
+<meta name="theme-color" content="#FFFFFF">
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(desc)}">
-{canon}
+<link rel="canonical" href="{url}">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="{BRAND}">
-<meta property="og:title" content="{esc(og_title or title)}">
+<meta property="og:title" content="{esc(title)}">
 <meta property="og:description" content="{esc(desc)}">
 <meta property="og:url" content="{url}">
 <meta property="og:image" content="{SITE['url']}/assets/og-cover.jpg">
@@ -81,61 +91,55 @@ def head(title, desc, path, base, og_title=None):
 </head>'''
 
 
-NAV = [('services', 'Services'), ('work', 'Work'), ('about', 'About'), ('start', 'Contact')]
+MENU = [('services', 'Services'), ('work', 'Work'), ('about', 'About'), ('start', 'Contact')]
 
 
-def header(base, active):
-    links = ''.join(f'<a href="{base}{k}/"{" aria-current=\"page\"" if k == active else ""}>{t}</a>' for k, t in NAV)
+def header(base):
+    links = ''.join(f'<a class="m" href="{base}{k}/"><small>{i + 1:02d}</small><span>{t}</span></a>' for i, (k, t) in enumerate(MENU))
     return f'''<a class="skip" href="#main">Skip to content</a>
 <header class="site-header" data-header>
-  <div class="container bar">
-    <a class="logo" href="{base or './'}" aria-label="{BRAND} home"><img src="{base}{LOGO_BLUE}" alt="{BRAND}" width="150" height="57"></a>
-    <nav class="nav" aria-label="Primary">{links}</nav>
-    <a class="btn btn-primary btn-sm bar-cta" href="{base}start/">Start a Project</a>
+  <div class="wrap bar">
+    <a class="logo" href="{base or './'}" aria-label="{BRAND} home"><img class="lg-b" src="{base}{LOGO_BLUE}" alt="{BRAND}" width="132" height="50"><img class="lg-w" src="{base}{LOGO_WHITE}" alt="" aria-hidden="true" width="132" height="50"></a>
+    {pill('Start a project', base + 'start/', 'bar-cta')}
     <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu" aria-label="Open menu"><span></span><span></span></button>
   </div>
-  <div class="mobile-menu" id="menu" hidden>
-    <nav class="container" aria-label="Mobile">{''.join(f'<a href="{base}{k}/">{t}</a>' for k, t in [('services','Services'),('work','Work'),('about','About'),('start','Contact')])}
-      <a class="btn btn-yellow btn-lg" href="{base}start/">Start a Project</a></nav>
-  </div>
-</header>'''
+</header>
+<div class="menu-panel" id="menu" aria-hidden="true">
+  <nav aria-label="Menu">{links}</nav>
+  <div class="menu-foot"><span>{SITE['location']}</span><a href="mailto:{SITE['email']}">{SITE['email']}</a>{pill('Start a project', base + 'start/', 'pill-yellow')}</div>
+</div>'''
 
 
 def footer(base):
     return f'''<footer class="site-footer">
-  <div class="container foot-grid">
+  <div class="wrap foot">
     <div class="foot-brand">
-      <a href="{base or './'}" aria-label="{BRAND} home"><img src="{base}{LOGO_BLUE}" alt="{BRAND}" width="170" height="65" loading="lazy"></a>
+      <a href="{base or './'}" aria-label="{BRAND} home"><img src="{base}{LOGO_BLUE}" alt="{BRAND}" width="150" height="57" loading="lazy"></a>
       <p>Whatever you're putting out there, we'll make it look right.</p>
-      <a class="btn btn-primary" href="{base}start/">Start a Project</a>
+      {pill('Start a project', base + 'start/')}
     </div>
-    <nav class="foot-col" aria-label="Footer">
-      <h2>Explore</h2>
-      <a href="{base}services/">Services</a><a href="{base}work/">Work</a><a href="{base}about/">About</a><a href="{base}start/">Start a project</a>
-    </nav>
-    <div class="foot-col">
-      <h2>Say hello</h2>
-      <a href="mailto:{SITE['email']}">{SITE['email']}</a>
-      <p>{SITE['location']}</p>
-    </div>
+    <nav class="foot-col" aria-label="Footer"><h2>Explore</h2>
+      <a href="{base}services/">Services</a><a href="{base}work/">Work</a><a href="{base}about/">About</a><a href="{base}start/">Start a project</a></nav>
+    <div class="foot-col"><h2>Say hello</h2><a href="mailto:{SITE['email']}">{SITE['email']}</a><p>{SITE['location']}</p></div>
   </div>
-  <div class="container foot-base"><span>© {SITE['year']} {BRAND}. All rights reserved.</span><span>Concept projects are labelled Concept.</span></div>
+  <div class="wrap foot-base"><span>© {SITE['year']} {BRAND}. All rights reserved.</span><span>Concept projects are labelled Concept.</span></div>
 </footer>
-<a class="sticky-cta" href="{base}start/">Start a Project</a>'''
+{pill('Start a project', base + 'start/', 'sticky-cta pill-lg')}'''
 
 
-def page(path, key, body, active=None, title=None, desc=None, body_class='', scripts=''):
+def page(path, key, body, title=None, desc=None, body_class=''):
     depth = 0 if not path else path.count('/')
     base = '../' * depth
     t, d = (title, desc) if title else META[key]
     out = head(t, d or META[key][1], path, base) + f'''
 <body class="{body_class}">
-{header(base, active)}
+{header(base)}
 <main id="main">
-{body.replace('{{BASE}}', base)}
+{body}
 </main>
 {footer(base)}
-{scripts}<script src="{base}js/site.js?v={VERSION}" defer></script>
+<script src="{base}js/lenis.min.js" defer></script>
+<script src="{base}js/site.js?v={VERSION}" defer></script>
 </body>
 </html>
 '''
@@ -144,182 +148,191 @@ def page(path, key, body, active=None, title=None, desc=None, body_class='', scr
     open(dest, 'w', encoding='utf-8').write(out)
 
 
-def cta_band(base, headline, sub, label='Start a Project', href=None, dark=False):
-    href = href or f'{base}start/'
-    cls = 'cta-band dark' if dark else 'cta-band'
-    return f'''<section class="{cls} reveal"><div class="container">
-  <h2 class="h2">{headline}</h2><p class="lead">{sub}</p>
-  <a class="btn {'btn-yellow' if dark else 'btn-primary'} btn-lg" href="{href}">{label}</a></div></section>'''
+def close_cta(base, headline='Have an idea? Let\'s make it <span class="grad">real</span>.', sub="Tell us what you're working on. A few words is plenty.", href=None, label='Start a Project'):
+    return f'''<section class="sec close"><div class="wrap">
+  <h2 class="big" data-r="words">{headline}</h2><p class="sub" data-r data-d=".25">{sub}</p>
+  <div class="cta-row" data-r data-d=".35">{pill(label, href or base + 'start/', 'pill-lg')}</div></div></section>'''
 
 
 # ── HOME ──────────────────────────────────────────────────────────────────
 def home():
     base = ''
-    # hero stage
-    stage, rot = [], []
-    for n, wi in enumerate(HERO_ROTATION):
-        verb, thing, fory, slug, frag, cap, need = WEDO[wi]
-        idx = find_img(PROJECTS, slug, frag)
-        stage.append(f'<figure class="stage-item{" is-on" if n == 0 else ""}">'
-                     f'{img(slug, idx, cap, base, sizes="(min-width: 900px) 42vw, 92vw", eager=(n == 0), want=1100)}'
-                     f'<figcaption>{esc(cap)}</figcaption></figure>')
-        rot.append({'verb': verb, 'thing': thing, 'for': fory})
-    first = rot[0]
-    rotdata = esc(json.dumps(rot, ensure_ascii=False))
+    rot = [{'verb': WEDO[i][0], 'thing': WEDO[i][1], 'for': WEDO[i][2]} for i in HERO_ROTATION]
+    f0 = rot[0]
     all_things = ', '.join(w[1] for w in WEDO)
-    hero = f'''<section class="hero container" aria-labelledby="hero-title">
-  <div class="hero-copy">
-    <p class="eyebrow">{BRAND}</p>
-    <h1 id="hero-title" class="display">Whatever you're putting out there, we'll make it <mark>look right.</mark></h1>
-    <p class="lead">{BRAND} designs logos, flyers, websites, billboards, vehicle branding and everything in between, for people, businesses, churches, organizations and events.</p>
-    <div class="cta-row"><a class="btn btn-primary btn-lg" href="start/">Start a Project</a><a class="btn btn-ghost btn-lg" href="work/">See what we've made</a></div>
-    <p class="hint">Need just one thing? That's fine. One flyer is a real project.</p>
-    <p class="hero-we" data-rotator='{rotdata}'>
-      <span class="sr-only">We design {all_things} for your ideas.</span>
-      <span aria-hidden="true">We <span class="r-verb">{first['verb']}</span> <b class="r-thing">{first['thing']}</b> for your <span class="r-for">{first['for']}</span>.</span>
-    </p>
+    thumbs = ''.join(
+        f'<i style="background-image:url({base}img/{s}/{find_img(PROJECTS, s, fr):02d}-560.webp)"></i>' for s, fr in HERO_THUMBS)
+    hero = f'''<section class="hero" aria-labelledby="hero-title">
+  <div class="hero-l">
+    <p class="eyebrow" data-r="fade" data-intro>{BRAND}</p>
+    <h1 class="h1" id="hero-title" data-r="words" data-intro>Whatever you're putting out there, we'll make it <span class="grad">look right.</span></h1>
   </div>
-  <div class="hero-stage" role="group" aria-label="Examples of our work">{''.join(stage)}</div>
+  <div class="hero-r">
+    <p class="hero-we" data-rotator='{esc(json.dumps(rot, ensure_ascii=False))}' data-r data-intro data-d=".45">
+      <span class="sr-only">We design {all_things} for your ideas.</span>
+      <span aria-hidden="true">We <span class="rv">{f0['verb']}</span> <b class="rt grad">{f0['thing']}</b> for your <span class="rf">{f0['for']}</span>.</span></p>
+    <p class="lead" data-r data-intro data-d=".55">{BRAND} designs logos, flyers, websites, billboards, vehicle branding and everything in between, for people, businesses, churches, organizations and events.</p>
+    <div class="hero-cta" data-r data-intro data-d=".65">{pill('Start a project', 'start/')}<span class="thumbs" aria-hidden="true">{thumbs}</span></div>
+    <p class="hero-note" data-r="fade" data-intro data-d=".8">Need just one thing? That's fine. One flyer is a real project.</p>
+  </div>
 </section>'''
 
-    need = '''<section class="section need" id="need"><div class="container">
-  <div class="section-head reveal"><p class="eyebrow">Start here</p><h2 class="h2">What do you need help with?</h2>
-  <p class="lead">Pick the closest one. You can add more, or change your mind, on the next screen.</p></div>
-  <ul class="chips reveal">''' + ''.join(
-        f'<li><a class="chip{" chip-yellow" if k == "unsure" else ""}" href="start/?need={k}">{esc(t)}<span aria-hidden="true">→</span></a></li>' for k, t in NEEDS) + '''</ul>
-  <p class="more reveal"><a class="link-arrow" href="services/">See everything we can design for you</a></p>
+    film_idx = find_img(PROJECTS, FILM['slug'], FILM['poster'])
+    film = f'''<section class="showcase wide"><div class="film" data-r>
+  {img(FILM['slug'], film_idx, f'A still from the {BRAND} film', base, sizes='(min-width: 1280px) 1160px, 94vw', eager=True, want=1600, cls='poster', extra=' data-par=".06"')}
+  <video preload="none" playsinline poster="{base}img/{FILM['slug']}/{film_idx:02d}-1100.webp"><source src="{base}{FILM['src']}" type="video/mp4"></video>
+  <div class="film-ui"><div><small>The film · 1:30</small><p>{BRAND} in 90 seconds: what we do, and what it looks like.</p></div>
+  <button class="play" type="button" aria-label="Play the {BRAND} film">{PLAY}</button></div></div></section>'''
+
+    track = ''.join(f'<span>{esc(w)}</span>' for w in MARQUEE)
+    marquee = f'<div class="marquee" aria-hidden="true"><div class="marquee-track">{track}</div><div class="marquee-track">{track}</div></div>'
+
+    need_rows = ''.join(
+        f'<a class="row{" hl" if k == "unsure" else ""}" href="start/?need={k}"><span>{esc(t)}</span><i class="arrow-c">{ARROW}</i></a>' for k, t in NEEDS)
+    need = f'''<section class="sec" id="need"><div class="wrap">
+  <div class="sh"><div><p class="eyebrow" data-r="fade">Start here</p><h2 class="h2" data-r="words">What do you <span class="grad">need</span> help with?</h2></div>
+  <div class="sh-r"><p class="sub" data-r>Pick the closest one. You can add more, or change your mind, on the next screen.</p></div></div>
+  <div class="rows" data-stagger="45">{need_rows}</div>
+  <div class="cta-row" data-r>{pill('See everything we design', 'services/', 'pill-ghost')}</div>
 </div></section>'''
 
-    # we do ___ for your ___
-    rows, panel = [], []
-    for i, (verb, thing, fory, slug, frag, cap, need_k) in enumerate(WEDO):
-        sid = next((s['id'] for s in SERVICES if s['need'] == need_k), 'brand')
-        if slug:
-            idx = find_img(PROJECTS, slug, frag)
-            panel.append(f'<figure class="wp-item{" is-on" if i == 0 else ""}" data-i="{i}">'
-                         f'{img(slug, idx, cap, base, sizes="(min-width: 900px) 40vw, 0px", want=1100)}<figcaption>{esc(cap)}</figcaption></figure>')
-        else:
-            panel.append(f'<figure class="wp-item wp-soon" data-i="{i}"><div><b>Vehicle branding</b><span>Full wraps for cars, vans and delivery vehicles. Concept mockups coming soon.</span></div></figure>')
-        rows.append(f'<li><a class="wedo-row" href="services/#{sid}" data-i="{i}">'
-                    f'<span class="w-line">We {verb} <b>{thing}</b> for your {fory}.</span></a></li>')
-    wedo = f'''<section class="section wedo sand" id="what-we-do"><div class="container">
-  <div class="section-head reveal"><p class="eyebrow">What we do</p><h2 class="h2">We design it. You put it out there.</h2>
-  <p class="lead">A few of the things people ask us for. If it's not on the list, ask anyway.</p></div>
-  <div class="wedo-grid">
-    <ol class="wedo-list reveal">{''.join(rows)}</ol>
-    <div class="wedo-panel" aria-hidden="true">{''.join(panel)}</div>
-  </div>
-  <p class="more reveal"><a class="link-arrow" href="services/">See everything we can design for you</a></p>
-</div></section>'''
+    cards = ''
+    for s in FEATURED:
+        p = BY[s]
+        cards += f'''<a class="pcard" href="work/{s}/" aria-label="{esc(p['title'])}">{img(s, 0, p['title'], base, sizes='(min-width: 1100px) 480px, 82vw', want=1100, extra=' data-par=".05"')}
+  <span class="pc-top"><span class="tagc{' y' if p['concept'] else ''}">{'Concept' if p['concept'] else esc(KIND[p['kind']])}</span><i class="arrow-c">{ARROW}</i></span>
+  <span class="pc-body"><h3>{esc(p['title'])}</h3><p>{esc(p['plain'])}</p></span></a>'''
+    work = f'''<section class="sec" id="work" style="padding-top:0"><div class="wrap">
+  <div class="sh"><div><p class="eyebrow" data-r="fade">Selected work</p><h2 class="h2" data-r="words">Recent <span class="grad">work</span></h2></div>
+  <div class="sh-r"><p class="sub" data-r>A selection of logos, brands, websites, graphics, packaging and films. Drag to explore.</p></div></div></div>
+  <div class="car" data-car data-r><div class="car-track">{cards}</div></div>
+  <div class="wrap car-ctl" data-r><button class="car-btn" type="button" data-prev aria-label="Previous projects">{LEFT}</button><div class="car-bar"><i></i></div><button class="car-btn" type="button" data-next aria-label="Next projects">{RIGHT}</button>{pill('All ' + str(len(PROJECTS)) + ' projects', 'work/', 'pill-ghost')}</div>
+</section>'''
 
-    # stories
-    stories = []
-    for n, slug in enumerate(HOME_STORIES):
+    ways = ''
+    for w in TWO_WAYS:
+        ticks = ''.join(f'<li>{CHECK}<span>{esc(i)}</span></li>' for i in w['items'])
+        ways += f'''<div class="way"><span class="chip" data-r><i></i>{esc(w['tag'])}</span>
+  <h3 class="h3" data-r data-d=".08">{esc(w['title'])}</h3><ul class="ticks" data-stagger="70">{ticks}</ul>
+  <div data-r data-d=".3">{pill(esc(w['cta']), w['href'])}</div>
+  <div class="way-img">{ref_img(w['img'], w['img'][0], base, sizes='(min-width: 900px) 580px, 94vw', want=1100, extra=' data-par=".05"')}</div></div>'''
+    two = f'''<section class="sec" id="ways" style="padding-top:0"><div class="wrap">
+  <div class="sh"><div><p class="eyebrow" data-r="fade">Where to begin</p><h2 class="h2" data-r="words"><span class="grad">Starting</span> or growing, we've got you</h2></div></div>
+  <div class="two" data-r>{ways}</div></div></section>'''
+
+    stories = ''
+    for slug in HOME_STORIES:
         st, p = STORIES[slug], BY[slug]
         big, (a, b) = st['big'], st['small']
-        flip = ''
-        stories.append(f'''<article class="story reveal{flip}">
-  <header class="story-head"><p class="eyebrow">{st['kicker']} {concept_chip(p)}</p>
-    <h3 class="h3"><a href="work/{slug}/">{esc(p['title'])}</a></h3><p>{esc(st['line'])}</p>
-    <a class="link-arrow" href="work/{slug}/">View the project</a></header>
-  <div class="story-grid">
-    <figure class="s-big"><span class="s-n">1</span>{ref_img(big, big[2], base, sizes='(min-width: 900px) 56vw, 92vw')}<figcaption>{esc(big[2])}</figcaption></figure>
-    <figure class="s-a"><span class="s-n">2</span>{ref_img(a, a[2], base, sizes='(min-width: 900px) 30vw, 46vw', want=560)}<figcaption>{esc(a[2])}</figcaption></figure>
-    <figure class="s-b"><span class="s-n">3</span>{ref_img(b, b[2], base, sizes='(min-width: 900px) 30vw, 46vw', want=560)}<figcaption>{esc(b[2])}</figcaption></figure>
-  </div></article>''')
-    work = f'''<section class="section work-home" id="work"><div class="container">
-  <div class="section-head reveal"><p class="eyebrow">Selected work</p><h2 class="h2">From an idea to the real world.</h2>
-  <p class="lead">A design isn't finished until you can see where it goes. Here's what a few projects became.</p></div>
-  {''.join(stories)}
-  <div class="work-cta reveal"><p class="h4">Have something like this in mind?</p>
-    <div class="cta-row"><a class="btn btn-primary btn-lg" href="start/">Tell us about it</a><a class="btn btn-ghost btn-lg" href="work/">See all {len(PROJECTS)} projects</a></div></div>
+        stories += f'''<article class="story"><div class="story-head" data-r><div><p class="eyebrow">{st['kicker']} {concept(p)}</p>
+    <h3 class="h3"><a href="work/{slug}/">{esc(p['title'])}</a></h3><p>{esc(st['line'])}</p></div>{pill('View the project', f'work/{slug}/', 'pill-ghost')}</div>
+  <div class="story-grid" data-r data-d=".1">
+    <figure class="s-big"><span class="s-n">1</span>{ref_img(big, big[2], base, sizes='(min-width: 900px) 640px, 94vw')}<figcaption>{esc(big[2])}</figcaption></figure>
+    <figure class="s-a"><span class="s-n">2</span>{ref_img(a, a[2], base, sizes='(min-width: 900px) 460px, 46vw', want=560)}<figcaption>{esc(a[2])}</figcaption></figure>
+    <figure class="s-b"><span class="s-n">3</span>{ref_img(b, b[2], base, sizes='(min-width: 900px) 460px, 46vw', want=560)}<figcaption>{esc(b[2])}</figcaption></figure></div></article>'''
+    story = f'''<section class="sec" id="stories" style="padding-top:0"><div class="wrap">
+  <div class="sh"><div><p class="eyebrow" data-r="fade">Idea → design → real world</p><h2 class="h2" data-r="words">From an idea to <span class="grad">the real world</span></h2></div>
+  <div class="sh-r"><p class="sub" data-r>A design isn't finished until you can see where it goes. Here's what a few projects became.</p></div></div>
+  {stories}</div></section>'''
+
+    def acard(i):
+        t, d = AUDIENCES[i]
+        return f'<div class="acard"><h3>{esc(t)}</h3><p>{esc(d)}</p></div>'
+
+    def photo(ref):
+        slug, fr = ref
+        return f'<div class="acard photo">{img(slug, find_img(PROJECTS, slug, fr), BY[slug]["title"], base, sizes="360px", want=560)}</div>'
+    blue = '<div class="acard blue"><h3>No project is too small.</h3><p>One flyer, one logo, one card. They all count here.</p></div>'
+    r1 = [acard(0), acard(1), photo(AUD_PHOTOS[0]), acard(2), acard(3), blue, acard(4)]
+    r2 = [acard(5), photo(AUD_PHOTOS[1]), acard(6), acard(7), photo(AUD_PHOTOS[2]), acard(0), acard(3)]
+    row = lambda items, cls='': f'<div class="cards-row {cls}">{"".join(items)}{"".join(items)}</div>'
+    who = f'''<section class="sec" id="who" style="padding-top:0"><div class="wrap">
+  <div class="sh"><div><p class="eyebrow" data-r="fade">Who we work with</p><h2 class="h2" data-r="words">Big idea or small one, <span class="grad">we're glad you're here</span></h2></div>
+  <div class="sh-r"><p class="sub" data-r>You don't need to know design words. You just need something you want people to see.</p></div></div></div>
+  <div class="cards-wrap" data-r aria-label="Who we work with">{row(r1)}{row(r2, 'rev')}</div></section>'''
+
+    pans = ''
+    for n, ((t, d), ref) in enumerate(zip(WHY, WHY_IMGS)):
+        pans += f'''<article class="pan" tabindex="0">{ref_img(ref, '', base, sizes='(min-width: 900px) 640px, 94vw', want=1100)}
+  <span class="pn">{n + 1:02d}</span><span class="pp">{PLUS}</span><div class="pbd"><h3>{esc(t)}</h3><p>{esc(d)}</p></div></article>'''
+    n_asks = len({a for s in SERVICES for a in s['asks']})
+    stats = [(len(PROJECTS), '', 'projects in our portfolio'), (len(SERVICES), '', 'kinds of work you can ask for'),
+             (n_asks, '', 'specific things you can ask for'), (3, '', 'short steps to get started')]
+    stat_html = ''.join(f'<div class="stat"><b data-count="{n}" data-suffix="{s}">{n}{s}</b><span>{esc(l)}</span></div>' for n, s, l in stats)
+    why = f'''<section class="sec" id="why" style="padding-top:0"><div class="wrap">
+  <div class="sh"><div><p class="eyebrow" data-r="fade">Why {BRAND}</p><h2 class="h2" data-r="words">Easy to talk to. <span class="grad">Serious about the work.</span></h2></div></div>
+  <div class="acc" data-r>{pans}</div><div class="stats" data-r>{stat_html}</div></div></section>'''
+
+    lf = ''.join(f'<figure class="lf-{i}" data-r data-d="{i * .1:.1f}">{ref_img(r, r[2], base, sizes="(min-width: 900px) 600px, 94vw")}<figcaption>{esc(r[2])}</figcaption></figure>' for i, r in enumerate(LARGE_FORMAT))
+    large = f'''<section class="sec dark" id="large-format"><div class="wrap large-grid">
+  <div><p class="eyebrow" data-r="fade">Billboards, banners and vehicles</p>
+    <h2 class="big" data-r="words">Your vehicle is already moving around the city. <span class="grad">Make it work for you.</span></h2>
+    <p class="sub" data-r data-d=".2" style="margin-top:24px">Not a small logo on a door. A design that works at the size of a billboard, a banner or a whole van, so people notice it and remember it.</p>
+    <div class="cta-row" data-r data-d=".3">{pill('Get my vehicle branded', 'start/?need=vehicle', 'pill-yellow pill-lg')}{pill('Billboards and banners', 'services/#ads', 'pill-line pill-lg')}</div>
+    <p class="small muted" data-r data-d=".4" style="margin-top:20px">We design it and prepare the files. Printing and fitting are done by a printer or installer.</p></div>
+  <div class="collage">{lf}<div class="soon lf-soon" data-r data-d=".3"><b>Vehicles</b><span>Full wraps for cars, vans and delivery vehicles. Concept mockups coming soon.</span></div></div>
 </div></section>'''
 
-    aud = f'''<section class="section who" id="who"><div class="container">
-  <div class="section-head reveal"><p class="eyebrow">Who we work with</p><h2 class="h2">Big idea or small one, we're glad you're here.</h2>
-  <p class="lead">You don't need to know design words. You just need something you want people to see.</p></div>
-  <ul class="aud reveal">{''.join(f'<li><h3>{esc(t)}</h3><p>{esc(d)}</p></li>' for t, d in AUDIENCES)}</ul>
-  <!-- photo-slot: optional editorial photography can be placed here later -->
-</div></section>'''
+    steps = ''.join(f'<li><span class="n grad">{i + 1:02d}</span><h3>{esc(t)}</h3><p>{esc(d)}</p></li>' for i, (t, d) in enumerate(STEPS))
+    how = f'''<section class="sec" id="how"><div class="wrap">
+  <div class="sh"><div><p class="eyebrow" data-r="fade">How it works</p><h2 class="h2" data-r="words">Simple, <span class="grad">from the first message</span></h2></div>
+  <div class="sh-r" data-r>{pill('Start a project', 'start/')}</div></div>
+  <ol class="steps" data-stagger="90">{steps}</ol></div></section>'''
 
-    lf = ''.join(
-        f'<figure class="lf-{i}">{ref_img(r, r[2], base, sizes="(min-width: 900px) 34vw, 92vw")}<figcaption>{esc(r[2])}</figcaption></figure>'
-        for i, r in enumerate(LARGE_FORMAT))
-    large = f'''<section class="section large dark" id="large-format"><div class="container large-grid">
-  <div class="large-copy reveal"><p class="eyebrow">Billboards, banners and vehicles</p>
-    <h2 class="h2">Your vehicle is already moving around the city. Make it work for you.</h2>
-    <p class="lead">Not a small logo on a door. A design that works at the size of a billboard, a banner or a whole van, so people notice it and remember it.</p>
-    <div class="cta-row"><a class="btn btn-yellow btn-lg" href="start/?need=vehicle">Get my vehicle branded</a><a class="btn btn-ghost-light btn-lg" href="services/#ads">Billboards and banners</a></div>
-    <p class="hint">We design it and prepare the files. Printing and fitting are done by a printer or installer.</p></div>
-  <div class="large-collage reveal">{lf}
-    <div class="lf-soon"><b>Vehicles</b><span>Full wraps for cars, vans and delivery vehicles. Concept mockups coming soon.</span></div></div>
-</div></section>'''
+    srows = ''.join(f'<a class="row" href="services/#{s["id"]}"><span>{esc(s["title"])}</span><i class="arrow-c">{ARROW}</i></a>' for s in SERVICES)
+    small = [a for s in SERVICES for a in s['asks'][:3]][:23]
+    asks = ''.join(f'<li>{esc(a)}</li>' for a in small) + f'<li><a href="start/?need=unsure">Don\'t see it? Ask us →</a></li>'
+    serv = f'''<section class="sec" id="services" style="padding-top:0"><div class="wrap">
+  <div class="sh"><div><p class="eyebrow" data-r="fade">Services</p><h2 class="h2" data-r="words">What we can <span class="grad">design for you</span></h2></div>
+  <div class="sh-r" data-r>{pill('See all services', 'services/', 'pill-ghost')}</div></div>
+  <div class="rows" data-stagger="45">{srows}</div><ul class="asks-list" data-r>{asks}</ul></div></section>'''
 
-    steps = f'''<section class="section how" id="how"><div class="container">
-  <div class="section-head reveal"><p class="eyebrow">How it works</p><h2 class="h2">Simple, from the first message.</h2></div>
-  <ol class="steps reveal">{''.join(f'<li><span class="n">{i + 1}</span><h3>{esc(t)}</h3><p>{esc(d)}</p></li>' for i, (t, d) in enumerate(STEPS))}</ol>
-  <p class="more reveal"><a class="btn btn-primary btn-lg" href="start/">Start a Project</a></p>
-</div></section>'''
-
-    why = f'''<section class="section why sand" id="why"><div class="container">
-  <div class="section-head reveal"><p class="eyebrow">Why {BRAND}</p><h2 class="h2">Easy to talk to. Serious about the work.</h2></div>
-  <ul class="why-grid reveal">{''.join(f'<li><h3>{esc(t)}</h3><p>{esc(d)}</p></li>' for t, d in WHY)}</ul>
-</div></section>'''
-
-    close = cta_band(base, "Have an idea? Let's make it real.", "Tell us what you're working on. A few words is plenty.", dark=True)
-    page('', 'home', hero + need + wedo + work + aud + large + steps + why + close, body_class='home')
+    page('', 'home', hero + film + marquee + need + work + two + story + who + why + large + how + serv + close_cta(base), body_class='home')
 
 
 # ── SERVICES ──────────────────────────────────────────────────────────────
 def services():
     base = '../'
-    jump = ''.join(f'<li><a class="chip" href="#{s["id"]}">{esc(s["title"])}</a></li>' for s in SERVICES)
-    intro = f'''<section class="page-hero container"><p class="eyebrow">What we can design for you</p>
-  <h1 class="display-md">Whatever you need designed, just ask.</h1>
-  <p class="lead">Big project or small, brand new or a refresh. If it needs to look good, it's something we can talk about. Jump to what you need:</p>
-  <ul class="chips jump">{jump}</ul>
-  <div class="unsure-box"><div><h2 class="h3">Not sure what you need?</h2><p>That's a very normal place to start. Tell us your idea in your own words and we'll work out the rest together.</p></div>
-  <a class="btn btn-yellow btn-lg" href="{base}start/?need=unsure">I have an idea</a></div></section>'''
+    jump = ''.join(f'<a class="pf" href="#{s["id"]}">{esc(s["title"])}</a>' for s in SERVICES)
+    intro = f'''<section class="ph"><div class="wrap"><p class="eyebrow" data-r="fade" data-intro>What we can design for you</p>
+  <h1 class="h1" data-r="words" data-intro>Whatever you need designed, <span class="grad">just ask.</span></h1>
+  <p class="lead" data-r data-intro data-d=".3">Big project or small, brand new or a refresh. If it needs to look good, it's something we can talk about. Jump to what you need:</p>
+  <div class="pills" data-r data-intro data-d=".4">{jump}</div>
+  <div class="unsure" data-r><div><h2 class="h3">Not sure what you need?</h2><p>That's a very normal place to start. Tell us your idea in your own words and we'll work out the rest together.</p></div>
+  {pill('I have an idea', base + 'start/?need=unsure', 'pill-yellow pill-lg')}</div></div></section>'''
     groups = []
     for n, s in enumerate(SERVICES):
         asks = ''.join(f'<li>{esc(a)}</li>' for a in s['asks'])
-        prod = f'<p class="prod-note">{esc(PRODUCTION_NOTE)}</p>' if s['production'] else ''
-        strip = ''
+        prod = f'<p class="prod">{esc(PRODUCTION_NOTE)}</p>' if s['production'] else ''
         if s['work']:
-            cards = ''.join(f'<a class="mini" href="{base}work/{w}/">{img(w, 0, BY[w]["title"], base, sizes="(min-width: 900px) 26vw, 46vw", want=560)}'
+            cards = ''.join(f'<a class="mini" href="{base}work/{w}/"><div class="mi">{img(w, 0, BY[w]["title"], base, sizes="(min-width: 900px) 26vw, 94vw", want=560)}</div>'
                             f'<span>{esc(BY[w]["title"])}{" · Concept" if BY[w]["concept"] else ""}</span></a>' for w in s['work'])
-            strip = f'<div class="mini-row">{cards}</div>'
         else:
-            strip = f'<div class="mini-row"><div class="mini soon"><b>{esc(s["title"])}</b><span>{esc(s.get("note", "Examples coming soon."))}</span></div></div>'
-        groups.append(f'''<section class="svc{' sand' if n % 2 == 0 else ''}" id="{s['id']}"><div class="container">
-  <div class="svc-grid">
-    <div class="svc-head reveal"><p class="eyebrow">{n + 1:02d}</p><h2 class="h2">{esc(s['title'])}</h2><p class="svc-line">{esc(s['line'])}</p><p>{esc(s['intro'])}</p></div>
-    <div class="svc-body reveal"><h3 class="small-h">What people ask us for</h3><ul class="asks">{asks}</ul>{prod}
-      <a class="btn btn-primary btn-lg" href="{base}start/?need={s['need']}">{esc(s['cta'])}</a></div>
-  </div>{strip}</div></section>''')
-    end = cta_band(base, "Don't see it? Ask anyway.", "Other creative requests are welcome. Tell us what you have in mind.", 'Tell Us What You Need', dark=False)
-    page('services/', 'services', intro + ''.join(groups) + end, active='services', body_class='services')
+            cards = f'<div class="mini soon"><b>{esc(s["title"])}</b><span>{esc(s.get("note", "Examples coming soon."))}</span></div>'
+        groups.append(f'''<section class="svc" id="{s['id']}"><div class="wrap">
+  <div class="svc-grid"><div class="svc-head"><span class="svc-n">{n + 1:02d}</span><h2 class="h2" data-r="words">{esc(s['title'])}</h2>
+    <p class="svc-line" data-r>{esc(s['line'])}</p><p class="muted" data-r>{esc(s['intro'])}</p></div>
+  <div class="svc-body" data-r><h3 class="eyebrow">What people ask us for</h3><ul class="asks">{asks}</ul>{prod}{pill(esc(s['cta']), f"{base}start/?need={s['need']}")}</div></div>
+  <div class="mini-row" data-r>{cards}</div></div></section>''')
+    page('services/', 'services', intro + ''.join(groups) + close_cta(base, "Don't see it? <span class=\"grad\">Ask anyway.</span>", "Other creative requests are welcome. Tell us what you have in mind.", label='Tell Us What You Need'), body_class='services')
 
 
 # ── WORK INDEX ────────────────────────────────────────────────────────────
 def work_index():
     base = '../'
-    chips = '<li><button class="chip is-on" data-filter="all" type="button">All <span class="count">%d</span></button></li>' % len(PROJECTS)
+    chips = f'<button class="pf is-on" data-filter="all" type="button" aria-pressed="true">All <span class="count">{len(PROJECTS)}</span></button>'
     for k, label in KIND.items():
         n = sum(1 for p in PROJECTS if p['kind'] == k)
-        chips += f'<li><button class="chip" data-filter="{k}" type="button">{esc(label)} <span class="count">{n}</span></button></li>'
-    cards = []
-    for p in PROJECTS:
-        cards.append(f'''<article class="wcard reveal" data-kind="{p['kind']}"><a class="wc-media" href="{p['slug']}/" aria-label="{esc(p['title'])}">
-  {img(p['slug'], 0, p['title'], base, sizes='(min-width: 900px) 46vw, 92vw', want=1100)}{concept_chip(p)}</a>
-  <div class="wc-meta"><h2 class="h4"><a href="{p['slug']}/">{esc(p['title'])}</a></h2><p>{esc(p['plain'])}</p><span class="kindtag">{esc(KIND[p['kind']])}</span></div></article>''')
-    body = f'''<section class="page-hero container"><p class="eyebrow">Our work</p>
-  <h1 class="display-md">Things we've made.</h1>
-  <p class="lead">Logos, brands, websites, social graphics, packaging and films. Projects marked <span class="chip-concept inline">Concept</span> are self-initiated and fictional. Click any project to see it up close.</p>
-  <ul class="chips filters" role="group" aria-label="Filter projects">{chips}</ul></section>
-<section class="container work-grid" id="grid">{''.join(cards)}</section>
-{cta_band(base, "Have something like this in mind?", "Tell us what you're working on. We'll take it from there.", 'Start a Project')}'''
-    page('work/', 'work', body, active='work', body_class='work')
+        chips += f'<button class="pf" data-filter="{k}" type="button" aria-pressed="false">{esc(label)} <span class="count">{n}</span></button>'
+    cards = ''.join(f'''<article class="wcard" data-kind="{p['kind']}" data-r><a class="wc-media" href="{p['slug']}/" aria-label="{esc(p['title'])}">{img(p['slug'], 0, p['title'], base, sizes='(min-width: 900px) 580px, 94vw', want=1100)}{concept(p)}</a>
+  <div class="wc-meta"><h2><a href="{p['slug']}/">{esc(p['title'])}</a></h2><p>{esc(p['plain'])}</p><span class="kt">{esc(KIND[p['kind']])}</span></div></article>''' for p in PROJECTS)
+    body = f'''<section class="ph"><div class="wrap"><p class="eyebrow" data-r="fade" data-intro>Our work</p>
+  <h1 class="h1" data-r="words" data-intro>Things <span class="grad">we've made</span></h1>
+  <p class="lead" data-r data-intro data-d=".3">Logos, brands, websites, social graphics, packaging and films. Projects marked <span class="concept">Concept</span> are self-initiated and fictional. Click any project to see it up close.</p>
+  <div class="pills" role="group" aria-label="Filter projects" data-r data-intro data-d=".4">{chips}</div></div></section>
+<section class="wrap work-grid" id="grid">{cards}</section>
+{close_cta(base, 'Have something like this <span class="grad">in mind?</span>')}'''
+    page('work/', 'work', body, body_class='work')
 
 
 # ── PROJECT PAGES ─────────────────────────────────────────────────────────
@@ -329,12 +342,11 @@ KIND_NEED = {'brand': 'brand', 'web': 'website', 'social': 'design', 'print': 'p
 def related(p, n=3):
     same = [x for x in PROJECTS if x['kind'] == p['kind'] and x['slug'] != p['slug']]
     i = next(k for k, x in enumerate(PROJECTS) if x['slug'] == p['slug'])
-    rest = PROJECTS[i + 1:] + PROJECTS[:i]
     pick = same[:n]
-    for x in rest:
+    for x in PROJECTS[i + 1:] + PROJECTS[:i]:
         if len(pick) >= n:
             break
-        if x not in pick and x['slug'] != p['slug']:
+        if x not in pick:
             pick.append(x)
     return pick[:n]
 
@@ -346,20 +358,17 @@ def project(p):
     if p.get('client'): facts.append(('Client', p['client']))
     if p.get('industry'): facts.append(('Industry', p['industry']))
     if p.get('type'): facts.append(('Project type', p['type']))
-    facts.append(('What we did', p['services']))
-    facts.append(('Year', p['year']))
+    facts += [('What we did', p['services']), ('Year', p['year'])]
     dl = ''.join(f'<div><dt>{k}</dt><dd>{esc(str(v))}</dd></div>' for k, v in facts)
-    note = ''
-    if p['concept']:
-        note = f'<p class="concept-note"><span class="chip-concept">Concept</span> A self-initiated project. It was made to show what {BRAND} can do, not for a paying client.</p>'
+    note = f'<p class="concept-note"><span class="concept">Concept</span> A self-initiated project. It was made to show what {BRAND} can do, not for a paying client.</p>' if p['concept'] else ''
     story = ''
     if slug in STORIES:
         st = STORIES[slug]
         big, (a, b) = st['big'], st['small']
-        story = f'''<section class="proj-story container reveal"><h2 class="h3">From idea to the real world</h2>
-  <div class="story-grid"><figure class="s-big"><span class="s-n">1</span>{ref_img(big, big[2], base, sizes='(min-width: 900px) 56vw, 92vw')}<figcaption>{esc(big[2])}</figcaption></figure>
-  <figure class="s-a"><span class="s-n">2</span>{ref_img(a, a[2], base, sizes='(min-width: 900px) 30vw, 46vw', want=560)}<figcaption>{esc(a[2])}</figcaption></figure>
-  <figure class="s-b"><span class="s-n">3</span>{ref_img(b, b[2], base, sizes='(min-width: 900px) 30vw, 46vw', want=560)}<figcaption>{esc(b[2])}</figcaption></figure></div></section>'''
+        story = f'''<section class="wrap blk"><h2 class="h3" data-r>From idea to the real world</h2>
+  <div class="story-grid" data-r><figure class="s-big"><span class="s-n">1</span>{ref_img(big, big[2], base, sizes='(min-width: 900px) 640px, 94vw')}<figcaption>{esc(big[2])}</figcaption></figure>
+  <figure class="s-a"><span class="s-n">2</span>{ref_img(a, a[2], base, sizes='(min-width: 900px) 460px, 46vw', want=560)}<figcaption>{esc(a[2])}</figcaption></figure>
+  <figure class="s-b"><span class="s-n">3</span>{ref_img(b, b[2], base, sizes='(min-width: 900px) 460px, 46vw', want=560)}<figcaption>{esc(b[2])}</figcaption></figure></div></section>'''
     vids = ''
     if p['vids']:
         items = ''
@@ -367,99 +376,93 @@ def project(p):
             poster = f' poster="{base}{q(v["poster"])}"' if v['poster'] else ''
             cap = f'<h3 class="h4">{esc(v["title"])}</h3>' if v['title'] else ''
             items += f'<figure class="vid">{cap}<video controls preload="none" playsinline{poster}><source src="{base}{q(v["src"])}" type="video/mp4"></video></figure>'
-        vids = f'<section class="proj-videos container reveal"><h2 class="h3">Watch</h2><div class="vid-grid">{items}</div></section>'
+        vids = f'<section class="wrap blk" data-r><h2 class="h3">Watch</h2><div class="vid-grid">{items}</div></section>'
     live = ''
     if p['live']:
-        live = f'<p class="live reveal"><a class="btn btn-yellow btn-lg" href="{base}{q(p["live"])}" target="_blank" rel="noopener">{esc(p["live_label"])} <span aria-hidden="true">↗</span></a></p>'
+        live = f'<div class="live" data-r>{pill(esc(p["live_label"]), base + q(p["live"]))}</div>'
     n_img = len(p['srcs'])
-    gal = ''
-    full_idx = range(1, n_img)  # cover (idx 0) is shown as hero; gallery = rest
     items = ''.join(
         f'<button class="g-item" type="button" data-full="{base}img/{slug}/{i:02d}-{MANIFEST[slug][str(i)]["sizes"][-1]}.webp" data-alt="{esc(p["title"])} image {i}">'
-        f'{img(slug, i, f"{p["title"]} image {i}", base, sizes="(min-width: 1100px) 33vw, (min-width: 640px) 50vw, 92vw", want=560)}</button>' for i in full_idx)
-    if items:
-        gal = f'<section class="proj-gallery container"><h2 class="h3">The work</h2><div class="g-grid">{items}</div></section>'
-    rel = ''.join(f'''<article class="wcard"><a class="wc-media" href="{base}work/{x['slug']}/" aria-label="{esc(x['title'])}">{img(x['slug'], 0, x['title'], base, sizes='(min-width: 900px) 30vw, 92vw', want=560)}{concept_chip(x)}</a>
-  <div class="wc-meta"><h3 class="h4"><a href="{base}work/{x['slug']}/">{esc(x['title'])}</a></h3><p>{esc(x['plain'])}</p></div></article>''' for x in related(p))
-    body = f'''<section class="proj-head container"><a class="back" href="{base}work/">← All work</a>
-  <p class="eyebrow">{esc(KIND[p['kind']])} {concept_chip(p)}</p>
-  <h1 class="display-md">{esc(p['title'])}</h1><p class="lead">{esc(p['plain'])}.</p>{note}
-  <dl class="facts">{dl}</dl></section>
-<section class="proj-hero container">{img(slug, 0, p['title'], base, sizes='(min-width: 1320px) 1240px, 94vw', eager=True, want=1600, cls='hero-img')}</section>
-<section class="proj-body container reveal"><div class="pb-grid">
-  <div><h2 class="small-h">The challenge</h2><p>{esc(p['challenge'])}</p></div>
-  <div><h2 class="small-h">What we did</h2><p>{esc(p['approach'])}</p></div>
-  <div><h2 class="small-h">What was made</h2><p>{esc(p['made'])}</p></div></div>{live}</section>
+        f'{img(slug, i, f"{p["title"]} image {i}", base, sizes="(min-width: 1100px) 33vw, (min-width: 640px) 50vw, 94vw", want=560)}</button>' for i in range(1, n_img))
+    gal = f'<section class="wrap blk"><h2 class="h3" data-r>The work</h2><div class="g-grid">{items}</div></section>' if items else ''
+    rel = ''.join(f'''<article class="wcard" data-r><a class="wc-media" href="{base}work/{x['slug']}/" aria-label="{esc(x['title'])}">{img(x['slug'], 0, x['title'], base, sizes='(min-width: 900px) 30vw, 94vw', want=560)}{concept(x)}</a>
+  <div class="wc-meta"><h3><a href="{base}work/{x['slug']}/">{esc(x['title'])}</a></h3><p>{esc(x['plain'])}</p></div></article>''' for x in related(p))
+    body = f'''<section class="proj-head"><div class="wrap"><a class="back" href="{base}work/">← All work</a>
+  <p class="eyebrow">{esc(KIND[p['kind']])} {concept(p)}</p>
+  <h1 class="h1" data-r="words" data-intro>{esc(p['title'])}</h1><p class="lead" data-r data-intro data-d=".2">{esc(p['plain'])}.</p>{note}
+  <dl class="facts" data-r data-intro data-d=".3">{dl}</dl></div></section>
+<section class="wrap proj-hero" data-r data-intro data-d=".25">{img(slug, 0, p['title'], base, sizes='(min-width: 1280px) 1160px, 94vw', eager=True, want=1600, cls='hero-img')}</section>
+<section class="wrap"><div class="pb" data-r>
+  <div><h2>The challenge</h2><p>{esc(p['challenge'])}</p></div>
+  <div><h2>What we did</h2><p>{esc(p['approach'])}</p></div>
+  <div><h2>What was made</h2><p>{esc(p['made'])}</p></div></div>{live}</section>
 {story}{vids}{gal}
-{cta_band(base, "Have something like this in mind?", "Tell us what you're working on. A few words is plenty.", 'Start a Project', href=f"{base}start/?need={KIND_NEED[p['kind']]}")}
-<section class="section more-proj"><div class="container"><h2 class="h3">More projects</h2><div class="rel-grid">{rel}</div></div></section>
+{close_cta(base, 'Have something like this <span class="grad">in mind?</span>', href=f"{base}start/?need={KIND_NEED[p['kind']]}")}
+<section class="sec" style="padding-top:0"><div class="wrap"><h2 class="h3" data-r style="margin-bottom:28px">More projects</h2><div class="rel">{rel}</div></div></section>
 <div class="lightbox" hidden role="dialog" aria-modal="true" aria-label="Image viewer"><button class="lb-close" type="button" aria-label="Close">×</button>
   <button class="lb-nav lb-prev" type="button" aria-label="Previous image">←</button><img alt=""><button class="lb-nav lb-next" type="button" aria-label="Next image">→</button><span class="lb-count"></span></div>'''
-    title = f"{p['title']} | {BRAND}"
-    desc = f"{p['plain']}. {p['summary']}"[:300]
-    page(f'work/{slug}/', 'work', body, active='work', title=title, desc=desc, body_class='project')
+    page(f'work/{slug}/', 'work', body, title=f"{p['title']} | {BRAND}", desc=f"{p['plain']}. {p['summary']}"[:300], body_class='project')
 
 
 # ── ABOUT ─────────────────────────────────────────────────────────────────
 def about():
     base = '../'
-    steps = ''.join(f'<li><span class="n">{i + 1}</span><h3>{esc(t)}</h3><p>{esc(d)}</p></li>' for i, (t, d) in enumerate(STEPS))
+    steps = ''.join(f'<li><span class="n grad">{i + 1:02d}</span><h3>{esc(t)}</h3><p>{esc(d)}</p></li>' for i, (t, d) in enumerate(STEPS))
     why = ''.join(f'<li><h3>{esc(t)}</h3><p>{esc(d)}</p></li>' for t, d in WHY)
-    body = f'''<section class="page-hero container"><p class="eyebrow">About {BRAND}</p>
-  <h1 class="display-md">We help ideas look like they deserve to be seen.</h1></section>
-<section class="section container about-who reveal"><div class="two"><h2 class="h3">Who we are</h2>
-  <div class="prose"><p>{BRAND} is a design studio. We help people turn their ideas into things that look professional, memorable and ready to be seen: logos, flyers, social media graphics, websites, campaigns, vehicle branding and more.</p>
+    body = f'''<section class="ph"><div class="wrap"><p class="eyebrow" data-r="fade" data-intro>About {BRAND}</p>
+  <h1 class="h1" data-r="words" data-intro>We help ideas look like <span class="grad">they deserve to be seen.</span></h1></div></section>
+<section class="sec"><div class="wrap about-grid"><h2 class="h3" data-r>Who we are</h2>
+  <div class="prose" data-r data-d=".1"><p>{BRAND} is a design studio. We help people turn their ideas into things that look professional, memorable and ready to be seen: logos, flyers, social media graphics, websites, campaigns, vehicle branding and more.</p>
   <p>We work with individuals, small businesses, churches, organizations and companies. We're based in Canada and work with people around the world. Some of what we do is big and some of it is one flyer. We treat them with the same care.</p></div></div></section>
-<section class="section sand"><div class="container two about-vm reveal"><div><p class="eyebrow">Our vision</p>
-  <p class="statement">A world where anyone with a good idea can put it out there looking as good as it deserves.</p></div>
-  <div><p class="eyebrow">Our mission</p><p class="statement sm">To make professional design easy to ask for, by bringing together creativity, careful design, technology and honest collaboration, and by giving every request, big or small, the same care.</p></div></div></section>
-<section class="section container reveal"><div class="section-head"><p class="eyebrow">How we work</p><h2 class="h2">Simple, from the first message.</h2></div><ol class="steps">{steps}</ol></section>
-<section class="section sand"><div class="container reveal"><div class="section-head"><p class="eyebrow">Why {BRAND}</p><h2 class="h2">Easy to talk to. Serious about the work.</h2></div><ul class="why-grid">{why}</ul></div></section>
-{cta_band(base, "Let's work together.", "Tell us what you're working on. A few words is plenty.", 'Start a Project', dark=True)}'''
-    page('about/', 'about', body, active='about', body_class='about')
+<section class="sec dark"><div class="wrap vm"><div data-r><p class="eyebrow">Our vision</p><p class="statement">A world where anyone with a good idea can put it out there looking <span class="grad">as good as it deserves.</span></p></div>
+  <div data-r data-d=".15"><p class="eyebrow">Our mission</p><p class="statement sm">To make professional design easy to ask for, by bringing together creativity, careful design, technology and honest collaboration, and by giving every request, big or small, the same care.</p></div></div></section>
+<section class="sec"><div class="wrap"><div class="sh"><div><p class="eyebrow" data-r="fade">How we work</p><h2 class="h2" data-r="words">Simple, <span class="grad">from the first message</span></h2></div></div>
+  <ol class="steps" data-stagger="90">{steps}</ol></div></section>
+<section class="sec" style="padding-top:0"><div class="wrap"><div class="sh"><div><p class="eyebrow" data-r="fade">Why {BRAND}</p><h2 class="h2" data-r="words">Easy to talk to. <span class="grad">Serious about the work.</span></h2></div></div>
+  <ul class="why-cards" data-stagger="90">{why}</ul></div></section>
+{close_cta(base, "Let's work <span class=\"grad\">together.</span>")}'''
+    page('about/', 'about', body, body_class='about')
 
 
 # ── START ─────────────────────────────────────────────────────────────────
 def start():
     base = '../'
-    chips = ''.join(
-        f'<label class="pick"><input type="checkbox" name="need" value="{k}"><span>{esc(t)}</span></label>' for k, t in NEEDS)
-    body = f'''<section class="page-hero container start-hero"><p class="eyebrow">Start a project</p>
-  <h1 class="display-md">Tell us what you're working on.</h1>
-  <p class="lead">No brief needed. A few words is plenty. We'll take it from there.</p></section>
-<section class="container start-wrap">
+    chips = ''.join(f'<label class="pick"><input type="checkbox" name="need" value="{k}"><span>{esc(t)}</span></label>' for k, t in NEEDS)
+    body = f'''<section class="ph"><div class="wrap"><p class="eyebrow" data-r="fade" data-intro>Start a project</p>
+  <h1 class="h1" data-r="words" data-intro>Tell us what <span class="grad">you're working on.</span></h1>
+  <p class="lead" data-r data-intro data-d=".3">No brief needed. A few words is plenty. We'll take it from there.</p></div></section>
+<section class="wrap start-wrap">
   <form id="start-form" class="start-form" action="{SITE['formspree']}" method="POST" novalidate>
     <input type="hidden" name="_subject" value="New project enquiry from the {BRAND} website">
     <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="trap" aria-hidden="true">
     <ol class="progress" aria-hidden="true"><li class="on"><i>1</i> What you need</li><li><i>2</i> Your idea</li><li><i>3</i> How to reach you</li></ol>
-    <fieldset class="step is-on" data-step="1"><legend class="h3">What do you need?</legend>
-      <p class="hint">Tick everything that applies.</p><div class="picks">{chips}</div></fieldset>
-    <fieldset class="step" data-step="2"><legend class="h3">Tell us a little about it.</legend>
+    <fieldset class="step is-on" data-step="1"><legend>What do you need?</legend><p class="hint">Tick everything that applies.</p><div class="picks">{chips}</div></fieldset>
+    <fieldset class="step" data-step="2"><legend>Tell us a little about it.</legend>
       <label class="field"><span>What's the idea?</span><textarea name="idea" rows="6" placeholder="For example: I'm starting a bakery and need a logo and a flyer for the opening. Messy is fine."></textarea></label>
       <label class="field"><span>A link to anything that helps (optional)</span><input type="url" name="link" placeholder="https://"></label></fieldset>
-    <fieldset class="step" data-step="3"><legend class="h3">How can we reach you?</legend>
+    <fieldset class="step" data-step="3"><legend>How can we reach you?</legend>
       <label class="field"><span>Your name</span><input type="text" name="name" autocomplete="name" required></label>
       <label class="field"><span>Email</span><input type="email" name="email" autocomplete="email" required></label>
       <label class="field"><span>Phone or WhatsApp (optional)</span><input type="tel" name="phone" autocomplete="tel"></label>
       <label class="field"><span>Is there a date you need it by? (optional)</span><input type="text" name="deadline" placeholder="For example: end of next month"></label></fieldset>
     <p class="form-error" role="alert" aria-live="assertive"></p>
-    <div class="form-actions"><button type="button" class="btn btn-ghost" data-back hidden>← Back</button>
-      <button type="button" class="btn btn-primary btn-lg" data-next>Continue</button>
-      <button type="submit" class="btn btn-primary btn-lg" data-submit>Send it to us</button></div>
-    <p class="hint small">Prefer email? <a href="mailto:{SITE['email']}">{SITE['email']}</a></p>
+    <div class="form-actions"><button type="button" class="btn-plain" data-back hidden>← Back</button>
+      <button type="button" class="pill pill-lg" data-next><span>Continue</span><i class="ico">{ARROW}</i></button>
+      <button type="submit" class="pill pill-lg" data-submit><span>Send it to us</span><i class="ico">{ARROW}</i></button></div>
+    <p class="hint">Prefer email? <a href="mailto:{SITE['email']}">{SITE['email']}</a></p>
   </form>
-  <div class="form-done" hidden><h2 class="h2">Thank you. We've got it.</h2><p class="lead">We'll read what you sent and get back to you.</p>
-    <a class="btn btn-primary btn-lg" href="{base}work/">See some of our work</a></div>
+  <div class="form-done" hidden><h2 class="h2">Thank you. <span class="grad">We've got it.</span></h2><p class="lead">We'll read what you sent and get back to you.</p>
+    {pill('See some of our work', base + 'work/')}</div>
 </section>'''
-    page('start/', 'start', body, active='start', body_class='start')
+    page('start/', 'start', body, body_class='start')
 
 
 # ── 404, sitemap, robots ──────────────────────────────────────────────────
 def extras():
     open(os.path.join(ROOT, '404.html'), 'w', encoding='utf-8').write(f'''<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Page not found | {BRAND}</title><meta name="robots" content="noindex">
-<style>body{{margin:0;min-height:100vh;display:grid;place-items:center;background:#F6F2EA;color:#17140F;font-family:system-ui,sans-serif;text-align:center;padding:24px}}
-h1{{font-size:clamp(2.2rem,6vw,4rem);margin:0 0 12px}}p{{margin:0 0 24px;color:#6B655A;font-size:1.1rem}}a{{display:inline-block;background:#162DAF;color:#fff;padding:14px 26px;border-radius:999px;text-decoration:none;font-weight:600}}</style></head>
+<style>body{{margin:0;min-height:100vh;display:grid;place-items:center;background:#fff;color:#0A0C24;font-family:system-ui,sans-serif;text-align:center;padding:24px}}
+h1{{font-size:clamp(2.2rem,6vw,4rem);margin:0 0 12px;letter-spacing:-.03em}}p{{margin:0 0 24px;color:#5F6485;font-size:1.1rem}}a{{display:inline-block;background:#162DAF;color:#fff;padding:16px 30px;border-radius:999px;text-decoration:none;font-weight:600}}</style></head>
 <body><main><h1>That page isn't here.</h1><p>But we can help you find what you need.</p><a id="home" href="/">Back to {BRAND}</a></main>
 <script>var p=location.pathname.split('/');document.getElementById('home').href=(location.hostname.indexOf('github.io')>-1?'/'+p[1]:'')+'/';</script></body></html>''')
     urls = ['', 'services/', 'work/', 'about/', 'start/'] + [f'work/{p["slug"]}/' for p in PROJECTS]

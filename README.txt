@@ -20,7 +20,10 @@ How it is built
     tools/fonts.py        Self-hosts Syne + Space Grotesk (css/fonts/)
     tools/og.py           Social share image (assets/og-cover.jpg)
     css/site.css          Design system
-    js/site.js            Menu, reveals, hero rotator, filters, lightbox, start form
+    js/site.js            Smooth scroll, reveals, word-by-word headlines, menu, parallax, carousel, panels,
+                          hero rotator, filters, lightbox, start form
+    js/lenis.min.js       Lenis smooth scrolling (MIT licence, v1.1.20, vendored)
+    tools/cdp.py          Headless-Chrome driver for review screenshots and interaction tests
 
 Adding or changing a project
   1. Add/edit it in tools/projects-raw.json and its entries in tools/content.py
@@ -38,4 +41,4 @@ Before launch
   - Confirm which projects are client work vs concept (see CONCEPT in tools/content.py).
   - Add real testimonials when available (none are shown now).
 
-Preview locally:  python -m http.server 8000   then open http://localhost:8000
+Preview locally:  double-click preview.bat   (or: python -m http.server 8000, then open http://localhost:8000)

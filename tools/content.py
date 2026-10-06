@@ -296,3 +296,27 @@ def find_img(projects, slug, fragment):
         if f in _norm(s):
             return i
     raise KeyError(f'{slug}: no image matching {fragment!r}')
+
+
+# ── V2.1 (Orizon-feel restyle): extra home content ────────────────────────
+MARQUEE = ['Logos', 'Flyers', 'Websites', 'Billboards', 'Vehicle branding', 'Social media graphics', 'Business cards', 'Packaging',
+           'Presentations', 'Posters', 'Banners', 'Invitations', 'Brand guidelines', 'Photo editing', 'Motion graphics']
+
+FEATURED = ['linkrithm', 'green-blueprint', 'mason-and-rowe-residences', 'shorteeme', 'design-eigen', 'jojo-foods',
+            'northstar-capital-website', 'rovard-studios-brand-film']
+
+TWO_WAYS = [
+    dict(tag='Starting something new', title='Your new business, brand or idea',
+         items=['A logo and a look that feels like a real brand', 'Business cards, letterheads and stationery',
+                'Social media profile and banner designs', 'A simple website or landing page'],
+         cta='Start a Project', href='start/?need=brand', img=('linkrithm', 'gallery-02')),
+    dict(tag='Growing something bigger', title='Your campaign, event or next big push',
+         items=['Flyers, posters and invitations', 'Billboards, banners and signage',
+                'Vehicle branding for cars, vans and delivery vehicles', 'Presentations, decks and company profiles'],
+         cta='Tell Us What You Need', href='start/?need=ads', img=('green-blueprint', 'Cover 7 - Copy')),
+]
+
+WHY_IMGS = [('green-blueprint', 'Cover 7 - Copy'), ('linkrithm', 'gallery-02'), ('design-eigen', 'Tshirt Mockup'), ('mason-and-rowe-residences', 'mr-ui-04-home')]
+AUD_PHOTOS = [('linkrithm', 'gallery-13'), ('shorteeme', None), ('green-blueprint', 'Cover 1.jpg')]
+HERO_THUMBS = [('linkrithm', 'gallery-02'), ('green-blueprint', 'Cover 7 - Copy'), ('jojo-foods', None)]
+FILM = dict(src='assets/Motion%20Design/1_Rovard%20Brand%20Film/rovard-brand-film.mp4', slug='rovard-studios-brand-film', poster='film-02')
