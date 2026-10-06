@@ -12,6 +12,7 @@ from PIL import Image
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from content import *  # noqa
 from blogdata import POSTS
+from legal import PAGES as LEGAL, UPDATED as LEGAL_UPDATED
 
 VERSION = time.strftime('%Y%m%d%H%M')
 MANIFEST = json.load(open(os.path.join(ROOT, 'tools', 'manifest.json')))
@@ -76,6 +77,9 @@ def head(title, desc, path, base):
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(desc)}">
 <link rel="canonical" href="{url}">
+<link rel="alternate" hreflang="en" href="{url}">
+<link rel="alternate" hreflang="fr" href="{SITE['url']}/fr/{path}">
+<link rel="alternate" hreflang="x-default" href="{url}">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="{BRAND}">
 <meta property="og:title" content="{esc(title)}">
@@ -115,7 +119,7 @@ def header(base):
 </div>'''
 
 
-def footer(base):
+def footer(base, path=''):
     pick = ['Logo design', 'Brand refresh', 'Brand guidelines', 'Business cards', 'Flyers', 'Posters', 'Invitations', 'Brochures', 'Social media posts', 'Church and ministry graphics',
             'Business websites', 'Landing pages', 'Billboards', 'Banners', 'Full vehicle wraps', 'Product packaging', 'Pitch decks', 'Presentations', 'Photo editing and retouching', 'Video editing']
     where = {ask: g['id'] for g in SERVICES for ask in g['asks']}
@@ -132,9 +136,14 @@ def footer(base):
       <a href="{base or './'}">Home</a><a href="{base}services/">Services</a><a href="{base}work/">Our work</a><a href="{base}blog/">Blog</a><a href="{base}about/">About</a><a href="{base}start/">Start a project</a></nav>
     <nav class="foot-col foot-svc" aria-label="Services"><h2>Services</h2><div class="svc-cols">{''.join(svc)}</div></nav>
   </div>
-  <div class="wrap foot-base"><span>© {SITE['year']} {BRAND}. All rights reserved.</span></div>
+  <div class="wrap foot-base"><span>© {SITE['year']} {BRAND}. All rights reserved.</span>
+    <span class="lang" data-lang aria-label="Language"><a href="{base}{path}" aria-current="true">EN</a><a href="{base}fr/{path}" hreflang="fr" lang="fr">FR</a></span>
+    <nav class="foot-legal" aria-label="Legal"><a href="{base}privacy/">Privacy Policy</a><a href="{base}cookies/">Cookie Preferences</a><a href="{base}terms/">Terms</a></nav></div>
 </footer>
 {pill('Start a project', base + 'start/', 'sticky-cta pill-lg')}'''
+
+
+BUILT = []
 
 
 def page(path, key, body, title=None, desc=None, body_class=''):
@@ -147,12 +156,13 @@ def page(path, key, body, title=None, desc=None, body_class=''):
 <main id="main">
 {body}
 </main>
-{footer(base)}
+{footer(base, path)}
 <script src="{base}js/lenis.min.js" defer></script>
 <script src="{base}js/site.js?v={VERSION}" defer></script>
 </body>
 </html>
 '''
+    BUILT.append((path, out))
     dest = os.path.join(ROOT, path, 'index.html') if path else os.path.join(ROOT, 'index.html')
     os.makedirs(os.path.dirname(dest), exist_ok=True)
     open(dest, 'w', encoding='utf-8').write(out)
@@ -515,6 +525,27 @@ def blog_post(b):
 
 
 
+# ── LEGAL ─────────────────────────────────────────────────────────────────
+def legal():
+    for pg in LEGAL:
+        base = '../'
+        parts = []
+        for kind, val in pg['body']:
+            if kind == 'h':
+                parts.append(f'<h2>{esc(val)}</h2>')
+            elif kind == 'ul':
+                parts.append('<ul>' + ''.join(f'<li>{esc(x)}</li>' for x in val) + '</ul>')
+            else:
+                parts.append(f'<p>{esc(val)}</p>')
+        body = f'''<section class="ph post-ph"><div class="wrap"><p class="eyebrow" data-r="fade" data-intro>Legal</p>
+  <h1 class="h1" data-r="words" data-intro>{esc(pg['title'])}</h1>
+  <p class="lead" data-r data-intro data-d=".3">{esc(pg['intro'])}</p><p class="post-meta">Last updated: {LEGAL_UPDATED}</p></div></section>
+<div class="wrap post-body">{''.join(parts)}</div>
+{close_cta(base, "Questions? <span class=\"grad\">Just ask.</span>")}'''
+        page(f"{pg['slug']}/", 'home', body, title=f"{pg['title']} | {BRAND}", desc=pg['intro'], body_class='legal')
+
+
+
 # ── START ─────────────────────────────────────────────────────────────────
 def start():
     base = '../'
@@ -561,7 +592,7 @@ def extras():
 h1{{font-size:clamp(2.2rem,6vw,4rem);margin:0 0 12px;letter-spacing:-.03em}}p{{margin:0 0 24px;color:#5F6485;font-size:1.1rem}}a{{display:inline-block;background:#162DAF;color:#fff;padding:16px 30px;border-radius:999px;text-decoration:none;font-weight:600}}</style></head>
 <body><main><h1>That page isn't here.</h1><p>But we can help you find what you need.</p><a id="home" href="/">Back to {BRAND}</a></main>
 <script>var p=location.pathname.split('/');document.getElementById('home').href=(location.hostname.indexOf('github.io')>-1?'/'+p[1]:'')+'/';</script></body></html>''')
-    urls = ['', 'services/', 'work/', 'blog/', 'about/', 'start/'] + [f'work/{p["slug"]}/' for p in PROJECTS] + [f'blog/{b["slug"]}/' for b in POSTS]
+    urls = ['', 'services/', 'work/', 'blog/', 'about/', 'start/', 'privacy/', 'cookies/', 'terms/'] + [f'work/{p["slug"]}/' for p in PROJECTS] + [f'blog/{b["slug"]}/' for b in POSTS]
     sm = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + ''.join(
         f'  <url><loc>{SITE["url"]}/{u}</loc></url>\n' for u in urls) + '</urlset>\n'
     open(os.path.join(ROOT, 'sitemap.xml'), 'w', encoding='utf-8').write(sm)
@@ -569,10 +600,12 @@ h1{{font-size:clamp(2.2rem,6vw,4rem);margin:0 0 12px;letter-spacing:-.03em}}p{{m
 
 
 if __name__ == '__main__':
-    home(); services(); work_index(); about(); start(); blog()
+    home(); services(); work_index(); about(); start(); blog(); legal()
     for b in POSTS:
         blog_post(b)
     for p in PROJECTS:
         project(p)
     extras()
-    print('built', 5 + len(PROJECTS), 'pages, version', VERSION)
+    import i18n
+    n, miss = i18n.run(BUILT, SITE['url'])
+    print('built', len(BUILT), 'English pages +', n, 'French pages, version', VERSION, '| untranslated strings:', miss)

@@ -624,3 +624,13 @@ ul, ol { list-style: none; }
 .foot-svc .svc-cols a { font-size: 16px; }
 @media (max-width: 760px) { .foot-svc .svc-cols { grid-auto-flow: row; grid-template-rows: none; } }
 .close-r .reel video { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* footer: language switch + legal links */
+.foot-base { align-items: center; }
+.lang { display: inline-flex; gap: 14px; }
+.lang a { font-weight: 500; transition: color .25s; }
+.lang a[aria-current] { color: var(--blue); }
+.lang a:hover { color: var(--blue); }
+.foot-legal { display: flex; flex-wrap: wrap; gap: 8px 28px; }
+.foot-legal a:hover { color: var(--blue); }
+.legal .post-ph .lead { margin-top: 20px; max-width: 58ch; color: var(--muted); }

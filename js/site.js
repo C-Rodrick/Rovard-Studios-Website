@@ -7,6 +7,8 @@
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const FR = document.documentElement.lang === 'fr';
+  const L = (en, fr) => (FR ? fr : en);
   const body = document.body;
   const isHome = body.classList.contains('home');
   const HEAD = () => (innerWidth <= 900 ? 64 : 72);
@@ -36,7 +38,7 @@
   const btn = $('.menu-btn'), panel = $('.menu-panel');
   function closeMenu() {
     if (!body.classList.contains('menu-open')) return;
-    body.classList.remove('menu-open'); btn.setAttribute('aria-expanded', 'false'); btn.setAttribute('aria-label', 'Open menu');
+    body.classList.remove('menu-open'); btn.setAttribute('aria-expanded', 'false'); btn.setAttribute('aria-label', L('Open menu', 'Ouvrir le menu'));
     panel.setAttribute('aria-hidden', 'true'); panel.inert = true; startScroll();
   }
   if (btn && panel) {
@@ -44,7 +46,7 @@
     btn.addEventListener('click', () => {
       const open = !body.classList.contains('menu-open');
       if (!open) return closeMenu();
-      body.classList.add('menu-open'); btn.setAttribute('aria-expanded', 'true'); btn.setAttribute('aria-label', 'Close menu');
+      body.classList.add('menu-open'); btn.setAttribute('aria-expanded', 'true'); btn.setAttribute('aria-label', L('Close menu', 'Fermer le menu'));
       panel.setAttribute('aria-hidden', 'false'); panel.inert = false; stopScroll();
       setTimeout(() => $('a', panel) && $('a', panel).focus({ preventScroll: true }), 500);
     });
@@ -226,11 +228,11 @@
       const c = $(`input[name="need"][value="${CSS.escape(v)}"]`, form); if (c) c.checked = true;
     });
     const check = () => {
-      if (!form.name.value.trim()) return [form.name, 'Please tell us your name.'];
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.value.trim())) return [form.email, 'Please check your email address.'];
+      if (!form.name.value.trim()) return [form.name, L('Please tell us your name.', 'Veuillez nous indiquer votre nom.')];
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.value.trim())) return [form.email, L('Please check your email address.', 'Veuillez vérifier votre adresse courriel.')];
       const needs = $$('input[name="need"]:checked', form).map(x => x.value);
-      if (!needs.length) return [$('.seg', form), 'Pick at least one thing you need, or choose “I’m not sure”.'];
-      if (needs.includes('unsure') && !form.idea.value.trim()) return [form.idea, 'Tell us a little about your idea, in your own words.'];
+      if (!needs.length) return [$('.seg', form), L('Pick at least one thing you need, or choose “I’m not sure”.', 'Choisissez au moins une chose dont vous avez besoin, ou « Je ne sais pas trop ».')];
+      if (needs.includes('unsure') && !form.idea.value.trim()) return [form.idea, L('Tell us a little about your idea, in your own words.', 'Parlez-nous un peu de votre idée, dans vos propres mots.')];
       return null;
     };
     form.addEventListener('submit', async e => {
@@ -238,14 +240,14 @@
       const bad = check();
       if (bad) { err.textContent = bad[1]; bad[0].focus && bad[0].focus(); return; }
       err.textContent = '';
-      const sub = $('[data-submit]', form), label = sub.querySelector('span'); sub.disabled = true; label.textContent = 'Sending…';
+      const sub = $('[data-submit]', form), label = sub.querySelector('span'); sub.disabled = true; label.textContent = L('Sending…', 'Envoi en cours…');
       try {
         const r = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
         if (!r.ok) throw new Error('bad status');
         form.hidden = true; $('.form-done').hidden = false; goto($('.form-done'), -120);
       } catch (_) {
-        err.innerHTML = 'Something went wrong. Please try again, or email us at <a href="mailto:hello@rovardstudios.com">hello@rovardstudios.com</a>.';
-        sub.disabled = false; label.textContent = 'Send it to us';
+        err.innerHTML = L('Something went wrong. Please try again, or email us at ', 'Une erreur est survenue. Veuillez réessayer, ou écrivez-nous à ') + '<a href="mailto:hello@rovardstudios.com">hello@rovardstudios.com</a>.';
+        sub.disabled = false; label.textContent = L('Send it to us', 'Envoyez-le-nous');
       }
     });
   }

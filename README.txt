@@ -49,3 +49,11 @@ PEOPLE PHOTOS & TESTIMONIALS
 - Real quotes only: add entries to tools/testimonials.json, e.g.
   [{"quote": "...", "name": "Jane Doe", "role": "Owner, Acme", "photo": "img/people/jane.webp"}]
   ("photo" optional, only with the person's permission). Empty list = the section is hidden.
+
+LEGAL PAGES (tools/legal.py) AND FRENCH (fr/)
+- /privacy/, /cookies/, /terms/ come from tools/legal.py. They are a plain-language starting draft that is meant to be fair to both
+  sides. Check the figures in the Terms (50% deposit, 2 revision rounds, 14-day invoices, 30-day quotes) and have a lawyer review them.
+- Every page has a French copy under fr/ (same paths). `python tools/build.py` makes it from the English pages with tools/i18n.py
+  and the dictionary tools/fr/dict.json. Text with no entry stays English and is listed in tools/fr-missing.json (the build prints the count).
+- To change French wording: edit tools/fr_parts/p*.json (index -> French; keys in keys.json), run `python tools/fr_merge.py`, then build.
+  New English copy needs new entries: add them to a new tools/fr/extra.json as {"English text": "French text"}.
