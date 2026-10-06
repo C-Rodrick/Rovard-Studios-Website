@@ -11,7 +11,8 @@ from PIL import Image
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from content import *  # noqa
-from blogdata import POSTS
+from blogdata import with_more
+POSTS = with_more()
 from landing import LANDING
 from legal import PAGES as LEGAL, UPDATED as LEGAL_UPDATED, ANALYTICS_NOTE
 
@@ -570,6 +571,7 @@ def blog_post(b):
 <div class="wrap post-cover" data-r><div class="wc-media">{img(b['cover'], 0, '', base, sizes='(min-width: 1200px) 1100px, 94vw', want=1100, eager=True)}</div></div>
 <div class="wrap post-body" data-r>{''.join(parts)}</div></article>
 <section class="sec" style="padding-top:0"><div class="wrap"><h2 class="h3" data-r style="margin-bottom:28px">More from the blog</h2><div class="blog-grid blog-rel">{rel}</div></div></section>
+<script type="application/ld+json">{json.dumps({'@context': 'https://schema.org', '@type': 'Article', 'headline': b['title'], 'description': b['excerpt'], 'datePublished': b['iso'], 'author': {'@type': 'Organization', 'name': BRAND}, 'publisher': {'@type': 'Organization', 'name': BRAND}}, ensure_ascii=False)}</script>
 {close_cta(base, "Let's make yours <span class=\"grad\">look right.</span>")}'''
     page(f'blog/{b["slug"]}/', 'blog', body, title=f"{b['title']} | {BRAND}", desc=b['excerpt'], body_class='blog')
 

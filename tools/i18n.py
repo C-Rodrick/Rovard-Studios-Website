@@ -119,6 +119,12 @@ class Tr:
         self.d = {}
         for f in sorted(glob.glob(os.path.join(ROOT, 'tools', 'fr', '*.json'))):
             self.d.update(json.load(open(f, encoding='utf-8')))
+        try:
+            from blog_more import FR_PAIRS
+            for k, v in FR_PAIRS().items():
+                self.d.setdefault(k, v)
+        except ImportError:
+            pass
         self.nd = {norm(html.unescape(k)): v for k, v in self.d.items()}
         self.missing = {}
 
@@ -131,6 +137,25 @@ class Tr:
             w = self.nd.get(k + '.')
             v = w[:-1] if w is not None and w.endswith('.') else None
         return v
+
+    MONTHS = {'January': 'janvier', 'February': 'février', 'March': 'mars', 'April': 'avril', 'May': 'mai', 'June': 'juin', 'July': 'juillet',
+              'August': 'août', 'September': 'septembre', 'October': 'octobre', 'November': 'novembre', 'December': 'décembre'}
+
+    def _bit(self, x):
+        v = self._one(x)
+        if v is not None:
+            return v
+        m = re.match(r'^([A-Z][a-z]+) (\d{1,2}), (\d{4})$', x)
+        if m and m.group(1) in self.MONTHS:
+            d = '1er' if m.group(2) == '1' else m.group(2)
+            return f'{d} {self.MONTHS[m.group(1)]} {m.group(3)}'
+        m = re.match(r'^(\d+) min read$', x)
+        if m:
+            return f'{m.group(1)} min de lecture'
+        m = re.match(r'^by (.+)$', x)
+        if m:
+            return f'par {m.group(1)}'
+        return None
 
     def get(self, key):
         k = norm(html.unescape(key))
@@ -147,6 +172,10 @@ class Tr:
         if m:
             left = self.get(m.group(1))
             return None if left is None else f'{left}, image {m.group(2)}'
+        if '<' not in k and ' \u00b7 ' in k:
+            bits = [self._bit(x) for x in k.split(' \u00b7 ')]
+            if all(b is not None for b in bits):
+                return ' \u00b7 '.join(bits)
         if '<' not in k:
             parts = re.split(r'(?<=[.!?])\s+(?=[A-Z0-9"“*$])', k)
             if len(parts) > 1:

@@ -1,7 +1,7 @@
 # Blog posts. Plain advice written by ROVARD STUDIOS. No client names, results or statistics are claimed.
 # body blocks: ('p', text) paragraph · ('h', text) heading · ('ul', [items]) list
 POSTS = [
-    dict(slug='how-to-brief-a-designer', date='October 2026', read=4, cover='design-eigen', tag='Getting started',
+    dict(slug='how-to-brief-a-designer', date='October 6, 2026', iso='2026-10-06', read=4, cover='design-eigen', tag='Getting started',
          title="How to brief a designer when you don't know design words",
          excerpt="You don't need to say 'kerning' or 'moodboard'. Here's what actually helps a designer help you.",
          body=[
@@ -17,7 +17,7 @@ POSTS = [
              ('h', "A few words is plenty"),
              ('p', "If all you have is a rough idea, send it. Messy is fine. Our job is to ask the right follow-up questions and turn the idea into something clear."),
          ]),
-    dict(slug='logo-or-full-brand', date='October 2026', read=4, cover='green-blueprint', tag='Branding',
+    dict(slug='logo-or-full-brand', date='October 6, 2026', iso='2026-10-06', read=4, cover='green-blueprint', tag='Branding',
          title="Logo or full brand identity: what do you actually need?",
          excerpt="A logo is one piece of a brand. Here's how to tell whether you need just the logo or the whole system.",
          body=[
@@ -33,7 +33,7 @@ POSTS = [
              ('h', "Not sure?"),
              ('p', "Start with the logo and the basics: two or three colours and one or two fonts. You can always build the rest around it. If you tell us where your brand will show up, we'll tell you honestly what you need."),
          ]),
-    dict(slug='what-every-flyer-needs', date='October 2026', read=3, cover='dress-doctor', tag='Flyers & print',
+    dict(slug='what-every-flyer-needs', date='October 6, 2026', iso='2026-10-06', read=3, cover='dress-doctor', tag='Flyers & print',
          title="What every flyer needs before it goes out",
          excerpt="A great-looking flyer that leaves out the date is just a nice picture. A quick checklist.",
          body=[
@@ -47,7 +47,7 @@ POSTS = [
              ('h', "Proofread out loud"),
              ('p', "Read every word aloud, then ask someone else to do the same. Dates and phone numbers are where mistakes hide."),
          ]),
-    dict(slug='what-to-send-before-your-logo', date='October 2026', read=3, cover='linkrithm', tag='Getting started',
+    dict(slug='what-to-send-before-your-logo', date='October 6, 2026', iso='2026-10-06', read=3, cover='linkrithm', tag='Getting started',
          title="What to send us before we start your logo",
          excerpt="Five small things that make the first round of your logo much closer to what you imagined.",
          body=[
@@ -58,7 +58,7 @@ POSTS = [
              ('h', "What happens next"),
              ('p', "We come back with ideas, you tell us what's working and what isn't, and we refine from there. The more honest your feedback, the quicker we get there."),
          ]),
-    dict(slug='keep-your-brand-consistent', date='October 2026', read=4, cover='shorteeme', tag='Social media',
+    dict(slug='keep-your-brand-consistent', date='October 6, 2026', iso='2026-10-06', read=4, cover='shorteeme', tag='Social media',
          title="Keeping your brand consistent across social media",
          excerpt="When your posts all look like they came from the same place, people remember you. Simple habits that help.",
          body=[
@@ -72,7 +72,7 @@ POSTS = [
              ('h', "Review once a month"),
              ('p', "Scroll back through your last twenty posts. Do they feel like one voice? If not, you know what to tighten."),
          ]),
-    dict(slug='packaging-that-gets-picked-up', date='October 2026', read=3, cover='jojo-foods', tag='Packaging',
+    dict(slug='packaging-that-gets-picked-up', date='October 6, 2026', iso='2026-10-06', read=3, cover='jojo-foods', tag='Packaging',
          title="Packaging that gets picked up: three things to get right",
          excerpt="On a crowded shelf, you have a second or two. Where to spend your design effort.",
          body=[
@@ -87,3 +87,14 @@ POSTS = [
              ('p', "Print one, put it on a shelf or table, and step back. If the name still reads from across the room, you're close."),
          ]),
 ]
+
+
+def with_more():
+    """The six older posts plus the ones in blog_more.py, as one list (newest topics last)."""
+    from blog_more import MORE
+    out = list(POSTS)
+    for m in MORE:
+        words = sum(len(t.split()) if isinstance(t, str) else sum(len(x.split()) for x in t) for _, t in m['en']['body'])
+        out.append(dict(slug=m['slug'], date='October 6, 2026', iso='2026-10-06', read=max(2, round(words / 190)), cover=m['cover'], tag=m['tag'],
+                        title=m['en']['title'], excerpt=m['en']['excerpt'], body=m['en']['body']))
+    return out
