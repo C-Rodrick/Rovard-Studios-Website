@@ -616,7 +616,7 @@ def faq_section(base, items=None, heading='Questions, <span class="grad">answere
 def pricing():
     base = '../'
     cards = ''
-    for pk in PACKAGES:
+    for pk in sorted(PACKAGES, key=lambda x: (x.get('price') is None, x.get('price') or 0)):
         price = f'From <b>${pk["price"]:,}</b>' if pk.get('price') else '<b>Tell us your budget</b>'
         feat = ' pk-feat' if pk.get('featured') else ''
         lis = ''.join(f'<li>{esc(x)}</li>' for x in pk['includes'])

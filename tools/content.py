@@ -380,6 +380,12 @@ PACKAGES = [
          includes=['Page design that works on phones', 'Layout for your words and images', 'A contact form that reaches you', 'Files ready to publish'], need='website', price=1500),
     dict(id='big', name='Billboards & vehicles', who="Something that has to be read from across the road.",
          includes=['Billboard, banner, sign or vehicle artwork', "Made to your supplier's sizes and specs", 'Print-ready files', 'Help finding the right printer or installer'], need='ads', price=300),
+    dict(id='bw', name='Brand + website', who="You're launching and want your brand and your website to match from day one.",
+         includes=['Logo and brand guidelines', 'A website of several pages', 'Business card and social profile designs', 'Two rounds of changes on each piece'], need='brand', price=3000),
+    dict(id='launch', name='Full launch', who="A launch or a rebrand where everything needs to look right at once.",
+         includes=['Brand identity and guidelines', 'Website design', 'Launch graphics for social media and print', 'A presentation or pitch deck'], need='brand', price=5000),
+    dict(id='custom', name='Something else', who="A bigger project, a mix of things, or something not listed here.",
+         includes=['Packaging, motion, books, vehicles and more', 'A plan built around your idea', 'A written quote before work starts'], need='unsure', price=None),
 ]
 
 # ── FAQ (answers match the Terms page) ───────────────────────────────────────────────────────────────

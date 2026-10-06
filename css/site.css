@@ -659,7 +659,7 @@ ul, ol { list-style: none; }
 .faq-i p { padding: 0 44px 24px 4px; color: var(--muted); font-size: 17px; line-height: 1.6; max-width: 62ch; }
 @media (max-width: 900px) { .faq-grid { grid-template-columns: minmax(0, 1fr); } }
 /* Pricing */
-.pk-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; padding-block: clamp(40px, 5vw, 72px) 24px; }
+.pk-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; padding-block: clamp(40px, 5vw, 72px) 24px; }
 .pk { display: flex; flex-direction: column; gap: 16px; padding: clamp(26px, 2.6vw, 36px); border: 1px solid var(--line); border-radius: var(--r); background: #fff; transition: transform .6s var(--out), box-shadow .6s var(--out); }
 .pk:hover { transform: translateY(-4px); box-shadow: 0 24px 50px rgba(22, 45, 175, .1); }
 .pk-feat { background: linear-gradient(160deg, var(--blue), var(--deep)); color: #fff; border-color: transparent; }
@@ -675,7 +675,7 @@ ul, ol { list-style: none; }
 .pk .pill { align-self: flex-start; }
 .pk-feat .pill { background: #fff; color: var(--blue); }
 .pk-note { padding-bottom: clamp(40px, 5vw, 72px); color: var(--muted); max-width: 70ch; font-size: 17px; }
-@media (max-width: 1100px) { .pk-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 1180px) { .pk-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 700px) { .pk-grid { grid-template-columns: minmax(0, 1fr); } }
 
 /* service pages */
