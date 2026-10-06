@@ -301,7 +301,7 @@ def home():
 
     pans = ''
     for n, ((t, d), ref) in enumerate(zip(WHY, WHY_IMGS)):
-        pans += f'''<article class="pan" tabindex="0">{ref_img(ref, '', base, sizes='(min-width: 900px) 640px, 94vw', want=1100)}
+        pans += f'''<article class="pan" tabindex="0">{ref_img(ref, '', base, sizes='(min-width: 900px) 640px, 94vw', want=1100, extra=f' style="object-position:{ref[2]}"')}
   <span class="pn">{n + 1:02d}</span><span class="pp">{PLUS}</span><div class="pbd"><h3>{esc(t)}</h3><p>{esc(d)}</p></div></article>'''
     n_asks = len({a for s in SERVICES for a in s['asks']})
     stats = [(7, '+', 'years of experience'), (200, '+', 'projects completed'),

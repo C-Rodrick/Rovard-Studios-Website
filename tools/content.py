@@ -164,7 +164,6 @@ WHY = [
     ('You can talk to us like a person.', "Tell us what you're trying to do, in whatever words you have."),
     ('No project is too small.', "One flyer, one logo, one card. They all count here."),
     ('We think about where it will live.', "A design isn't finished until it works on the phone, the poster, the wall and the vehicle."),
-    ("You'll know what's happening.", "Clear steps, and a chance to shape it along the way."),
 ]
 
 # ── Page meta ─────────────────────────────────────────────────────────────
@@ -317,7 +316,7 @@ TWO_WAYS = [
          cta='Tell Us What You Need', href='start/?need=ads', img=('green-blueprint', 'Cover 7 - Copy')),
 ]
 
-WHY_IMGS = [('green-blueprint', 'Cover 7 - Copy'), ('linkrithm', 'gallery-02'), ('design-eigen', 'Tshirt Mockup'), ('mason-and-rowe-residences', 'mr-ui-04-home')]
+WHY_IMGS = [('green-blueprint', 'Cover 7 - Copy', '80% 40%'), ('linkrithm', 'gallery-13', '50% 22%'), ('design-eigen', 'Tshirt Mockup', '50% 38%')]  # + focal point shown when the card is narrow
 AUD_PHOTOS = [('linkrithm', 'gallery-13'), ('shorteeme', None), ('green-blueprint', 'Cover 1.jpg')]
 HERO_FACES = [1, 5, 6]  # people photos used as the small round avatars (illustrative, not clients)
 FILM = dict(src='assets/Motion%20Design/1_Rovard%20Brand%20Film/rovard-brand-film.mp4', slug='rovard-studios-brand-film', poster='film-02')
