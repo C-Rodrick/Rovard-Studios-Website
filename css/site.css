@@ -114,7 +114,7 @@ ul, ol { list-style: none; }
 .arrow-c { display: grid; place-items: center; flex: none; width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--line-2); color: var(--ink); transition: background-color .3s, color .3s, border-color .3s, transform .4s var(--out); }
 
 /* ── Header + menu ────────────────────────────────────────────────────── */
-.site-header { position: sticky; top: 0; z-index: 120; height: var(--head-h); background: rgba(255, 255, 255, .92); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+.site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 120; height: var(--head-h); background: rgba(255, 255, 255, .92); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
 .bar { display: flex; align-items: center; height: 100%; gap: 14px; }
 .logo { margin-right: auto; }
 .logo img { width: 132px; height: auto; }
@@ -694,3 +694,5 @@ ul, ol { list-style: none; }
 .svc-body .more:hover { text-decoration: underline; }
 .svc-page .sec:not(.close) { padding-block: clamp(40px, 5vw, 80px); }
 .svc-page .sec[style*="padding-top:0"] { padding-top: 0; }
+
+body { padding-top: var(--head-h); }
