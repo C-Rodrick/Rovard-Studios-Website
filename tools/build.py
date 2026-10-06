@@ -83,7 +83,10 @@ def head(title, desc, path, base):
 <meta property="og:image" content="{SITE['url']}/assets/og-cover.jpg">
 <meta property="og:image:alt" content="{BRAND}">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="{base}assets/rovard-mark.svg">
+<link rel="icon" href="{base}favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="32x32" href="{base}assets/favicon/icon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="{base}assets/favicon/icon-192.png">
+<link rel="apple-touch-icon" href="{base}assets/favicon/icon-180.png">
 <link rel="preload" href="{base}css/fonts/Syne.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="{base}css/fonts/SpaceGrotesk.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{base}css/site.css?v={VERSION}">
