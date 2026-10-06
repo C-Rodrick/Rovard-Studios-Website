@@ -160,8 +160,7 @@ def home():
     rot = [{'verb': WEDO[i][0], 'thing': WEDO[i][1], 'for': WEDO[i][2]} for i in HERO_ROTATION]
     f0 = rot[0]
     all_things = ', '.join(w[1] for w in WEDO)
-    thumbs = ''.join(
-        f'<i style="background-image:url({base}img/{s}/{find_img(PROJECTS, s, fr):02d}-560.webp)"></i>' for s, fr in HERO_THUMBS)
+    thumbs = ''.join(f'<i style="background-image:url({base}img/people/{n:02d}-560.webp);background-size:230% auto;background-position:50% 9%"></i>' for n in HERO_FACES)
     hero = f'''<section class="hero" aria-labelledby="hero-title">
   <div class="hero-l">
     <p class="eyebrow" data-r="fade" data-intro>{BRAND}</p>
@@ -274,8 +273,8 @@ def home():
         pans += f'''<article class="pan" tabindex="0">{ref_img(ref, '', base, sizes='(min-width: 900px) 640px, 94vw', want=1100)}
   <span class="pn">{n + 1:02d}</span><span class="pp">{PLUS}</span><div class="pbd"><h3>{esc(t)}</h3><p>{esc(d)}</p></div></article>'''
     n_asks = len({a for s in SERVICES for a in s['asks']})
-    stats = [(len(PROJECTS), '', 'projects in our portfolio'), (len(SERVICES), '', 'kinds of work you can ask for'),
-             (n_asks, '', 'specific things you can ask for'), (3, '', 'short steps to get started')]
+    stats = [(7, '+', 'years of experience'), (200, '+', 'projects completed'),
+             (len(SERVICES), '', 'kinds of work you can ask for'), (3, '', 'short steps to get started')]
     stat_html = ''.join(f'<div class="stat"><b data-count="{n}" data-suffix="{s}">{n}{s}</b><span>{esc(l)}</span></div>' for n, s, l in stats)
     why = f'''<section class="sec" id="why" style="padding-top:0"><div class="wrap">
   <div class="sh"><div><p class="eyebrow" data-r="fade">Why {BRAND}</p><h2 class="h2" data-r="words">Easy to talk to. <span class="grad">Serious about the work.</span></h2></div></div>
@@ -446,7 +445,7 @@ def about():
 def start():
     base = '../'
     picks = ''.join(f'<label class="pick"><input type="checkbox" name="need" value="{k}"><span>{esc(t)}</span></label>' for k, t in NEEDS)
-    arc = ''.join(f'<i style="background-image:url({base}img/{sl}/{find_img(PROJECTS, sl, fr):02d}-560.webp)"></i>' for sl, fr in HERO_THUMBS)
+    arc = ''.join(f'<i style="background-image:url({base}img/people/{n:02d}-560.webp);background-size:230% auto;background-position:50% 9%"></i>' for n in HERO_FACES)
     body = f"""<section class="talk"><div class="wrap">
   <div class="talk-head">
     <div class="arc" aria-hidden="true" data-r="fade" data-intro>{arc}</div>

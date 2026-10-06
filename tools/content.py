@@ -318,7 +318,7 @@ TWO_WAYS = [
 
 WHY_IMGS = [('green-blueprint', 'Cover 7 - Copy'), ('linkrithm', 'gallery-02'), ('design-eigen', 'Tshirt Mockup'), ('mason-and-rowe-residences', 'mr-ui-04-home')]
 AUD_PHOTOS = [('linkrithm', 'gallery-13'), ('shorteeme', None), ('green-blueprint', 'Cover 1.jpg')]
-HERO_THUMBS = [('linkrithm', 'gallery-02'), ('green-blueprint', 'Cover 7 - Copy'), ('jojo-foods', None)]
+HERO_FACES = [1, 5, 6]  # people photos used as the small round avatars (illustrative, not clients)
 FILM = dict(src='assets/Motion%20Design/1_Rovard%20Brand%20Film/rovard-brand-film.mp4', slug='rovard-studios-brand-film', poster='film-02')
 
 
