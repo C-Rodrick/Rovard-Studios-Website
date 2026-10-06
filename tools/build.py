@@ -629,7 +629,7 @@ def pricing():
   <h1 class="h1" data-r="words" data-intro>Clear, <span class="grad">no surprises</span></h1>
   <p class="lead" data-r data-intro data-d=".3">Every project gets a written quote before any work starts. Here is what each kind of project usually includes, so you know what to ask for.</p></div></section>
 <section class="wrap pk-grid">{cards}</section>
-<section class="wrap pk-note" data-r><p>Not sure which fits? Pick a budget range on the project form and we'll tell you honestly what it can cover. Final prices, timelines and what's included are always in your written quote.</p></section>
+<section class="wrap pk-note" data-r><p>Prices are starting points in US dollars, before taxes. Not sure which fits? Pick a budget range on the project form and we'll tell you honestly what it can cover. Final prices, timelines and what's included are always in your written quote.</p></section>
 {faq_section(base)}
 {close_cta(base, "Ready when <span class=\"grad\">you are.</span>")}"""
     page('pricing/', 'pricing', body, body_class='pricing')

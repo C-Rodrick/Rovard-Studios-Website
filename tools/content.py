@@ -11,7 +11,7 @@ BRAND = 'ROVARD STUDIOS'
 SITE = {
     'url': 'https://rovardstudios.com',          # change in one place if the final domain differs
     'email': 'hello@rovardstudios.com',
-    'whatsapp': '',     # digits only with country code, e.g. 15145550123. Empty = no WhatsApp button
+    'whatsapp': '15878936078',     # digits only with country code, e.g. 15145550123. Empty = no WhatsApp button
     'booking': '',      # full URL of your booking page (Calendly, Cal.com...). Empty = no "Book a call"
     'plausible': '',    # your site domain as set up in Plausible, e.g. rovardstudios.com. Empty = no analytics
     'location': 'Canada · Worldwide',
@@ -371,15 +371,15 @@ BUDGETS = ['Under $250', '$250 – $1,000', '$1,000 – $3,000', '$3,000 – $5,
 # `price` is a number in USD, e.g. 250. None shows "Tell us your budget".
 PACKAGES = [
     dict(id='logo', name='Logo', who="You're starting something and need a clean mark to begin with.",
-         includes=['Logo design', 'Two rounds of changes', 'Files for print and screen', 'A short note on your colours and fonts'], need='brand', price=None),
+         includes=['Logo design', 'Two rounds of changes', 'Files for print and screen', 'A short note on your colours and fonts'], need='brand', price=350),
     dict(id='flyer', name='Flyers & social', who="One flyer, one poster, one invitation, or a set of posts for your page.",
-         includes=['Flyer, poster, invitation or a set of social graphics', 'Two rounds of changes', 'Print-ready and screen-ready files', 'Templates, if you will post often'], need='design', price=None),
+         includes=['Flyer, poster, invitation or a set of social graphics', 'Two rounds of changes', 'Print-ready and screen-ready files', 'Templates, if you will post often'], need='design', price=75),
     dict(id='brand', name='Brand identity', who="You want everything you make to look like it belongs together.",
-         includes=['Logo and variations', 'Colours, fonts and how to use them', 'Brand guidelines you can hand to anyone', 'Business card and social profile designs'], need='brand', price=None, featured=True),
+         includes=['Logo and variations', 'Colours, fonts and how to use them', 'Brand guidelines you can hand to anyone', 'Business card and social profile designs'], need='brand', price=1200, featured=True),
     dict(id='web', name='Website', who="You need a website or landing page people can actually understand.",
-         includes=['Page design that works on phones', 'Layout for your words and images', 'A contact form that reaches you', 'Files ready to publish'], need='website', price=None),
+         includes=['Page design that works on phones', 'Layout for your words and images', 'A contact form that reaches you', 'Files ready to publish'], need='website', price=1500),
     dict(id='big', name='Billboards & vehicles', who="Something that has to be read from across the road.",
-         includes=['Billboard, banner, sign or vehicle artwork', "Made to your supplier's sizes and specs", 'Print-ready files', 'Help finding the right printer or installer'], need='ads', price=None),
+         includes=['Billboard, banner, sign or vehicle artwork', "Made to your supplier's sizes and specs", 'Print-ready files', 'Help finding the right printer or installer'], need='ads', price=300),
 ]
 
 # ── FAQ (answers match the Terms page) ───────────────────────────────────────────────────────────────
