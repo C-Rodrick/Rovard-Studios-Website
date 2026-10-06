@@ -384,6 +384,8 @@ PACKAGES = [
          includes=['Logo and brand guidelines', 'A website of several pages', 'Business card and social profile designs', 'Two rounds of changes on each piece'], need='brand', price=3000),
     dict(id='launch', name='Full launch', who="A launch or a rebrand where everything needs to look right at once.",
          includes=['Brand identity and guidelines', 'Website design', 'Launch graphics for social media and print', 'A presentation or pitch deck'], need='brand', price=5000),
+    dict(id='scale', name='Complete brand & digital', who="A serious launch or rebuild where the whole look, site and rollout come together.",
+         includes=['Full brand identity and guidelines', 'A larger website with custom page designs', 'Packaging, print and vehicle or signage artwork as needed', 'Launch campaign graphics and a short promo video', 'Priority scheduling and three rounds of changes'], need='brand', price=10000),
     dict(id='custom', name='Something else', who="A bigger project, a mix of things, or something not listed here.",
          includes=['Packaging, motion, books, vehicles and more', 'A plan built around your idea', 'A written quote before work starts'], need='unsure', price=None),
 ]
