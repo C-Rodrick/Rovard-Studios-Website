@@ -57,3 +57,12 @@ LEGAL PAGES (tools/legal.py) AND FRENCH (fr/)
   and the dictionary tools/fr/dict.json. Text with no entry stays English and is listed in tools/fr-missing.json (the build prints the count).
 - To change French wording: edit tools/fr_parts/p*.json (index -> French; keys in keys.json), run `python tools/fr_merge.py`, then build.
   New English copy needs new entries: add them to a new tools/fr/extra.json as {"English text": "French text"}.
+
+SETTINGS YOU NEED TO FILL IN (tools/content.py, SITE)
+- whatsapp: digits with country code (e.g. 15145550123). Empty = no WhatsApp button. The message text is pre-filled in English and French.
+- booking: full URL of your booking page (Calendly, Cal.com). Empty = no "Book a call" card on the start page.
+- plausible: your domain as registered in Plausible. Empty = no analytics script. When set, the Privacy and Cookie pages add one sentence about it.
+PRICING (tools/content.py, PACKAGES): set "price" to a number (USD) to show "From $X" instead of "Tell us your budget".
+FAQ (tools/content.py, FAQ) and service pages (tools/landing.py) feed the FAQ blocks and /services/<name>/ pages.
+BLOG: tools/blogdata.py (first six) and tools/blog_more.py (six more, with French side by side). Change the date in each post.
+AUDIT: python tools/audit_site.py (preview server running) checks speed and accessibility.

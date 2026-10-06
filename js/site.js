@@ -272,7 +272,7 @@
 
   /* ── Showreel: still frame for reduced motion, pause when off screen ── */
   $$('[data-reel]').forEach(v => {
-    if (reduce) { v.removeAttribute('autoplay'); v.pause(); return; }
+    if (reduce) return;   // still poster only
     if ('IntersectionObserver' in window) new IntersectionObserver(es => es.forEach(e => (e.isIntersecting ? v.play().catch(() => {}) : v.pause())), { threshold: .25 }).observe(v);
   });
 })();
