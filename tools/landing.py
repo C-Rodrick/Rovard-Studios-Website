@@ -3,8 +3,8 @@
 LANDING = {
     'brand': dict(
         slug='logo-design', title='Logo design and brand identity', desc="Logo design, brand identity and brand guidelines for new businesses, organizations and personal brands.",
-        h1='A logo and a look that feels like <span class="grad">a real brand</span>',
-        lead="Starting something, or giving it a fresh start? We design the logo, then the colours, lettering and rules that make everything you make look like it belongs together.",
+        h1='People judge you in seconds. <span class="grad">Make them count.</span>',
+        lead="People judge you in seconds, and your logo is usually the first thing they see. We design it, then the colours, lettering and rules that make everything you make look like it belongs together.",
         who=["New businesses that need a clean mark to begin with", "Established companies that want to look the part again", "Individuals building a personal brand"],
         get=["A logo designed around your idea and your audience", "Colours and fonts that work together", "Files for print and screen", "Brand guidelines you can hand to anyone who works with you"],
         faq=[("What's the difference between a logo and a brand identity?", "A logo is the mark that identifies you. A brand identity adds the colours, lettering and rules for using them, so everything you make looks consistent."),
@@ -13,7 +13,7 @@ LANDING = {
     'design': dict(
         slug='flyer-design', title='Flyer, poster and invitation design', desc="Flyers, posters, invitations, brochures and event graphics, ready for print or screen.",
         h1='Need a flyer? <span class="grad">We\'ve got you.</span>',
-        lead="One flyer, one poster, one invitation is a real job and we're glad to do it. We design it so people notice it, read it and know what to do next.",
+        lead="A flyer has one job: get the right person to take one action. We design it so people notice it, read it and know what to do next.",
         who=["Events, openings and special offers", "Churches, ministries and community groups", "Businesses that need a menu, brochure or certificate"],
         get=["A design built around one clear message", "The right size and shape for where it will be used", "Print-ready and screen-ready files", "Two rounds of changes"],
         faq=[("What do I need to send?", "The words that must appear (dates, address, phone, website), your logo if you have one, and any photos you want used."),
@@ -31,7 +31,7 @@ LANDING = {
     'website': dict(
         slug='website-design', title='Website and landing page design', desc="Website and landing page design that people can actually understand, built to work well on phones.",
         h1='A website people can <span class="grad">actually understand</span>',
-        lead="We design pages that explain what you do in the first scroll and make the next step obvious, and we build them to work on phones as well as computers.",
+        lead="If people can't tell what you do in the first scroll, they leave. We design pages that explain it fast and make the next step obvious, and we build them for phones as well as computers.",
         who=["Businesses and organizations that need a clear online home", "People launching a product or an event", "Personal brands and portfolios"],
         get=["Page design with a clear structure", "A layout for your words and images", "A contact form that reaches you", "Files ready to publish"],
         faq=[("How many pages can I have?", "As many as you need. A simple landing page or a full website are both fine. We'll agree the pages in your quote."),

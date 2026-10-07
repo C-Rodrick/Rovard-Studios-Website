@@ -194,12 +194,12 @@ def faces(base):
 CTA_POOL = ['linkrithm', 'green-blueprint', 'design-eigen', 'jojo-foods', 'bitefort', 'shorteeme']
 
 
-def close_cta(base, headline="Have an idea? Let's make it <span class=\"grad\">real</span>.", sub="Tell us what you're working on. A few words is plenty.", href=None, label='Start a Project'):
+def close_cta(base, headline="Ready to make it <span class=\"grad\">real?</span>", sub="Tell us what you're working on. A few words is enough to start.", href=None, label='Start a Project'):
     slug = CTA_POOL[len(headline) % len(CTA_POOL)]
     return f'''<section class="sec close"><div class="wrap close-grid">
   <div class="close-l"><h2 class="big" data-r="words">{headline}</h2><p class="sub" data-r data-d=".25">{sub}</p>
   <div class="cta-row" data-r data-d=".35">{pill(label, href or base + 'start/')}{pill('See our work', base + 'work/', 'pill-outline pill-sm', ico=False)}</div>
-  <p class="close-note" data-r="fade" data-d=".5">*A few words is plenty. Even one flyer is a real project.</p></div>
+  <p class="close-note" data-r="fade" data-d=".5">*No brief needed. Start with one sentence.</p></div>
   <div class="close-r" data-r="fade" data-d=".2"><div class="wc-media reel"><video src="{base}video/showreel.mp4" poster="{base}video/showreel-poster.webp" muted loop playsinline preload="none" aria-label="A short reel of recent ROVARD STUDIOS work" data-reel></video></div></div>
 </div></section>'''
 
@@ -228,10 +228,10 @@ def home():
     <p class="hero-we" data-rotator='{esc(json.dumps(rot, ensure_ascii=False))}' data-r data-intro data-d=".45">
       <span class="sr-only">We design {all_things} for your ideas.</span>
       <span aria-hidden="true">We <span class="rv">{f0['verb']}</span> <b class="rt grad">{f0['thing']}</b> for your <span class="rf">{f0['for']}</span>.</span></p>
-    <p class="lead" data-r data-intro data-d=".55">{BRAND} designs logos, flyers, websites, billboards, vehicle branding and everything in between, for people, businesses, churches, organizations and events.</p>
+    <p class="lead" data-r data-intro data-d=".55">{BRAND} designs logos, flyers, websites, billboards, vehicle branding and everything in between. People decide what they think of you in seconds. We make sure that first look says the right thing.</p>
     <div class="cta-row" data-r data-intro data-d=".65">{pill('Start a project', 'start/', 'pill-lg')}{pill('See our work', 'work/', 'pill-outline pill-sm', ico=False)}</div>
     <p class="hero-proof" data-r="fade" data-intro data-d=".75"><b>7+ years</b> of experience <i></i> <b>200+ projects</b> completed</p>
-    <p class="hero-note" data-r="fade" data-intro data-d=".8">Need just one thing? That's fine. One flyer is a real project.</p>
+    <p class="hero-note" data-r="fade" data-intro data-d=".8">Need just one thing? Start there. A small job done well is how trust gets built.</p>
   </div>
   <div class="hero-reel" aria-hidden="true">{reel_row(reel_a)}{reel_row(reel_b, 'rev')}</div>
 </section>'''
@@ -259,8 +259,8 @@ def home():
     need_rows = ''.join(
         f'<a class="row{" hl" if k == "unsure" else ""}" href="start/?need={k}"><span>{esc(t)}</span><i class="arrow-c">{ARROW}</i></a>' for k, t in NEEDS)
     need = f'''<section class="sec" id="need"><div class="wrap">
-  <div class="sh"><div><p class="eyebrow" data-r="fade">Start here</p><h2 class="h2" data-r="words">What do you <span class="grad">need</span> help with?</h2></div>
-  <div class="sh-r"><p class="sub" data-r>Pick the closest one. You can add more, or change your mind, on the next screen.</p></div></div>
+  <div class="sh"><div><p class="eyebrow" data-r="fade">Start here</p><h2 class="h2" data-r="words">What are you <span class="grad">trying to make?</span></h2></div>
+  <div class="sh-r"><p class="sub" data-r>Pick the closest one. Can't decide? Pick anything. You can change it on the next screen.</p></div></div>
   <div class="rows" data-stagger="45">{need_rows}</div>
   <div class="cta-row" data-r>{pill('See everything we design', 'services/', 'pill-ghost')}</div>
 </div></section>'''
@@ -272,8 +272,8 @@ def home():
   <span class="pc-top"><span class="tagc">{esc(KIND[p['kind']])}</span><i class="arrow-c">{ARROW}</i></span>
   <span class="pc-body"><h3>{esc(p['title'])}</h3><p>{esc(p['plain'])}</p></span></a>'''
     work = f'''<section class="sec" id="work" style="padding-top:0"><div class="wrap">
-  <div class="sh"><div><p class="eyebrow" data-r="fade">Selected work</p><h2 class="h2" data-r="words">Recent <span class="grad">work</span></h2></div>
-  <div class="sh-r"><p class="sub" data-r>A selection of logos, brands, websites, graphics, packaging and films. Drag to explore.</p></div></div></div>
+  <div class="sh"><div><p class="eyebrow" data-r="fade">Selected work</p><h2 class="h2" data-r="words">Don't take our word for it. <span class="grad">Look at the work.</span></h2></div>
+  <div class="sh-r"><p class="sub" data-r>Logos, brands, websites, graphics, packaging and films. Drag to explore, and ask yourself: could this be my business?</p></div></div></div>
   <div class="car" data-car data-r><div class="car-track">{cards}</div></div>
   <div class="wrap car-ctl" data-r><button class="car-btn" type="button" data-prev aria-label="Previous projects">{LEFT}</button><div class="car-bar"><i></i></div><button class="car-btn" type="button" data-next aria-label="Next projects">{RIGHT}</button>{pill('See all work', 'work/', 'pill-ghost')}</div>
 </section>'''
@@ -286,7 +286,7 @@ def home():
   <div data-r data-d=".3">{pill(esc(w['cta']), w['href'])}</div>
   <div class="way-img">{ref_img(w['img'], w['img'][0], base, sizes='(min-width: 900px) 580px, 94vw', want=1100, extra=' data-par=".05"')}</div></div>'''
     two = f'''<section class="sec" id="ways" style="padding-top:0"><div class="wrap">
-  <div class="sh"><div><p class="eyebrow" data-r="fade">Where to begin</p><h2 class="h2" data-r="words"><span class="grad">Starting</span> or growing, we've got you</h2></div></div>
+  <div class="sh"><div><p class="eyebrow" data-r="fade">Where to begin</p><h2 class="h2" data-r="words">Where are you right now: <span class="grad">starting or growing?</span></h2></div></div>
   <div class="two" data-r>{ways}</div></div></section>'''
 
     stories = ''
@@ -301,7 +301,7 @@ def home():
     <figure class="s-b"><span class="s-n">3</span>{ref_img(b, b[2], base, sizes='(min-width: 900px) 460px, 46vw', want=560)}<figcaption>{esc(b[2])}</figcaption></figure></div></article>'''
     story = f'''<section class="sec" id="stories" style="padding-top:0"><div class="wrap">
   <div class="sh"><div><p class="eyebrow" data-r="fade">Idea → design → real world</p><h2 class="h2" data-r="words">From an idea to <span class="grad">the real world</span></h2></div>
-  <div class="sh-r"><p class="sub" data-r>A design isn't finished until you can see where it goes. Here's what a few projects became.</p></div></div>
+  <div class="sh-r"><p class="sub" data-r>A logo on a screen isn't the job. The job is what happens when it meets the real world. Here's what a few projects became.</p></div></div>
   {stories}</div></section>'''
 
     def acard(i):
@@ -317,8 +317,8 @@ def home():
     r2 = [person(6), acard(4), person(5), acard(5), person(9), person(2), acard(6), person(7), acard(7)]
     row = lambda items, cls='': f'<div class="cards-row {cls}">{"".join(items)}{"".join(items)}</div>'
     who = f'''<section class="sec" id="who" style="padding-top:0"><div class="wrap">
-  <div class="sh"><div><p class="eyebrow" data-r="fade">Who we work with</p><h2 class="h2" data-r="words">Big idea or small one, <span class="grad">we're glad you're here</span></h2></div>
-  <div class="sh-r"><p class="sub" data-r>You don't need to know design words. You just need something you want people to see.</p></div></div></div>
+  <div class="sh"><div><p class="eyebrow" data-r="fade">Who we work with</p><h2 class="h2" data-r="words">Big idea or small one, <span class="grad">start where you are.</span></h2></div>
+  <div class="sh-r"><p class="sub" data-r>You don't need design language. You need something worth showing people, and a reason for them to care.</p></div></div></div>
   <div class="cards-wrap" data-r aria-label="Who we work with">{row(r1)}{row(r2, 'rev')}</div>
   <p class="small muted illus" data-r>{PEOPLE_NOTE}</p></section>'''
 
@@ -347,14 +347,14 @@ def home():
              (len(SERVICES), '', 'kinds of work you can ask for'), (3, '', 'short steps to get started')]
     stat_html = ''.join(f'<div class="stat"><b data-count="{n}" data-suffix="{s}">{n}{s}</b><span>{esc(l)}</span></div>' for n, s, l in stats)
     why = f'''<section class="sec" id="why" style="padding-top:0"><div class="wrap">
-  <div class="sh"><div><p class="eyebrow" data-r="fade">Why {BRAND}</p><h2 class="h2" data-r="words">Easy to talk to. <span class="grad">Serious about the work.</span></h2></div></div>
+  <div class="sh"><div><p class="eyebrow" data-r="fade">Why {BRAND}</p><h2 class="h2" data-r="words">Easy to talk to. <span class="grad">Serious about the result.</span></h2></div></div>
   <div class="acc" data-r>{pans}</div><div class="stats" data-r>{stat_html}</div></div></section>'''
 
     lf = ''.join(f'<figure class="lf-{i}" data-r data-d="{i * .1:.1f}">{ref_img(r, r[2], base, sizes="(min-width: 900px) 600px, 94vw")}<figcaption>{esc(r[2])}</figcaption></figure>' for i, r in enumerate(LARGE_FORMAT))
     large = f'''<section class="sec dark" id="large-format"><div class="wrap large-grid">
   <div><p class="eyebrow" data-r="fade">Billboards, banners and vehicles</p>
     <h2 class="big" data-r="words">Your vehicle is already moving around the city. <span class="grad">Make it work for you.</span></h2>
-    <p class="sub" data-r data-d=".2" style="margin-top:24px">Not a small logo on a door. A design that works at the size of a billboard, a banner or a whole van, so people notice it and remember it.</p>
+    <p class="sub" data-r data-d=".2" style="margin-top:24px">Think about it: your vehicle advertises you all day, whether you designed it or not. So make it count. We design at billboard, banner and van scale, so people notice you and remember you.</p>
     <div class="cta-row" data-r data-d=".3">{pill('Get my vehicle branded', 'start/?need=vehicle', 'pill-yellow pill-lg')}{pill('Billboards and banners', 'services/#ads', 'pill-line pill-lg')}</div>
     <p class="small muted" data-r data-d=".4" style="margin-top:20px">We design it and prepare the files. Printing and fitting are done by a printer or installer.</p></div>
   <div class="collage">{lf}<div class="soon lf-soon" data-r data-d=".3"><b>Vehicles</b><span>Full wraps for cars, vans and delivery vehicles. Mockups coming soon.</span></div></div>
@@ -362,7 +362,7 @@ def home():
 
     steps = ''.join(f'<li><span class="n grad">{i + 1:02d}</span><h3>{esc(t)}</h3><p>{esc(d)}</p></li>' for i, (t, d) in enumerate(STEPS))
     how = f'''<section class="sec" id="how"><div class="wrap">
-  <div class="sh"><div><p class="eyebrow" data-r="fade">How it works</p><h2 class="h2" data-r="words">Simple, <span class="grad">from the first message</span></h2></div>
+  <div class="sh"><div><p class="eyebrow" data-r="fade">How it works</p><h2 class="h2" data-r="words">No mystery. <span class="grad">Here's how it works.</span></h2></div>
   <div class="sh-r" data-r>{pill('Start a project', 'start/')}</div></div>
   <ol class="steps" data-stagger="90">{steps}</ol></div></section>'''
 
@@ -383,9 +383,9 @@ def services():
     jump = ''.join(f'<a class="pf" href="#{s["id"]}">{esc(s["title"])}</a>' for s in SERVICES)
     intro = f'''<section class="ph"><div class="wrap"><p class="eyebrow" data-r="fade" data-intro>What we can design for you</p>
   <h1 class="h1" data-r="words" data-intro>Whatever you need designed, <span class="grad">just ask.</span></h1>
-  <p class="lead" data-r data-intro data-d=".3">Big project or small, brand new or a refresh. If it needs to look good, it's something we can talk about. Jump to what you need:</p>
+  <p class="lead" data-r data-intro data-d=".3">Big project or small, brand new or a refresh. If it needs to look right, we can talk about it. Jump to what you need:</p>
   <div class="pills" data-r data-intro data-d=".4">{jump}</div>
-  <div class="unsure" data-r><div><h2 class="h3">Not sure what you need?</h2><p>That's a very normal place to start. Tell us your idea in your own words and we'll work out the rest together.</p></div>
+  <div class="unsure" data-r><div><h2 class="h3">Not sure what you need?</h2><p>Good. That's where the best conversations start. Tell us your idea in your own words and we'll figure out the rest together.</p></div>
   {pill('I have an idea', base + 'start/?need=unsure', 'pill-yellow pill-lg')}</div></div></section>'''
     groups = []
     for n, s in enumerate(SERVICES):
@@ -531,10 +531,10 @@ def about():
     steps = ''.join(f'<li><span class="n grad">{i + 1:02d}</span><h3>{esc(t)}</h3><p>{esc(d)}</p></li>' for i, (t, d) in enumerate(STEPS))
     why = ''.join(f'<li><h3>{esc(t)}</h3><p>{esc(d)}</p></li>' for t, d in WHY)
     body = f'''<section class="ph"><div class="wrap"><p class="eyebrow" data-r="fade" data-intro>About {BRAND}</p>
-  <h1 class="h1" data-r="words" data-intro>We help ideas look like <span class="grad">they deserve to be seen.</span></h1></div></section>
+  <h1 class="h1" data-r="words" data-intro>Your idea deserves to be <span class="grad">seen properly.</span></h1></div></section>
 <section class="sec" style="padding-bottom:70px"><div class="wrap about-grid"><h2 class="h3" data-r>Who we are</h2>
-  <div class="prose" data-r data-d=".1"><p>{BRAND} is a design studio. We help people turn their ideas into things that look professional, memorable and ready to be seen: logos, flyers, social media graphics, websites, campaigns, vehicle branding and more.</p>
-  <p>We work with individuals, small businesses, churches, organizations and companies. We're based in Canada and work with people around the world. Some of what we do is big and some of it is one flyer. We treat them with the same care.</p></div></div></section>
+  <div class="prose" data-r data-d=".1"><p>{BRAND} is a design studio. Our job is simple: help people put their ideas out there in a way that looks professional, feels memorable and does its job. Logos, flyers, social media graphics, websites, campaigns, vehicle branding and more.</p>
+  <p>We work with individuals, small businesses, churches, organizations and companies. We're based in Canada and work with people around the world. Some projects are big and some are one flyer. Same care, same questions: who is this for, and what should it do?</p></div></div></section>
 <section class="sec" style="padding-top:0"><div class="wrap"><div class="stats" data-r><div class="stat"><b data-count="7" data-suffix="+">7+</b><span>years of experience</span></div><div class="stat"><b data-count="200" data-suffix="+">200+</b><span>projects completed</span></div><div class="stat"><b data-count="{len(SERVICES)}" data-suffix="">{len(SERVICES)}</b><span>kinds of work you can ask for</span></div><div class="stat"><b data-count="3" data-suffix="">3</b><span>short steps to get started</span></div></div></div></section>
 <section class="sec dark"><div class="wrap vm"><div data-r><p class="eyebrow">Our vision</p><p class="statement">A world where anyone with a good idea can put it out there looking <span class="grad">as good as it deserves.</span></p></div>
   <div data-r data-d=".15"><p class="eyebrow">Our mission</p><p class="statement sm">To make professional design easy to ask for, by bringing together creativity, careful design, technology and honest collaboration, and by giving every request, big or small, the same care.</p></div></div></section>
@@ -613,14 +613,14 @@ def legal():
 
 
 # ── FAQ + PRICING ─────────────────────────────────────────────────────────
-def faq_section(base, items=None, heading='Questions, <span class="grad">answered</span>', eyebrow='FAQ'):
+def faq_section(base, items=None, heading='Questions you\'re <span class="grad">probably asking</span>', eyebrow='FAQ'):
     items = items or FAQ
     qa = ''.join(f'<details class="faq-i"><summary><span>{esc(q)}</span><i class="faq-ico"></i></summary><p>{esc(a)}</p></details>' for q, a in items)
     ld = json.dumps({'@context': 'https://schema.org', '@type': 'FAQPage', 'mainEntity': [
         {'@type': 'Question', 'name': q, 'acceptedAnswer': {'@type': 'Answer', 'text': a}} for q, a in items]}, ensure_ascii=False)
     return f"""<section class="sec faq-sec" id="faq"><div class="wrap faq-grid">
   <div class="faq-head"><p class="eyebrow" data-r="fade">{eyebrow}</p><h2 class="h2" data-r="words">{heading}</h2>
-    <p class="sub" data-r data-d=".2">Can't find yours? Ask us. A few words is plenty.</p>{pill('Ask us', base + 'start/', 'pill-outline pill-sm', ico=False)}</div>
+    <p class="sub" data-r data-d=".2">Not here? Ask us. A few words is plenty.</p>{pill('Ask us', base + 'start/', 'pill-outline pill-sm', ico=False)}</div>
   <div class="faq-list" data-r>{qa}</div></div>
 <script type="application/ld+json">{ld}</script></section>"""
 
@@ -639,9 +639,9 @@ def pricing():
   <p class="pk-price">{price}</p>{btn}</article>"""
     body = f"""<section class="ph"><div class="wrap"><p class="eyebrow" data-r="fade" data-intro>Pricing</p>
   <h1 class="h1" data-r="words" data-intro>Clear, <span class="grad">no surprises</span></h1>
-  <p class="lead" data-r data-intro data-d=".3">Every project gets a written quote before any work starts. Here is what each kind of project usually includes, so you know what to ask for.</p></div></section>
+  <p class="lead" data-r data-intro data-d=".3">Price should come from value, so every project gets a written quote before any work starts. Here's what each kind of project usually includes, so you know what to ask for.</p></div></section>
 <section class="wrap pk-grid">{cards}</section>
-<section class="wrap pk-note" data-r><p>Prices are starting points in US dollars, before taxes. Not sure which fits? Pick a budget range on the project form and we'll tell you honestly what it can cover. Final prices, timelines and what's included are always in your written quote.</p></section>
+<section class="wrap pk-note" data-r><p>These are starting points, in US dollars, before taxes. Not sure which fits? Choose a budget range on the form and we'll tell you honestly what it can cover. Your written quote has the final price, the timeline and exactly what's included.</p></section>
 {faq_section(base)}
 {close_cta(base, "Ready when <span class=\"grad\">you are.</span>")}"""
     page('pricing/', 'pricing', body, body_class='pricing')
@@ -664,7 +664,7 @@ def start():
   <aside class="talk2-side">
     <p class="nrf" data-r data-intro>Not sure how to put it? <b>Messy is fine.</b></p>
     <h1 class="big" data-r="words" data-intro data-d=".1">Tell us <span class="grad">what you need</span></h1>
-    <p class="talk-sub" data-r data-intro data-d=".3">Share what you're working on here, or send us an email at <a href="mailto:{SITE['email']}">{SITE['email']}</a>. A few words is plenty.</p>
+    <p class="talk-sub" data-r data-intro data-d=".3">Share what you're working on, or email us at <a href="mailto:{SITE['email']}">{SITE['email']}</a>. Tell us who it's for and what it needs to do. If you don't know yet, say that.</p>
     <div class="alt" data-r data-d=".35"><a class="alt-card" href="mailto:{SITE['email']}"><small>Email us</small><b>{SITE['email']}</b><i class="arrow-c">{ARROW}</i></a>{extra_alt}
       <a class="alt-card" href="{base}work/"><small>Not ready yet?</small><b>See what we've made</b><i class="arrow-c">{ARROW}</i></a></div>
     <h2 class="side-h" data-r>How it works</h2>

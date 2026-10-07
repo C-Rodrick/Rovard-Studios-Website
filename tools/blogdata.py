@@ -5,7 +5,7 @@ POSTS = [
          title="How to brief a designer when you don't know design words",
          excerpt="You don't need to say 'kerning' or 'moodboard'. Here's what actually helps a designer help you.",
          body=[
-             ('p', "Most people who come to a designer worry they'll say the wrong thing. They won't. A good brief isn't about design vocabulary. It's about telling us what the thing is for and who it's meant to reach."),
+             ('p', "Here's what most people get wrong about briefing a designer: they think they need design words. You don't. A good brief answers two questions: what is this for, and who is it meant to reach?"),
              ('h', "Start with the job, not the look"),
              ('p', "Before colours and fonts, answer one question: what should happen after someone sees this? A flyer might need people to show up on Saturday. A logo might need to make a new business feel trustworthy. When we know the job, the look gets much easier."),
              ('h', "Tell us who it's for"),
@@ -21,7 +21,7 @@ POSTS = [
          title="Logo or full brand identity: what do you actually need?",
          excerpt="A logo is one piece of a brand. Here's how to tell whether you need just the logo or the whole system.",
          body=[
-             ('p', "People use 'logo' and 'brand' as if they mean the same thing. They don't, and knowing the difference can save you money and time."),
+             ('p', "A logo is not a brand. People mix them up all the time, and the confusion costs money. Let's clear it up."),
              ('h', "What a logo is"),
              ('p', "A logo is the mark that identifies you: a symbol, a wordmark, or both. It's the thing on your sign, your invoice and your social media profile picture."),
              ('h', "What a brand identity adds"),
@@ -37,7 +37,7 @@ POSTS = [
          title="What every flyer needs before it goes out",
          excerpt="A great-looking flyer that leaves out the date is just a nice picture. A quick checklist.",
          body=[
-             ('p', "A flyer has one job: get the right person to do one thing. Most flyers that don't work are missing something simple."),
+             ('p', "A flyer has one job: get the right person to take one action. If yours isn't working, ask what that action is. Most of the time, something simple is missing."),
              ('h', "The checklist"),
              ('ul', ["What it is, in a few words, large enough to read from a distance", "When and where, written out in full", "One clear thing you want people to do (call, scan, come, buy)", "Contact details that actually work: check every number and spelling", "Your logo, so people remember who sent it"]),
              ('h', "Less is louder"),
@@ -51,7 +51,7 @@ POSTS = [
          title="What to send us before we start your logo",
          excerpt="Five small things that make the first round of your logo much closer to what you imagined.",
          body=[
-             ('p', "The best logos start with a good conversation. These are the things that help us most. You don't need all of them, and 'I'm not sure' is a perfectly good answer to any of them."),
+             ('p', "Good logos start with good questions, not good software. These are the things that help us most. You don't need all of them. 'I'm not sure' is a fine answer to any of them."),
              ('ul', ["The name, exactly as it should be written, and any tagline", "What you do and who you do it for, in a sentence or two", "Three words you'd like people to feel when they see it (trusted, playful, premium...)", "Logos you admire and logos you'd never want to resemble", "Where it will appear most: a sign, an app icon, packaging, a uniform"]),
              ('h', "Why the 'where' matters"),
              ('p', "A logo that looks perfect on a big screen can fall apart as a tiny profile picture. Knowing where yours will live most often tells us how simple it needs to be."),
@@ -62,7 +62,7 @@ POSTS = [
          title="Keeping your brand consistent across social media",
          excerpt="When your posts all look like they came from the same place, people remember you. Simple habits that help.",
          body=[
-             ('p', "People rarely notice consistency. They just notice when it's missing. If your profile picture, posts and flyers all look like they came from different businesses, trust takes longer to build."),
+             ('p', "Nobody praises consistency. They just notice when it's missing. If your profile picture, your posts and your flyers look like they came from three different businesses, trust takes longer to build."),
              ('h', "Pick a small set and stick to it"),
              ('ul', ["Two or three brand colours, with the exact codes written down", "One or two fonts for headlines and text", "One way of placing your logo on every post", "A consistent style for photos (bright, dark, with people, without)"]),
              ('h', "Use templates"),
@@ -76,7 +76,7 @@ POSTS = [
          title="Packaging that gets picked up: three things to get right",
          excerpt="On a crowded shelf, you have a second or two. Where to spend your design effort.",
          body=[
-             ('p', "Whether it's a bag, a box or a label, packaging is usually seen quickly and from a distance. That changes what matters."),
+             ('p', "Whether it's a bag, a box or a label, people see packaging quickly and from a distance. So what matters changes. Here's where to put your effort."),
              ('h', "1. A name people can read at arm's length"),
              ('p', "Your brand name and what's inside should be readable at a glance. Everything else is secondary. If someone has to hunt for it, they'll move on."),
              ('h', "2. One colour idea"),
