@@ -98,6 +98,7 @@ def head(title, desc, path, base):
 {analytics}<link rel="preload" href="{base}css/fonts/Syne.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="{base}css/fonts/SpaceGrotesk.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{base}css/site.css?v={VERSION}">
+<link rel="stylesheet" href="{base}css/theme.css?v={VERSION}">
 <script>document.documentElement.classList.add('js')</script>
 <script type="application/ld+json">{ld}</script>
 </head>'''
@@ -133,12 +134,13 @@ def footer(base, path=''):
     where = {ask: g['id'] for g in SERVICES for ask in g['asks']}
     svc = [f'<a href="{base}services/{LANDING[where[a]]["slug"]}/">{esc(a)}</a>' for a in pick if a in where]
     return f'''<footer class="site-footer">
+  <div class="wrap foot-top"><h2 class="foot-big">Let's make it <span class="grad">look right.</span></h2>
+    <div class="foot-top-r"><a class="foot-mail" href="mailto:{SITE['email']}">{SITE['email']}</a>{pill('Start a project', base + 'start/')}</div></div>
   <div class="wrap foot">
     <div class="foot-brand">
-      <a href="{base or './'}" aria-label="{BRAND} home"><img src="{base}{LOGO_BLUE}" alt="{BRAND}" width="150" height="57" loading="lazy"></a>
+      <a href="{base or './'}" aria-label="{BRAND} home"><img src="{base}{LOGO_WHITE}" alt="{BRAND}" width="150" height="57" loading="lazy"></a>
       <p>Whatever you're putting out there, we'll make it look right.</p>
-      <a class="pill pill-outline" href="{base}start/"><span>Say hello</span></a>
-      <p class="foot-contact"><a href="mailto:{SITE['email']}">{SITE['email']}</a><br>{SITE['location']}</p>
+      <p class="foot-contact">{SITE['location']}</p>
     </div>
     <nav class="foot-col" aria-label="Company"><h2>Company</h2>
       <a href="{base or './'}">Home</a><a href="{base}services/">Services</a><a href="{base}work/">Our work</a><a href="{base}pricing/">Pricing</a><a href="{base}blog/">Blog</a><a href="{base}about/">About</a><a href="{base}start/">Start a project</a></nav>
@@ -196,7 +198,7 @@ def close_cta(base, headline="Have an idea? Let's make it <span class=\"grad\">r
     slug = CTA_POOL[len(headline) % len(CTA_POOL)]
     return f'''<section class="sec close"><div class="wrap close-grid">
   <div class="close-l"><h2 class="big" data-r="words">{headline}</h2><p class="sub" data-r data-d=".25">{sub}</p>
-  <div class="cta-row" data-r data-d=".35"><a class="pill pill-talk" href="{href or base + 'start/'}"><span>{label}</span><span class="thumbs" aria-hidden="true">{faces(base)}</span></a>{pill('See our work', base + 'work/', 'pill-outline pill-sm', ico=False)}</div>
+  <div class="cta-row" data-r data-d=".35">{pill(label, href or base + 'start/')}{pill('See our work', base + 'work/', 'pill-outline pill-sm', ico=False)}</div>
   <p class="close-note" data-r="fade" data-d=".5">*A few words is plenty. Even one flyer is a real project.</p></div>
   <div class="close-r" data-r="fade" data-d=".2"><div class="wc-media reel"><video src="{base}video/showreel.mp4" poster="{base}video/showreel-poster.webp" muted loop playsinline preload="none" aria-label="A short reel of recent ROVARD STUDIOS work" data-reel></video></div></div>
 </div></section>'''
@@ -209,30 +211,40 @@ def home():
     f0 = rot[0]
     all_things = ', '.join(w[1] for w in WEDO)
     thumbs = faces(base)
-    hero = f'''<section class="hero" aria-labelledby="hero-title">
-  <div class="hero-l">
+    def rcard(slug):
+        p = BY[slug]
+        return f'<a class="rcard" href="work/{slug}/" tabindex="-1" aria-label="{esc(p["title"])}">{img(slug, 0, p["title"], base, sizes="300px", want=560)}<span>{esc(p["title"])}</span></a>'
+    reel_a = [x for x in FEATURED]
+    reel_b = [p['slug'] for p in PROJECTS if p['slug'] not in FEATURED and p['kind'] != 'motion'][:10]
+    reel_b = reel_b + [x for x in reversed(FEATURED)][:max(0, 8 - len(reel_b))]
+    def reel_row(items, cls=''):
+        one = ''.join(rcard(x) for x in items)
+        two = one.replace('<a class="rcard"', '<a aria-hidden="true" class="rcard"')
+        return f'<div class="reel-row {cls}">{one}{two}</div>'
+    hero = f'''<section class="hero2" aria-labelledby="hero-title">
+  <div class="wrap hero2-in">
     <p class="eyebrow" data-r="fade" data-intro>{BRAND}</p>
     <h1 class="h1" id="hero-title" data-r="words" data-intro>Whatever you're putting out there, we'll make it <span class="grad">look right.</span></h1>
-  </div>
-  <div class="hero-r">
     <p class="hero-we" data-rotator='{esc(json.dumps(rot, ensure_ascii=False))}' data-r data-intro data-d=".45">
       <span class="sr-only">We design {all_things} for your ideas.</span>
       <span aria-hidden="true">We <span class="rv">{f0['verb']}</span> <b class="rt grad">{f0['thing']}</b> for your <span class="rf">{f0['for']}</span>.</span></p>
     <p class="lead" data-r data-intro data-d=".55">{BRAND} designs logos, flyers, websites, billboards, vehicle branding and everything in between, for people, businesses, churches, organizations and events.</p>
-    <div class="hero-cta" data-r data-intro data-d=".65"><a class="pill pill-talk" href="start/"><span>Let's talk</span><span class="thumbs" aria-hidden="true">{thumbs}</span></a>
-      <span class="hand" aria-hidden="true"><svg viewBox="0 0 70 40" width="56" height="32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M66 30C48 36 24 30 8 12"/><path d="M7 21L7 11L17 13"/></svg><span>Tell us what you're making</span></span></div>
+    <div class="cta-row" data-r data-intro data-d=".65">{pill('Start a project', 'start/', 'pill-lg')}{pill('See our work', 'work/', 'pill-outline pill-sm', ico=False)}</div>
     <p class="hero-proof" data-r="fade" data-intro data-d=".75"><b>7+ years</b> of experience <i></i> <b>200+ projects</b> completed</p>
     <p class="hero-note" data-r="fade" data-intro data-d=".8">Need just one thing? That's fine. One flyer is a real project.</p>
   </div>
+  <div class="hero-reel" aria-hidden="true">{reel_row(reel_a)}{reel_row(reel_b, 'rev')}</div>
 </section>'''
 
     def logo_item(f, name, h, first):
         w, hh = Image.open(os.path.join(ROOT, 'img', 'logos', f + '-c.png')).size
-        return (f'<span class="lg-item{" on" if first else ""}"><img class="lg" src="{base}img/logos/{f}-c.png" alt="{esc(name)}" '
-                f'width="{round(h * w / hh)}" height="{h}" loading="eager" decoding="async"></span>')
-    slots = ''.join('<div class="lg-slot">' + ''.join(logo_item(*b, i == 0) for i, b in enumerate(BRAND_LOGOS[k::4])) + '</div>' for k in range(4))
-    logos = f'''<section class="logos" aria-label="Brands we have designed"><p class="eyebrow" data-r="fade">Brands we've designed</p>
-  <div class="lg-band" data-r><div class="wrap lg-slots" data-logo-slots>{slots}</div></div></section>'''
+        k = min(h, 44)
+        return (f'<li class="lg-tile"><img class="lg" src="{base}img/logos/{f}-c.png" alt="{esc(name)}" '
+                f'width="{round(k * w / hh)}" height="{k}" loading="lazy" decoding="async"></li>')
+    one = ''.join(logo_item(*b, False) for b in BRAND_LOGOS)
+    two = one.replace('<li class="lg-tile">', '<li class="lg-tile" aria-hidden="true">').replace(' alt="', ' data-a="').replace('<img class="lg"', '<img alt="" class="lg"')
+    logos = f'''<section class="logos" aria-label="Brands we have designed"><div class="wrap"><p class="eyebrow" data-r="fade">Brands we've designed</p></div>
+  <div class="logo-marq" data-r><ul class="logo-track">{one}{two}</ul></div></section>'''
 
     film_idx = find_img(PROJECTS, FILM['slug'], FILM['poster'])
     film = f'''<section class="showcase wide"><div class="film" data-r>
@@ -545,7 +557,7 @@ def blog():
     cards = [bcard(b, base) for b in POSTS]
     band = f'''<aside class="bband" data-r><div><h2 class="h3">Need something designed?</h2><p>A few words about your idea is plenty. We'll take it from there.</p></div>{pill("Start a project", base + "start/")}</aside>'''
     grid = ''.join(cards[:3]) + band + ''.join(cards[3:])
-    body = f'''<section class="ph blog-ph"><div class="wrap blog-hd"><h1 class="h1" data-r="words" data-intro><span class="grad">Our</span> Blog</h1>
+    body = f'''<section class="ph blog-ph"><div class="wrap blog-hd"><h1 class="h1" data-r="words" data-intro>Studio <span class="grad">notes</span></h1>
   <p class="lead" data-r data-intro data-d=".3">Plain advice from the studio: how to ask for the right thing, get it made well, and make it look right.</p></div></section>
 <section class="wrap blog-grid">{grid}</section>
 {close_cta(base, "Have a question? <span class=\"grad\">Ask us.</span>", "Tell us what you're working on. A few words is plenty.")}'''
@@ -647,14 +659,19 @@ def start():
     budgets = ''.join(f'<label class="pick"><input type="radio" name="budget" value="{esc(b)}"><span>{esc(b)}</span></label>' for b in BUDGETS)
     picks = ''.join(f'<label class="pick"><input type="checkbox" name="need" value="{k}"><span>{esc(t)}</span></label>' for k, t in NEEDS)
     arc = ''.join(f'<i style="background-image:url({base}img/people/{n:02d}-560.webp);background-size:230% auto;background-position:50% 9%"></i>' for n in HERO_FACES)
-    body = f"""<section class="talk"><div class="wrap">
-  <div class="talk-head">
-    <div class="arc" aria-hidden="true" data-r="fade" data-intro>{arc}</div>
-    <p class="nrf" data-r data-intro data-d=".1">Not sure how to put it? <b>Messy is fine.</b></p>
-    <h1 class="big" data-r="words" data-intro data-d=".15">Let's <span class="grad">talk!</span></h1>
-    <p class="talk-sub" data-r data-intro data-d=".35">Share what you're working on here, or send us an email at <a href="mailto:{SITE['email']}">{SITE['email']}</a>. A few words is plenty.</p>
-  </div>
-  <form id="start-form" class="tform" action="{SITE['formspree']}" method="POST" novalidate data-r data-intro data-d=".45">
+    steps = ''.join(f'<li><span class="n">{i + 1:02d}</span><div><h3>{esc(t)}</h3><p>{esc(d)}</p></div></li>' for i, (t, d) in enumerate(STEPS[:3]))
+    body = f"""<section class="talk2"><div class="wrap talk2-grid">
+  <aside class="talk2-side">
+    <p class="nrf" data-r data-intro>Not sure how to put it? <b>Messy is fine.</b></p>
+    <h1 class="big" data-r="words" data-intro data-d=".1">Tell us <span class="grad">what you need</span></h1>
+    <p class="talk-sub" data-r data-intro data-d=".3">Share what you're working on here, or send us an email at <a href="mailto:{SITE['email']}">{SITE['email']}</a>. A few words is plenty.</p>
+    <div class="alt" data-r data-d=".35"><a class="alt-card" href="mailto:{SITE['email']}"><small>Email us</small><b>{SITE['email']}</b><i class="arrow-c">{ARROW}</i></a>{extra_alt}
+      <a class="alt-card" href="{base}work/"><small>Not ready yet?</small><b>See what we've made</b><i class="arrow-c">{ARROW}</i></a></div>
+    <h2 class="side-h" data-r>How it works</h2>
+    <ol class="side-steps" data-r data-d=".1">{steps}</ol>
+  </aside>
+  <div class="talk2-main">
+  <form id="start-form" class="tform" action="{SITE['formspree']}" method="POST" novalidate data-r data-intro data-d=".25">
     <input type="hidden" name="_subject" value="New project enquiry from the {BRAND} website">
     <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="trap" aria-hidden="true">
     <div class="f"><label for="f-name">Name &amp; company</label><input id="f-name" name="name" type="text" autocomplete="name" placeholder="Your name, and your business if you have one" required></div>
@@ -672,9 +689,7 @@ def start():
   </form>
   <div class="form-done" hidden><h2 class="h2">Thank you. <span class="grad">We've got it.</span></h2><p class="lead">We'll read what you sent and get back to you.</p>
     <div class="cta-row">{pill('See some of our work', base + 'work/')}</div></div>
-  <div class="or" data-r><span>or</span></div>
-  <div class="alt" data-r><a class="alt-card" href="mailto:{SITE['email']}"><small>Email us</small><b>{SITE['email']}</b><i class="arrow-c">{ARROW}</i></a>
-    <a class="alt-card" href="{base}work/"><small>Not ready yet?</small><b>See what we've made</b><i class="arrow-c">{ARROW}</i></a>{extra_alt}</div>
+  </div>
 </div></section>"""
     page('start/', 'start', body, body_class='start')
 
