@@ -336,3 +336,11 @@ html.js [data-r]:not(.in) .grad, html.js [data-r]:not(.in) .grad .wi { backgroun
 html.js .row[data-r], html.js .pk[data-r], html.js .pan[data-r], html.js .faq-i[data-r] { transition-timing-function: cubic-bezier(.34, 1.56, .64, 1); }
 .asks-list li { padding: 10px 16px; line-height: 1.35; font-size: 15px; }
 .site-footer { border-top: 1px solid rgba(255, 255, 255, .25); }
+
+/* headings on blue surfaces are always white */
+.bband .h3, .bband h2, .bband h3, .close h2, .close h3, .logos h2, .logos h3, .site-footer h2, .site-footer h3,
+.talk2-side h1, .talk2-side h2, .talk2-side h3, .acard.blue h3, .row.hl, .pk-grid .pk:nth-child(n+7) h2, .pk-grid .pk:nth-child(n+7) h3,
+.pk-grid .pk:nth-child(n+7) .pk-price, .pk-grid .pk:nth-child(n+7) .pk-price b, .dark h1, .dark h2, .dark h3, #large-format h1, #large-format h2, #large-format h3 { color: #fff; }
+.row:hover { color: #fff; }
+.foot-col h2 { color: var(--yellow); }
+.side-h { color: var(--yellow); }
