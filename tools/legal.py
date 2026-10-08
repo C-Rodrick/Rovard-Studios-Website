@@ -9,7 +9,7 @@ PAGES = [
          body=[
              ('h', 'What we collect'),
              ('p', "We only collect what you choose to send us. When you fill in the Start a project form or email us, that can include:"),
-             ('ul', ["Your name and, if you give it, your business name", "Your email address and, optionally, your phone or WhatsApp number", "What you need, a description of your idea, an optional budget range and an optional deadline", "Any files or links you send us"]),
+             ('ul', ["Your name and, if you give it, your business name", "Your email address and, optionally, your phone number", "What you need, a description of your idea, an optional budget range and an optional deadline", "Any files or links you send us"]),
              ('p', "We do not run advertising trackers, and we do not use analytics cookies on this website (see our Cookie Preferences page)."),
              ('h', 'How we use it'),
              ('ul', ["To reply to you and talk about your project", "To prepare quotes and deliver the work you ask for", "To send invoices and keep the records the law requires", "To keep our site and our systems secure"]),
