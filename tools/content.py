@@ -11,7 +11,7 @@ BRAND = 'ROVARD STUDIOS'
 SITE = {
     'url': 'https://rovardstudios.com',          # change in one place if the final domain differs
     'email': 'hello@rovardstudios.com',
-    'whatsapp': '15878936078',     # digits only with country code, e.g. 15145550123. Empty = no WhatsApp button
+    'whatsapp': '',     # digits only with country code, e.g. 15145550123. Empty = no WhatsApp button
     'booking': '',      # full URL of your booking page (Calendly, Cal.com...). Empty = no "Book a call"
     'plausible': '',    # your site domain as set up in Plausible, e.g. rovardstudios.com. Empty = no analytics
     'location': 'Canada · Worldwide',

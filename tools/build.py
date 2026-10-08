@@ -677,7 +677,7 @@ def start():
     <div class="f"><label for="f-name">Name &amp; company</label><input id="f-name" name="name" type="text" autocomplete="name" placeholder="Your name, and your business if you have one" required></div>
     <div class="f-row">
       <div class="f"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required></div>
-      <div class="f"><label for="f-phone">Phone or WhatsApp <em>(optional)</em></label><input id="f-phone" name="phone" type="tel" autocomplete="tel" placeholder="+1 555 555 5555"></div>
+      <div class="f"><label for="f-phone">Phone <em>(optional)</em></label><input id="f-phone" name="phone" type="tel" autocomplete="tel" placeholder="+1 555 555 5555"></div>
     </div>
     <div class="f"><span class="lab" id="needs-l">What do you need? <em>Tick everything that applies</em></span><div class="seg" role="group" aria-labelledby="needs-l">{picks}</div></div>
     <div class="f"><label for="f-idea">Tell us a little about it</label><textarea id="f-idea" name="idea" rows="4" placeholder="For example: I'm starting a bakery and need a logo and a flyer for the opening."></textarea></div>
