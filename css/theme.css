@@ -344,3 +344,8 @@ html.js .row[data-r], html.js .pk[data-r], html.js .pan[data-r], html.js .faq-i[
 .row:hover { color: #fff; }
 .foot-col h2 { color: var(--yellow); }
 .side-h { color: var(--yellow); }
+
+/* hero: 3D wireframe sculpture behind the headline (moves with the cursor) */
+.hero2-stage { position: relative; }
+.hero-3d-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; opacity: .85; }
+.hero2-in { position: relative; z-index: 1; }

@@ -170,6 +170,7 @@ def page(path, key, body, title=None, desc=None, body_class=''):
 {footer(base, path)}
 <script src="{base}js/lenis.min.js" defer></script>
 <script src="{base}js/site.js?v={VERSION}" defer></script>
+{('<script src="' + base + 'js/hero-3d.js?v=' + VERSION + '" defer></script>') if body_class == 'home' else ''}
 </body>
 </html>
 '''
@@ -222,6 +223,7 @@ def home():
         two = one.replace('<a class="rcard"', '<a aria-hidden="true" class="rcard"')
         return f'<div class="reel-row {cls}">{one}{two}</div>'
     hero = f'''<section class="hero2" aria-labelledby="hero-title">
+  <div class="hero2-stage"><canvas id="heroCanvas" class="hero-3d-canvas" aria-hidden="true"></canvas>
   <div class="wrap hero2-in">
     <p class="eyebrow" data-r="fade" data-intro>{BRAND}</p>
     <h1 class="h1" id="hero-title" data-r="words" data-intro>Whatever you're putting out there, we'll make it <span class="grad">look right.</span></h1>
@@ -232,7 +234,7 @@ def home():
     <div class="cta-row" data-r data-intro data-d=".65">{pill('Start a project', 'start/', 'pill-lg')}{pill('See our work', 'work/', 'pill-outline pill-sm', ico=False)}</div>
     <p class="hero-proof" data-r="fade" data-intro data-d=".75"><b>7+ years</b> of experience <i></i> <b>200+ projects</b> completed</p>
     <p class="hero-note" data-r="fade" data-intro data-d=".8">Need just one thing? Start there. A small job done well is how trust gets built.</p>
-  </div>
+  </div></div>
   <div class="hero-reel" aria-hidden="true">{reel_row(reel_a)}{reel_row(reel_b, 'rev')}</div>
 </section>'''
 
