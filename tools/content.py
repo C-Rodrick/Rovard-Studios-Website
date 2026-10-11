@@ -11,6 +11,7 @@ BRAND = 'ROVARD STUDIOS'
 SITE = {
     'url': 'https://rovardstudios.com',          # change in one place if the final domain differs
     'email': 'hello@rovardstudios.com',
+    'media': '',        # Cloudflare R2 public URL for images + videos, e.g. https://media.rovardstudios.com (no trailing slash). Empty = served from this site
     'whatsapp': '',     # digits only with country code, e.g. 15145550123. Empty = no WhatsApp button
     'booking': '',      # full URL of your booking page (Calendly, Cal.com...). Empty = no "Book a call"
     'plausible': '',    # your site domain as set up in Plausible, e.g. rovardstudios.com. Empty = no analytics

@@ -6,7 +6,7 @@
 Pages: / , /services/ , /work/ , /work/<slug>/ (x22) , /about/ , /start/ , 404.html , sitemap.xml , robots.txt
 Env: NOLAZY=1 renders images eagerly (for review screenshots only).
 """
-import html, json, os, sys, time, urllib.parse
+import html, json, os, re, sys, time, urllib.parse
 from PIL import Image
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -155,6 +155,15 @@ def footer(base, path=''):
 
 
 BUILT = []
+_MEDIA_RE = re.compile(r'''(?<=["'(, ])(?:\.\./)*((?:img|video)/(?!mp4)|assets/Motion%20Design/)''')
+
+
+def media_urls(html_text):
+    """Point every image and video at the media host (Cloudflare R2) when SITE['media'] is set."""
+    m = (SITE.get('media') or '').rstrip('/')
+    return _MEDIA_RE.sub(lambda x: m + '/' + x.group(1), html_text) if m else html_text
+
+
 
 
 def page(path, key, body, title=None, desc=None, body_class=''):
@@ -174,6 +183,7 @@ def page(path, key, body, title=None, desc=None, body_class=''):
 </body>
 </html>
 '''
+    out = media_urls(out)
     BUILT.append((path, out))
     dest = os.path.join(ROOT, path, 'index.html') if path else os.path.join(ROOT, 'index.html')
     os.makedirs(os.path.dirname(dest), exist_ok=True)

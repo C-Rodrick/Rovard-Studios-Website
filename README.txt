@@ -66,3 +66,7 @@ PRICING (tools/content.py, PACKAGES): set "price" to a number (USD) to show "Fro
 FAQ (tools/content.py, FAQ) and service pages (tools/landing.py) feed the FAQ blocks and /services/<name>/ pages.
 BLOG: tools/blogdata.py (first six) and tools/blog_more.py (six more, with French side by side). Change the date in each post.
 AUDIT: python tools/audit_site.py (preview server running) checks speed and accessibility.
+
+MEDIA ON CLOUDFLARE R2 (faster images and videos)
+- Set SITE['media'] in tools/content.py to your R2 public URL (https://media.rovardstudios.com). Every image/video URL is rewritten at build time.
+- Upload the files with tools/upload_media.py (setup steps are at the top of that file). Empty media = files come from the site itself.
