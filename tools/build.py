@@ -222,18 +222,26 @@ def home():
         one = ''.join(rcard(x) for x in items)
         two = one.replace('<a class="rcard"', '<a aria-hidden="true" class="rcard"')
         return f'<div class="reel-row {cls}">{one}{two}</div>'
-    hero = f'''<section class="hero2" aria-labelledby="hero-title">
+    hero = f'''<section class="hero2 hero-orig" aria-labelledby="hero-title">
   <div class="hero2-stage"><canvas id="heroCanvas" class="hero-3d-canvas" aria-hidden="true"></canvas>
-  <div class="wrap hero2-in">
-    <p class="eyebrow" data-r="fade" data-intro>{BRAND}</p>
-    <h1 class="h1" id="hero-title" data-r="words" data-intro>Whatever you're putting out there, we'll make it <span class="grad">look right.</span></h1>
-    <p class="hero-we" data-rotator='{esc(json.dumps(rot, ensure_ascii=False))}' data-r data-intro data-d=".45">
-      <span class="sr-only">We design {all_things} for your ideas.</span>
-      <span aria-hidden="true">We <span class="rv">{f0['verb']}</span> <b class="rt grad">{f0['thing']}</b> for your <span class="rf">{f0['for']}</span>.</span></p>
-    <p class="lead" data-r data-intro data-d=".55">{BRAND} designs logos, flyers, websites, billboards, vehicle branding and everything in between. People decide what they think of you in seconds. We make sure that first look says the right thing.</p>
-    <div class="cta-row" data-r data-intro data-d=".65">{pill('Start a project', 'start/', 'pill-lg')}{pill('See our work', 'work/', 'pill-outline pill-sm', ico=False)}</div>
-    <p class="hero-proof" data-r="fade" data-intro data-d=".75"><b>7+ years</b> of experience <i></i> <b>200+ projects</b> completed</p>
-    <p class="hero-note" data-r="fade" data-intro data-d=".8">Need just one thing? Start there. A small job done well is how trust gets built.</p>
+  <div class="wrap hero-orig-in">
+    <div class="hero-kicker" data-r="fade" data-intro>Canada · Worldwide <span></span> Independent design studio</div>
+    <div class="hero-title-wrap">
+      <p class="eyebrow" data-r="fade" data-intro>{BRAND}</p>
+      <h1 class="h1 hero-title" id="hero-title" data-r="words" data-intro>Whatever you're<br>putting out there,<br>we'll make it <span class="grad">look right.</span></h1>
+    </div>
+    <div class="hero-bottom">
+      <div class="hero-copy-col">
+        <p class="hero-we" data-rotator='{esc(json.dumps(rot, ensure_ascii=False))}' data-r data-intro data-d=".45">
+          <span class="sr-only">We design {all_things} for your ideas.</span>
+          <span aria-hidden="true">We <span class="rv">{f0['verb']}</span> <b class="rt grad">{f0['thing']}</b> for your <span class="rf">{f0['for']}</span>.</span></p>
+        <p class="lead" data-r data-intro data-d=".55">{BRAND} designs logos, flyers, websites, billboards, vehicle branding and everything in between. People decide what they think of you in seconds. We make sure that first look says the right thing.</p>
+        <div class="cta-row" data-r data-intro data-d=".65">{pill('Start a project', 'start/', 'pill-lg')}</div>
+        <p class="hero-proof" data-r="fade" data-intro data-d=".75"><b>7+ years</b> of experience <i></i> <b>200+ projects</b> completed</p>
+      </div>
+      <a class="round-link" href="#work" aria-label="Explore selected work" data-r="fade" data-intro data-d=".8"><span>Explore<br>the work</span><b>↓</b></a>
+    </div>
+    <div class="hero-scroll" aria-hidden="true"><span></span></div>
   </div></div>
   <div class="hero-reel" aria-hidden="true">{reel_row(reel_a)}{reel_row(reel_b, 'rev')}</div>
 </section>'''

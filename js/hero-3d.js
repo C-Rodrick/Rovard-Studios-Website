@@ -183,9 +183,9 @@
       // Project vertices to 2D
       const isMobile = width < 768;
       // Center slightly to the right of the hero text on desktop
-      const cx = width * 0.5;
-      const cy = height * 0.5;
-      const scaleMultiplier = isMobile ? Math.min(width, height) / 620 : Math.min(width * 0.9, height * 1.55) / 600;
+      const cx = isMobile ? width * 0.5 : width * 0.68;
+      const cy = height * 0.48;
+      const scaleMultiplier = isMobile ? Math.min(width, height) / 620 : Math.min(width, height) / 680;
       const focalLength = 520;
 
       const projected = new Array(baseVertices.length);
