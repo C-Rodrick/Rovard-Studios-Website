@@ -1391,7 +1391,7 @@ form.addEventListener('submit', async e => {
         <button type="button" class="primary-button" style="margin-top:35px" onclick="location.reload()">Back to Rovard <span>↗</span></button>
       </div>`;
   } catch (err) {
-    $('#formError').textContent = 'Something went wrong. Please try again or email hello@rovardstudios.com.';
+    $('#formError').textContent = 'Something went wrong. Please try again or email hello@rovardstudio.com.';
     submitButton.disabled = false;
     submitButton.innerHTML = 'Send inquiry <span>↗</span>';
   }

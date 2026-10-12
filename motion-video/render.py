@@ -1096,7 +1096,7 @@ def end_card(c, t):
     text(c, tag, 960 - 10, 712 + 16 * (1 - tp), 34, WHITE, tp, fam='syne', w=600, track=-.03, align=.5)
     c.drawCircle(960 - 10 + tw / 2 + 12, 712 + 16 * (1 - tp) - 5, 6 * e(t, 87.9, 88.3, oback), paint(YEL))
     ip = e(t, 87.75, 88.4)
-    text(c, 'hello@rovardstudios.com     ·     Canada · Worldwide', 960, 768 + 12 * (1 - ip), 22, WHITE, .55 * ip, fam='sg', w=400, track=.04, align=.5)
+    text(c, 'hello@rovardstudio.com     ·     Canada · Worldwide', 960, 768 + 12 * (1 - ip), 22, WHITE, .55 * ip, fam='sg', w=400, track=.04, align=.5)
 
 
 # ── Transitions ──────────────────────────────────────────────────────────

@@ -1,0 +1,39 @@
+# Rovard Studios
+
+> Independent branding and design studio based in Canada, working with businesses worldwide. Brand identity, website, UI, social media, packaging and motion design.
+
+Contact: hello@rovardstudio.com · Start a project: https://rovardstudio.com/#contact
+
+## Services
+
+- [Brand Identity Design](https://rovardstudio.com/services/brand-identity-design/): Brand identity design for ambitious businesses in Canada and worldwide: strategy, logo, colour, typography and brand guidelines built as one system.
+- [Social Media Design](https://rovardstudio.com/services/social-media-design/): Social media design for brands that want to stay recognizable: campaign graphics, post and story templates and content systems built on your identity.
+- [UI Design](https://rovardstudio.com/services/ui-design/): UI design for apps, dashboards and digital products: clear interfaces, design systems and responsive screens that make complex services easy to use.
+- [Web Design](https://rovardstudio.com/services/web-design/): Website design for businesses in Canada and worldwide: art direction, UX and responsive, conversion-focused websites built around your brand.
+- [Packaging Design](https://rovardstudio.com/services/packaging-design/): Packaging and print design that makes products feel considered and desirable: labels, boxes, book covers and print-ready artwork.
+- [Motion Design](https://rovardstudio.com/services/motion-design/): Motion design for brands: brand films, 3D product ads, kinetic typography and social animation that give your identity a pulse.
+
+## Selected work
+
+- [Green Blueprint](https://rovardstudio.com/work/green-blueprint/) (Brand Identity Design): An eco-conscious construction brand built around a clear vision for sustainable urban design.
+- [Design Eigen](https://rovardstudio.com/work/design-eigen/) (Brand Identity Design): An identity refresh designed to sharpen the brand story and improve recognition across channels.
+- [Bitefort](https://rovardstudio.com/work/bitefort/) (Brand Identity Design): A confident identity and digital direction for a privacy-first cookie management platform.
+- [LinkRithm](https://rovardstudio.com/work/linkrithm/) (Brand Identity Design): A connected brand identity system built for engineering teams, technical knowledge and digital collaboration.
+- [Vita House](https://rovardstudio.com/work/vita-house/) (Brand Identity Design, self-initiated concept): A warm, human brand identity for a fictional U.S. preventative healthcare company, built to feel like coming home rather than going to a clinic.
+- [Northstar Capital](https://rovardstudio.com/work/northstar-capital/) (Brand Identity Design, self-initiated concept): An editorial-tech brand identity for a fictional U.S. fintech that helps small businesses understand cash flow, built on one idea: a fixed point to steer by.
+- [Mason & Rowe](https://rovardstudio.com/work/mason-and-rowe/) (Brand Identity Design, self-initiated concept): A quiet, architectural brand identity for a fictional U.S. luxury residential developer, built on one idea: homes made to be inherited.
+- [ShorteeMe](https://rovardstudio.com/work/shorteeme/) (Social Media Design): A bright, human social campaign system helping ShorteeMe make financing feel clear, accessible and full of possibility.
+- [Kymela 2026](https://rovardstudio.com/work/kymela-2026/) (Social Media Design): A content system designed to make the brand feel active, intentional and easy to recognize.
+- [PDOCA](https://rovardstudio.com/work/pdoca/) (Social Media Design): A bold campaign identity for PDOCA’s coaching academy, built to create consistent brand presence across multiple formats.
+- [Dress Doctor](https://rovardstudio.com/work/dress-doctor/) (Social Media Design): A bright, service-led campaign system for Dress Doctor Laundry, built to make free pickup and promo offers read at a glance.
+- [GCE Study App](https://rovardstudio.com/work/gce-study-app/) (Social Media Design): A fresh, energetic campaign identity introducing the GCE Study App to Cameroonian students.
+- [Proxima Exchange](https://rovardstudio.com/work/proxima-exchange/) (UI Design): A premium website and interface for a crypto and forex trading platform, built directly from the Proxima identity.
+- [Afa'a Pay](https://rovardstudio.com/work/afaa-pay/) (UI Design): A brand identity, fintech website and working escrow platform for a modern African payment network, built around one promise: building trust into every transaction.
+- [Vita House Care](https://rovardstudio.com/work/vita-house-care/) (UI Design, self-initiated concept): A responsive healthcare website, a six-step booking flow and a patient dashboard that make preventative care feel clear, calm and easy to use.
+- [Northstar Capital Website](https://rovardstudio.com/work/northstar-capital-website/) (UI Design, self-initiated concept): A responsive eight-page website for a fictional U.S. fintech, with a working product dashboard behind it. The hero is the product itself, not a stock photo.
+- [Mason & Rowe Residences](https://rovardstudio.com/work/mason-and-rowe-residences/) (UI Design, self-initiated concept): A responsive luxury real-estate website for a fictional U.S. developer: a cinematic arrival, a property interface with interactive stacking plans and drawn floor plans, and a private-viewing booking flow.
+- [Book Cover Design](https://rovardstudio.com/work/book-cover-design/) (Packaging): A premium book cover system built to make the title feel authoritative, desirable and impossible to shelve away.
+- [JoJo Foods](https://rovardstudio.com/work/jojo-foods/) (Packaging): Retro-bright potato chip packaging built around a cream roundel mark, a red and orange sunburst and a clear window that lets the chips do the selling.
+- [Proxima Exchange Films](https://rovardstudio.com/work/proxima-exchange-films/) (Motion Design): Two launch films for a crypto and forex trading platform: a cinematic 3D brand film and a precise product film built from the real interface.
+- [Rovard Studios Brand Film](https://rovardstudio.com/work/rovard-studios-brand-film/) (Motion Design): A 90-second brand film that turns the Rovard identity, services and selected work into one continuous piece of motion.
+- [Northstar Capital Ad](https://rovardstudio.com/work/northstar-capital-ad/) (Motion Design): A 30-second 3D launch ad for the Northstar Capital website and dashboard, presenting the concept as a real product.

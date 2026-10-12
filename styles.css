@@ -2669,3 +2669,18 @@ select:focus {
     display: none;
   }
 }
+/* Service titles link to their landing pages; keep the row's look */
+.service {
+  position: relative;
+}
+
+.service h3 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.service h3 a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
