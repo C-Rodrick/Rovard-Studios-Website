@@ -246,7 +246,7 @@
         if (!r.ok) throw new Error('bad status');
         form.hidden = true; $('.form-done').hidden = false; goto($('.form-done'), -120);
       } catch (_) {
-        err.innerHTML = L('Something went wrong. Please try again, or email us at ', 'Une erreur est survenue. Veuillez réessayer, ou écrivez-nous à ') + '<a href="mailto:hello@rovardstudios.com">hello@rovardstudios.com</a>.';
+        err.innerHTML = L('Something went wrong. Please try again, or email us at ', 'Une erreur est survenue. Veuillez réessayer, ou écrivez-nous à ') + '<a href="mailto:hello@rovardstudio.com">hello@rovardstudio.com</a>.';
         sub.disabled = false; label.textContent = L('Send it to us', 'Envoyez-le-nous');
       }
     });

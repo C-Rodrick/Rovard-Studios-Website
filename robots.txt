@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://rovardstudios.com/sitemap.xml
+Sitemap: https://rovardstudio.com/sitemap.xml

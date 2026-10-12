@@ -1,7 +1,7 @@
 """Upload every image and video to a Cloudflare R2 bucket (S3 API), with long cache headers.
 
 One-time setup (Cloudflare dashboard):
-  1. R2 -> Create bucket (e.g. rovard-media).  2. Bucket -> Settings -> Custom domain: media.rovardstudios.com (or enable the r2.dev URL).
+  1. R2 -> Create bucket (e.g. rovard-media).  2. Bucket -> Settings -> Custom domain: media.rovardstudio.com (or enable the r2.dev URL).
   3. R2 -> Manage API tokens -> create a token with Object Read & Write for that bucket.
 Then:
   pip install boto3
