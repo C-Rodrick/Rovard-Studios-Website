@@ -14,23 +14,31 @@
     content="branding studio Canada, brand identity design Canada, graphic design studio Canada, social media design, UI design, packaging design, motion design, web design, creative studio Canada, branding agency" />
   <meta name="author" content="Rovard Studios" />
   <meta name="robots" content="index, follow, max-image-preview:large" />
-  <link rel="canonical" href="https://rovardstudios.com/" />
+  <link rel="canonical" href="https://rovardstudio.com/" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Rovard Studios" />
+  <meta property="og:locale" content="en_CA" />
   <meta property="og:title" content="Rovard Studios — Design that moves businesses forward." />
   <meta property="og:description"
     content="A premium Canadian design and branding studio working worldwide across identity, social, UI, packaging, motion and web." />
-  <meta property="og:url" content="https://rovardstudios.com/" />
-  <meta property="og:image" content="https://rovardstudios.com/assets/og-cover.jpg" />
-  <meta property="og:image:alt" content="Rovard Studios — Canada · Worldwide" />
+  <meta property="og:url" content="https://rovardstudio.com/" />
+  <meta property="og:image" content="https://rovardstudio.com/assets/og-cover.jpg" />
+  <meta property="og:image:alt" content="Rovard Studios — Design that moves businesses forward." />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Rovard Studios — Design that moves businesses forward." />
   <meta name="twitter:description" content="Premium design and branding studio based in Canada, working worldwide." />
-  <meta name="twitter:image" content="https://rovardstudios.com/assets/og-cover.jpg" />
+  <meta name="twitter:image" content="https://rovardstudio.com/assets/og-cover.jpg" />
+  <meta name="twitter:image:alt" content="Rovard Studios — Design that moves businesses forward." />
 
-  <link rel="icon" href="assets/rovard-mark.svg" />
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
+  <link rel="icon" type="image/svg+xml" href="assets/rovard-mark.svg" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+  <link rel="manifest" href="site.webmanifest" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -45,17 +53,122 @@
   <link rel="stylesheet" href="styles.css?v=202610021543" />
 
   <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"ProfessionalService",
-    "name":"Rovard Studios",
-    "url":"https://rovardstudios.com/",
-    "logo":"https://rovardstudios.com/assets/Combined%20Logo%20-%20Rovard%20Studios%20-%20Blue.svg",
-    "description":"Premium Canadian design and branding studio working worldwide across brand identity, social media, UI, packaging, motion and web design.",
-    "areaServed":"Worldwide",
-    "email":"hello@rovardstudios.com",
-    "sameAs":[]
-  }
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://rovardstudio.com/#organization",
+      "name": "Rovard Studios",
+      "url": "https://rovardstudio.com/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://rovardstudio.com/assets/apple-touch-icon.png",
+        "width": 180,
+        "height": 180
+      },
+      "image": "https://rovardstudio.com/assets/og-cover.jpg",
+      "email": "hello@rovardstudios.com"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://rovardstudio.com/#website",
+      "url": "https://rovardstudio.com/",
+      "name": "Rovard Studios",
+      "publisher": {
+        "@id": "https://rovardstudio.com/#organization"
+      },
+      "inLanguage": "en"
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://rovardstudio.com/#service",
+      "name": "Rovard Studios",
+      "url": "https://rovardstudio.com/",
+      "image": "https://rovardstudio.com/assets/og-cover.jpg",
+      "description": "Premium Canadian design and branding studio working worldwide across brand identity, social media, UI, packaging, motion and web design.",
+      "email": "hello@rovardstudios.com",
+      "areaServed": "Worldwide",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "CA"
+      },
+      "parentOrganization": {
+        "@id": "https://rovardstudio.com/#organization"
+      },
+      "knowsAbout": [
+        "Brand Identity Design",
+        "Social Media Design",
+        "UI Design",
+        "Packaging Design",
+        "Motion Design",
+        "Web Design"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Design services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Brand Identity Design"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Social Media Design"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "UI Design"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Packaging Design"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Motion Design"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Web Design"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://rovardstudio.com/#webpage",
+      "url": "https://rovardstudio.com/",
+      "name": "Rovard Studios — Brand, Digital & Creative Studio",
+      "isPartOf": {
+        "@id": "https://rovardstudio.com/#website"
+      },
+      "about": {
+        "@id": "https://rovardstudio.com/#organization"
+      },
+      "primaryImageOfPage": "https://rovardstudio.com/assets/og-cover.jpg",
+      "inLanguage": "en"
+    }
+  ]
+}
   </script>
 </head>
 
@@ -353,6 +466,17 @@
         <div><span>Connect with us</span><a href="mailto:hello@rovardstudios.com">Email ↗</a></div>
       </div>
     </div>
+    <!-- work-index:start -->
+    <section class="work-index" aria-label="All projects">
+      <div class="footer-links">
+        <div><span>Brand Identity Design</span><a href="/work/green-blueprint/">Green Blueprint</a><a href="/work/design-eigen/">Design Eigen</a><a href="/work/bitefort/">Bitefort</a><a href="/work/linkrithm/">LinkRithm</a><a href="/work/vita-house/">Vita House</a><a href="/work/northstar-capital/">Northstar Capital</a><a href="/work/mason-and-rowe/">Mason &amp; Rowe</a></div>
+        <div><span>Social Media Design</span><a href="/work/shorteeme/">ShorteeMe</a><a href="/work/kymela-2026/">Kymela 2026</a><a href="/work/pdoca/">PDOCA</a><a href="/work/dress-doctor/">Dress Doctor</a><a href="/work/gce-study-app/">GCE Study App</a></div>
+        <div><span>UI Design</span><a href="/work/proxima-exchange/">Proxima Exchange</a><a href="/work/afaa-pay/">Afa'a Pay</a><a href="/work/vita-house-care/">Vita House Care</a><a href="/work/northstar-capital-website/">Northstar Capital Website</a><a href="/work/mason-and-rowe-residences/">Mason &amp; Rowe Residences</a></div>
+        <div><span>Packaging</span><a href="/work/book-cover-design/">Book Cover Design</a><a href="/work/jojo-foods/">JoJo Foods</a></div>
+        <div><span>Motion Design</span><a href="/work/proxima-exchange-films/">Proxima Exchange Films</a><a href="/work/rovard-studios-brand-film/">Rovard Studios Brand Film</a><a href="/work/northstar-capital-ad/">Northstar Capital Ad</a></div>
+      </div>
+    </section>
+    <!-- work-index:end -->
     <div class="footer-bottom"><span>© 2026 Rovard Studios. All rights reserved.</span><span>Canada ·
         Worldwide</span><span>Designed with intention.</span></div>
   </footer>

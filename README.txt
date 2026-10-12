@@ -13,7 +13,8 @@ ASSETS TO ADD:
 - assets/og-cover.jpg
 
 Before launch:
-1. Replace https://rovardstudios.com/ if the final domain differs.
+1. Final domain is https://rovardstudio.com/ (already set in index.html, robots.txt, sitemap.xml and work pages).
+   Per-project pages in /work/ and sitemap.xml are generated: run `node tools/build_work_pages.js` after editing caseData in script.js.
 2. Replace placeholder portfolio artwork with the real project images.
 3. Connect FORM_ENDPOINT in script.js to Formspree, Basin, a serverless function, or your own API.
 4. Replace placeholder testimonial names/content with real testimonials.

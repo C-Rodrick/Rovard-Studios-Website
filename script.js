@@ -759,7 +759,7 @@ const renderPortfolioGroups = () => {
                     data-cursor-label="View case study"
                     aria-label="Open ${project.title} case study"
                   >
-                    <span class="portfolio-card-media" data-bg="${image}"></span>
+                    <span class="portfolio-card-media" data-bg="${image}" role="img" aria-label="${project.title} — ${project.category} by Rovard Studios"></span>
                     <span class="portfolio-card-copy">
                       <span class="portfolio-card-kicker">${project.category}</span>
                       <h3>${project.title}</h3>
