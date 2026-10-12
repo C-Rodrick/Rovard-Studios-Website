@@ -172,7 +172,7 @@ WHY = [
 
 # ── Page meta ─────────────────────────────────────────────────────────────
 META = {
-    'home': (f"{BRAND} | Logos, flyers, websites & more for your ideas",
+    'home': (f"{BRAND} | Logo, flyer & website design studio in Canada",
              f"{BRAND} designs logos, flyers, websites, billboards, vehicle branding and more for people, businesses, churches, organizations and events. Tell us what you need."),
     'services': (f"What we can design for you | {BRAND}",
                  f"Logos, flyers, social media graphics, websites, billboards, banners, vehicle branding, presentations, packaging, photo and video. See what {BRAND} can design for you."),

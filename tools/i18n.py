@@ -168,6 +168,10 @@ class Tr:
         if m:
             left = self.get(m.group(1))
             return None if left is None else f'{left} | ROVARD STUDIOS'
+        m = re.match(r'^(.+?) — (.+)$', k)
+        if m:  # "Project name — Kind": keep the name, translate the kind
+            right = self.get(m.group(2))
+            return None if right is None else f'{m.group(1)} — {right}'
         m = re.match(r'^(.*) image (\d+)$', k)
         if m:
             left = self.get(m.group(1))
@@ -253,6 +257,11 @@ def walk(n, T):
     if n.tag == 'script' and any(k == 'type' and v == 'application/ld+json' for k, v in n.attrs) and n.kids:
         try:
             data = json.loads(n.kids[0].s)
+            if data.get('@type') == 'BreadcrumbList':
+                for it in data['itemListElement']:
+                    it['name'] = T.get(it['name']) or it['name']
+                    it['item'] = re.sub(r'^(https?://[^/]+)/', lambda m: m.group(1) + '/fr/', it['item'])
+                n.kids[0].s = json.dumps(data, ensure_ascii=False)
             if data.get('@type') == 'FAQPage':
                 for q in data['mainEntity']:
                     q['name'] = T.get(q['name']) or q['name']
@@ -329,11 +338,13 @@ def make_fr(path, html_en, T, site_url):
     return out
 
 
-def run(pages, site_url):
+def run(pages, site_url, post=None):
     """pages: list of (path, html). Writes fr/<path>/index.html and tools/fr-missing.json."""
     T = Tr()
     for path, h in pages:
         out = make_fr(path, h, T, site_url)
+        if post:
+            out = post(out)
         dest = os.path.join(ROOT, 'fr', path, 'index.html') if path else os.path.join(ROOT, 'fr', 'index.html')
         os.makedirs(os.path.dirname(dest), exist_ok=True)
         open(dest, 'w', encoding='utf-8').write(out)

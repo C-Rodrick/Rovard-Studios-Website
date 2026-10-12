@@ -32,6 +32,18 @@ LEFT = '<svg viewBox="0 0 14 14" fill="none" aria-hidden="true" width="16" heigh
 RIGHT = '<svg viewBox="0 0 14 14" fill="none" aria-hidden="true" width="16" height="16"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>'
 
 
+def added_date(rel):
+    """Date a file was first committed (for VideoObject.uploadDate)."""
+    import subprocess
+    try:
+        out = subprocess.run(['git', 'log', '--diff-filter=A', '--format=%aI', '--', rel], cwd=ROOT, capture_output=True, text=True).stdout.split()
+        if out:
+            return out[-1]
+    except OSError:
+        pass
+    return time.strftime('%Y-%m-%d')
+
+
 def q(path):
     return urllib.parse.quote(path, safe='/')
 
@@ -64,12 +76,46 @@ def concept(p, cls='concept'):
     return ''
 
 
-def head(title, desc, path, base):
+def clip(t, n=158):
+    t = ' '.join(t.split())
+    return t if len(t) <= n else t[:n - 1].rsplit(' ', 1)[0].rstrip(',;:·—-') + '…'
+
+
+ORG_ID = SITE['url'] + '/#organization'
+
+
+def site_ld():
+    return {'@context': 'https://schema.org', '@graph': [
+        {'@type': ['Organization', 'ProfessionalService'], '@id': ORG_ID, 'name': BRAND, 'url': SITE['url'] + '/',
+         'logo': {'@type': 'ImageObject', 'url': f"{SITE['url']}/assets/favicon/icon-512.png", 'width': 512, 'height': 512},
+         'image': f"{SITE['url']}/assets/og-cover.jpg", 'email': SITE['email'],
+         'address': {'@type': 'PostalAddress', 'addressCountry': 'CA'},
+         'areaServed': [{'@type': 'Country', 'name': 'Canada'}, 'Worldwide'],
+         'knowsLanguage': ['en', 'fr'], 'description': META['home'][1]},
+        {'@type': 'WebSite', '@id': SITE['url'] + '/#website', 'url': SITE['url'] + '/', 'name': BRAND,
+         'publisher': {'@id': ORG_ID}, 'inLanguage': ['en', 'fr']},
+    ]}
+
+
+_DESC_RE = re.compile(r'(<meta (?:name="description"|property="og:description") content=")([^"]*)(">)')
+
+
+def clip_meta(h):
+    """Trim meta/og descriptions to search-result length (run after translation)."""
+    return _DESC_RE.sub(lambda m: m.group(1) + esc(clip(html.unescape(m.group(2)))) + m.group(3), h)
+
+
+def crumbs(items):
+    """items: [(name, path)] after Home. Path is relative to the site root."""
+    full = [('Home', '')] + items
+    return {'@context': 'https://schema.org', '@type': 'BreadcrumbList', 'itemListElement': [
+        {'@type': 'ListItem', 'position': i + 1, 'name': n, 'item': f"{SITE['url']}/{u}"} for i, (n, u) in enumerate(full)]}
+
+
+def head(title, desc, path, base, extra_ld=()):
     url = f"{SITE['url']}/{path}"
-    ld = json.dumps({
-        '@context': 'https://schema.org', '@type': 'ProfessionalService', 'name': BRAND, 'url': SITE['url'] + '/',
-        'logo': f"{SITE['url']}/{LOGO_BLUE}", 'email': SITE['email'], 'areaServed': 'Worldwide', 'description': META['home'][1],
-    }, ensure_ascii=False)
+    ld = json.dumps(site_ld(), ensure_ascii=False)
+    ld += ''.join(f'</script>\n<script type="application/ld+json">{json.dumps(x, ensure_ascii=False)}' for x in extra_ld)
     analytics = f'<script defer data-domain="{SITE["plausible"]}" src="https://plausible.io/js/script.js"></script>' + chr(10) if SITE.get('plausible') else ''
     return f'''<!DOCTYPE html>
 <html lang="en">
@@ -84,11 +130,14 @@ def head(title, desc, path, base):
 <link rel="alternate" hreflang="fr" href="{SITE['url']}/fr/{path}">
 <link rel="alternate" hreflang="x-default" href="{url}">
 <meta property="og:type" content="website">
+<meta property="og:locale" content="en_CA">
 <meta property="og:site_name" content="{BRAND}">
 <meta property="og:title" content="{esc(title)}">
 <meta property="og:description" content="{esc(desc)}">
 <meta property="og:url" content="{url}">
 <meta property="og:image" content="{SITE['url']}/assets/og-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="{BRAND}">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="{base}favicon.ico" sizes="48x48">
@@ -166,11 +215,22 @@ def media_urls(html_text):
 
 
 
-def page(path, key, body, title=None, desc=None, body_class=''):
+SECTION_NAME = {'services': 'Services', 'work': 'Work', 'blog': 'Blog', 'pricing': 'Pricing', 'about': 'About', 'start': 'Start a project',
+                'privacy': 'Privacy', 'cookies': 'Cookies', 'terms': 'Terms'}
+
+
+def page(path, key, body, title=None, desc=None, body_class='', ld=()):
     depth = 0 if not path else path.count('/')
     base = '../' * depth
     t, d = (title, desc) if title else META[key]
-    out = head(t, d or META[key][1], path, base) + f'''
+    ld = list(ld)
+    if path:
+        top = path.split('/')[0]
+        trail = [(SECTION_NAME.get(top, top.title()), top + '/')]
+        if path.count('/') > 1:
+            trail.append((t.rsplit(' | ', 1)[0].split(' — ')[0], path))
+        ld.append(crumbs(trail))
+    out = head(t, d or META[key][1], path, base, ld) + f'''
 <body class="{body_class}">
 {header(base)}
 <main id="main">
@@ -185,6 +245,7 @@ def page(path, key, body, title=None, desc=None, body_class=''):
 '''
     out = media_urls(out)
     BUILT.append((path, out))
+    out = clip_meta(out)
     dest = os.path.join(ROOT, path, 'index.html') if path else os.path.join(ROOT, 'index.html')
     os.makedirs(os.path.dirname(dest), exist_ok=True)
     open(dest, 'w', encoding='utf-8').write(out)
@@ -438,7 +499,8 @@ def service_pages():
         steps = ''.join(f'<li><span class="n grad">{i + 1:02d}</span><h3>{esc(t)}</h3><p>{esc(d)}</p></li>' for i, (t, d) in enumerate(STEPS))
         others = ''.join(f'<a class="pf" href="{base}services/{LANDING[o["id"]]["slug"]}/">{esc(o["title"])}</a>' for o in SERVICES if o['id'] != s['id'])
         ld = json.dumps({'@context': 'https://schema.org', '@type': 'Service', 'name': L['title'], 'description': L['desc'],
-                         'provider': {'@type': 'ProfessionalService', 'name': BRAND, 'url': SITE['url'] + '/'}, 'areaServed': 'Worldwide'}, ensure_ascii=False)
+                         'serviceType': L['title'], 'url': f"{SITE['url']}/services/{L['slug']}/",
+                         'provider': {'@id': ORG_ID, 'name': BRAND}, 'areaServed': [{'@type': 'Country', 'name': 'Canada'}, 'Worldwide']}, ensure_ascii=False)
         body = f"""<section class="ph"><div class="wrap"><p class="eyebrow" data-r="fade" data-intro><a href="{base}services/">Services</a> · {esc(s['title'])}</p>
   <h1 class="h1" data-r="words" data-intro>{L['h1']}</h1>
   <p class="lead" data-r data-intro data-d=".3">{esc(L['lead'])}</p>
@@ -542,7 +604,19 @@ def project(p):
 <section class="sec" style="padding-top:0"><div class="wrap"><h2 class="h3" data-r style="margin-bottom:28px">More projects</h2><div class="rel">{rel}</div></div></section>
 <div class="lightbox" hidden role="dialog" aria-modal="true" aria-label="Image viewer"><button class="lb-close" type="button" aria-label="Close">×</button>
   <button class="lb-nav lb-prev" type="button" aria-label="Previous image">←</button><img alt=""><button class="lb-nav lb-next" type="button" aria-label="Next image">→</button><span class="lb-count"></span></div>'''
-    page(f'work/{slug}/', 'work', body, title=f"{p['title']} | {BRAND}", desc=f"{p['plain']}. {p['summary']}"[:300], body_class='project')
+    url = f"{SITE['url']}/work/{slug}/"
+    cover = f"{SITE['url']}/img/{slug}/00-{MANIFEST[slug]['0']['sizes'][-1]}.webp"
+    ld = [{'@context': 'https://schema.org', '@type': 'CreativeWork', '@id': url + '#work', 'name': p['title'], 'url': url,
+           'description': f"{p['plain']}. {p['summary']}", 'image': cover, 'dateCreated': str(p['year']), 'genre': KIND[p['kind']],
+           'creator': {'@id': ORG_ID, 'name': BRAND}, 'inLanguage': 'en'}]
+    for v in p['vids']:
+        ld.append({'@context': 'https://schema.org', '@type': 'VideoObject',
+                   'name': f"{p['title']}: {v['title']}" if v['title'] else p['title'], 'description': f"{p['plain']}. {p['summary']}",
+                   'thumbnailUrl': f"{SITE['url']}/{q(v['poster'])}" if v['poster'] else cover,
+                   'contentUrl': f"{SITE['url']}/{q(v['src'])}", 'embedUrl': url, 'uploadDate': added_date(v['src']),
+                   'publisher': {'@id': ORG_ID, 'name': BRAND}})
+    page(f'work/{slug}/', 'work', body, title=f"{p['title']} — {KIND[p['kind']]} | {BRAND}", desc=f"{p['plain']}. {p['summary']}",
+         body_class='project', ld=ld)
 
 
 # ── ABOUT ─────────────────────────────────────────────────────────────────
@@ -603,9 +677,13 @@ def blog_post(b):
 <div class="wrap post-cover" data-r><div class="wc-media">{img(b['cover'], 0, '', base, sizes='(min-width: 1200px) 1100px, 94vw', want=1100, eager=True)}</div></div>
 <div class="wrap post-body" data-r>{''.join(parts)}</div></article>
 <section class="sec" style="padding-top:0"><div class="wrap"><h2 class="h3" data-r style="margin-bottom:28px">More from the blog</h2><div class="blog-grid blog-rel">{rel}</div></div></section>
-<script type="application/ld+json">{json.dumps({'@context': 'https://schema.org', '@type': 'Article', 'headline': b['title'], 'description': b['excerpt'], 'datePublished': b['iso'], 'author': {'@type': 'Organization', 'name': BRAND}, 'publisher': {'@type': 'Organization', 'name': BRAND}}, ensure_ascii=False)}</script>
 {close_cta(base, "Let's make yours <span class=\"grad\">look right.</span>")}'''
-    page(f'blog/{b["slug"]}/', 'blog', body, title=f"{b['title']} | {BRAND}", desc=b['excerpt'], body_class='blog')
+    url = f"{SITE['url']}/blog/{b['slug']}/"
+    art = {'@context': 'https://schema.org', '@type': 'BlogPosting', 'headline': b['title'], 'description': b['excerpt'], 'url': url,
+           'mainEntityOfPage': url, 'image': f"{SITE['url']}/img/{b['cover']}/00-{MANIFEST[b['cover']]['0']['sizes'][-1]}.webp",
+           'datePublished': b['iso'], 'dateModified': b['iso'], 'inLanguage': 'en',
+           'author': {'@id': ORG_ID, 'name': BRAND, 'url': SITE['url'] + '/'}, 'publisher': {'@id': ORG_ID, 'name': BRAND}}
+    page(f'blog/{b["slug"]}/', 'blog', body, title=f"{b['title']} | {BRAND}", desc=b['excerpt'], body_class='blog', ld=[art])
 
 
 
@@ -723,10 +801,42 @@ h1{{font-size:clamp(2.2rem,6vw,4rem);margin:0 0 12px;letter-spacing:-.03em}}p{{m
 <body><main><h1>That page isn't here.</h1><p>But we can help you find what you need.</p><a id="home" href="/">Back to {BRAND}</a></main>
 <script>var p=location.pathname.split('/');document.getElementById('home').href=(location.hostname.indexOf('github.io')>-1?'/'+p[1]:'')+'/';</script></body></html>''')
     urls = ['', 'services/'] + [f'services/{v["slug"]}/' for v in LANDING.values()] + [ 'work/', 'pricing/', 'blog/', 'about/', 'start/', 'privacy/', 'cookies/', 'terms/'] + [f'work/{p["slug"]}/' for p in PROJECTS] + [f'blog/{b["slug"]}/' for b in POSTS]
-    sm = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + ''.join(
-        f'  <url><loc>{SITE["url"]}/{u}</loc></url>\n' for u in urls) + '</urlset>\n'
+    # Every English page and its French copy, linked to each other, with the project images listed
+    today = time.strftime('%Y-%m-%d')
+    imgs = {f'work/{p["slug"]}/': [f'img/{p["slug"]}/{i:02d}-{MANIFEST[p["slug"]][str(i)]["sizes"][-1]}.webp'
+                                   for i in range(min(len(p['srcs']), 10))] for p in PROJECTS}
+    rows = []
+    for u in urls:
+        alts = ''.join(f'\n    <xhtml:link rel="alternate" hreflang="{l}" href="{SITE["url"]}/{pre}{u}"/>'
+                       for l, pre in (('en', ''), ('fr', 'fr/'), ('x-default', '')))
+        for pre in ('', 'fr/'):
+            im = ''.join(f'\n    <image:image><image:loc>{SITE["url"]}/{q(i)}</image:loc></image:image>' for i in imgs.get(u, []))
+            rows.append(f'  <url>\n    <loc>{SITE["url"]}/{pre}{u}</loc>\n    <lastmod>{today}</lastmod>{alts}{im}\n  </url>\n')
+    sm = ('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '
+          'xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n' + ''.join(rows) + '</urlset>\n')
     open(os.path.join(ROOT, 'sitemap.xml'), 'w', encoding='utf-8').write(sm)
     open(os.path.join(ROOT, 'robots.txt'), 'w', encoding='utf-8').write(f'User-agent: *\nAllow: /\n\nSitemap: {SITE["url"]}/sitemap.xml\n')
+
+    # Netlify response headers: security, long caching for fingerprinted/static files,
+    # and keep the concept demo sites (fictional brands) out of search; their /work/ pages represent them.
+    concept_dirs = ['afaa-pay', 'northstar-capital', 'vita-house', 'mason-rowe', 'flyer', 'motion-video']
+    open(os.path.join(ROOT, '_headers'), 'w', encoding='utf-8').write(
+        '/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n  X-Frame-Options: SAMEORIGIN\n'
+        '  Permissions-Policy: camera=(), microphone=(), geolocation=()\n\n'
+        '/img/*\n  Cache-Control: public, max-age=31536000, immutable\n\n'
+        '/css/fonts/*\n  Cache-Control: public, max-age=31536000, immutable\n\n'
+        '/css/*\n  Cache-Control: public, max-age=604800\n\n/js/*\n  Cache-Control: public, max-age=604800\n\n'
+        '/assets/*\n  Cache-Control: public, max-age=2592000\n\n/video/*\n  Cache-Control: public, max-age=2592000\n\n'
+        + ''.join(f'/{d}/*\n  X-Robots-Tag: noindex, follow\n\n' for d in concept_dirs))
+
+    # llms.txt: plain summary for AI search tools
+    open(os.path.join(ROOT, 'llms.txt'), 'w', encoding='utf-8').write(
+        f"# {BRAND}\n\n> {META['home'][1]} Based in Canada, working worldwide, in English and French.\n\n"
+        f"Contact: {SITE['email']} · Start a project: {SITE['url']}/start/\n\n## Services\n\n"
+        + ''.join(f"- [{v['title']}]({SITE['url']}/services/{v['slug']}/): {v['desc']}\n" for v in LANDING.values())
+        + f"\n## Work\n\n" + ''.join(f"- [{p['title']}]({SITE['url']}/work/{p['slug']}/) ({KIND[p['kind']]}): {p['plain']}.\n" for p in PROJECTS)
+        + f"\n## Guides\n\n" + ''.join(f"- [{b['title']}]({SITE['url']}/blog/{b['slug']}/): {b['excerpt']}\n" for b in POSTS)
+        + f"\n## More\n\n- [Pricing]({SITE['url']}/pricing/)\n- [About]({SITE['url']}/about/)\n- [Français]({SITE['url']}/fr/)\n")
 
 
 if __name__ == '__main__':
@@ -737,5 +847,5 @@ if __name__ == '__main__':
         project(p)
     extras()
     import i18n
-    n, miss = i18n.run(BUILT, SITE['url'])
+    n, miss = i18n.run(BUILT, SITE['url'], post=clip_meta)
     print('built', len(BUILT), 'English pages +', n, 'French pages, version', VERSION, '| untranslated strings:', miss)
