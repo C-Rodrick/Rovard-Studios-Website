@@ -334,75 +334,20 @@ def home():
   <div class="film-ui"><div><small>The film · 1:30</small><p>{BRAND} in 90 seconds: what we do, and what it looks like.</p></div>
   <button class="play" type="button" aria-label="Play the {BRAND} film">{PLAY}</button></div></div></section>'''
 
-    track = ''.join(f'<span>{esc(w)}</span>' for w in MARQUEE)
-    marquee = f'<div class="marquee" aria-hidden="true"><div class="marquee-track">{track}</div><div class="marquee-track">{track}</div></div>'
-
-    need_rows = ''.join(
-        f'<a class="row{" hl" if k == "unsure" else ""}" href="start/?need={k}"><span>{esc(t)}</span><i class="arrow-c">{ARROW}</i></a>' for k, t in NEEDS)
-    need = f'''<section class="sec" id="need"><div class="wrap">
-  <div class="sh"><div><p class="eyebrow" data-r="fade">Start here</p><h2 class="h2" data-r="words">What are you <span class="grad">trying to make?</span></h2></div>
-  <div class="sh-r"><p class="sub" data-r>Pick the closest one. Can't decide? Pick anything. You can change it on the next screen.</p></div></div>
-  <div class="rows" data-stagger="45">{need_rows}</div>
-  <div class="cta-row" data-r>{pill('See everything we design', 'services/', 'pill-ghost')}</div>
-</div></section>'''
-
     cards = ''
     for s in FEATURED:
         p = BY[s]
         cards += f'''<a class="pcard" href="work/{s}/" aria-label="{esc(p['title'])}">{img(s, 0, p['title'], base, sizes='(min-width: 1100px) 480px, 82vw', want=1100, extra=' data-par=".05"')}
   <span class="pc-top"><span class="tagc">{esc(KIND[p['kind']])}</span><i class="arrow-c">{ARROW}</i></span>
   <span class="pc-body"><h3>{esc(p['title'])}</h3><p>{esc(p['plain'])}</p></span></a>'''
-    work = f'''<section class="sec" id="work" style="padding-top:0"><div class="wrap">
+    work = f'''<section class="sec" id="work"><div class="wrap">
   <div class="sh"><div><p class="eyebrow" data-r="fade">Selected work</p><h2 class="h2" data-r="words">Don't take our word for it. <span class="grad">Look at the work.</span></h2></div>
   <div class="sh-r"><p class="sub" data-r>Logos, brands, websites, graphics, packaging and films. Drag to explore, and ask yourself: could this be my business?</p></div></div></div>
   <div class="car" data-car data-r><div class="car-track">{cards}</div></div>
   <div class="wrap car-ctl" data-r><button class="car-btn" type="button" data-prev aria-label="Previous projects">{LEFT}</button><div class="car-bar"><i></i></div><button class="car-btn" type="button" data-next aria-label="Next projects">{RIGHT}</button>{pill('See all work', 'work/', 'pill-ghost')}</div>
 </section>'''
 
-    ways = ''
-    for w in TWO_WAYS:
-        ticks = ''.join(f'<li>{CHECK}<span>{esc(i)}</span></li>' for i in w['items'])
-        ways += f'''<div class="way"><span class="chip" data-r><i></i>{esc(w['tag'])}</span>
-  <h3 class="h3" data-r data-d=".08">{esc(w['title'])}</h3><ul class="ticks" data-stagger="70">{ticks}</ul>
-  <div data-r data-d=".3">{pill(esc(w['cta']), w['href'])}</div>
-  <div class="way-img">{ref_img(w['img'], w['img'][0], base, sizes='(min-width: 900px) 580px, 94vw', want=1100, extra=' data-par=".05"')}</div></div>'''
-    two = f'''<section class="sec" id="ways" style="padding-top:0"><div class="wrap">
-  <div class="sh"><div><p class="eyebrow" data-r="fade">Where to begin</p><h2 class="h2" data-r="words">Where are you right now: <span class="grad">starting or growing?</span></h2></div></div>
-  <div class="two" data-r>{ways}</div></div></section>'''
-
-    stories = ''
-    for slug in HOME_STORIES:
-        st, p = STORIES[slug], BY[slug]
-        big, (a, b) = st['big'], st['small']
-        stories += f'''<article class="story"><div class="story-head" data-r><div><p class="eyebrow">{st['kicker']} {concept(p)}</p>
-    <h3 class="h3"><a href="work/{slug}/">{esc(p['title'])}</a></h3><p>{esc(st['line'])}</p></div>{pill('View the project', f'work/{slug}/', 'pill-ghost')}</div>
-  <div class="story-grid" data-r data-d=".1">
-    <figure class="s-big"><span class="s-n">1</span>{ref_img(big, big[2], base, sizes='(min-width: 900px) 640px, 94vw')}<figcaption>{esc(big[2])}</figcaption></figure>
-    <figure class="s-a"><span class="s-n">2</span>{ref_img(a, a[2], base, sizes='(min-width: 900px) 460px, 46vw', want=560)}<figcaption>{esc(a[2])}</figcaption></figure>
-    <figure class="s-b"><span class="s-n">3</span>{ref_img(b, b[2], base, sizes='(min-width: 900px) 460px, 46vw', want=560)}<figcaption>{esc(b[2])}</figcaption></figure></div></article>'''
-    story = f'''<section class="sec" id="stories" style="padding-top:0"><div class="wrap">
-  <div class="sh"><div><p class="eyebrow" data-r="fade">Idea → design → real world</p><h2 class="h2" data-r="words">From an idea to <span class="grad">the real world</span></h2></div>
-  <div class="sh-r"><p class="sub" data-r>A logo on a screen isn't the job. The job is what happens when it meets the real world. Here's what a few projects became.</p></div></div>
-  {stories}</div></section>'''
-
-    def acard(i):
-        t, d = AUDIENCES[i]
-        return f'<div class="acard"><h3>{esc(t)}</h3><p>{esc(d)}</p></div>'
-
-    def person(n):
-        label, pos = PEOPLE[n]
-        return (f'<figure class="acard photo">{img("people", n, label, base, sizes="360px", want=560, extra=f" style=\"object-position:{pos}\"")}'
-                f'<figcaption>{esc(label)}</figcaption></figure>')
-    blue = '<div class="acard blue"><h3>No project is too small.</h3><p>One flyer, one logo, one card. They all count here.</p></div>'
-    r1 = [person(1), acard(0), acard(1), person(4), person(8), acard(2), person(3), acard(3), person(10), blue]
-    r2 = [person(6), acard(4), person(5), acard(5), person(9), person(2), acard(6), person(7), acard(7)]
     row = lambda items, cls='': f'<div class="cards-row {cls}">{"".join(items)}{"".join(items)}</div>'
-    who = f'''<section class="sec" id="who" style="padding-top:0"><div class="wrap">
-  <div class="sh"><div><p class="eyebrow" data-r="fade">Who we work with</p><h2 class="h2" data-r="words">Big idea or small one, <span class="grad">start where you are.</span></h2></div>
-  <div class="sh-r"><p class="sub" data-r>You don't need design language. You need something worth showing people, and a reason for them to care.</p></div></div></div>
-  <div class="cards-wrap" data-r aria-label="Who we work with">{row(r1)}{row(r2, 'rev')}</div>
-  <p class="small muted illus" data-r>{PEOPLE_NOTE}</p></section>'''
-
     tms = load_testimonials()
     if tms:
         def tcard(t):
@@ -418,18 +363,6 @@ def home():
   <div class="cards-wrap" data-r>{row(cards_t[:half])}{row(cards_t[half:], 'rev')}</div></section>'''
     else:
         reviews = ''
-
-    pans = ''
-    for n, ((t, d), ref) in enumerate(zip(WHY, WHY_IMGS)):
-        pans += f'''<article class="pan" tabindex="0">{ref_img(ref, '', base, sizes='(min-width: 900px) 640px, 94vw', want=1100, extra=f' style="object-position:{ref[2]}"')}
-  <span class="pn">{n + 1:02d}</span><span class="pp">{PLUS}</span><div class="pbd"><h3>{esc(t)}</h3><p>{esc(d)}</p></div></article>'''
-    n_asks = len({a for s in SERVICES for a in s['asks']})
-    stats = [(7, '+', 'years of experience'), (200, '+', 'projects completed'),
-             (len(SERVICES), '', 'kinds of work you can ask for'), (3, '', 'short steps to get started')]
-    stat_html = ''.join(f'<div class="stat"><b data-count="{n}" data-suffix="{s}">{n}{s}</b><span>{esc(l)}</span></div>' for n, s, l in stats)
-    why = f'''<section class="sec" id="why" style="padding-top:0"><div class="wrap">
-  <div class="sh"><div><p class="eyebrow" data-r="fade">Why {BRAND}</p><h2 class="h2" data-r="words">Easy to talk to. <span class="grad">Serious about the result.</span></h2></div></div>
-  <div class="acc" data-r>{pans}</div><div class="stats" data-r>{stat_html}</div></div></section>'''
 
     lf = ''.join(f'<figure class="lf-{i}" data-r data-d="{i * .1:.1f}">{ref_img(r, r[2], base, sizes="(min-width: 900px) 600px, 94vw")}<figcaption>{esc(r[2])}</figcaption></figure>' for i, r in enumerate(LARGE_FORMAT))
     large = f'''<section class="sec dark" id="large-format"><div class="wrap large-grid">
@@ -448,14 +381,12 @@ def home():
   <ol class="steps" data-stagger="90">{steps}</ol></div></section>'''
 
     srows = ''.join(f'<a class="row" href="services/#{s["id"]}"><span>{esc(s["title"])}</span><i class="arrow-c">{ARROW}</i></a>' for s in SERVICES)
-    small = [a for s in SERVICES for a in s['asks'][:3]][:23]
-    asks = ''.join(f'<li>{esc(a)}</li>' for a in small) + f'<li><a href="start/?need=unsure">Don\'t see it? Ask us →</a></li>'
     serv = f'''<section class="sec" id="services" style="padding-top:0"><div class="wrap">
   <div class="sh"><div><p class="eyebrow" data-r="fade">Services</p><h2 class="h2" data-r="words">What we can <span class="grad">design for you</span></h2></div>
   <div class="sh-r" data-r>{pill('See all services', 'services/', 'pill-ghost')}</div></div>
-  <div class="rows" data-stagger="45">{srows}</div><ul class="asks-list" data-r>{asks}</ul></div></section>'''
+  <div class="rows" data-stagger="45">{srows}</div></div></section>'''
 
-    page('', 'home', hero + logos + film + marquee + need + work + two + story + who + reviews + why + large + how + serv + faq_section(base) + close_cta(base), body_class='home')
+    page('', 'home', hero + logos + film + work + serv + reviews + large + how + faq_section(base, FAQ[:5]) + close_cta(base), body_class='home')
 
 
 # ── SERVICES ──────────────────────────────────────────────────────────────
