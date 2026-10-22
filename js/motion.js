@@ -46,12 +46,12 @@
   const pageHead = $('.ph .wrap, .proj-head .wrap');
   const zoom = $('[data-zoom]');
   const bands = $$('[data-band]');
-  const lf = $('#large-format');
+  const blocks = $$('.tone, #large-format');
   const steps = $('.steps');
   // only measure what is near the screen
   const near = new Set();
   const nio = new IntersectionObserver(es => es.forEach(en => (en.isIntersecting ? near.add(en.target) : near.delete(en.target))), { rootMargin: '25% 0px' });
-  [zoom, lf, steps, ...bands].forEach(el => el && nio.observe(el));
+  [zoom, steps, ...bands, ...blocks].forEach(el => el && nio.observe(el));
 
   let lastY = -1, lastH = 0, vel = 0, prevY = scrollY;
   const frame = () => {
@@ -90,11 +90,11 @@
         b.style.transform = `translate3d(${(dir * (p - 0.5) * 40).toFixed(2)}vw, 0, 0) skewX(${clamp(-vel * 0.12, -8, 8).toFixed(2)}deg)`;
       });
 
-      if (lf && near.has(lf)) {
-        const r = lf.getBoundingClientRect();
-        const p = clamp((vh - r.top) / (vh * 0.8));
-        lf.style.setProperty('--k', Math.pow(1 - p, 2).toFixed(4));
-      }
+      blocks.forEach(bl => {
+        if (!near.has(bl)) return;
+        const p = clamp((vh - bl.getBoundingClientRect().top) / (vh * 0.8));
+        bl.style.setProperty('--k', Math.pow(1 - p, 2).toFixed(4));
+      });
 
       if (steps && near.has(steps)) {
         const r = steps.getBoundingClientRect();

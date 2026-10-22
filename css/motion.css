@@ -84,8 +84,8 @@ html.mo .zoom .film.playing { clip-path: none; }
 .band-row span::after { content: ""; width: .16em; height: .16em; border-radius: 50%; background: var(--yellow); flex: none; }
 .band-row.o { color: transparent; -webkit-text-stroke: 1.5px var(--blue); margin-left: -30vw; }
 
-/* ── Large format: the blue section widens from a card to full bleed ──── */
-html.mo #large-format { clip-path: inset(0 calc(var(--k, 0) * 7%) round calc(var(--k, 0) * 56px)); }
+/* ── Colour blocks widen from a smaller card as they arrive ───────────── */
+html.mo .tone, html.mo #large-format { clip-path: inset(0 calc(var(--k, 0) * 7%) round clamp(28px, 4vw, 56px)); }
 
 /* ── How it works: the line draws as you scroll ────────────────────────── */
 html.mo .steps { position: relative; }
@@ -110,3 +110,35 @@ html.mo .pill { translate: var(--mx, 0px) var(--my, 0px); }
   .intro, .cur, .mo-prog { display: none !important; }
   html::after { display: none !important; }
 }
+
+/* ── Bold type ─────────────────────────────────────────────────────────────
+   Same fonts (Syne + Space Grotesk), pushed bigger, heavier and tighter. */
+.h1, .h2, .big { font-weight: 700; letter-spacing: -.045em; }
+.h2 { font-size: clamp(2.3rem, 5.3vw, 5.1rem); line-height: 1; }
+.big { font-size: clamp(2.6rem, 6.4vw, 6.2rem); line-height: .98; }
+.hero-orig .hero-title { font-weight: 800; font-size: clamp(2.8rem, 6.2vw, 7rem); line-height: .92; letter-spacing: -.055em; }
+.ph .h1, .proj-head .h1 { font-weight: 800; font-size: clamp(2.8rem, 7.4vw, 7.4rem); line-height: .93; letter-spacing: -.05em; max-width: 14ch; }
+.sh { align-items: flex-end; }
+.sh > div:first-child { flex: 1 1 560px; }
+.eyebrow { font-size: 13px; letter-spacing: .18em; }
+@media (max-width: 760px) { .hero-orig .hero-title { font-size: clamp(2.3rem, 10.6vw, 4.2rem); } }
+
+/* ── Colour blocks: whole sections in brand ink, yellow and blue ───────── */
+.tone { position: relative; padding-block: var(--sec); border-radius: clamp(28px, 4vw, 56px); margin-inline: clamp(8px, 1.2vw, 16px); }
+.tone + .tone, .tone + #large-format { margin-top: clamp(8px, 1.2vw, 16px); }
+#large-format { border-radius: clamp(28px, 4vw, 56px); margin-inline: clamp(8px, 1.2vw, 16px); }
+.tone-ink { background: radial-gradient(60% 50% at 100% 0%, rgba(61, 131, 251, .32), transparent 65%), radial-gradient(50% 45% at 0% 100%, rgba(245, 204, 0, .12), transparent 65%), var(--dark); color: #fff; }
+.tone-ink .h2, .tone-ink .h3, .tone-ink .big { color: #fff; }
+.tone-ink .eyebrow { color: rgba(255, 255, 255, .82); }
+.tone-ink .sub { color: rgba(255, 255, 255, .72); }
+.tone-ink .grad, .tone-ink .sp .grad .wi { color: #fff; -webkit-text-fill-color: #fff; }
+.tone-ink .car-bar { background: rgba(255, 255, 255, .16); }
+.tone-ink .car-bar i { background: var(--yellow); }
+.tone-yellow { background: radial-gradient(55% 60% at 100% 0%, rgba(255, 255, 255, .55), transparent 65%), linear-gradient(160deg, #FFD91A, var(--yellow)); color: var(--ink); }
+.tone-yellow .eyebrow { color: var(--ink); }
+.tone-yellow .eyebrow::before { background: var(--blue); box-shadow: 0 0 0 4px rgba(22, 45, 175, .18); }
+.tone-yellow .grad, .tone-yellow .sp .grad .wi { color: var(--blue); -webkit-text-fill-color: var(--blue);
+  background-image: linear-gradient(transparent 62%, rgba(255, 255, 255, .75) 62%, rgba(255, 255, 255, .75) 90%, transparent 90%); }
+.tone-yellow .row { background: rgba(255, 255, 255, .62); border-color: rgba(255, 255, 255, .8); box-shadow: 0 14px 40px rgba(120, 90, 0, .14); }
+.tone-yellow .row::before { color: var(--ink); }
+.tone-yellow .row:hover::before { color: #fff; }

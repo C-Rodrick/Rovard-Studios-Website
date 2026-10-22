@@ -354,7 +354,7 @@ def home():
         cards += f'''<a class="pcard" href="work/{s}/" aria-label="{esc(p['title'])}">{img(s, 0, p['title'], base, sizes='(min-width: 1100px) 480px, 82vw', want=1100, extra=' data-par=".05"')}
   <span class="pc-top"><span class="tagc">{esc(KIND[p['kind']])}</span><i class="arrow-c">{ARROW}</i></span>
   <span class="pc-body"><h3>{esc(p['title'])}</h3><p>{esc(p['plain'])}</p></span></a>'''
-    work = f'''<section class="sec" id="work"><div class="wrap">
+    work = f'''<section class="sec tone tone-ink" id="work"><div class="wrap">
   <div class="sh"><div><p class="eyebrow" data-r="fade">Selected work</p><h2 class="h2" data-r="words">Don't take our word for it. <span class="grad">Look at the work.</span></h2></div>
   <div class="sh-r"><p class="sub" data-r>Logos, brands, websites, graphics, packaging and films. Drag to explore, and ask yourself: could this be my business?</p></div></div></div>
   <div class="car" data-car data-r><div class="car-track">{cards}</div></div>
@@ -395,7 +395,7 @@ def home():
   <ol class="steps" data-stagger="90">{steps}</ol></div></section>'''
 
     srows = ''.join(f'<a class="row" href="services/#{s["id"]}"><span>{esc(s["title"])}</span><i class="arrow-c">{ARROW}</i></a>' for s in SERVICES)
-    serv = f'''<section class="sec" id="services" style="padding-top:0"><div class="wrap">
+    serv = f'''<section class="sec tone tone-yellow" id="services"><div class="wrap">
   <div class="sh"><div><p class="eyebrow" data-r="fade">Services</p><h2 class="h2" data-r="words">What we can <span class="grad">design for you</span></h2></div>
   <div class="sh-r" data-r>{pill('See all services', 'services/', 'pill-ghost')}</div></div>
   <div class="rows" data-stagger="45">{srows}</div></div></section>'''
