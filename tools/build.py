@@ -188,12 +188,11 @@ def footer(base, path=''):
   <div class="wrap foot">
     <div class="foot-brand">
       <a href="{base or './'}" aria-label="{BRAND} home"><img src="{base}{LOGO_WHITE}" alt="{BRAND}" width="150" height="57" loading="lazy"></a>
-      <p>Whatever you're putting out there, we'll make it look right.</p>
       <p class="foot-contact">{SITE['location']}</p>
     </div>
     <nav class="foot-col" aria-label="Company"><h2>Company</h2>
       <a href="{base or './'}">Home</a><a href="{base}services/">Services</a><a href="{base}work/">Our work</a><a href="{base}pricing/">Pricing</a><a href="{base}blog/">Blog</a><a href="{base}about/">About</a><a href="{base}start/">Start a project</a></nav>
-    <nav class="foot-col foot-svc" aria-label="Services"><h2>Services</h2><div class="svc-cols">{''.join(svc)}</div></nav>
+    <nav class="foot-col foot-svc" aria-label="Services"><h2>Services</h2><div class="svc-cols">{''.join(svc)}</div><a class="svc-all" href="{base}services/">See all services</a></nav>
   </div>
   <div class="wrap foot-base"><span>© {SITE['year']} {BRAND}. All rights reserved.</span>
     <span class="lang" data-lang aria-label="Language"><a href="{base}{path}" aria-current="true">EN</a><a href="{base}fr/{path}" hreflang="fr" lang="fr">FR</a></span>
