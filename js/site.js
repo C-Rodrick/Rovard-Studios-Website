@@ -224,15 +224,25 @@
   const form = $('#start-form');
   if (form) {
     const err = $('.form-error', form);
-    (new URLSearchParams(location.search).get('need') || '').split(',').filter(Boolean).forEach(v => {
-      const c = $(`input[name="need"][value="${CSS.escape(v)}"]`, form); if (c) c.checked = true;
-    });
+    const qs = new URLSearchParams(location.search), pkSel = form.package, needSel = form.need, budSel = form.budget;
+    const has = (sel, v) => [...sel.options].some(o => o.value === v);
+    // picking a package fills in what it is and its budget range
+    const fromPackage = () => {
+      const o = pkSel.selectedOptions[0];
+      if (!o || !o.dataset.need) return;
+      if (has(needSel, o.dataset.need)) needSel.value = o.dataset.need;
+      if (o.dataset.budget) budSel.value = o.dataset.budget;
+    };
+    pkSel.addEventListener('change', fromPackage);
+    const need0 = (qs.get('need') || '').split(',')[0];
+    if (need0 && has(needSel, need0)) needSel.value = need0;
+    const pk0 = qs.get('package') && $(`option[data-pk="${CSS.escape(qs.get('package'))}"]`, pkSel);
+    if (pk0) { pkSel.value = pk0.value; fromPackage(); }
     const check = () => {
+      if (!needSel.value) return [needSel, L('Choose what you need, or “I’m not sure”.', 'Choisissez ce dont vous avez besoin, ou « Je ne sais pas trop ».')];
       if (!form.name.value.trim()) return [form.name, L('Please tell us your name.', 'Veuillez nous indiquer votre nom.')];
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.value.trim())) return [form.email, L('Please check your email address.', 'Veuillez vérifier votre adresse courriel.')];
-      const needs = $$('input[name="need"]:checked', form).map(x => x.value);
-      if (!needs.length) return [$('.seg', form), L('Pick at least one thing you need, or choose “I’m not sure”.', 'Choisissez au moins une chose dont vous avez besoin, ou « Je ne sais pas trop ».')];
-      if (needs.includes('unsure') && !form.idea.value.trim()) return [form.idea, L('Tell us a little about your idea, in your own words.', 'Parlez-nous un peu de votre idée, dans vos propres mots.')];
+      if (needSel.value === 'unsure' && !form.idea.value.trim()) return [form.idea, L('Tell us a little about your idea, in your own words.', 'Parlez-nous un peu de votre idée, dans vos propres mots.')];
       return null;
     };
     form.addEventListener('submit', async e => {

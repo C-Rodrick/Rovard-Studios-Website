@@ -660,7 +660,7 @@ def pricing():
         price = f'From <b>${pk["price"]:,}</b>' if pk.get('price') else '<b>Tell us your budget</b>'
         feat = ''
         lis = ''.join(f'<li>{esc(x)}</li>' for x in pk['includes'])
-        btn = pill('Get a quote', f"{base}start/?need={pk['need']}", 'pill-outline pill-sm', ico=False)
+        btn = pill('Choose this package', f"{base}start/?package={pk['id']}", 'pill-outline pill-sm', ico=False)
         cards += f"""<article class="pk{feat}" data-r>
   <h2>{esc(pk['name'])}</h2><p class="pk-who">{esc(pk['who'])}</p>
   <ul>{lis}</ul>
@@ -669,7 +669,7 @@ def pricing():
   <h1 class="h1" data-r="words" data-intro>Clear, <span class="grad">no surprises</span></h1>
   <p class="lead" data-r data-intro data-d=".3">Price should come from value, so every project gets a written quote before any work starts. Here's what each kind of project usually includes, so you know what to ask for.</p></div></section>
 <section class="wrap pk-grid">{cards}</section>
-<section class="wrap pk-note" data-r><p>These are starting points, in US dollars, before taxes. Not sure which fits? Choose a budget range on the form and we'll tell you honestly what it can cover. Your written quote has the final price, the timeline and exactly what's included.</p></section>
+<section class="wrap pk-note" data-r><p>These are starting points, in US dollars, before taxes. Not sure which fits? Pick “No package” on the form, choose a budget range, and we'll tell you honestly what it can cover. Your written quote has the final price, the timeline and exactly what's included.</p></section>
 {faq_section(base)}
 {close_cta(base, "Ready when <span class=\"grad\">you are.</span>")}"""
     page('pricing/', 'pricing', body, body_class='pricing')
@@ -679,41 +679,45 @@ def pricing():
 # ── START ─────────────────────────────────────────────────────────────────
 def start():
     base = '../'
-    extra_alt = ''
+    def bucket(price):
+        # the budget range a package's starting price falls in
+        for b, top in zip(BUDGETS, [250, 1000, 3000, 5000, 10000, float('inf')]):
+            if price is not None and price < top:
+                return b
+        return BUDGETS[-1]
+    pk_opts = ''
+    for pk in sorted(PACKAGES, key=lambda x: (x.get('price') is None, x.get('price') or 0)):
+        label = esc(pk['name']) + (f" · from ${pk['price']:,}" if pk.get('price') else '')
+        pk_opts += f'<option value="{esc(pk["name"])}" data-pk="{pk["id"]}" data-need="{pk["need"]}" data-budget="{esc(bucket(pk.get("price")))}">{label}</option>'
+    need_opts = ''.join(f'<option value="{k}">{esc(t)}</option>' for k, t in NEEDS)
+    budget_opts = ''.join(f'<option value="{esc(b)}">{esc(b)}</option>' for b in BUDGETS)
+    alt = f'<a href="mailto:{SITE["email"]}">{SITE["email"]}</a>'
     if wa_href():
-        extra_alt += f'<a class="alt-card" href="{wa_href()}" target="_blank" rel="noopener"><small>Prefer to chat?</small><b>Message us on WhatsApp</b><i class="arrow-c">{ARROW}</i></a>'
-    if SITE.get('booking'):
-        extra_alt += f'<a class="alt-card" href="{SITE["booking"]}" target="_blank" rel="noopener"><small>Prefer to talk?</small><b>Book a call</b><i class="arrow-c">{ARROW}</i></a>'
-    budgets = ''.join(f'<label class="pick"><input type="radio" name="budget" value="{esc(b)}"><span>{esc(b)}</span></label>' for b in BUDGETS)
-    picks = ''.join(f'<label class="pick"><input type="checkbox" name="need" value="{k}"><span>{esc(t)}</span></label>' for k, t in NEEDS)
-    arc = ''.join(f'<i style="background-image:url({base}img/people/{n:02d}-560.webp);background-size:230% auto;background-position:50% 9%"></i>' for n in HERO_FACES)
-    steps = ''.join(f'<li><span class="n">{i + 1:02d}</span><div><h3>{esc(t)}</h3><p>{esc(d)}</p></div></li>' for i, (t, d) in enumerate(STEPS[:3]))
+        alt += f' · <a href="{wa_href()}" target="_blank" rel="noopener">WhatsApp</a>'
     body = f"""<section class="talk2"><div class="wrap talk2-grid">
   <aside class="talk2-side">
-    <p class="nrf" data-r data-intro>Not sure how to put it? <b>Messy is fine.</b></p>
-    <h1 class="big" data-r="words" data-intro data-d=".1">Tell us <span class="grad">what you need</span></h1>
-    <p class="talk-sub" data-r data-intro data-d=".3">Share what you're working on, or email us at <a href="mailto:{SITE['email']}">{SITE['email']}</a>. Tell us who it's for and what it needs to do. If you don't know yet, say that.</p>
-    <div class="alt" data-r data-d=".35"><a class="alt-card" href="mailto:{SITE['email']}"><small>Email us</small><b>{SITE['email']}</b><i class="arrow-c">{ARROW}</i></a>{extra_alt}
-      <a class="alt-card" href="{base}work/"><small>Not ready yet?</small><b>See what we've made</b><i class="arrow-c">{ARROW}</i></a></div>
-    <h2 class="side-h" data-r>How it works</h2>
-    <ol class="side-steps" data-r data-d=".1">{steps}</ol>
+    <h1 class="big" data-r="words" data-intro>Tell us <span class="grad">what you need</span></h1>
+    <p class="talk-sub" data-r data-intro data-d=".2">A few words is enough. We reply with a written quote before any work starts.</p>
+    <a class="pk-cta" href="{base}pricing/" data-r data-intro data-d=".3"><small>Know what you want?</small><b>Compare our packages</b><i class="arrow-c">{ARROW}</i></a>
+    <p class="talk-alt" data-r data-intro data-d=".35">Prefer to write? {alt}</p>
   </aside>
   <div class="talk2-main">
   <form id="start-form" class="tform" action="{SITE['formspree']}" method="POST" novalidate data-r data-intro data-d=".25">
     <input type="hidden" name="_subject" value="New project enquiry from the {BRAND} website">
     <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="trap" aria-hidden="true">
-    <div class="f"><label for="f-name">Name &amp; company</label><input id="f-name" name="name" type="text" autocomplete="name" placeholder="Your name, and your business if you have one" required></div>
+    <div class="f"><label for="f-package">Package <em>(optional)</em></label><select id="f-package" name="package"><option value="">No package, just a quote</option>{pk_opts}</select>
+      <a class="pk-link" href="{base}pricing/">See what each package includes</a></div>
     <div class="f-row">
-      <div class="f"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required></div>
-      <div class="f"><label for="f-phone">Phone <em>(optional)</em></label><input id="f-phone" name="phone" type="tel" autocomplete="tel" placeholder="+1 555 555 5555"></div>
+      <div class="f"><label for="f-need">What do you need?</label><select id="f-need" name="need" required><option value="" disabled selected>Choose one</option>{need_opts}</select></div>
+      <div class="f"><label for="f-budget">Budget <em>(optional, USD)</em></label><select id="f-budget" name="budget"><option value="">Choose a range</option>{budget_opts}</select></div>
     </div>
-    <div class="f"><span class="lab" id="needs-l">What do you need? <em>Tick everything that applies</em></span><div class="seg" role="group" aria-labelledby="needs-l">{picks}</div></div>
-    <div class="f"><label for="f-idea">Tell us a little about it</label><textarea id="f-idea" name="idea" rows="4" placeholder="For example: I'm starting a bakery and need a logo and a flyer for the opening."></textarea></div>
-    <div class="f"><span class="lab" id="budget-l">Roughly what's your budget? <em>(optional, in USD)</em></span><div class="seg" role="radiogroup" aria-labelledby="budget-l">{budgets}</div></div>
-    <div class="f"><label for="f-date">Is there a date you need it by? <em>(optional)</em></label><input id="f-date" name="deadline" type="text" placeholder="For example: end of next month"></div>
+    <div class="f-row">
+      <div class="f"><label for="f-name">Name</label><input id="f-name" name="name" type="text" autocomplete="name" placeholder="Your name or business" required></div>
+      <div class="f"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required></div>
+    </div>
+    <div class="f"><label for="f-idea">A few words about it <em>(optional)</em></label><textarea id="f-idea" name="idea" rows="3" placeholder="For example: a logo and an opening flyer for my bakery, by next month."></textarea></div>
     <p class="form-error" role="alert" aria-live="assertive"></p>
-    <div class="tform-foot"><p class="small muted">One flyer is a real project. No brief needed.</p>
-      <button type="submit" class="pill pill-lg" data-submit><span>Send it to us</span><i class="ico">{ARROW}</i></button></div>
+    <div class="tform-foot"><button type="submit" class="pill pill-lg" data-submit><span>Send it to us</span><i class="ico">{ARROW}</i></button></div>
   </form>
   <div class="form-done" hidden><h2 class="h2">Thank you. <span class="grad">We've got it.</span></h2><p class="lead">We'll read what you sent and get back to you.</p>
     <div class="cta-row">{pill('See some of our work', base + 'work/')}</div></div>
