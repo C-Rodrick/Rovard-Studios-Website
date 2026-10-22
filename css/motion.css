@@ -1,0 +1,112 @@
+/* ROVARD STUDIOS — animated version (motion layer). Loaded after theme.css.
+   Adds an opening sequence, page-to-page curtain, scroll-pinned film zoom, scroll-driven type band, masked image reveals,
+   a growing large-format reveal, scroll-out hero, a cursor follower and magnetic buttons.
+   Every starting state is keyed on html.mo, which the head script only sets when the visitor has not asked for reduced motion,
+   so without JS or with reduced motion the site is exactly the v2 site. */
+
+@view-transition { navigation: none; }   /* the curtain below replaces the cross-fade */
+
+/* ── Opening sequence (home, first visit in a session) ─────────────────── */
+.intro { display: none; }
+html.is-intro .intro {
+  display: grid; place-items: center; position: fixed; inset: 0; z-index: 990; pointer-events: none; color: #fff; overflow: hidden; clip-path: inset(0 0 0 0);
+  background: radial-gradient(60% 55% at 80% 10%, rgba(116, 163, 255, .45), transparent 65%), radial-gradient(50% 45% at 0% 100%, rgba(245, 204, 0, .16), transparent 65%), linear-gradient(160deg, #1B35C4, var(--deep));
+  animation: introWipe 1.05s var(--expo) 1.75s forwards;
+}
+.intro-in { display: grid; justify-items: center; gap: clamp(14px, 2vw, 24px); padding-inline: var(--gut); text-align: center; }
+html.is-intro .intro-in { animation: introZoom 1.1s var(--expo) 1.7s forwards; }
+.intro-word { font: 800 clamp(2.6rem, 10.5vw, 9.5rem)/.92 var(--display); letter-spacing: -.045em; display: grid; justify-items: center; }
+.intro-word .ln { display: block; overflow: hidden; padding-bottom: .08em; }
+.intro-word i { display: inline-block; font-style: normal; transform: translateY(110%); }
+html.is-intro .intro-word i { animation: chIn .95s var(--out) calc(.15s + var(--i) * 42ms) forwards; }
+.intro-word .ln + .ln i { -webkit-text-stroke: 1.5px #fff; color: transparent; }
+.intro-tag { font: 600 12px/1.2 var(--body); letter-spacing: .16em; text-transform: uppercase; opacity: 0; display: flex; gap: 12px; align-items: center; }
+.intro-tag::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--yellow); }
+html.is-intro .intro-tag { animation: fadeIn .6s ease-out .75s forwards; }
+.intro-bar { position: absolute; left: 0; right: 0; bottom: 0; height: 4px; background: var(--yellow); transform: scaleX(0); transform-origin: left; }
+html.is-intro .intro-bar { animation: barGrow 1.55s cubic-bezier(.65, 0, .35, 1) .1s forwards; }
+/* the page under the curtain zooms back to rest as the curtain lifts, and the hero lines wait for it */
+html.is-intro .hero2-stage { animation: settle 1.7s var(--out) 1.85s backwards; }
+html.is-intro [data-intro] { transition-delay: calc(var(--d, 0s) + 1.9s); }
+html.is-intro [data-intro] .wi { transition-delay: calc(var(--i, 0) * 55ms + var(--d, 0s) + 1.9s); }
+@keyframes chIn { to { transform: none; } }
+@keyframes fadeIn { to { opacity: .85; } }
+@keyframes barGrow { to { transform: none; } }
+@keyframes introWipe { to { clip-path: inset(0 0 100% 0); visibility: hidden; } }
+@keyframes introZoom { to { transform: translateY(-14vh) scale(1.35); opacity: 0; } }
+@keyframes settle { from { transform: scale(1.1); } }
+
+/* ── Page-to-page curtain ──────────────────────────────────────────────── */
+html.mo::after {
+  content: ""; position: fixed; inset: 0; z-index: 1000; pointer-events: none; clip-path: inset(100% 0 0 0);
+  background: url("../assets/Combined%20Logo%20-%20Rovard%20Studios%20-%20White.svg") center / clamp(120px, 14vw, 170px) auto no-repeat,
+              linear-gradient(160deg, #1B35C4, var(--deep));
+}
+html.pt-out::after { animation: curtainIn .55s var(--expo) forwards; }
+html.pt-in::after { clip-path: inset(0); animation: curtainOut .95s var(--expo) .08s forwards; }
+html.pt-in main { animation: rise 1.2s var(--out) .3s backwards; }
+@keyframes curtainIn { from { clip-path: inset(100% 0 0 0); } to { clip-path: inset(0); } }
+@keyframes curtainOut { to { clip-path: inset(0 0 100% 0); } }
+@keyframes rise { from { transform: translateY(70px); } }
+
+/* ── Scroll progress ───────────────────────────────────────────────────── */
+.mo-prog { position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 130; pointer-events: none; transform-origin: left; transform: scaleX(0);
+  background: linear-gradient(90deg, var(--yellow), var(--blue-2)); }
+
+/* ── Masked image reveals ──────────────────────────────────────────────── */
+html.mo .mz { clip-path: inset(100% 0 0 0 round var(--r)); transition: clip-path 1.35s var(--expo) var(--md, 0s); }
+html.mo .mz.mz-in { clip-path: inset(0 0 0 0 round var(--r)); }
+html.mo .mz.mz-done { clip-path: none; }
+html.mo .mz img { scale: 1.22; transition: transform 1.2s var(--out), scale 1.9s var(--out) var(--md, 0s); }
+html.mo .mz.mz-in img { scale: 1; }
+
+/* ── Film: pinned, grows from a card to the full screen ────────────────── */
+.zoom-pin { display: contents; }
+html.mo .showcase.zoom { padding-inline: 0; height: 200vh; height: 200svh; --z: 0; }
+html.mo .zoom-pin { display: grid; place-items: center; position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
+html.mo .zoom .film {
+  width: 100%; height: 100%; aspect-ratio: auto; border-radius: 0; box-shadow: none;
+  clip-path: inset(calc((1 - var(--z)) * 17%) calc((1 - var(--z)) * 20%) round calc((1 - var(--z)) * 28px + 0px));
+}
+html.mo .zoom .film .poster { inset: 0; height: 100%; scale: calc(1.28 - var(--z) * .28); }
+html.mo .zoom .film-ui { opacity: clamp(0, calc((var(--z) - .55) * 3), 1); }
+html.mo .zoom .film.playing { clip-path: none; }
+@media (max-width: 760px) {
+  /* keep the film close to its own shape on phones so the poster text is not cropped */
+  html.mo .showcase.zoom { height: 140vh; height: 140svh; }
+  html.mo .zoom .film { height: 62.5vw; clip-path: inset(calc((1 - var(--z)) * 12%) calc((1 - var(--z)) * 10%) round calc((1 - var(--z)) * 18px + 0px)); }
+}
+
+/* ── Scroll-driven type band ───────────────────────────────────────────── */
+.band { overflow: hidden; padding-block: clamp(56px, 9vw, 130px) 0; display: grid; gap: clamp(4px, 1vw, 12px); }
+.band-row { display: flex; gap: .5em; white-space: nowrap; width: max-content; font: 800 clamp(3rem, 10.5vw, 10rem)/1 var(--display); letter-spacing: -.045em; color: var(--blue); will-change: transform; }
+.band-row span { display: inline-flex; align-items: center; gap: .5em; }
+.band-row span::after { content: ""; width: .16em; height: .16em; border-radius: 50%; background: var(--yellow); flex: none; }
+.band-row.o { color: transparent; -webkit-text-stroke: 1.5px var(--blue); margin-left: -30vw; }
+
+/* ── Large format: the blue section widens from a card to full bleed ──── */
+html.mo #large-format { clip-path: inset(0 calc(var(--k, 0) * 7%) round calc(var(--k, 0) * 56px)); }
+
+/* ── How it works: the line draws as you scroll ────────────────────────── */
+html.mo .steps { position: relative; }
+html.mo .steps::after { content: ""; position: absolute; left: 0; right: 0; top: -1px; height: 2px; transform-origin: left; transform: scaleX(var(--p, 0));
+  background: linear-gradient(90deg, var(--yellow), var(--blue-2)); pointer-events: none; }
+@media (max-width: 900px) { html.mo .steps::after { display: none; } }
+
+/* ── Cursor follower (mouse only) ──────────────────────────────────────── */
+.cur { position: fixed; left: 0; top: 0; z-index: 400; pointer-events: none; width: 12px; height: 12px; margin: -6px 0 0 -6px; border-radius: 50%;
+  background: var(--blue); display: grid; place-items: center; opacity: 0; transition: width .45s var(--out), height .45s var(--out), margin .45s var(--out), background-color .3s, opacity .3s; }
+.cur b { font: 600 12px/1 var(--body); letter-spacing: .12em; text-transform: uppercase; color: var(--ink); opacity: 0; transition: opacity .25s; }
+.cur.on { opacity: 1; }
+.cur.big { width: 92px; height: 92px; margin: -46px 0 0 -46px; background: var(--yellow); }
+.cur.big b { opacity: 1; transition-delay: .1s; }
+.cur.link { width: 34px; height: 34px; margin: -17px 0 0 -17px; background: rgba(61, 131, 251, .22); }
+@media (hover: none), (pointer: coarse) { .cur { display: none; } }
+
+/* ── Magnetic buttons ──────────────────────────────────────────────────── */
+html.mo .pill { translate: var(--mx, 0px) var(--my, 0px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .intro, .cur, .mo-prog { display: none !important; }
+  html::after { display: none !important; }
+}

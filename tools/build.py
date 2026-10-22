@@ -112,7 +112,7 @@ def crumbs(items):
         {'@type': 'ListItem', 'position': i + 1, 'name': n, 'item': f"{SITE['url']}/{u}"} for i, (n, u) in enumerate(full)]}
 
 
-def head(title, desc, path, base, extra_ld=()):
+def head(title, desc, path, base, extra_ld=(), intro=False):
     url = f"{SITE['url']}/{path}"
     ld = json.dumps(site_ld(), ensure_ascii=False)
     ld += ''.join(f'</script>\n<script type="application/ld+json">{json.dumps(x, ensure_ascii=False)}' for x in extra_ld)
@@ -148,7 +148,9 @@ def head(title, desc, path, base, extra_ld=()):
 <link rel="preload" href="{base}css/fonts/SpaceGrotesk.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{base}css/site.css?v={VERSION}">
 <link rel="stylesheet" href="{base}css/theme.css?v={VERSION}">
+<link rel="stylesheet" href="{base}css/motion.css?v={VERSION}">
 <script>document.documentElement.classList.add('js')</script>
+<script>(function(d){{try{{if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;d.classList.add('mo');var s=sessionStorage;if(s.getItem('rv-pt')){{s.removeItem('rv-pt');d.classList.add('pt-in');}}else if({'1' if intro else '0'}&&!s.getItem('rv-intro'))d.classList.add('is-intro');if({'1' if intro else '0'})s.setItem('rv-intro','1');}}catch(e){{}}}})(document.documentElement)</script>
 <script type="application/ld+json">{ld}</script>
 </head>'''
 
@@ -202,6 +204,16 @@ def footer(base, path=''):
 {wa_fab()}'''
 
 
+def _letters(word, start):
+    return ''.join(f'<i style="--i:{start + k}">{c}</i>' for k, c in enumerate(word))
+
+
+# opening sequence on the home page (shown once per visit; css/motion.css)
+INTRO = f'''<div class="intro" aria-hidden="true"><div class="intro-in"><p class="intro-word"><span class="ln">{_letters('ROVARD', 0)}</span><span class="ln">{_letters('STUDIOS', 6)}</span></p>
+  <p class="intro-tag">Independent design studio · Canada · Worldwide</p></div><span class="intro-bar"></span></div>
+'''
+BAND = ['Logos', 'Flyers', 'Websites', 'Billboards', 'Vehicle branding', 'Social media', 'Packaging', 'Pitch decks', 'Films']
+
 BUILT = []
 _MEDIA_RE = re.compile(r'''(?<=["'(, ])(?:\.\./)*((?:img|video)/(?!mp4)|assets/Motion%20Design/)''')
 
@@ -229,15 +241,16 @@ def page(path, key, body, title=None, desc=None, body_class='', ld=()):
         if path.count('/') > 1:
             trail.append((t.rsplit(' | ', 1)[0].split(' — ')[0], path))
         ld.append(crumbs(trail))
-    out = head(t, d or META[key][1], path, base, ld) + f'''
+    out = head(t, d or META[key][1], path, base, ld, intro=body_class == 'home') + f'''
 <body class="{body_class}">
-{header(base)}
+{INTRO if body_class == 'home' else ''}{header(base)}
 <main id="main">
 {body}
 </main>
 {footer(base, path)}
 <script src="{base}js/lenis.min.js" defer></script>
 <script src="{base}js/site.js?v={VERSION}" defer></script>
+<script src="{base}js/motion.js?v={VERSION}" defer></script>
 {('<script src="' + base + 'js/hero-3d.js?v=' + VERSION + '" defer></script>') if body_class == 'home' else ''}
 </body>
 </html>
@@ -327,11 +340,13 @@ def home():
   <div class="logo-marq" data-r><ul class="logo-track">{one}{two}</ul></div></section>'''
 
     film_idx = find_img(PROJECTS, FILM['slug'], FILM['poster'])
-    film = f'''<section class="showcase wide"><div class="film" data-r>
+    film = f'''<section class="showcase wide zoom" data-zoom><div class="zoom-pin"><div class="film" data-r>
   {img(FILM['slug'], film_idx, f'A still from the {BRAND} film', base, sizes='(min-width: 1280px) 1160px, 94vw', eager=True, want=1600, cls='poster', extra=' data-par=".06"')}
   <video preload="none" playsinline poster="{base}img/{FILM['slug']}/{film_idx:02d}-1100.webp"><source src="{base}{FILM['src']}" type="video/mp4"></video>
   <div class="film-ui"><div><small>The film · 1:30</small><p>{BRAND} in 90 seconds: what we do, and what it looks like.</p></div>
-  <button class="play" type="button" aria-label="Play the {BRAND} film">{PLAY}</button></div></div></section>'''
+  <button class="play" type="button" aria-label="Play the {BRAND} film">{PLAY}</button></div></div></div></section>'''
+    band_words = ''.join(f'<span>{esc(w)}</span>' for w in BAND)
+    band = f'''<div class="band" aria-hidden="true"><div class="band-row" data-band="-1">{band_words}{band_words}</div><div class="band-row o" data-band="1">{band_words}{band_words}</div></div>'''
 
     cards = ''
     for s in FEATURED:
@@ -385,7 +400,7 @@ def home():
   <div class="sh-r" data-r>{pill('See all services', 'services/', 'pill-ghost')}</div></div>
   <div class="rows" data-stagger="45">{srows}</div></div></section>'''
 
-    page('', 'home', hero + logos + film + work + serv + reviews + large + how + faq_section(base, FAQ[:5]) + close_cta(base), body_class='home')
+    page('', 'home', hero + logos + film + band + work + serv + reviews + large + how + faq_section(base, FAQ[:5]) + close_cta(base), body_class='home')
 
 
 # ── SERVICES ──────────────────────────────────────────────────────────────

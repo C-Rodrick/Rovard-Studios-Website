@@ -23,6 +23,11 @@ How it is built
     js/site.js            Smooth scroll, reveals, word-by-word headlines, menu, parallax, carousel, panels,
                           hero rotator, filters, lightbox, start form
     js/lenis.min.js       Lenis smooth scrolling (MIT licence, v1.1.20, vendored)
+    css/motion.css + js/motion.js   Animated version (branch animated-version): opening sequence on the home page (once per visit),
+                          page-to-page curtain, pinned film that grows to full screen, scroll-driven type band, masked image
+                          reveals, widening large-format section, steps line, scroll progress, cursor follower, magnetic buttons.
+                          All of it is off for prefers-reduced-motion (the head script never sets html.mo), and the mouse-only
+                          parts are off on touch screens. French wording for it is in tools/fr/motion.json.
     tools/cdp.py          Headless-Chrome driver for review screenshots and interaction tests
 
 Adding or changing a project
