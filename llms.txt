@@ -1,10 +1,18 @@
 # ROVARD STUDIOS
 
-> ROVARD STUDIOS designs logos, flyers, websites, billboards, vehicle branding and more for people, businesses, churches, organizations and events. Tell us what you need. Based in Canada, working worldwide, in English and French.
+> ROVARD STUDIOS turns ideas into extraordinary visual experiences: brand worlds, digital experiences, motion and visual stories, creative communication and creative direction. Based in Canada, working worldwide, in English and French.
 
 Contact: hello@rovardstudio.com · Start a project: https://rovardstudio.com/start/
 
-## Services
+## Capabilities
+
+- Brand Worlds: Brand strategy, identity systems, logo design, typography and visual language.
+- Digital Experiences: Website design, digital interfaces, interactive experiences and digital environments.
+- Motion & Visual Stories: Motion graphics, animated identities, promotional videos and visual storytelling.
+- Creative Communication: Graphic design, campaigns, promotional materials and advertising visuals.
+- Creative Direction: Concept development, art direction, visual strategy and creative problem-solving.
+
+## What we make
 
 - [Logo design and brand identity](https://rovardstudio.com/services/logo-design/): Logo design, brand identity and brand guidelines for new businesses, organizations and personal brands.
 - [Flyer, poster and invitation design](https://rovardstudio.com/services/flyer-design/): Flyers, posters, invitations, brochures and event graphics, ready for print or screen.
@@ -22,26 +30,26 @@ Contact: hello@rovardstudio.com · Start a project: https://rovardstudio.com/sta
 - [Design Eigen](https://rovardstudio.com/work/design-eigen/) (Logos & brands): Logo and brand refresh for a branding agency.
 - [Bitefort](https://rovardstudio.com/work/bitefort/) (Logos & brands): Brand identity for a privacy software company.
 - [LinkRithm](https://rovardstudio.com/work/linkrithm/) (Logos & brands): Brand identity for an engineering platform.
-- [Vita House](https://rovardstudio.com/work/vita-house/) (Logos & brands): Brand identity for a fictional preventative health company.
-- [Northstar Capital](https://rovardstudio.com/work/northstar-capital/) (Logos & brands): Brand identity for a fictional small-business finance app.
-- [Mason & Rowe](https://rovardstudio.com/work/mason-and-rowe/) (Logos & brands): Brand identity for a fictional luxury home developer.
+- [Vita House](https://rovardstudio.com/work/vita-house/) (Logos & brands, concept): Brand identity for a fictional preventative health company.
+- [Northstar Capital](https://rovardstudio.com/work/northstar-capital/) (Logos & brands, concept): Brand identity for a fictional small-business finance app.
+- [Mason & Rowe](https://rovardstudio.com/work/mason-and-rowe/) (Logos & brands, concept): Brand identity for a fictional luxury home developer.
 - [ShorteeMe](https://rovardstudio.com/work/shorteeme/) (Social & flyers): Social media graphics for a financing brand.
 - [Kymela 2026](https://rovardstudio.com/work/kymela-2026/) (Social & flyers): Wedding invitation and save-the-date graphics.
 - [PDOCA](https://rovardstudio.com/work/pdoca/) (Social & flyers): Event flyers and social posts for a coaching academy.
 - [Dress Doctor](https://rovardstudio.com/work/dress-doctor/) (Social & flyers): Promotional flyers for a laundry service.
 - [GCE Study App](https://rovardstudio.com/work/gce-study-app/) (Social & flyers): Launch graphics for a study app.
-- [Proxima Exchange](https://rovardstudio.com/work/proxima-exchange/) (Websites & apps): Website design for a trading platform.
-- [Afa'a Pay](https://rovardstudio.com/work/afaa-pay/) (Websites & apps): Brand and working website for a payments company.
-- [Vita House Care](https://rovardstudio.com/work/vita-house-care/) (Websites & apps): Website and booking flow for a fictional health company.
-- [Northstar Capital Website](https://rovardstudio.com/work/northstar-capital-website/) (Websites & apps): Website and dashboard for a fictional finance app.
-- [Mason & Rowe Residences](https://rovardstudio.com/work/mason-and-rowe-residences/) (Websites & apps): Website for a fictional luxury home developer.
+- [Proxima Exchange](https://rovardstudio.com/work/proxima-exchange/) (Websites & apps, concept): Website design for a trading platform.
+- [Afa'a Pay](https://rovardstudio.com/work/afaa-pay/) (Websites & apps, concept): Brand and working website for a payments company.
+- [Vita House Care](https://rovardstudio.com/work/vita-house-care/) (Websites & apps, concept): Website and booking flow for a fictional health company.
+- [Northstar Capital Website](https://rovardstudio.com/work/northstar-capital-website/) (Websites & apps, concept): Website and dashboard for a fictional finance app.
+- [Mason & Rowe Residences](https://rovardstudio.com/work/mason-and-rowe-residences/) (Websites & apps, concept): Website for a fictional luxury home developer.
 - [Book Cover Design](https://rovardstudio.com/work/book-cover-design/) (Packaging & print): Book cover design.
 - [JoJo Foods](https://rovardstudio.com/work/jojo-foods/) (Packaging & print): Potato chip packaging.
-- [Proxima Exchange Films](https://rovardstudio.com/work/proxima-exchange-films/) (Video & motion): Two launch films for a trading platform.
+- [Proxima Exchange Films](https://rovardstudio.com/work/proxima-exchange-films/) (Video & motion, concept): Two launch films for a trading platform.
 - [ROVARD STUDIOS Brand Film](https://rovardstudio.com/work/rovard-studios-brand-film/) (Video & motion): A 90-second film about ROVARD STUDIOS.
-- [Northstar Capital Ad](https://rovardstudio.com/work/northstar-capital-ad/) (Video & motion): A 30-second launch ad for a fictional finance app.
+- [Northstar Capital Ad](https://rovardstudio.com/work/northstar-capital-ad/) (Video & motion, concept): A 30-second launch ad for a fictional finance app.
 
-## Guides
+## Insights
 
 - [How to brief a designer when you don't know design words](https://rovardstudio.com/blog/how-to-brief-a-designer/): You don't need to say 'kerning' or 'moodboard'. Here's what actually helps a designer help you.
 - [Logo or full brand identity: what do you actually need?](https://rovardstudio.com/blog/logo-or-full-brand/): A logo is one piece of a brand. Here's how to tell whether you need just the logo or the whole system.
@@ -59,5 +67,6 @@ Contact: hello@rovardstudio.com · Start a project: https://rovardstudio.com/sta
 ## More
 
 - [Pricing](https://rovardstudio.com/pricing/)
-- [About](https://rovardstudio.com/about/)
+- [Studio](https://rovardstudio.com/studio/)
+- [Contact](https://rovardstudio.com/contact/)
 - [Français](https://rovardstudio.com/fr/)

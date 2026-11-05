@@ -12,3 +12,6 @@ mason-rowe/_art/__pycache__/
 __pycache__/
 *.pyc
 tools/*.log
+
+# Obsidian Core build tooling
+node_modules/

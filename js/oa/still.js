@@ -1,0 +1,1 @@
+import{a as t}from"./c-MWZRDF5U.js";var a=new URLSearchParams(location.search),r=document.querySelector("canvas"),e=t(r,{tier:"high",still:!0});e.setIdle(!1);e.resize();e.set(a.get("state")||"hero");e.render();document.documentElement.dataset.ready="1";

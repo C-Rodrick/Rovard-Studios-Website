@@ -1,3 +1,8 @@
+ROVARD STUDIOS: OBSIDIAN ARCHITECTURE EDITION
+=============================================
+This branch is a separate design direction and is not live. Read docs/OBSIDIAN-AUDIT.md first.
+Build: npm install, then npm run build. The older notes below describe the shared data files and the live V2 site.
+
 ROVARD STUDIOS WEBSITE — V2
 ============================
 

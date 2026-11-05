@@ -1,0 +1,55 @@
+/* ── Entry choreography, in CSS so that it needs no JavaScript to finish and never blocks a click. ──
+   `.js:not(.seen)` means first page of a visit. Later pages in the same visit get a shorter version. */
+@keyframes rise { from { opacity: .01; transform: translateY(36px); } to { opacity: 1; transform: none; } }
+@keyframes rise-s { from { opacity: .01; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes fade { from { opacity: .01; } to { opacity: 1; } }
+@keyframes settle { from { opacity: .3; transform: scale(1.03); } to { opacity: 1; transform: none; } }
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Hero headline: 650 ms, 70 ms stagger, line by line. Masks are not needed: the lines are selectable text. */
+  .js .fit .ln { animation: rise var(--t-text) var(--e-in) both; animation-delay: calc(850ms + var(--i) * var(--st-text)); }
+  .js .home .top-logo { animation: rise-s 600ms var(--e-in) both 650ms; }
+  .js .enter { animation: rise-s var(--t-text) var(--e-in) both; animation-delay: var(--at, 0ms); }
+  .js .enter-lines .ln { display: inline-block; animation: rise var(--t-text) var(--e-in) both; }
+  .js .enter-lines .ln + br + .ln { animation-delay: 70ms; }
+  /* Never a blank screen: the room is on screen from the first paint, and it settles into place. */
+  .js .s-hero > .scene-still img { animation: settle 800ms var(--e-in) both; }
+  .js .ph--scene > .scene-still img { animation: fade 600ms linear both; }
+
+  /* Second page onward: no staged wait for anything. */
+  .js.seen .fit .ln { animation-delay: calc(var(--i) * var(--st-text)); }
+  .js.seen .home .top-logo { animation: none; }
+  .js.seen .enter { animation-delay: calc(var(--at, 0ms) * .4); }
+  .js.seen .s-hero > .scene-still img { animation-delay: 0ms; }
+
+  /* Phones: tested on a slow connection, the staged wait cost more than it gave, so the same sequence runs at half the delay. */
+  @media (max-width: 860px) {
+    .js .fit .ln { animation-delay: calc(240ms + var(--i) * var(--st-text)); }
+    .js .home .top-logo { animation-delay: 120ms; }
+    .js .enter { animation-delay: calc(var(--at, 0ms) * .35); }
+  }
+
+  /* Page transitions: cross-document View Transitions, where the browser has them. */
+  @view-transition { navigation: auto; }
+  ::view-transition-old(root) { animation: 180ms var(--e-out) both vt-out; }
+  ::view-transition-new(root) { animation: 250ms var(--e-ui) both vt-in; }
+  ::view-transition-group(*) { animation-duration: 600ms; animation-timing-function: var(--e-ui); }
+}
+@keyframes vt-out { to { opacity: 0; } }
+@keyframes vt-in { from { opacity: 0; } }
+
+/* Mobile menu reveal. Items stagger 60 ms, under 600 ms in total. */
+@media (prefers-reduced-motion: no-preference) {
+  .menu[open] { animation: fade 240ms linear both; }
+  .menu[open] li { animation: rise-s 380ms var(--e-in) both; animation-delay: calc(var(--n, 0) * 60ms + 60ms); }
+  .menu[open] .menu-foot { animation: fade 300ms linear both 420ms; }
+  .menu.is-closing { animation: fade 160ms linear reverse both; }
+}
+.menu li:nth-child(2) { --n: 1; } .menu li:nth-child(3) { --n: 2; } .menu li:nth-child(4) { --n: 3; }
+.menu li:nth-child(5) { --n: 4; } .menu li:nth-child(6) { --n: 5; } .menu li:nth-child(7) { --n: 6; }
+
+/* Reduced motion: everything is simply there. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  .scroll-cue i { animation: none; background: var(--yellow); }
+}
