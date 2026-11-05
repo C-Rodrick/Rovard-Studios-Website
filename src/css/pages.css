@@ -1,4 +1,7 @@
 /* Inner pages. */
+/* Page titles rise on first paint with CSS alone: no script to wait for, so they count as loaded straight away. */
+@keyframes rise { from { transform: translateY(.35em); clip-path: inset(0 0 100% 0); } to { transform: none; clip-path: inset(-10% -10% -10% -10%); } }
+html.mo .rise { animation: rise var(--t-slow) var(--e-out) both; }
 .ph { padding-top: calc(var(--hdr) + clamp(48px, 8vw, 120px)); padding-bottom: var(--sec-s); }
 .ph .d-xl { max-width: 15ch; }
 .ph .lead { margin-top: clamp(20px, 3vw, 36px); color: var(--on-ink-2); }
@@ -62,23 +65,26 @@
 
 /* Brand Universe */
 .uni { background: var(--ink); border-top: 1px solid var(--line-ink); }
-.universe { position: relative; height: min(84vh, 780px); overflow: hidden; touch-action: pan-y; }
-.universe.is-live { cursor: grab; user-select: none; }
-.universe.is-live.grabbing { cursor: grabbing; }
-.u-world { position: absolute; left: 50%; top: 50%; width: 2400px; height: 1500px; will-change: transform; transform: translate(-50%, -50%); }
-.u-item { position: absolute; left: var(--x); top: var(--y); width: var(--w); display: block; will-change: transform; }
-.u-item img { width: 100%; height: auto; pointer-events: none; transition: filter var(--t-base); }
+.universe { position: relative; overflow-x: auto; scroll-snap-type: x proximity; padding-block: 20px; -webkit-overflow-scrolling: touch; }
+.u-world { display: flex; align-items: flex-start; gap: 16px; width: max-content; padding-inline: var(--gut); }
+.u-item { display: block; flex: none; width: min(72vw, 420px); scroll-snap-align: center; }
+.u-item:nth-child(even) { margin-top: 30px; }
+.u-item img { width: 100%; height: auto; pointer-events: none; }
 .u-cap { display: flex; flex-direction: column; gap: 2px; margin-top: 8px; }
 .u-cap b { font: 600 1.05rem/1.2 var(--display); }
 .u-cap .mono { color: var(--on-ink-2); }
 .u-item:hover .u-cap b, .u-item:focus-visible .u-cap b { color: var(--yellow); }
-.u-hint { position: absolute; right: var(--gut); bottom: 16px; }
+.u-hint { display: none; }
 .u-drag { display: inline-block; padding: 6px 10px; background: var(--yellow); color: var(--ink); }
-.universe.is-flat { height: auto; overflow-x: auto; scroll-snap-type: x proximity; padding-block: 20px; -webkit-overflow-scrolling: touch; }
-.universe.is-flat .u-world { position: static; width: max-content; height: auto; transform: none !important; display: flex; align-items: flex-start; gap: 16px; padding-inline: var(--gut); will-change: auto; }
-.universe.is-flat .u-item { position: static; width: min(72vw, 420px); transform: none !important; scroll-snap-align: center; flex: none; will-change: auto; }
-.universe.is-flat .u-item:nth-child(even) { margin-top: 30px; }
-.universe.is-flat .u-hint { display: none; }
+/* The wall: pointer devices with motion allowed. html.mo is set before first paint, so the layout never jumps. */
+@media (min-width: 760px) and (hover: hover) and (pointer: fine) {
+  html.mo .universe { height: min(84vh, 780px); overflow: hidden; padding: 0; touch-action: pan-y; scroll-snap-type: none; }
+  html.mo .universe.is-live { cursor: grab; user-select: none; }
+  html.mo .universe.is-live.grabbing { cursor: grabbing; }
+  html.mo .u-world { position: absolute; left: 50%; top: 50%; display: block; width: 2400px; height: 1500px; padding: 0; transform: translate(-50%, -50%); will-change: transform; }
+  html.mo .u-item, html.mo .u-item:nth-child(even) { position: absolute; left: var(--x); top: var(--y); width: var(--w); margin: 0; will-change: transform; }
+  html.mo .u-hint { display: block; position: absolute; right: var(--gut); bottom: 16px; }
+}
 
 /* Work index */
 .wk-index { padding-block: var(--sec-s); }
@@ -288,6 +294,7 @@
 .study-cap .dim { grid-column: 8 / -1; }
 .study-note { grid-column: 8 / -1; max-width: 50ch; color: var(--on-ink-2); }
 .study-cta { color: var(--yellow); }
+.study.still .lab-ctl, .study.still .study-cta { display: none; }
 .lab-ctl { grid-column: 8 / -1; margin-top: 8px; }
 .lab-range { grid-column: 8 / -1; margin-top: 8px; display: grid; gap: 4px; max-width: 360px; }
 .lab-range input { accent-color: var(--yellow); width: 100%; min-height: 28px; }

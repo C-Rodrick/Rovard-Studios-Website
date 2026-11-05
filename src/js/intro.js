@@ -1,7 +1,7 @@
 // Opening sequence: first visit only, about 1.4 seconds, skippable. The page underneath is already usable.
 // A CSS animation removes the overlay if this file fails. No progress bar: nothing is being waited for.
 import gsap from 'gsap';
-import { $, $$, html, EASE } from './config.js';
+import { $, $$, html, EASE, isPhone } from './config.js';
 
 export function runIntro(onReveal) {
   const el = $('[data-intro]');
@@ -21,4 +21,5 @@ export function runIntro(onReveal) {
     .fromTo(letters, { yPercent: 110 }, { yPercent: 0, duration: 0.4, stagger: 0.05, ease: EASE.out }, '-=.3')
     .add(reveal, '+=.02')
     .to(el, { clipPath: 'inset(0 0 100% 0)', duration: 0.6 }, '<');
+  if (isPhone()) tl.timeScale(1.4);
 }

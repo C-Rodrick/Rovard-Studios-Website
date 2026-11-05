@@ -4,6 +4,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { $, $$, DUR, EASE, FINE, html, isPhone } from './config.js';
 import { isPaused, onPause } from './prefs.js';
+import { coreQuality } from './core/quality.js';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -19,8 +20,8 @@ const P = {
   cta:       { x: .52, y: 0, s: .46, rx: -.06, ry: -.34, fluid: 0, strata: 0, block: 1, seed: 0, r: 1, burst: 0, tint: 1, rough: .22, dust: 0 },
 };
 const PHONE = {
-  hero: { x: 0, y: .46, s: .5 }, heroEnd: { x: 0, y: .9, s: .4 }, statement: { x: .9, y: .9, s: .3 },
-  cta: { x: .1, y: -.62, s: .42 },
+  hero: { x: 0, y: .46, s: .5 }, heroEnd: { x: 0, y: 1.6, s: .4 }, statement: { x: 0, y: 1.6, s: .3 },
+  cta: { x: .35, y: .56, s: .34 },
 };
 const pose = (k) => (isPhone() && PHONE[k] ? { ...P[k], ...PHONE[k] } : P[k]);
 const lerpPose = (a, b, t) => { const o = {}; for (const k in a) o[k] = a[k] + (b[k] - a[k]) * t; return o; };
@@ -34,9 +35,9 @@ function chain(keys, t) {
 async function bootCore() {
   const canvas = $('[data-core-canvas]');
   if (!canvas) return null;
-  const { createCore, coreQuality } = await import('./core/core.js');
   const q = coreQuality();
-  if (!q) return null;
+  if (!q) return null;                   // weak or software GPU: Three.js is never downloaded, the still image stays
+  const { createCore } = await import('./core/core.js');
   const keep = /[?&]core=poster/.test(location.search);
   const core = await createCore(canvas, { ...q, keep });
   core.jump(pose('hero'));
@@ -77,7 +78,17 @@ export function initHome() {
     wire(c);
     ScrollTrigger.refresh();
   }).catch(() => { /* keep the still image */ });
-  idle(start, { timeout: 2000 });
+  // Text and navigation first; the 3D arrives afterwards, on the first gesture or after a moment.
+  const gestures = ['scroll', 'touchstart', 'pointermove', 'keydown'];
+  let done = false;
+  const go = () => {
+    if (done) return;
+    done = true;
+    gestures.forEach((g) => removeEventListener(g, go));
+    idle(start, { timeout: 1500 });
+  };
+  gestures.forEach((g) => addEventListener(g, go, { once: true, passive: true }));
+  setTimeout(go, FINE ? 1500 : 6000);
 }
 
 function wire(core) {

@@ -108,8 +108,10 @@ html.fx [data-wipe] { --wipe: 0; }
 [data-wipe]::after { content: ""; position: absolute; inset: 0; background: var(--blue); transform: scaleY(var(--wipe, 0)); transform-origin: top; pointer-events: none; }
 
 /* ── No flash before GSAP arrives. If it never does, the content appears anyway. ── */
-html.mo:not(.fx) [data-split], html.mo:not(.fx) [data-hero-after], html.mo:not(.fx) [data-reveal] { opacity: 0; animation: failsafe .3s 2.5s forwards; }
+html.mo:not(.fx) [data-split="lines"], html.mo:not(.fx) [data-hero-after], html.mo:not(.fx) [data-reveal] { opacity: 0; animation: failsafe .3s 2.5s forwards; }
+html.mo:not(.fx) .hl { color: transparent; animation: failsafe-c .3s 2.5s forwards; }
 @keyframes failsafe { to { opacity: 1; } }
+@keyframes failsafe-c { to { color: inherit; } }
 
 /* ── Motion off (the pause control) ──────────────────────────────────── */
 html.motion-off *, html.motion-off *::before, html.motion-off *::after { animation-play-state: paused !important; }
@@ -130,4 +132,5 @@ html.motion-off *, html.motion-off *::before, html.motion-off *::after { animati
 .hero-img { view-transition-name: project-image; }
 
 .veil { position: fixed; inset: 0; z-index: var(--z-veil); background: var(--blue); display: none; will-change: transform; }
-html.pt-in .veil { display: block; }
+html.pt-in .veil { display: block; animation: veil-fail .4s 1.6s forwards; }
+@keyframes veil-fail { to { opacity: 0; visibility: hidden; } }

@@ -21,20 +21,6 @@ SITE = {
 }
 
 # ── "What do you need help with?" ─────────────────────────────────────────
-NEEDS = [
-    ('brand', 'A logo or a whole brand'),
-    ('design', 'A flyer, poster or invitation'),
-    ('social', 'Social media graphics'),
-    ('website', 'A website or landing page'),
-    ('ads', 'A billboard, banner or sign'),
-    ('vehicle', 'My vehicle branded'),
-    ('print', 'Business cards or stationery'),
-    ('docs', 'A presentation or document'),
-    ('packaging', 'Packaging'),
-    ('media', 'Photo or video editing'),
-    ('unsure', "I'm not sure. I just have an idea."),
-]
-
 # ── Services (what we can design for you) ─────────────────────────────────
 PRODUCTION_NOTE = ("We design it and prepare print-ready files. Printing and production are done by a printer "
                    "or installer, and we're happy to point you in the right direction.")
@@ -104,20 +90,6 @@ SERVICES = [
 
 # ── Home: "We do ___ for your ___" ────────────────────────────────────────
 # (verb, thing, for-your, project slug, filename-fragment, caption, need)
-WEDO = [
-    ('design', 'logos', 'new business', 'design-eigen', 'imgi_200', 'Logo, Design Eigen', 'brand'),
-    ('create', 'flyers', 'next event', 'dress-doctor', 'BOOK PICKUP_DD.jpg', 'Flyer, Dress Doctor', 'design'),
-    ('design', 'social media graphics', 'brand', 'shorteeme', 'Make something amazing', 'Social post, ShorteeMe', 'social'),
-    ('build', 'websites', 'business, organization or personal brand', 'mason-and-rowe-residences', 'mr-ui-04-home', 'Website design, Mason & Rowe Residences', 'website'),
-    ('design', 'business cards and stationery', 'company', 'linkrithm', 'gallery-02', 'Business cards, LinkRithm', 'print'),
-    ('design', 'billboards and banners', 'campaign', 'green-blueprint', 'Cover 7 - Copy', 'Billboard mockup, Green Blueprint', 'ads'),
-    ('brand', 'vehicles', 'business', None, None, None, 'vehicle'),
-    ('design', 'presentations and documents', 'big idea', 'northstar-capital', 'northstar-brand-02-strategy', 'Brand guidelines, Northstar Capital', 'docs'),
-    ('design', 'packaging', 'product', 'jojo-foods', None, 'Packaging, JoJo Foods', 'packaging'),
-    ('edit', 'photos and videos', 'launch', 'rovard-studios-brand-film', 'film-09', 'Film, ROVARD STUDIOS', 'media'),
-]
-HERO_ROTATION = [0, 1, 3, 4, 5, 8]          # indices into WEDO that have an image
-
 # ── Idea → design → application stories (only where we have the material) ──
 STORIES = {
     'linkrithm': dict(
@@ -137,37 +109,12 @@ STORIES = {
         big=('design-eigen', 'imgi_200', 'The logo'),
         small=[('design-eigen', 'ID Card', 'On an ID card'), ('design-eigen', 'Tshirt Mockup', 'On a T-shirt')]),
 }
-HOME_STORIES = ['linkrithm', 'green-blueprint', 'mason-and-rowe-residences']
-
-LARGE_FORMAT = [
-    ('green-blueprint', 'Cover 7 - Copy', 'Billboard mockup, Green Blueprint'),
-    ('green-blueprint', 'Cover 6.2', 'Roll-up banner mockup, Green Blueprint'),
-    ('linkrithm', 'gallery-06', 'Building billboard mockup, LinkRithm'),
-]
-
-AUDIENCES = [
-    ('Individuals & personal brands', 'A logo, a sharp profile, a CV that gets noticed.'),
-    ('Small businesses & startups', 'From your very first logo to the sign above the shop.'),
-    ('Established companies', 'A fresh look, a campaign, a website that finally explains what you do.'),
-    ('Churches & ministries', 'Event graphics, banners, backdrops and announcements.'),
-    ('Organizations & institutions', 'Programs, reports, certificates and campaigns.'),
-    ('Events', 'Flyers, invitations, signage, stage and social.'),
-    ('Creators & professionals', 'Thumbnails, portfolios, decks and personal sites.'),
-    ('Anyone with an idea', "Not sure what you need? Start right there."),
-]
-
 STEPS = [
     ("You tell us what's going on.", "Your own words. No brief, no jargon."),
     ('We ask the right questions.', "Who is this for? What should it do? A few simple questions make the work much better."),
     ('We design.', "You see real work, not a pitch about work."),
     ('We refine together.', "Your feedback sharpens it until it's right."),
     ("You get something you're proud of.", "Ready to put out there, with every file you need."),
-]
-
-WHY = [
-    ('We start with the why.', "Before we open a design file, we ask what this needs to do and who it's for. Good design starts there."),
-    ('Small jobs get real attention.', "One flyer, one logo, one card. If it carries your name, it matters."),
-    ('Design is a job, not decoration.', "It has to work on the phone, the poster, the wall and the vehicle. We design for where people will actually see it."),
 ]
 
 # ── Page meta ─────────────────────────────────────────────────────────────
@@ -302,30 +249,8 @@ def find_img(projects, slug, fragment):
             return i
     raise KeyError(f'{slug}: no image matching {fragment!r}')
 
-
 # ── V2.1 (Orizon-feel restyle): extra home content ────────────────────────
-MARQUEE = ['Logos', 'Flyers', 'Websites', 'Billboards', 'Vehicle branding', 'Social media graphics', 'Business cards', 'Packaging',
-           'Presentations', 'Posters', 'Banners', 'Invitations', 'Brand guidelines', 'Photo editing', 'Motion graphics']
-
-FEATURED = ['linkrithm', 'green-blueprint', 'mason-and-rowe-residences', 'shorteeme', 'design-eigen', 'jojo-foods',
-            'northstar-capital-website', 'rovard-studios-brand-film']
-
-TWO_WAYS = [
-    dict(tag='Starting something new', title='Your new business, brand or idea',
-         items=['A logo and a look people will remember', 'Business cards, letterheads and stationery',
-                'Social media profile and banner designs', 'A simple website or landing page'],
-         cta='Start a Project', href='start/?need=brand', img=('linkrithm', 'gallery-02')),
-    dict(tag='Growing something bigger', title='Your next campaign, event or big push',
-         items=['Flyers, posters and invitations', 'Billboards, banners and signage',
-                'Vehicle branding for cars, vans and delivery vehicles', 'Presentations, decks and company profiles'],
-         cta='Tell Us What You Need', href='start/?need=ads', img=('green-blueprint', 'Cover 7 - Copy')),
-]
-
-WHY_IMGS = [('green-blueprint', 'Cover 7 - Copy', '80% 40%'), ('linkrithm', 'gallery-13', '50% 22%'), ('design-eigen', 'Tshirt Mockup', '50% 38%')]  # + focal point shown when the card is narrow
-AUD_PHOTOS = [('linkrithm', 'gallery-13'), ('shorteeme', None), ('green-blueprint', 'Cover 1.jpg')]
-HERO_FACES = [1, 5, 6]  # people photos used as the small round avatars (illustrative, not clients)
 FILM = dict(src='assets/Motion%20Design/1_Rovard%20Brand%20Film/rovard-brand-film.mp4', slug='rovard-studios-brand-film', poster='film-02')
-
 
 # ── Supplied people photography (illustrative only: these are NOT our clients or team) ──
 # (photo number, audience label shown on the card, object-position of the face)
@@ -341,9 +266,6 @@ PEOPLE = {
     9: ('Agencies & partners', '50% 35%'),
     10: ('Business owners', '58% 40%'),
 }
-PEOPLE_NOTE = "Photography is illustrative. It does not show our clients."
-
-
 def load_testimonials():
     """Real quotes only. Add entries to tools/testimonials.json (see README). Empty file = section is not shown."""
     path = os.path.join(ROOT, 'tools', 'testimonials.json')
@@ -352,7 +274,6 @@ def load_testimonials():
     except (OSError, ValueError):
         return []
     return [t for t in data if t.get('quote') and t.get('name')]
-
 
 # Logos cut from our own project artwork (tools/logos.py). (file, brand name, display height px)
 BRAND_LOGOS = [('design-eigen', 'Design Eigen', 40), ('northstar-capital', 'Northstar Capital', 36), ('bitefort', 'Bitefort', 34), ('vita-house', 'Vita House', 40),
@@ -366,7 +287,6 @@ LOGO_COLOURS = {'design-eigen': '#111322', 'northstar-capital': '#0A0C24', 'bite
 
 # Budget choices on the start form: what the visitor picks from, not our prices.
 BUDGETS = ['Under $250', '$250 – $1,000', '$1,000 – $3,000', '$3,000 – $5,000', '$5,000 – $10,000', '$10,000+', 'Not sure yet']
-
 
 # ── Pricing packages. Leave price as None until you decide; then it shows "From $X" ──────────────────
 # `price` is a number in USD, e.g. 250. None shows "Tell us your budget".

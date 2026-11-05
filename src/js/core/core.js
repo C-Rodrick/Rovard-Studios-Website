@@ -1,7 +1,7 @@
 // ROVARD CORE: the studio's signature object. One sphere of vertices whose shape is computed in the vertex shader,
 // so it can travel between states without swapping models:
 //   seed (an idea) -> strata (thinking, layered) -> block (the logo's own square and R) -> fluid (the experience)
-// No model files, no textures: geometry and reflections are procedural, so it costs about 150 KB of gzip JS and no downloads.
+// No model files, no textures: geometry and reflections are procedural, so it costs about 160 KB of gzipped JS and no downloads.
 import {
   BackSide, BoxGeometry, BufferAttribute, BufferGeometry, Color, ExtrudeGeometry, Group, IcosahedronGeometry, Mesh, MeshBasicMaterial,
   MeshStandardMaterial, PerspectiveCamera, PMREMGenerator, Points, Scene, ShaderMaterial, SphereGeometry, ACESFilmicToneMapping,
@@ -106,12 +106,10 @@ function dust(count) {
   return new Points(g, m);
 }
 
-export const KEYS = {
-  //        x      y      s     rx     ry   fluid strata block seed    r   burst  tint   rough
-  hero:   { x: .47, y: .02, s: .54, rx: -.1, ry: .3, fluid: 1, strata: 0, block: 0, seed: 0, r: 0, burst: 0, tint: .22, rough: .1 },
-};
+const DEFAULT = { x: 0, y: 0, s: .5, rx: 0, ry: 0, fluid: 1, strata: 0, block: 0, seed: 0, r: 0, burst: 0, tint: .2, rough: .1, dust: .8 };
 
-const DEFAULT = KEYS.hero;
+// Lets the browser handle input between the expensive setup steps, so loading the Core never blocks the page for long.
+const breathe = () => new Promise((r) => setTimeout(r, 0));
 
 export async function createCore(canvas, { detail = 56, dpr = 1.75, particles = 240, aa = true, keep = false, spin = 1 } = {}) {
   const renderer = new WebGLRenderer({ canvas, alpha: true, antialias: aa, powerPreference: 'high-performance', preserveDrawingBuffer: keep });
@@ -120,8 +118,10 @@ export async function createCore(canvas, { detail = 56, dpr = 1.75, particles = 
   renderer.toneMapping = ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.15;
 
+  await breathe();
   const scene = new Scene();
   scene.environment = environment(renderer);
+  await breathe();
   const camera = new PerspectiveCamera(30, 1, 0.1, 40);
   camera.position.z = 6;
   const uniforms = { uTime: { value: 0 }, uMix: { value: { x: 1, y: 0, z: 0, w: 0 } } };
@@ -144,10 +144,12 @@ export async function createCore(canvas, { detail = 56, dpr = 1.75, particles = 
   };
   mat.customProgramCacheKey = () => 'rovard-core';
   const mesh = new Mesh(new IcosahedronGeometry(1, detail), mat);
+  await breathe();
   mesh.frustumCulled = false;
 
   const rMat = new MeshStandardMaterial({ color: 0xebebeb, metalness: 0.15, roughness: 0.32, envMapIntensity: 1.5, emissive: 0xebebeb, emissiveIntensity: 0.28, transparent: true });
   const r = new Mesh(rGeometry(), rMat);
+  await breathe();
   r.position.z = 0.455;
 
   const group = new Group();
@@ -157,7 +159,7 @@ export async function createCore(canvas, { detail = 56, dpr = 1.75, particles = 
   let pts = null;
   if (particles) { pts = dust(particles); scene.add(pts); }
 
-  const chrome = new Color(0xc9d4ff), cobalt = new Color(0x1f40e6);
+  const chrome = new Color(0xc9d4ff), cobalt = new Color(0x0d1c86);   // cobalt lands on the logo's #162DAF once lit
   const state = { ...DEFAULT }, target = { ...DEFAULT };
   const pointer = { x: 0, y: 0, sx: 0, sy: 0 };
   let w = 0, h = 0, raf = 0, last = 0, time = Math.random() * 40, active = false, paused = false, slow = 0, frames = 0;
@@ -182,8 +184,8 @@ export async function createCore(canvas, { detail = 56, dpr = 1.75, particles = 
     mat.color.copy(chrome).lerp(cobalt, state.tint);
     mat.roughness = state.rough;
     mat.metalness = 1 - state.tint * state.block * 0.8;            // as a block it turns from chrome into the logo's painted blue
-    mat.emissive.copy(cobalt).multiplyScalar(0.3 * state.tint * state.block);
-    mat.envMapIntensity = 1.25 - 0.75 * state.block;
+    mat.emissive.copy(cobalt).multiplyScalar(0.35 * state.tint * state.block);
+    mat.envMapIntensity = 1.25 - 0.8 * state.block;
     rMat.opacity = Math.min(1, state.r * 1.4);
     r.visible = state.r > 0.01;
     r.scale.setScalar(0.8 + state.r * 0.2);
@@ -227,7 +229,8 @@ export async function createCore(canvas, { detail = 56, dpr = 1.75, particles = 
 
   resize();
   apply();
-  if (renderer.compileAsync) await renderer.compileAsync(scene, camera); else renderer.compile(scene, camera);
+  await renderer.compileAsync(scene, camera);
+  await breathe();
   render();
 
   return {
@@ -247,20 +250,4 @@ export async function createCore(canvas, { detail = 56, dpr = 1.75, particles = 
       scene.environment.dispose(); renderer.dispose();
     },
   };
-}
-
-// Decide whether this device should run the Core at all, and at what quality.
-export function coreQuality(search = location.search) {
-  const force = /[?&]core=(force|poster)/.test(search);
-  const nav = navigator;
-  if (!force && (nav.connection?.saveData || (nav.deviceMemory && nav.deviceMemory < 4) || (nav.hardwareConcurrency && nav.hardwareConcurrency < 4))) return null;
-  const c = document.createElement('canvas');
-  const gl = c.getContext('webgl2', { failIfMajorPerformanceCaveat: !force });
-  if (!gl) return null;
-  const dbg = gl.getExtension('WEBGL_debug_renderer_info');
-  const name = dbg ? String(gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL)) : '';
-  gl.getExtension('WEBGL_lose_context')?.loseContext();
-  if (!force && /swiftshader|llvmpipe|software|basic render/i.test(name)) return null;
-  const small = innerWidth < 1024 || matchMedia('(pointer: coarse)').matches;
-  return small ? { detail: 24, dpr: 1.25, particles: 0, aa: false } : { detail: 56, dpr: 1.75, particles: 240, aa: true };
 }

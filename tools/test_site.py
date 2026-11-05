@@ -93,7 +93,7 @@ def overflow():
             for pg in SAMPLE:
                 b.goto(BASE + pg); b.wait(1000)
                 sw = b.js('document.documentElement.scrollWidth')
-                wide = b.js("""(()=>{const W=innerWidth,o=[];document.querySelectorAll('main *, header *, footer *').forEach(e=>{if(e.closest('.universe,.film-frame,.lightbox,.hero-still'))return;const r=e.getBoundingClientRect();if(r.width&&r.right>W+1&&getComputedStyle(e).position!=='fixed')o.push(e.tagName+'.'+e.className)});return o.slice(0,3).join(' | ')})()""")
+                wide = b.js("""(()=>{const W=innerWidth,o=[];document.querySelectorAll('main *, header *, footer *').forEach(e=>{if(e.tagName==='IMG'||e.closest('.universe,.film-frame,.lightbox'))return;const r=e.getBoundingClientRect();if(r.width&&r.right>W+1&&getComputedStyle(e).position!=='fixed')o.push(e.tagName+'.'+e.className)});return o.slice(0,3).join(' | ')})()""")
                 if sw > w or wide:
                     bad[pg] = f'{sw} {wide}'
             ok(f'no horizontal overflow at {w}px', not bad, json.dumps(bad)[:600])

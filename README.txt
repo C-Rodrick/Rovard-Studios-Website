@@ -9,31 +9,30 @@ Pages
   /work/                  Work index (filterable)
   /work/<project>/        One page per project (22)
   /about/                 About
-  /start/                 Start a project (deep-linkable: /start/?need=flyer,website)
+  /pricing/               Pricing
+  /blog/                  Insights
+  /dimension/             Creative Dimension (experiments)
+  /contact/               Contact
+  /start/                 Start a project (deep-linkable: /start/?need=website or ?package=brand)
 
 How it is built
+  Full handbook: docs/REDESIGN.md (design system, motion and 3D, how-tos, test report).
   The pages are GENERATED. Do not edit the .html files by hand.
-    tools/content.py      All copy, services, stories, project wording
-    tools/projects-raw.json   Project data (titles, galleries, videos, live links)
-    tools/build.py        Generates every page:   python tools/build.py
-    tools/images.py       Makes responsive WebP images into img/:   python tools/images.py
-    tools/fonts.py        Self-hosts Syne + Space Grotesk (css/fonts/)
-    tools/og.py           Social share image (assets/og-cover.jpg)
-    css/site.css          Design system
-    js/site.js            Smooth scroll, reveals, word-by-word headlines, menu, parallax, carousel, panels,
-                          hero rotator, filters, lightbox, start form
-    js/lenis.min.js       Lenis smooth scrolling (MIT licence, v1.1.20, vendored)
-    css/motion.css + js/motion.js   Animated version (branch animated-version): opening sequence on the home page (once per visit),
-                          page-to-page curtain, pinned film that grows to full screen, scroll-driven type band, masked image
-                          reveals, widening large-format section, steps line, scroll progress, cursor follower, magnetic buttons.
-                          All of it is off for prefers-reduced-motion (the head script never sets html.mo), and the mouse-only
-                          parts are off on touch screens. French wording for it is in tools/fr/motion.json.
-    tools/cdp.py          Headless-Chrome driver for review screenshots and interaction tests
+    npm install           first time only
+    npm run build         bundles src/ (JS and CSS) into js/dist and css/rovard.css, then generates every page
+    tools/build.py        page templates
+    tools/content_v3.py   capabilities, process, selected work, wall, lab, pricing groups
+    tools/content.py      settings, project wording, packages, FAQ
+    tools/projects-raw.json   project data (titles, galleries, videos, live links)
+    tools/images.py       makes responsive WebP images into img/
+    tools/core_stills.py  renders the 3D object's still images
+    tools/test_site.py    site tests
+    src/css, src/js       design tokens, styles and motion modules
 
 Adding or changing a project
   1. Add/edit it in tools/projects-raw.json and its entries in tools/content.py
      (PLAIN, PROJECT_KIND, CONCEPT, MADE).
-  2. python tools/images.py && python tools/build.py
+  2. python tools/images.py && npm run build
 
 Rules we follow
   - The written brand name is always ROVARD STUDIOS.

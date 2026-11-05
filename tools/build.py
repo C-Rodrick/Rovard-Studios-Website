@@ -9,6 +9,7 @@ Pages: / , /services/ + 9 service pages , /work/ + 22 project pages , /about/ , 
 Env: NOLAZY=1 renders images eagerly (for review screenshots only).
 """
 import html, json, os, re, sys, time, urllib.parse
+from PIL import Image
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from content import *  # noqa
@@ -61,6 +62,12 @@ def img(slug, idx, alt, base, sizes='100vw', cls='', eager=False, want=None, ext
     c = f' class="{cls}"' if cls else ''
     return (f'<img{c} src="{base}img/{slug}/{idx:02d}-{mid}.webp" srcset="{srcset}" sizes="{sizes}" '
             f'width="{wmax}" height="{h}" alt="{esc(alt)}" {load}{extra}>')
+
+
+def _img_preload(slug, idx, base, sizes):
+    ws = MANIFEST[slug][str(idx)]['sizes']
+    srcset = ', '.join(f'{base}img/{slug}/{idx:02d}-{w}.webp {w}w' for w in ws)
+    return f'\n<link rel="preload" as="image" imagesrcset="{srcset}" imagesizes="{sizes}" fetchpriority="high">'
 
 
 def ref_img(ref, alt, base, **kw):
@@ -117,7 +124,7 @@ def crumbs(items):
         {'@type': 'ListItem', 'position': i + 1, 'name': n, 'item': f"{SITE['url']}/{u}"} for i, (n, u) in enumerate(full)]}
 
 
-def head(title, desc, path, base, extra_ld=(), intro=False):
+def head(title, desc, path, base, extra_ld=(), intro=False, preload=''):
     url = f"{SITE['url']}/{path}"
     ld = json.dumps(site_ld(), ensure_ascii=False)
     ld += ''.join(f'</script>\n<script type="application/ld+json">{json.dumps(x, ensure_ascii=False)}' for x in extra_ld)
@@ -157,6 +164,7 @@ def head(title, desc, path, base, extra_ld=(), intro=False):
 {analytics}<link rel="preload" href="{base}css/fonts/Syne.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="{base}css/fonts/SpaceGrotesk.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{base}css/rovard.css?v={VERSION}">
+<link rel="modulepreload" href="{base}js/dist/main.js?v={VERSION}">{preload}
 <script>{boot}</script>
 <script type="application/ld+json">{ld}</script>
 </head>'''
@@ -243,7 +251,7 @@ SECTION_NAME = {'services': 'Services', 'work': 'Work', 'blog': 'Insights', 'pri
                 'dimension': 'Creative Dimension', 'privacy': 'Privacy', 'cookies': 'Cookies', 'terms': 'Terms'}
 
 
-def page(path, key, body, title=None, desc=None, body_class='', ld=()):
+def page(path, key, body, title=None, desc=None, body_class='', ld=(), preload=''):
     depth = 0 if not path else path.count('/')
     base = '../' * depth
     t, d = (title, desc) if title else META[key]
@@ -255,7 +263,7 @@ def page(path, key, body, title=None, desc=None, body_class='', ld=()):
             trail.append((t.rsplit(' | ', 1)[0].split(' — ')[0], path))
         ld.append(crumbs(trail))
     is_home = 'home' in body_class.split()
-    out = head(t, d or META[key][1], path, base, ld, intro=is_home) + f'''
+    out = head(t, d or META[key][1], path, base, ld, intro=is_home, preload=preload) + f'''
 <body class="{body_class}">
 {INTRO if is_home else ''}{header(base, path)}
 <main id="main">
@@ -275,7 +283,7 @@ def page(path, key, body, title=None, desc=None, body_class='', ld=()):
 
 
 def poster(name, base, alt='', cls='core-still', w=900, h=900, lazy=True):
-    load = 'loading="lazy" decoding="async"' if lazy else 'fetchpriority="low"'
+    load = 'loading="lazy" decoding="async"' if lazy else 'fetchpriority="high"'
     return f'<img class="{cls}" src="{base}img/core/{name}.webp" width="{w}" height="{h}" alt="{esc(alt)}" {load}>'
 
 
@@ -291,7 +299,7 @@ def page_head(eyebrow_text, h1, lead='', extra='', cls=''):
     lead_html = f'<p class="lead" data-reveal>{lead}</p>' if lead else ''
     return f'''<section class="ph env-ink {cls}"><div class="wrap ph-in">
   {eyebrow(eyebrow_text)}
-  <h1 class="d-xl" data-split="lines">{h1}</h1>
+  <h1 class="d-xl rise">{h1}</h1>
   {lead_html}{extra}
 </div></section>'''
 
@@ -396,7 +404,8 @@ def home():
 </div></section>'''
 
     stage = '<canvas class="core-canvas" data-core-canvas aria-hidden="true"></canvas>'
-    page('', 'home', stage + hero + statement + work + caps + process + why_sec + archive + cta, body_class='home')
+    page('', 'home', stage + hero + statement + work + caps + process + why_sec + archive + cta, body_class='home',
+         preload='\n<link rel="preload" as="image" href="img/core/hero.webp" fetchpriority="high">')
 
 
 # ── SERVICES ──────────────────────────────────────────────────────────────
@@ -480,9 +489,9 @@ def work_index():
     chips += f'<a class="chip chip-link" href="{base}dimension/">Experiments</a>'
 
     wall = ''
-    for slug, x, y, w, z in UNIVERSE:
+    for n, (slug, x, y, w, z) in enumerate(UNIVERSE):
         p = BY[slug]
-        wall += f'''<a class="u-item" data-u data-z="{z}" href="{base}work/{slug}/" data-cursor-label="" style="--x:{x}px;--y:{y}px;--w:{w}px" data-shared>{img(slug, 0, '', base, sizes=f'{w}px', want=w)}
+        wall += f'''<a class="u-item" data-u data-z="{z}" href="{base}work/{slug}/" data-cursor-label="" style="--x:{x}px;--y:{y}px;--w:{w}px" data-shared>{img(slug, 0, '', base, sizes=f'(max-width: 759px) 72vw, {w}px', want=w, eager=n == 0)}
     <span class="u-cap"><b>{esc(p['title'])}</b><span class="mono">{esc(KIND[p['kind']])}{' · ' + esc(STATUS_LABEL['concept']) if status_of(slug) == 'concept' else ''}</span></span></a>'''
     universe = f'''<section class="uni" aria-label="Brand Universe: a selection of projects"><div class="universe" data-universe><div class="u-world" data-world>{wall}</div>
   <p class="u-hint mono" aria-hidden="true"><span class="u-drag">Drag to explore</span></p></div></section>'''
@@ -495,7 +504,10 @@ def work_index():
   <a class="frame" href="{base}work/{p['slug']}/" aria-label="{esc(p['title'])}" data-cursor-label="">{img(p['slug'], 0, '', base, sizes='(min-width: 900px) 50vw, 94vw', want=1100)}</a>
   <div class="wk-meta"><h2><a href="{base}work/{p['slug']}/">{esc(p['title'])}</a></h2><p>{esc(p['plain'])}.</p><p class="mono meta"><span>{esc(KIND[p['kind']])}</span><span>{esc(str(p['year']))}</span>{tag(p)}</p></div></article>'''
 
-    logos = ''.join(f'<li><img src="{base}img/logos/{f}-c.png" alt="{esc(n)}" height="34" loading="lazy" decoding="async"></li>' for f, n, _ in BRAND_LOGOS)
+    def logo(f, n):
+        w, h = Image.open(os.path.join(ROOT, 'img', 'logos', f + '-c.png')).size
+        return f'<li><img src="{base}img/logos/{f}-c.png" alt="{esc(n)}" width="{round(30 * w / h)}" height="30" loading="lazy" decoding="async"></li>'
+    logos = ''.join(logo(f, n) for f, n, _ in BRAND_LOGOS)
     body = page_head('Work', 'A curated exhibition of what we make.', 'Explore the wall, or use the index below it. Independent concepts are labelled, so you always know what you are looking at.', cls='ph-short') + universe + f'''
 <div class="env-paper"><section class="wk-index" id="index"><div class="wrap">
   <div class="wk-bar"><h2 class="d-s">Project index <span class="mono" data-result-count>{len(PROJECTS)}</span></h2><div class="chips" role="group" aria-label="Filter projects">{chips}</div></div>
@@ -586,7 +598,7 @@ def project(p):
     body = f'''<section class="pj-head env-ink"><div class="wrap">
   <a class="back mono" href="{base}work/">All work</a>
   <p class="mono meta pj-tags"><span>{esc(KIND[p['kind']])}</span><span>{esc(str(p['year']))}</span>{tag(p)}</p>
-  <h1 class="d-xl" data-split="lines">{esc(p['title'])}</h1>
+  <h1 class="d-xl rise">{esc(p['title'])}</h1>
   <p class="lead" data-reveal>{esc(p['summary'])}</p>{concept_note}
 </div></section>
 <section class="pj-hero env-ink-solid"><div class="wrap"><div class="pj-hero-img">{img(slug, 0, p['title'], base, sizes='(min-width: 1280px) 1200px, 94vw', eager=True, want=1600, cls='hero-img')}</div></div></section>
@@ -618,7 +630,7 @@ def project(p):
                    'contentUrl': f"{SITE['url']}/{q(v['src'])}", 'embedUrl': url, 'uploadDate': added_date(v['src']),
                    'publisher': {'@id': ORG_ID, 'name': BRAND}})
     page(f'work/{slug}/', 'work', body, title=f"{p['title']} — {KIND[p['kind']]} | {BRAND}", desc=f"{p['plain']}. {p['summary']}",
-         body_class='project', ld=ld)
+         body_class='project', ld=ld, preload=_img_preload(slug, 0, base, '(min-width: 1280px) 1200px, 94vw'))
 
 
 # ── ABOUT ─────────────────────────────────────────────────────────────────
@@ -650,7 +662,7 @@ def about():
 
 # ── BLOG ──────────────────────────────────────────────────────────────────
 def bcard(b, base, cls=''):
-    return f'''<article class="post {cls}" data-shared><a class="frame" href="{base}blog/{b['slug']}/" aria-label="{esc(b['title'])}" data-cursor-label="">{img(b['cover'], 0, '', base, sizes='(min-width: 900px) 40vw, 94vw', want=1100)}</a>
+    return f'''<article class="post {cls}" data-shared><a class="frame" href="{base}blog/{b['slug']}/" aria-label="{esc(b['title'])}" data-cursor-label="">{img(b['cover'], 0, '', base, sizes='(min-width: 900px) 40vw, 94vw', want=1100, eager=cls == 'post-lead')}</a>
   <p class="mono meta"><span>{esc(b['date'])}</span><span>{esc(b['tag'])}</span></p><h2><a href="{base}blog/{b['slug']}/">{esc(b['title'])}</a></h2></article>'''
 
 
@@ -682,7 +694,7 @@ def blog_post(b):
     rel = ''.join(bcard(x, base) for x in others)
     body = f'''<article><section class="ph env-ink post-head"><div class="wrap ph-in">
   {eyebrow(f'<a href="{base}blog/">Insights</a> / {esc(b["tag"])}')}
-  <h1 class="d-l" data-split="lines">{esc(b['title'])}</h1>
+  <h1 class="d-l rise">{esc(b['title'])}</h1>
   <p class="mono post-meta">{esc(b['date'])} · {b['read']} min read · by {BRAND}</p></div></section>
 <div class="env-paper"><div class="wrap post-cover"><div class="frame">{img(b['cover'], 0, '', base, sizes='(min-width: 1200px) 1100px, 94vw', want=1100, eager=True)}</div></div>
 <div class="wrap prose">{''.join(prose(b['body']))}</div></div></article>

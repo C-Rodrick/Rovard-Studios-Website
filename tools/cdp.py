@@ -6,15 +6,21 @@
         b.js("document.querySelector('.menu-btn').click()"); b.wait(1200)
         b.shot('menu.png')
 """
-import base64, json, os, subprocess, tempfile, time, urllib.request
+import base64, json, os, socket, subprocess, tempfile, time, urllib.request
 import websocket
 
 CHROME = r'C:\Program Files\Google\Chrome\Application\chrome.exe'
 
 
+def _free_port():
+    with socket.socket() as s:
+        s.bind(('127.0.0.1', 0))
+        return s.getsockname()[1]
+
+
 class Browser:
-    def __init__(self, w=1440, h=900, mobile=False, port=9333):
-        self.w, self.h, self.port, self.mobile = w, h, port, mobile
+    def __init__(self, w=1440, h=900, mobile=False, port=None):
+        self.w, self.h, self.port, self.mobile = w, h, port or _free_port(), mobile
         self.dir = tempfile.mkdtemp(prefix='cdp-')
 
     def __enter__(self):
@@ -40,6 +46,10 @@ class Browser:
             self.ws.close()
         finally:
             self.proc.terminate()
+            try:
+                self.proc.wait(timeout=10)
+            except subprocess.TimeoutExpired:
+                self.proc.kill()
 
     def send(self, method, **params):
         self.i += 1

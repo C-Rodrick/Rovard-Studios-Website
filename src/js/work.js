@@ -27,7 +27,8 @@ export function initFilters() {
 export function initUniverse() {
   const root = $('[data-universe]');
   if (!root) return;
-  if (REDUCED || isPhone() || !FINE) { root.classList.add('is-flat'); return; }   // becomes a native horizontal scroller
+  // Touch, phones, reduced motion and no-JS all get the native horizontal scroller from CSS. See .universe in pages.css.
+  if (REDUCED || isPhone() || !FINE) return;
   root.classList.add('is-live');
   const world = $('[data-world]', root), items = $$('[data-u]', root);
   let tx = 0, ty = 0, cx = 0, cy = 0, drag = null, moved = 0, visible = false, raf = 0;

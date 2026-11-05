@@ -53,7 +53,7 @@ export function headlines() {
   });
   $$('[data-read]').forEach((el) => {
     const s = SplitText.create(el, { type: 'words', wordsClass: 'rw' });
-    gsap.fromTo(s.words, { opacity: 0.16 }, {
+    gsap.fromTo(s.words, { opacity: 0.45 }, {   // never below large-text contrast, even if you stop mid-scroll
       opacity: 1, stagger: STAGGER.words, ease: EASE.none,
       scrollTrigger: { trigger: el, start: 'top 78%', end: 'bottom 52%', scrub: 0.4 },
     });

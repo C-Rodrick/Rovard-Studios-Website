@@ -2,6 +2,7 @@
 // Only one is ever running. Reduced motion or the pause control leaves a single still frame.
 import { $$, REDUCED } from '../config.js';
 import { isPaused, onPause } from '../prefs.js';
+import { hasRealGPU } from '../core/quality.js';
 
 const STUDIES = {
   field: () => import('./field.js'),
@@ -11,8 +12,12 @@ const STUDIES = {
   blocks: () => import('./blocks.js'),
 };
 
+const NEEDS_GPU = new Set(['field', 'specimen']);   // without a real GPU these stay as their poster images
+
 export function initLab() {
-  const items = $$('[data-study]').map((el) => ({ el, name: el.dataset.study, inst: null, loading: false, seen: false }));
+  const gpu = hasRealGPU();
+  $$('[data-study]').forEach((el) => { if (!gpu && NEEDS_GPU.has(el.dataset.study)) el.classList.add('still'); });
+  const items = $$('[data-study]').filter((el) => gpu || !NEEDS_GPU.has(el.dataset.study)).map((el) => ({ el, name: el.dataset.study, inst: null, loading: false, seen: false }));
   let current = null;
   const stopAll = () => items.forEach((i) => i.inst && i.inst.stop());
   const startOne = async (item) => {
@@ -41,6 +46,10 @@ export function initLab() {
     es.forEach((e) => { const it = items.find((i) => i.el === e.target); it.seen = e.isIntersecting; });
     pick();
   }, { threshold: 0.35 });
-  items.forEach((i) => io.observe(i.el));
+  // The page reads first; studies start once someone is actually here (first gesture, or after a moment).
+  let begun = false;
+  const begin = () => { if (begun) return; begun = true; items.forEach((i) => io.observe(i.el)); };
+  ['scroll', 'pointermove', 'touchstart', 'keydown'].forEach((t) => addEventListener(t, begin, { once: true, passive: true }));
+  setTimeout(begin, 4000);
   onPause((p) => { if (p) stopAll(); else if (current) startOne(current); });
 }
