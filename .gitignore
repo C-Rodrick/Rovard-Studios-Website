@@ -12,3 +12,5 @@ mason-rowe/_art/__pycache__/
 __pycache__/
 *.pyc
 tools/*.log
+
+node_modules/

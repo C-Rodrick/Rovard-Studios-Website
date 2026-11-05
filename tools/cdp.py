@@ -18,7 +18,7 @@ class Browser:
         self.dir = tempfile.mkdtemp(prefix='cdp-')
 
     def __enter__(self):
-        self.proc = subprocess.Popen([CHROME, '--headless=new', '--disable-gpu', f'--remote-debugging-port={self.port}', f'--user-data-dir={self.dir}',
+        self.proc = subprocess.Popen([CHROME, '--headless=new', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist', f'--remote-debugging-port={self.port}', f'--user-data-dir={self.dir}',
                                       '--hide-scrollbars', f'--window-size={max(self.w, 500)},{self.h + 200}', 'about:blank'],
                                      stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         for _ in range(60):
@@ -32,6 +32,7 @@ class Browser:
         self.i = 0
         self.send('Page.enable'); self.send('Runtime.enable')
         self.send('Emulation.setDeviceMetricsOverride', width=self.w, height=self.h, deviceScaleFactor=1, mobile=self.mobile)
+        self.send('Emulation.setTouchEmulationEnabled', enabled=self.mobile)
         return self
 
     def __exit__(self, *a):
