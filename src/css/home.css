@@ -155,6 +155,10 @@ html.fx.core-live .close-home { background: transparent; }
 }
 
 @media (max-width: 759px) {
+  /* Phones skip layout and paint for sections far off screen. Desktop keeps exact heights for the pinned section. */
+  .work, .caps, .proc, .why, .arch { content-visibility: auto; }
+  .work { contain-intrinsic-size: auto 2900px; } .caps { contain-intrinsic-size: auto 1450px; } .proc { contain-intrinsic-size: auto 2100px; }
+  .why { contain-intrinsic-size: auto 970px; } .arch { contain-intrinsic-size: auto 1050px; }
   .hero { --hero-fs: 9.5vw; }
   html[lang="fr"] .hero { --hero-fs: 8.4vw; }
   .hero-foot { grid-template-columns: 1fr; }

@@ -5,6 +5,7 @@
 import gsap from 'gsap';
 import { SplitText } from 'gsap/SplitText';
 import { $$, DUR, EASE, STAGGER, FINE, html } from './config.js';
+import { onceInView } from './reveals.js';
 
 gsap.registerPlugin(SplitText);
 
@@ -42,15 +43,19 @@ function weightField(lines) {
 }
 
 export function headlines() {
-  $$('[data-split="lines"]').forEach((el) => {
+  // Split only when a headline is about to be seen: splitting forces layout, so doing them all at load is expensive.
+  onceInView($$('[data-split="lines"]'), (batch) => batch.forEach((el) => {
+    let first = true;
+    el.classList.add('in');
     SplitText.create(el, {
       type: 'lines', mask: 'lines', linesClass: 'ln', autoSplit: true,
-      onSplit: (self) => gsap.from(self.lines, {
-        yPercent: 105, duration: DUR.slow, ease: EASE.out, stagger: STAGGER.lines,
-        scrollTrigger: { trigger: el, start: 'top 88%', once: true },
-      }),
+      onSplit: (self) => {
+        if (!first) return undefined;   // re-split after a resize: no second entrance
+        first = false;
+        return gsap.from(self.lines, { yPercent: 105, duration: DUR.slow, ease: EASE.out, stagger: STAGGER.lines });
+      },
     });
-  });
+  }));
   $$('[data-read]').forEach((el) => {
     const s = SplitText.create(el, { type: 'words', wordsClass: 'rw' });
     gsap.fromTo(s.words, { opacity: 0.45 }, {   // never below large-text contrast, even if you stop mid-scroll

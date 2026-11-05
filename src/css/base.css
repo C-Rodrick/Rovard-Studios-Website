@@ -104,12 +104,13 @@ main { position: relative; z-index: var(--z-page); }
 .frame { position: relative; display: block; overflow: hidden; background: var(--grey); }
 .frame img, .frame video { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--e-out); }
 a.frame:hover img, a:hover > .frame img, button:hover > .frame img { transform: scale(1.035); }
-html.fx [data-wipe] { --wipe: 0; }
+html.fx [data-wipe]:not(.in) { --wipe: 1; }
 [data-wipe]::after { content: ""; position: absolute; inset: 0; background: var(--blue); transform: scaleY(var(--wipe, 0)); transform-origin: top; pointer-events: none; }
 
 /* ── No flash before GSAP arrives. If it never does, the content appears anyway. ── */
 html.mo:not(.fx) [data-split="lines"], html.mo:not(.fx) [data-hero-after], html.mo:not(.fx) [data-reveal] { opacity: 0; animation: failsafe .3s 2.5s forwards; }
 html.mo:not(.fx) .hl { color: transparent; animation: failsafe-c .3s 2.5s forwards; }
+html.fx [data-split="lines"]:not(.in), html.fx [data-reveal]:not(.in) { opacity: 0; }
 @keyframes failsafe { to { opacity: 1; } }
 @keyframes failsafe-c { to { color: inherit; } }
 

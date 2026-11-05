@@ -3,11 +3,11 @@
 //   seed (an idea) -> strata (thinking, layered) -> block (the logo's own square and R) -> fluid (the experience)
 // No model files, no textures: geometry and reflections are procedural, so it costs about 160 KB of gzipped JS and no downloads.
 import {
-  BackSide, BoxGeometry, BufferAttribute, BufferGeometry, Color, ExtrudeGeometry, Group, IcosahedronGeometry, Mesh, MeshBasicMaterial,
-  MeshStandardMaterial, PerspectiveCamera, PMREMGenerator, Points, Scene, ShaderMaterial, SphereGeometry, ACESFilmicToneMapping,
+  BufferAttribute, BufferGeometry, Color, ExtrudeGeometry, Group, IcosahedronGeometry, Mesh, MeshStandardMaterial, PerspectiveCamera, Points, Scene, ShaderMaterial, ACESFilmicToneMapping,
   SRGBColorSpace, WebGLRenderer,
 } from 'three';
 import { SVGLoader } from 'three/addons/loaders/SVGLoader.js';
+import { environment } from './env.js';
 
 // The R from the logo file, unchanged. Coordinates are the logo's own 181 x 171 square.
 const R_PATH = 'M60.24 130V40.4H96.464C102.011 40.4 106.875 41.3813 111.056 43.344C115.323 45.2213 118.651 47.952 121.04 51.536C123.429 55.0347 124.624 59.2587 124.624 64.208V65.616C124.624 71.504 123.216 76.1547 120.4 79.568C117.584 82.9813 114.256 85.2853 110.416 86.48V88.272C113.488 88.3573 116.005 89.3813 117.968 91.344C120.016 93.2213 121.04 96.08 121.04 99.92V130H110.416V101.2C110.416 98.64 109.691 96.6773 108.24 95.312C106.875 93.9467 104.784 93.264 101.968 93.264H70.992V130H60.24ZM70.992 83.536H95.44C101.328 83.536 105.851 82.128 109.008 79.312C112.251 76.4107 113.872 72.4 113.872 67.28V66.384C113.872 61.264 112.293 57.296 109.136 54.48C105.979 51.5787 101.413 50.128 95.44 50.128H70.992V83.536Z';
@@ -49,28 +49,6 @@ vec3 coreShape(vec3 n){
   vec3 seed = n * (.42 + .02 * a);
   return fluid * uMix.x + strata * uMix.y + block * uMix.z + seed * uMix.w;
 }`;
-
-function environment(renderer) {
-  const s = new Scene();
-  const room = new Mesh(new SphereGeometry(30, 16, 12), new MeshBasicMaterial({ color: new Color(0.03, 0.05, 0.16), side: BackSide }));
-  s.add(room);
-  const panel = (rgb, gain, w, h, x, y, z) => {
-    const m = new Mesh(new BoxGeometry(w, h, 0.1), new MeshBasicMaterial({ color: new Color(rgb[0] * gain, rgb[1] * gain, rgb[2] * gain) }));
-    m.position.set(x, y, z); m.lookAt(0, 0, 0); s.add(m);
-  };
-  panel([1, 1, 1], 3.2, 20, 6, 0, 12, 3);              // overhead softbox
-  panel([0.14, 0.34, 1], 6, 12, 20, -14, 0, 3);      // cobalt wall
-  panel([0.14, 0.34, 1], 3.5, 20, 12, 0, -12, 6);    // cobalt floor bounce
-  panel([0.14, 0.34, 1], 2.2, 12, 20, 14, -2, -6);   // far cobalt wall
-  panel([1, 0.85, 0.22], 12, 1.4, 14, 13, 2, 7);     // signal-yellow strip
-  panel([1, 1, 1], 5, 1.6, 13, 6, 0, 14);            // key strip
-  panel([0.6, 0.72, 1], 4, 14, 4, -5, 7, -13);       // rim
-  const pm = new PMREMGenerator(renderer);
-  const tex = pm.fromScene(s, 0.012).texture;
-  pm.dispose();
-  s.traverse((o) => { if (o.isMesh) { o.geometry.dispose(); o.material.dispose(); } });
-  return tex;
-}
 
 function rGeometry() {
   const shapes = new SVGLoader().parse(`<svg xmlns="http://www.w3.org/2000/svg"><path d="${R_PATH}"/></svg>`).paths.flatMap((p) => SVGLoader.createShapes(p));

@@ -124,7 +124,7 @@ A single icosphere. Its shape is computed in the vertex shader as a blend of fou
 - **block** a soft slab with the logo's exact 181:171 proportions, plus the logo's R extruded from the SVG path: the design
 - **fluid** noise-displaced liquid: the experience
 
-No model files and no textures. Reflections come from a procedural environment of cobalt walls and one yellow strip. `home.js` holds the poses (`P`) and phone overrides (`PHONE`). Scroll picks a target pose and the Core eases toward it on its own clock, so jumping around the page cannot break it. `difference` blending on the hero type is why letters turn yellow where they cross the object.
+No model files and no textures. Reflections come from a procedural environment of cobalt walls and one yellow strip (`core/env.js`). It uses plain mipmaps instead of Three's PMREMGenerator, whose filter shader froze the page for 2 to 3 seconds on a first visit. That step now takes about 180 ms. Keep Three pinned: this relies on how r187 reads reflection maps. `home.js` holds the poses (`P`) and phone overrides (`PHONE`). Scroll picks a target pose and the Core eases toward it on its own clock, so jumping around the page cannot break it. `difference` blending on the hero type is why letters turn yellow where they cross the object.
 
 ### Technology decisions
 | Considered | Decision | Why |
@@ -139,6 +139,7 @@ No model files and no textures. Reflections come from a procedural environment o
 | Sound | Not used | Optional in the brief, and retired earlier in the project |
 
 ### Loading and fallbacks
+- **Entrances:** one IntersectionObserver in `reveals.js` instead of a ScrollTrigger per element, and headlines split only when about to be seen. On phones, far-off sections also skip layout with `content-visibility`.
 - **Opening sequence:** first visit only, about 1.4 s (faster on phones), any key or click skips it, no progress bar. A CSS animation removes it if the script fails.
 - **Core:** the page never waits for it. A still image shows first and the Core fades in over it when ready. `core/quality.js` keeps the still and never downloads Three.js when there is no WebGL 2, a software renderer, under 4 GB memory, under 4 CPU cores, or Save-Data on.
 - **Quality:** desktop 65k triangles and up to 1.75x resolution. Phones and tablets 12k triangles, 1.25x, no particles. A frame-time guard drops resolution, then falls back to the still.
@@ -189,22 +190,27 @@ No model files and no textures. Reflections come from a procedural environment o
 Run on a Windows PC with an Intel UHD integrated GPU, Chrome headless. Lighthouse 13.6, through a local server with gzip to approximate Netlify. See `tools/test_site.py`.
 
 ### Lighthouse
+Fresh browser for each home page run, because a cold start is what a first-time visitor gets.
+
 | Page | Mobile perf | Desktop perf | A11y | Best practices | SEO |
 |---|---|---|---|---|---|
-| Home | **73 to 91, misses the 85 target** | 90 to 99 | 100 | 100 | 100 |
-| Work | 93 | 100 | 100 | 100 | 100 |
-| Project page | 94 | 100 | 100 | 100 | 100 |
-| Services | 98 | 100 | 100 | 100 | 100 |
-| About | 94 | 100 | 100 | 100 | 100 |
-| Pricing | 93 | 100 | 100 | 100 | 100 |
-| Insights | 94 | 100 | 100 | 100 | 100 |
-| Start a project | 97 | 100 | 100 | 100 | 100 |
+| Home | 73 to 91, median 84 | 79 to 99 | 100 | 100 | 100 |
+| Work | 95 | 100 | 100 | 100 | 100 |
+| Project page | 95 | 100 | 100 | 100 | 100 |
+| Services | 100 | 100 | 100 | 100 | 100 |
+| About | 100 | 100 | 100 | 100 | 100 |
+| Pricing | 99 | 100 | 100 | 100 | 100 |
+| Insights | 95 | 100 | 100 | 100 | 100 |
+| Start a project | 98 | 100 | 100 | 100 | 100 |
 | Contact | 98 | 100 | 100 | 100 | 100 |
-| Creative Dimension | 91 | 100 | 100 | 100 | 100 |
+| Creative Dimension | 96 | 100 | 100 | 100 | 100 |
 
-CLS is 0 on every page. Scores are from repeated local runs and vary between runs; real scores on Netlify will differ.
+CLS is 0 on every page. Scores vary between runs, and real scores on Netlify will differ.
 
-**Known shortfalls.** The home page is the one page under the mobile target: in the last runs it scored 75 to 79, with 370 to 590 ms of blocking time and LCP of 3.2 to 3.9 s under simulated slow 4G. That is the cost of the opening sequence and character animation on a throttled CPU. Skipping the opening sequence on phones is the obvious next thing to try. LCP also exceeds 2.5 s on Work, project pages, Insights and Creative Dimension (2.6 to 3.0 s), which open with images.
+**Known shortfalls.**
+- The home page sits just under the mobile target of 85 at the median, and can drop under the desktop target of 90 on a cold start. What remains is parsing Three.js, building the mesh (about 340 ms) and the first frame (about 500 ms).
+- LCP is over 2.5 s under simulated slow 4G on the mobile home page (3.1 to 3.7 s), and on Work, project pages, Insights and Creative Dimension (2.7 to 2.9 s), which open with images.
+- Skipping the opening sequence on phones was tried and did not help, so it stays.
 
 ### 3D on a real GPU
 Intel UHD integrated: 101 to 103 fps in the hero and the pinned section, worst frame 20 ms. Canvas stops rendering when its sections are off screen (checked).

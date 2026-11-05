@@ -385,7 +385,7 @@ def home():
 </div></section>'''
 
     tiles = ''
-    for lay, s in zip(('a', 'b', 'c'), (LAB[0], LAB[3], LAB[4])):
+    for lay, s in zip(('a', 'b', 'c'), (LAB[0], LAB[1], LAB[4])):
         tiles += f'''<a class="arc arc-{lay}" href="dimension/#{s['id']}" data-cursor-label="" data-wipe><img src="img/lab/{s['id']}.webp" width="1000" height="429" alt="" loading="lazy" decoding="async">
     <span class="arc-cap"><span class="mono">Study {s['n']}</span><b>{esc(s['title'])}</b></span></a>'''
     archive = f'''<section class="arch env-ink-solid"><div class="wrap">
