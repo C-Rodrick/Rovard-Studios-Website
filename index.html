@@ -1,649 +1,223 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#F7F7F5" />
-  <meta name="color-scheme" content="light dark" />
-
-  <title>Rovard Studios — Branding &amp; Design Studio in Canada</title>
-  <meta name="description"
-    content="Canadian branding and design studio working worldwide. Brand identity, logo, website, UI, social media, packaging and motion design for ambitious businesses." />
-  <meta name="keywords"
-    content="branding studio Canada, brand identity design Canada, graphic design studio Canada, social media design, UI design, packaging design, motion design, web design, creative studio Canada, branding agency" />
-  <meta name="author" content="Rovard Studios" />
-  <meta name="robots" content="index, follow, max-image-preview:large" />
-  <link rel="canonical" href="https://rovardstudio.com/" />
-
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Rovard Studios" />
-  <meta property="og:locale" content="en_CA" />
-  <meta property="og:title" content="Rovard Studios — Design that moves businesses forward." />
-  <meta property="og:description"
-    content="A premium Canadian design and branding studio working worldwide across identity, social, UI, packaging, motion and web." />
-  <meta property="og:url" content="https://rovardstudio.com/" />
-  <meta property="og:image" content="https://rovardstudio.com/assets/og-cover.jpg" />
-  <meta property="og:image:alt" content="Rovard Studios — Design that moves businesses forward." />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Rovard Studios — Design that moves businesses forward." />
-  <meta name="twitter:description" content="Premium design and branding studio based in Canada, working worldwide." />
-  <meta name="twitter:image" content="https://rovardstudio.com/assets/og-cover.jpg" />
-  <meta name="twitter:image:alt" content="Rovard Studios — Design that moves businesses forward." />
-
-  <link rel="icon" href="favicon.ico" sizes="any" />
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
-  <link rel="icon" type="image/svg+xml" href="assets/rovard-mark.svg" />
-  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
-  <link rel="manifest" href="site.webmanifest" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap"
-    rel="stylesheet" />
-
-  <script>
-    try {
-      if (localStorage.getItem('rovard-theme') === 'dark') document.documentElement.dataset.theme = 'dark';
-    } catch { }
-  </script>
-  <link rel="stylesheet" href="styles.css?v=202610121800" />
-
-  <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Organization",
-      "@id": "https://rovardstudio.com/#organization",
-      "name": "Rovard Studios",
-      "url": "https://rovardstudio.com/",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://rovardstudio.com/assets/icon-512.png",
-        "width": 512,
-        "height": 512
-      },
-      "image": "https://rovardstudio.com/assets/og-cover.jpg",
-      "email": "hello@rovardstudio.com"
-    },
-    {
-      "@type": "WebSite",
-      "@id": "https://rovardstudio.com/#website",
-      "url": "https://rovardstudio.com/",
-      "name": "Rovard Studios",
-      "publisher": {
-        "@id": "https://rovardstudio.com/#organization"
-      },
-      "inLanguage": "en"
-    },
-    {
-      "@type": "ProfessionalService",
-      "@id": "https://rovardstudio.com/#service",
-      "name": "Rovard Studios",
-      "url": "https://rovardstudio.com/",
-      "image": "https://rovardstudio.com/assets/og-cover.jpg",
-      "description": "Premium Canadian design and branding studio working worldwide across brand identity, social media, UI, packaging, motion and web design.",
-      "email": "hello@rovardstudio.com",
-      "areaServed": "Worldwide",
-      "address": {
-        "@type": "PostalAddress",
-        "addressCountry": "CA"
-      },
-      "parentOrganization": {
-        "@id": "https://rovardstudio.com/#organization"
-      },
-      "knowsAbout": [
-        "Brand Identity Design",
-        "Social Media Design",
-        "UI Design",
-        "Packaging Design",
-        "Motion Design",
-        "Web Design"
-      ],
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Design services",
-        "itemListElement": [
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Brand Identity Design",
-              "url": "https://rovardstudio.com/services/brand-identity-design/"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Social Media Design",
-              "url": "https://rovardstudio.com/services/social-media-design/"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "UI Design",
-              "url": "https://rovardstudio.com/services/ui-design/"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Packaging Design",
-              "url": "https://rovardstudio.com/services/packaging-design/"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Motion Design",
-              "url": "https://rovardstudio.com/services/motion-design/"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Web Design",
-              "url": "https://rovardstudio.com/services/web-design/"
-            }
-          }
-        ]
-      }
-    },
-    {
-      "@type": "WebPage",
-      "@id": "https://rovardstudio.com/#webpage",
-      "url": "https://rovardstudio.com/",
-      "name": "Rovard Studios — Branding & Design Studio in Canada",
-      "isPartOf": {
-        "@id": "https://rovardstudio.com/#website"
-      },
-      "about": {
-        "@id": "https://rovardstudio.com/#organization"
-      },
-      "primaryImageOfPage": "https://rovardstudio.com/assets/og-cover.jpg",
-      "inLanguage": "en"
-    }
-  ]
-}
-  </script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rovard Studios — The Creative Edition. Independent creative studio, Canada</title>
+<meta name="description" content="Rovard Studios is an independent creative studio in Canada. Brand identity, social media, UI, packaging, motion and web design for ideas that refuse to look ordinary.">
+<link rel="canonical" href="https://rovardstudio.com/">
+<link rel="alternate" hreflang="en" href="https://rovardstudio.com/">
+<link rel="alternate" hreflang="fr" href="https://rovardstudio.com/fr/">
+<link rel="alternate" hreflang="x-default" href="https://rovardstudio.com/">
+<meta name="theme-color" content="#F3F0E9">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Rovard Studios">
+<meta property="og:title" content="Rovard Studios — The Creative Edition. Independent creative studio, Canada">
+<meta property="og:description" content="Rovard Studios is an independent creative studio in Canada. Brand identity, social media, UI, packaging, motion and web design for ideas that refuse to look ordinary.">
+<meta property="og:url" content="https://rovardstudio.com/">
+<meta property="og:image" content="https://rovardstudio.com/assets/og-cover.jpg">
+<meta property="og:locale" content="en_CA">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preload" href="/edition/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/edition/fonts/instrument-serif-italic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/edition/edition.css?v=1">
+<script>document.documentElement.classList.add('js');</script>
+<script src="/edition/edition.js?v=1" defer></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "Rovard Studios", "url": "https://rovardstudio.com/", "logo": "https://rovardstudio.com/assets/rovard-logo.svg", "email": "hello@rovardstudio.com", "description": "Rovard Studios is an independent creative studio in Canada. Brand identity, social media, UI, packaging, motion and web design for ideas that refuse to look ordinary.", "areaServed": "Worldwide", "address": {"@type": "PostalAddress", "addressCountry": "CA"}}</script>
 </head>
-
-<body>
-  <div class="page-loader" aria-hidden="true">
-    <div class="loader-brand">ROVARD<span>.</span></div>
-    <div class="loader-line"><i></i></div>
+<body class="home">
+<a class="skip" href="#main">Skip to content</a>
+<header class="mast" id="mast">
+  <a class="mast-logo" href="/" aria-label="Rovard Studios"><svg class="mark" viewBox="0 0 181 171" aria-hidden="true"><rect width="181" height="171" fill="currentColor"/><path fill="var(--mark-r)" d="M60.24 130V40.4H96.464C102.011 40.4 106.875 41.3813 111.056 43.344C115.323 45.2213 118.651 47.952 121.04 51.536C123.429 55.0347 124.624 59.2587 124.624 64.208V65.616C124.624 71.504 123.216 76.1547 120.4 79.568C117.584 82.9813 114.256 85.2853 110.416 86.48V88.272C113.488 88.3573 116.005 89.3813 117.968 91.344C120.016 93.2213 121.04 96.08 121.04 99.92V130H110.416V101.2C110.416 98.64 109.691 96.6773 108.24 95.312C106.875 93.9467 104.784 93.264 101.968 93.264H70.992V130H60.24ZM70.992 83.536H95.44C101.328 83.536 105.851 82.128 109.008 79.312C112.251 76.4107 113.872 72.4 113.872 67.28V66.384C113.872 61.264 112.293 57.296 109.136 54.48C105.979 51.5787 101.413 50.128 95.44 50.128H70.992V83.536Z"/></svg><span>Rovard Studios</span></a>
+  <p class="mast-issue lbl" aria-hidden="true"><span>Issue 001</span><span class="mast-sep">—</span><span class="mast-now" id="now">The Creative Edition</span></p>
+  <nav class="mast-nav lbl" aria-label="Main"><a href="#works">Works</a><a href="#studio">Studio</a><a href="#departments">Services</a><a href="#archive">Archive</a><a href="#contact">Contact</a></nav>
+  <div class="mast-tools lbl">
+    <a class="mast-lang" href="/fr/" hreflang="fr" lang="fr" title="Français"><span aria-hidden="true">EN / </span><b>FR</b></a>
+    <button class="mast-toc" type="button" aria-expanded="false" aria-controls="toc"><i aria-hidden="true"></i>Contents</button>
   </div>
-
-  <header class="site-header" id="site-header">
-    <a class="brand" href="#top" aria-label="Rovard Studios home">
-      <img class="logo-light" src="assets/Combined%20Logo%20-%20Rovard%20Studios%20-%20Blue.svg" alt="Rovard Studios" />
-      <img class="logo-dark" src="assets/Combined%20Logo%20-%20Rovard%20Studios%20-%20White.svg" alt="" aria-hidden="true" />
-    </a>
-
-    <nav class="desktop-nav" aria-label="Primary navigation">
-      <a href="#work">Work</a>
-      <a href="#services">Services</a>
-      <a href="#studio">Studio</a>
-      <a href="#process">Process</a>
-    </nav>
-
-    <div class="header-actions">
-      <button class="sound-toggle" type="button" role="switch" aria-checked="true" aria-label="Turn sound off"
-        title="Turn sound off">
-        <span class="sound-toggle-waves" aria-hidden="true">
-          <i></i><i></i><i></i>
-        </span>
-        <span class="sound-toggle-label">Sound On</span>
-      </button>
-      <button class="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Switch to dark mode"
-        title="Switch to dark mode">
-        <span class="theme-toggle-icon" aria-hidden="true">☾</span>
-        <span class="theme-toggle-label">Dark</span>
-      </button>
-      <a class="header-cta magnetic" href="#contact">
-        Start a project <span>↗</span>
-      </a>
-      <button class="menu-toggle" aria-label="Open menu" aria-expanded="false">
-        <span></span><span></span>
-      </button>
-    </div>
-  </header>
-
-  <div class="mobile-menu" aria-hidden="true">
-    <nav>
-      <a href="#work">01 / Work</a>
-      <a href="#services">02 / Services</a>
-      <a href="#studio">03 / Studio</a>
-      <a href="#process">04 / Process</a>
-      <a href="#contact">05 / Start a project ↗</a>
-    </nav>
-    <p>Canada · Worldwide</p>
+</header>
+<div class="toc" id="toc" hidden>
+  <div class="toc-in">
+    <p class="lbl toc-head"><span>In this issue</span><span>Issue 001 · 2026</span></p>
+    <ol class="toc-list"><li><a href="#cover"><span class="toc-no">01</span><span class="toc-name">The edition opening</span><span class="toc-sub">Cover</span></a></li><li><a href="#idea"><span class="toc-no">02</span><span class="toc-name">The idea</span><span class="toc-sub">We make ideas look different</span></a></li><li><a href="#works"><span class="toc-no">03</span><span class="toc-name">Selected works</span><span class="toc-sub">Six stories</span></a></li><li><a href="#studio"><span class="toc-no">04</span><span class="toc-name">The studio</span><span class="toc-sub">A point of view</span></a></li><li><a href="#departments"><span class="toc-no">05</span><span class="toc-name">Departments</span><span class="toc-sub">What we make</span></a></li><li><a href="#archive"><span class="toc-no">06</span><span class="toc-name">The archive</span><span class="toc-sub">Every project</span></a></li><li><a href="#notes"><span class="toc-no">07</span><span class="toc-name">Field notes</span><span class="toc-sub">How we work</span></a></li><li><a href="#contact"><span class="toc-no">08</span><span class="toc-name">Open projects</span><span class="toc-sub">Start one</span></a></li><li><a href="/work/"><span class="toc-no">→</span><span class="toc-name">Open the full archive</span><span class="toc-sub">22 projects</span></a></li></ol>
+    <p class="lbl toc-foot"><a href="mailto:hello@rovardstudio.com">hello@rovardstudio.com</a><button type="button" class="toc-close">Close ✕</button></p>
   </div>
-
-  <main id="top">
-    <section class="hero section">
-      <canvas id="heroCanvas" class="hero-3d-canvas" aria-hidden="true"></canvas>
-      <div class="hero-kicker reveal">Canada · Worldwide <span></span> Independent design studio</div>
-      <div class="hero-title-wrap">
-        <p class="eyebrow reveal">ROVARD STUDIOS / 001</p>
-        <h1 class="hero-title">
-          <span class="line reveal">Design</span>
-          <span class="line reveal">that moves</span>
-          <span class="line reveal accent-line">businesses forward<span class="dot">.</span></span>
-        </h1>
-      </div>
-      <div class="hero-bottom">
-        <p class="hero-copy reveal">We build visual identities and digital experiences designed to make ambitious
-          businesses clearer, more credible and more memorable.</p>
-        <a class="round-link magnetic reveal" href="#work" aria-label="Explore selected work">
-          <span>Explore<br>the work</span><b>↓</b>
-        </a>
-      </div>
-      <div class="hero-scroll" aria-hidden="true"><span></span></div>
-    </section>
-
-    <section class="statement section">
-      <div class="section-meta">01 / POSITIONING</div>
-      <div class="statement-content">
-        <p class="eyebrow reveal">The studio</p>
-        <h2 class="display reveal">We don't design for decoration.<br><em>We design for perception.</em></h2>
-        <p class="statement-text reveal">From identity systems to digital interfaces, every decision is made to help a
-          business communicate with confidence and move with intention.</p>
-      </div>
-    </section>
-
-    <section class="work section" id="work">
-      <div class="section-head">
-        <div>
-          <div class="section-meta">02 / SELECTED WORK</div>
-          <h2 class="section-title reveal">Built to be<br><em>remembered.</em></h2>
-        </div>
-        <p class="section-intro reveal">A curated selection across identity, social, digital, packaging, motion and web.
-        </p>
-      </div>
-
-      <div class="work-list reveal">
-        <div class="portfolio-groups" id="portfolioGroups" aria-label="Project type sliders"></div>
-      </div>
-
-      <div class="work-end reveal">
-        <span>Selected work / 2026</span>
-      </div>
-    </section>
-
-    <section class="services section rv-warp" id="services">
-      <div class="section-meta">03 / SERVICES</div>
-      <div class="services-top">
-        <h2 class="display reveal">One studio.<br><em>Many ways to move.</em></h2>
-        <p class="reveal">We bring strategy, visual design and digital thinking into one connected system.</p>
-      </div>
-
-      <div class="service-list" data-stagger="100">
-        <article class="service reveal">
-          <span class="service-number">01</span>
-          <div>
-            <h3><a href="/services/brand-identity-design/">Brand Identity</a></h3>
-            <p>Distinctive identity systems that clarify what you stand for and create consistency wherever your brand
-              appears.</p>
-          </div>
-          <span class="service-arrow">↗</span>
-        </article>
-        <article class="service reveal">
-          <span class="service-number">02</span>
-          <div>
-            <h3><a href="/services/social-media-design/">Social Media Design</a></h3>
-            <p>Campaigns and content systems built to keep your brand recognizable while giving every post a reason to
-              exist.</p>
-          </div>
-          <span class="service-arrow">↗</span>
-        </article>
-        <article class="service reveal">
-          <span class="service-number">03</span>
-          <div>
-            <h3><a href="/services/ui-design/">UI Design</a></h3>
-            <p>Clear, high-quality interfaces that turn complex products and services into confident digital
-              experiences.</p>
-          </div>
-          <span class="service-arrow">↗</span>
-        </article>
-        <article class="service reveal">
-          <span class="service-number">04</span>
-          <div>
-            <h3><a href="/services/packaging-design/">Packaging</a></h3>
-            <p>Physical experiences designed to make products feel considered, desirable and unmistakably yours.</p>
-          </div>
-          <span class="service-arrow">↗</span>
-        </article>
-        <article class="service reveal">
-          <span class="service-number">05</span>
-          <div>
-            <h3><a href="/services/motion-design/">Motion Design</a></h3>
-            <p>Movement systems, campaign animation and digital storytelling that give identity a pulse.</p>
-          </div>
-          <span class="service-arrow">↗</span>
-        </article>
-        <article class="service reveal">
-          <span class="service-number">06</span>
-          <div>
-            <h3><a href="/services/web-design/">Web Design</a></h3>
-            <p>Conversion-focused websites that combine strong art direction, intuitive UX and purposeful interaction.
-            </p>
-          </div>
-          <span class="service-arrow">↗</span>
-        </article>
-      </div>
-    </section>
-
-    <section class="studio section rv-warp" id="studio">
-      <div class="section-meta">04 / STUDIO</div>
-      <div class="studio-grid">
-        <div class="studio-copy">
-          <p class="eyebrow reveal">A strategic creative partner</p>
-          <h2 class="display reveal">Good design gets attention.<br><em>Great design earns trust.</em></h2>
-          <p class="reveal">Rovard Studios works with established businesses, entrepreneurs and international companies
-            that want their visual presence to match the ambition behind the business.</p>
-          <p class="reveal">We look beyond the immediate deliverable. We ask what needs to be understood, who needs to
-            believe it and what the design needs to make possible.</p>
-        </div>
-        <div class="studio-card reveal" data-rm-tilt="6">
-          <div class="studio-card-top"><span>ROVARD / PRINCIPLES</span><span>06</span></div>
-          <div class="principle"><span>01</span><b>Clarity</b>
-            <p>Make the important thing unmistakable.</p>
-          </div>
-          <div class="principle"><span>02</span><b>Character</b>
-            <p>Create a visual signature people can recognize.</p>
-          </div>
-          <div class="principle"><span>03</span><b>Craft</b>
-            <p>Obsess over the details that change perception.</p>
-          </div>
-          <div class="principle"><span>04</span><b>Consistency</b>
-            <p>Build systems, not disconnected assets.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="marquee-band" aria-label="Rovard capabilities">
-      <div class="marquee">
-        <span>BRAND IDENTITY</span><i>✦</i><span>SOCIAL SYSTEMS</span><i>✦</i><span>UI
-          DESIGN</span><i>✦</i><span>PACKAGING</span><i>✦</i><span>MOTION</span><i>✦</i><span>WEB DESIGN</span><i>✦</i>
-        <span>BRAND IDENTITY</span><i>✦</i><span>SOCIAL SYSTEMS</span><i>✦</i><span>UI
-          DESIGN</span><i>✦</i><span>PACKAGING</span><i>✦</i><span>MOTION</span><i>✦</i><span>WEB DESIGN</span><i>✦</i>
-      </div>
-    </section>
-
-    <section class="testimonials section rv-warp">
-      <div class="section-meta">05 / CLIENT VOICES</div>
-      <div class="testimonial-head">
-        <h2 class="display reveal">Built with intention.<br><em>Experienced in practice.</em></h2>
-      </div>
-
-      <div class="t-slider reveal">
-        <button class="t-arrow prev" id="prevQuote" type="button" aria-label="Previous testimonial">←</button>
-        <div class="t-stage" tabindex="0" aria-label="Client testimonials">
-          <div class="t-track">
-          <article class="t-card">
-            <span class="quote-mark" aria-hidden="true">“</span>
-            <blockquote>Rovard didn't just give us a new look. They helped us see the business differently. The identity finally feels as ambitious as the company we are building.</blockquote>
-            <footer><i class="t-avatar" aria-hidden="true">JM</i><div><b>Jordan Mitchell</b><span>Founder, Northline Group</span></div></footer>
-          </article>
-          <article class="t-card">
-            <span class="quote-mark" aria-hidden="true">“</span>
-            <blockquote>The difference was in the thinking. Every visual decision had a reason, and the final system gave our team a much clearer way to communicate.</blockquote>
-            <footer><i class="t-avatar" aria-hidden="true">AC</i><div><b>Amelia Carter</b><span>Marketing Director, Meridian</span></div></footer>
-          </article>
-          <article class="t-card">
-            <span class="quote-mark" aria-hidden="true">“</span>
-            <blockquote>We needed a studio that could think beyond a logo. Rovard gave us an identity, a digital direction and a system our entire team could actually use.</blockquote>
-            <footer><i class="t-avatar" aria-hidden="true">DB</i><div><b>Daniel Brooks</b><span>Co-Founder, Atlas Commerce</span></div></footer>
-          </article>
-          <article class="t-card">
-            <span class="quote-mark" aria-hidden="true">“</span>
-            <blockquote>The work feels premium without becoming complicated. It is clear, memorable and incredibly consistent across every touchpoint.</blockquote>
-            <footer><i class="t-avatar" aria-hidden="true">SL</i><div><b>Sofia Laurent</b><span>Brand Lead, Ritual Objects</span></div></footer>
-          </article>
-          <article class="t-card">
-            <span class="quote-mark" aria-hidden="true">“</span>
-            <blockquote>Rovard understood the commercial goal from day one. The design gave us the confidence to show up at a completely different level.</blockquote>
-            <footer><i class="t-avatar" aria-hidden="true">MR</i><div><b>Marcus Reed</b><span>CEO, Vanta</span></div></footer>
-          </article>
-          </div>
-        </div>
-        <button class="t-arrow next" id="nextQuote" type="button" aria-label="Next testimonial">→</button>
-      </div>
-      <div class="slider-bar t-bar" aria-hidden="true"><span class="slider-fill" id="quoteProgress"></span></div>
-    </section>
-
-    <section class="process section rv-warp" id="process">
-      <div class="section-meta">06 / PROCESS</div>
-      <div class="process-intro">
-        <h2 class="display reveal">A clear process.<br><em>Better creative work.</em></h2>
-        <p class="reveal">You always know where the project is, what happens next and why we're making the decisions we
-          make.</p>
-      </div>
-
-      <div class="process-stage">
-        <div class="process-sticky">
-          <div class="process-index"><span id="processNumber">01</span>
-            <div><i></i><i></i><i></i><i></i><i></i></div>
-          </div>
-          <div class="process-copy">
-            <span id="processLabel">DISCOVER</span>
-            <h3 id="processTitle">Start with the real problem.</h3>
-            <p id="processText">We learn the business, audience, context and objective before we decide what the design
-              should look like.</p>
-          </div>
-          <div class="process-visual" id="processVisual"><span>01</span></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="cta section" id="contact">
-      <div class="cta-inner">
-        <div class="section-meta">07 / START A PROJECT</div>
-        <p class="eyebrow reveal">Canada · Worldwide</p>
-        <h2 class="cta-title reveal">Have a business<br>worth <em>building?</em></h2>
-        <p class="cta-copy reveal">Tell us what you're building, where you want to take it and what needs to change.
-          We'll take it from there.</p>
-        <button class="primary-button magnetic reveal" id="openInquiry">Start a project <span>↗</span></button>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="footer-top">
-      <div class="footer-brand">
-        <img src="assets/Combined%20Logo%20-%20Rovard%20Studios%20-%20White.svg" alt="Rovard Studios" />
-        <p>We build visual identities designed to move businesses forward.</p>
-      </div>
-      <div class="footer-links">
-        <div><span>Navigate</span><a href="#work">Work</a><a href="#services">Services</a><a href="#studio">Studio</a><a
-            href="#process">Process</a></div>
-        <div><span>Services</span><a href="/services/brand-identity-design/">Brand Identity</a><a href="/services/web-design/">Web Design</a><a href="/services/ui-design/">UI Design</a><a href="/services/social-media-design/">Social Media</a><a href="/services/packaging-design/">Packaging</a><a href="/services/motion-design/">Motion</a></div>
-        <div><span>Connect with us</span><a href="mailto:hello@rovardstudio.com">Email ↗</a></div>
-      </div>
+</div>
+<main id="main">
+<section class="cover" id="cover" data-section="01 — The edition opening">
+  <div class="cover-top lbl">
+    <span>Rovard Studios / Independent creative studio</span>
+    <span>Issue 001</span>
+    <span>The Creative Edition</span>
+    <span>Canada · Worldwide — 2026</span>
+  </div>
+  <h1 class="cover-word" aria-label="Rovard Studios"><span data-fit class="cw"><i style="--i:0">R</i><i style="--i:1">O</i><i style="--i:2">V</i><i style="--i:3">A</i><i style="--i:4">R</i><i style="--i:5">D</i></span></h1>
+  <div class="cover-grid">
+    <div class="cover-inside">
+      <p class="lbl">Inside this issue</p>
+      <ol><li><a href="#idea"><span>02</span>The idea</a></li><li><a href="#works"><span>03</span>Selected works</a></li><li><a href="#studio"><span>04</span>The studio</a></li><li><a href="#departments"><span>05</span>Departments</a></li><li><a href="#archive"><span>06</span>The archive</a></li><li><a href="#notes"><span>07</span>Field notes</a></li><li><a href="#contact"><span>08</span>Open projects</a></li></ol>
     </div>
-    <!-- work-index:start -->
-    <section class="work-index" aria-label="All projects">
-      <div class="footer-links">
-        <div><span>Brand Identity Design</span><a href="/work/green-blueprint/">Green Blueprint</a><a href="/work/design-eigen/">Design Eigen</a><a href="/work/bitefort/">Bitefort</a><a href="/work/linkrithm/">LinkRithm</a><a href="/work/vita-house/">Vita House</a><a href="/work/northstar-capital/">Northstar Capital</a><a href="/work/mason-and-rowe/">Mason &amp; Rowe</a></div>
-        <div><span>Social Media Design</span><a href="/work/shorteeme/">ShorteeMe</a><a href="/work/kymela-2026/">Kymela 2026</a><a href="/work/pdoca/">PDOCA</a><a href="/work/dress-doctor/">Dress Doctor</a><a href="/work/gce-study-app/">GCE Study App</a></div>
-        <div><span>UI Design</span><a href="/work/proxima-exchange/">Proxima Exchange</a><a href="/work/afaa-pay/">Afa'a Pay</a><a href="/work/vita-house-care/">Vita House Care</a><a href="/work/northstar-capital-website/">Northstar Capital Website</a><a href="/work/mason-and-rowe-residences/">Mason &amp; Rowe Residences</a></div>
-        <div><span>Packaging</span><a href="/work/book-cover-design/">Book Cover Design</a><a href="/work/jojo-foods/">JoJo Foods</a></div>
-        <div><span>Motion Design</span><a href="/work/proxima-exchange-films/">Proxima Exchange Films</a><a href="/work/rovard-studios-brand-film/">Rovard Studios Brand Film</a><a href="/work/northstar-capital-ad/">Northstar Capital Ad</a></div>
-      </div>
-    </section>
-    <!-- work-index:end -->
-    <div class="footer-bottom"><span>© 2026 Rovard Studios. All rights reserved.</span><span>Canada ·
-        Worldwide</span><span>Designed with intention.</span></div>
-  </footer>
-
-  <!-- Case study modal -->
-  <div class="case-modal" id="caseModal" aria-hidden="true">
-    <button class="modal-close" aria-label="Close case study">×</button>
-    <div class="modal-scroll">
-      <div class="case-hero" id="caseHero" style="background: linear-gradient(135deg, #5CAD8D, #1B4839);">
-        <span id="caseCategory">BRAND IDENTITY</span>
-        <h2 id="caseTitle" style="color: rgb(235, 235, 235);">Green Blueprint</h2>
-        <p id="caseSummary">A complete identity system built to make an ambitious business instantly recognizable.</p>
-      </div>
-      <div class="case-body">
-        <div class="case-meta"><span id="caseYear">2026</span><span id="caseServices">Identity / Art Direction /
-            Packaging</span></div>
-        <dl class="case-facts" id="caseFacts" hidden></dl>
-        <div class="case-section"><span>THE CHALLENGE</span>
-          <h3 id="caseChallenge">A growing business needed a visual identity that could communicate confidence without
-            losing character.</h3>
-        </div>
-        <div class="case-section"><span>THE APPROACH</span>
-          <p id="caseApproach">We created a flexible visual system with a distinctive mark, editorial typography, a
-            controlled colour language and applications designed to work across digital and physical touchpoints.</p>
-        </div>
-        <div class="case-gallery" id="caseGallery"></div>
-        <div class="case-section"><span>THE OUTCOME</span>
-          <p id="caseOutcome">A coherent brand system that gives the business a stronger presence and a practical
-            foundation for future growth.</p>
-        </div>
-        <a class="primary-button case-live" id="caseLive" target="_blank" rel="noopener" hidden>View live project ↗</a>
-        <button class="primary-button modal-project" id="modalProject">Start a similar project ↗</button>
-        <section class="case-more" id="caseMore" aria-label="More projects" hidden>
-          <div class="case-more-head"><span>MORE PROJECTS</span><h3>Keep exploring.</h3></div>
-          <div class="case-more-grid" id="caseMoreGrid"></div>
-        </section>
-      </div>
+    <figure class="cover-fig">
+      <a href="/work/design-eigen/" class="cover-img"><img src="/edition/img/design-eigen/06.webp" width="1800" height="1013" alt="Design Eigen" fetchpriority="high" decoding="async" sizes="(max-width: 760px) 92vw, 34vw"></a>
+      <figcaption class="lbl"><span>On the cover</span> Design Eigen, Brand identity</figcaption>
+    </figure>
+    <div class="cover-line">
+      <p class="serif">Designing ideas.<br><em>Shaping visual culture.</em></p>
+      <span class="sticker" aria-hidden="true"><b>New<br>issue</b><i>001</i></span>
     </div>
   </div>
-
-  <div class="gallery-lightbox" id="galleryLightbox" aria-hidden="true">
-    <button class="gallery-lightbox-close" id="galleryLightboxClose" aria-label="Close image">×</button>
-    <div class="gallery-lightbox-inner">
-      <button class="gallery-lightbox-nav lb-prev" id="galleryLightboxPrev" aria-label="Previous image">←</button>
-      <img id="galleryLightboxImage" alt="" />
-      <button class="gallery-lightbox-nav lb-next" id="galleryLightboxNext" aria-label="Next image">→</button>
-    </div>
-    <span class="gallery-lightbox-counter" id="galleryLightboxCounter"></span>
+</section>
+<section class="hero" id="idea" data-section="02 — The idea">
+  <p class="lbl hero-lbl"><span>§02</span> The idea</p>
+  <h2 class="hero-type" data-field>
+    <span class="hw hw1" data-w>We</span>
+    <span class="hw hw2"><span data-w>make</span><span class="hero-aside lbl">(verb) to give form to a thought</span></span>
+    <span class="hw hw3"><span data-w>ideas</span><span class="hero-img" aria-hidden="true"><span class="hi-frame on" data-title="Design Eigen"><img src="/edition/img/design-eigen/06.webp" width="1800" height="1013" alt="Design Eigen" fetchpriority="high" decoding="async" sizes="30vw"></span><span class="hi-frame" data-title="JoJo Foods"><img src="/edition/img/jojo-foods/cover.webp" width="960" height="720" alt="" loading="lazy" decoding="async" sizes="30vw"></span><span class="hi-frame" data-title="Green Blueprint"><img src="/edition/img/green-blueprint/02.webp" width="1800" height="1350" alt="" loading="lazy" decoding="async" sizes="30vw"></span><span class="hi-frame" data-title="Proxima Exchange Films"><img src="/edition/img/proxima-exchange-films/04.webp" width="1800" height="754" alt="" loading="lazy" decoding="async" sizes="30vw"></span><span class="hi-frame" data-title="Bitefort"><img src="/edition/img/bitefort/03.webp" width="1800" height="1350" alt="" loading="lazy" decoding="async" sizes="30vw"></span><span class="hi-frame" data-title="Book Cover Design"><img src="/edition/img/book-cover-design/05.webp" width="856" height="1186" alt="" loading="lazy" decoding="async" sizes="30vw"></span><span class="hi-frame" data-title="LinkRithm"><img src="/edition/img/linkrithm/09.webp" width="1800" height="1005" alt="" loading="lazy" decoding="async" sizes="30vw"></span><span class="hi-frame" data-title="Mason &amp; Rowe"><img src="/edition/img/mason-and-rowe/04.webp" width="1800" height="1200" alt="" loading="lazy" decoding="async" sizes="30vw"></span></span></span>
+    <span class="hw hw4" data-w>look</span>
+    <span class="hw hw5 serif">different.</span>
+  </h2>
+  <p class="lbl hero-fig" aria-live="off"><span>Fig. <b id="hfn">01</b></span> <span id="hft">Design Eigen</span></p>
+  <div class="hero-foot">
+    <p class="hero-lede" data-reveal>We explore ideas, develop visual identities and create experiences through design, motion and digital expression.</p>
+    <p class="hero-cta" data-reveal><a class="btn" href="#works">Read the selected works <span aria-hidden="true">↓</span></a><a class="btn btn-line" href="#contact">Start a project <span aria-hidden="true">↗</span></a></p>
   </div>
-
-  <!-- Multi-step inquiry -->
-  <div class="inquiry-modal" id="inquiryModal" aria-hidden="true">
-    <div class="inquiry-panel">
-      <button class="modal-close inquiry-close" aria-label="Close project questionnaire">×</button>
-      <div class="inquiry-header">
-        <span>ROVARD / PROJECT INQUIRY</span>
-        <div class="inquiry-progress"><i id="inquiryProgress"></i></div>
-        <span id="stepCount">01 / 05</span>
-      </div>
-
-      <form id="projectForm" novalidate>
-        <div class="form-step active" data-step="1">
-          <p class="eyebrow">Let's start here</p>
-          <h2>Tell us about<br><em>the business.</em></h2>
-          <label>What is your name? <input name="name" type="text" autocomplete="name" placeholder="Your name"
-              required /></label>
-          <label>Work email <input name="email" type="email" autocomplete="email" placeholder="you@company.com"
-              required /></label>
-          <label>Company / brand <input name="company" type="text" autocomplete="organization"
-              placeholder="Company name" required /></label>
-        </div>
-
-        <div class="form-step" data-step="2">
-          <p class="eyebrow">The opportunity</p>
-          <h2>What do you<br><em>need?</em></h2>
-          <div class="choice-grid">
-            <label class="choice"><input type="checkbox" name="services" value="Brand Identity Design"><span>Brand
-                Identity</span></label>
-            <label class="choice"><input type="checkbox" name="services" value="Social Media Design"><span>Social
-                Media</span></label>
-            <label class="choice"><input type="checkbox" name="services" value="UI Design"><span>UI
-                Design</span></label>
-            <label class="choice"><input type="checkbox" name="services"
-                value="Packaging"><span>Packaging</span></label>
-            <label class="choice"><input type="checkbox" name="services"
-                value="Motion Design"><span>Motion</span></label>
-            <label class="choice"><input type="checkbox" name="services" value="Web Design"><span>Web
-                Design</span></label>
-          </div>
-          <p class="form-hint">Select everything that applies.</p>
-        </div>
-
-        <div class="form-step" data-step="3">
-          <p class="eyebrow">The context</p>
-          <h2>Where are you<br><em>right now?</em></h2>
-          <div class="radio-stack">
-            <label class="choice"><input type="radio" name="stage" value="Launching something new"
-                required><span>Launching something new</span></label>
-            <label class="choice"><input type="radio" name="stage"
-                value="Rebranding an existing business"><span>Rebranding an existing business</span></label>
-            <label class="choice"><input type="radio" name="stage" value="Growing an established business"><span>Growing
-                an established business</span></label>
-            <label class="choice"><input type="radio" name="stage"
-                value="Building a new digital experience"><span>Building a new digital experience</span></label>
-          </div>
-        </div>
-
-        <div class="form-step" data-step="4">
-          <p class="eyebrow">The project</p>
-          <h2>Give us the<br><em>big picture.</em></h2>
-          <label>What are you trying to achieve? <textarea name="goals" rows="4"
-              placeholder="Tell us what needs to change, improve or become possible." required></textarea></label>
-          <label>Approximate budget
-            <select name="budget" required>
-              <option value="">Select a range</option>
-              <option>$2,500 – $5,000</option>
-              <option>$5,000 – $10,000</option>
-              <option>$10,000 – $20,000</option>
-              <option>$20,000+</option>
-              <option>Let's discuss</option>
-            </select>
-          </label>
-          <label>Target timeline
-            <select name="timeline" required>
-              <option value="">Select a timeline</option>
-              <option>As soon as possible</option>
-              <option>Within 1 month</option>
-              <option>1–3 months</option>
-              <option>3–6 months</option>
-              <option>Flexible</option>
-            </select>
-          </label>
-        </div>
-
-        <div class="form-step" data-step="5">
-          <p class="eyebrow">One last thing</p>
-          <h2>Where should we<br><em>take this?</em></h2>
-          <label>Anything else we should know? <textarea name="notes" rows="5"
-              placeholder="Links, references, competitors, context or anything else that will help us understand the opportunity."></textarea></label>
-          <label>Website / social link <input name="website" type="url" placeholder="https://" /></label>
-          <div class="form-success-note">After you submit, we'll review the brief and reach out to schedule a
-            consultation.</div>
-        </div>
-
-        <div class="form-error" id="formError" role="alert"></div>
-
-        <div class="form-actions">
-          <button type="button" class="text-button" id="prevStep">← Back</button>
-          <button type="button" class="primary-button" id="nextStep">Continue <span>→</span></button>
-          <button type="submit" class="primary-button" id="submitForm">Send inquiry <span>↗</span></button>
-        </div>
-      </form>
-    </div>
+</section>
+<div class="band" aria-hidden="true"><div class="band-track" data-drift><span class="">A studio for ideas</span><b>✦</b><span class="serif">that refuse to look ordinary</span><b>✦</b><span class="">Creative thinking</span><b>✦</b><span class="serif">Unexpected execution</span><b>✦</b><span class="">A studio for ideas</span><b>✦</b><span class="serif">that refuse to look ordinary</span><b>✦</b><span class="">Creative thinking</span><b>✦</b><span class="serif">Unexpected execution</span><b>✦</b><span class="">A studio for ideas</span><b>✦</b><span class="serif">that refuse to look ordinary</span><b>✦</b><span class="">Creative thinking</span><b>✦</b><span class="serif">Unexpected execution</span><b>✦</b></div></div>
+<section class="works" id="works" data-section="03 — Selected works">
+  <header class="sh ">
+  <p class="sh-no" aria-hidden="true">03</p>
+  <p class="lbl sh-lbl"><span>§03</span> Selected works</p>
+  <h2 class="sh-title" data-reveal>Six stories <em>from the archive.</em></h2>
+  <p class="sh-intro" data-reveal>Identity, packaging, motion and interface work, chosen for how differently each one solves its problem.</p>
+</header>
+  <article class="ft ft-bleed" data-reveal>
+  <a class="ft-media" href="/work/green-blueprint/" data-cursor="Read" aria-label="Green Blueprint"><span class="wipe"><img src="/edition/img/green-blueprint/05.webp" width="1800" height="1350" alt="Green Blueprint" loading="lazy" decoding="async" sizes="100vw" style="view-transition-name: p-green-blueprint"></span></a>
+  <h3 class="ft-title ft-over"><a href="/work/green-blueprint/">Green Blueprint</a></h3>
+  <div class="ft-row"><p class="lbl meta"><span>No. 01</span><span>Brand identity</span><span>2026</span></p><p class="ft-sum serif">An eco-conscious construction brand built around a clear vision for sustainable urban design.</p><p class="lbl ft-svc">Identity / Art Direction / Packaging</p><a class="more" href="/work/green-blueprint/">Read the story <span aria-hidden="true">→</span></a></div>
+</article><article class="ft ft-offset" data-reveal>
+  <p class="ft-vert lbl" aria-hidden="true">Packaging — No. 19</p>
+  <div class="ft-text">
+    <p class="lbl meta"><span>No. 19</span><span>Packaging</span><span>2026</span></p>
+    <h3 class="ft-title ft-stack"><a href="/work/jojo-foods/">JoJo<br>Foods</a></h3>
+    <p class="ft-sum">Retro-bright potato chip packaging built around a cream roundel mark, a red and orange sunburst and a clear window that lets the chips do the selling.</p><a class="more" href="/work/jojo-foods/">Read the story <span aria-hidden="true">→</span></a>
   </div>
-
-  <script src="script.js?v=202610121800"></script>
-  <script src="motion.js?v=202610021543"></script>
-  <script src="sound.js?v=202610021543"></script>
-  <script src="hero-3d.js?v=202610021543"></script>
-  <script src="immersive.js?v=202610021543"></script>
+  <a class="ft-media ft-main" href="/work/jojo-foods/" data-cursor="Read" aria-label="JoJo Foods"><span class="wipe"><img src="/edition/img/jojo-foods/cover.webp" width="960" height="720" alt="JoJo Foods" loading="lazy" decoding="async" sizes="(max-width: 760px) 100vw, 55vw" style="view-transition-name: p-jojo-foods"></span></a>
+  <span class="ft-media ft-small wipe" aria-hidden="true"><img src="/edition/img/jojo-foods/05.webp" width="1800" height="1200" alt="" loading="lazy" decoding="async" sizes="22vw"></span>
+</article><article class="ft ft-film env-ink" data-reveal>
+  <div class="ft-film-head"><p class="lbl meta"><span>No. 20</span><span>Motion</span><span>2026</span><span class="tag">Self-initiated concept</span></p><h3 class="ft-title"><a href="/work/proxima-exchange-films/">Proxima <em class="serif">Exchange</em> Films</a></h3></div>
+  <a class="ft-media ft-screen" href="/work/proxima-exchange-films/" data-cursor="Read" aria-label="Proxima Exchange Films">
+    <video class="loop" muted loop playsinline preload="none" poster="/edition/video/proxima-loop.webp" style="view-transition-name: p-proxima-exchange-films"><source src="/edition/video/proxima-loop.mp4" type="video/mp4"></video>
+  </a>
+  <p class="ft-side ft-side-l lbl">Motion Design / 3D / Cinematic Direction / Sound Design</p>
+  <div class="ft-side ft-side-r"><p class="ft-sum">Two launch films for a crypto and forex trading platform: a cinematic 3D brand film and a precise product film built from the real interface.</p><a class="more" href="/work/proxima-exchange-films/">Read the story <span aria-hidden="true">→</span></a></div>
+</article><article class="ft ft-split" data-reveal>
+  <a class="ft-media ft-a" href="/work/mason-and-rowe/" data-cursor="Read" aria-label="Mason &amp; Rowe"><span class="wipe"><img src="/edition/img/mason-and-rowe/cover.webp" width="960" height="640" alt="Mason &amp; Rowe" loading="lazy" decoding="async" sizes="(max-width: 760px) 100vw, 56vw" style="view-transition-name: p-mason-and-rowe"></span></a>
+  <div class="ft-text"><p class="lbl meta"><span>No. 07</span><span>Brand identity</span><span>2026</span><span class="tag">Self-initiated concept</span></p><h3 class="ft-title"><a href="/work/mason-and-rowe/">Mason <em class="serif">&amp;</em> Rowe</a></h3><p class="ft-sum">A quiet, architectural brand identity for a fictional U.S. luxury residential developer, built on one idea: homes made to be inherited.</p><a class="more" href="/work/mason-and-rowe/">Read the story <span aria-hidden="true">→</span></a></div>
+  <span class="ft-media ft-b wipe" aria-hidden="true"><img src="/edition/img/mason-and-rowe/04.webp" width="1800" height="1200" alt="" loading="lazy" decoding="async" sizes="(max-width: 760px) 60vw, 30vw"></span>
+</article><article class="ft ft-int" data-reveal>
+  <h3 class="ft-title ft-word"><a href="/work/bitefort/" aria-label="Bitefort" data-fit data-cursor="Read"><span>Bite</span><span class="ft-in wipe"><img src="/edition/img/bitefort/03.webp" width="1800" height="1350" alt="" loading="lazy" decoding="async" sizes="30vw" style="view-transition-name: p-bitefort"></span><span>fort</span></a></h3>
+  <div class="ft-row"><p class="lbl meta"><span>No. 03</span><span>Brand identity</span><span>2026</span></p><p class="ft-sum serif">A confident identity and digital direction for a privacy-first cookie management platform.</p><span class="ft-media ft-small wipe" aria-hidden="true"><img src="/edition/img/bitefort/02.webp" width="1800" height="1350" alt="" loading="lazy" decoding="async" sizes="20vw"></span><a class="more" href="/work/bitefort/">Read the story <span aria-hidden="true">→</span></a></div>
+</article><article class="ft ft-tri env-cobalt" data-reveal>
+  <h3 class="ft-title ft-vertical"><a href="/work/linkrithm/">LinkRithm</a></h3>
+  <a class="ft-media t1" href="/work/linkrithm/" data-cursor="Read" aria-label="LinkRithm"><span class="wipe"><img src="/edition/img/linkrithm/01.webp" width="1800" height="1005" alt="LinkRithm" loading="lazy" decoding="async" sizes="(max-width: 760px) 100vw, 44vw" style="view-transition-name: p-linkrithm"></span></a>
+  <span class="ft-media t2 wipe" aria-hidden="true"><img src="/edition/img/linkrithm/05.webp" width="1800" height="1005" alt="" loading="lazy" decoding="async" sizes="(max-width: 760px) 50vw, 26vw"></span>
+  <span class="ft-media t3 wipe" aria-hidden="true"><img src="/edition/img/linkrithm/06.webp" width="1376" height="768" alt="" loading="lazy" decoding="async" sizes="(max-width: 760px) 50vw, 22vw"></span>
+  <div class="ft-text"><p class="lbl meta"><span>No. 04</span><span>Brand identity</span><span>2026</span></p><p class="ft-sum">A connected brand identity system built for engineering teams, technical knowledge and digital collaboration.</p><a class="more" href="/work/linkrithm/">Read the story <span aria-hidden="true">→</span></a></div>
+</article>
+  <p class="works-all"><a class="btn btn-big" href="/work/">Open the full archive <span class="lbl">22 projects</span> <span aria-hidden="true">→</span></a></p>
+</section>
+<section class="studio" id="studio" data-section="04 — The studio">
+  <p class="lbl sh-lbl"><span>§04</span> The studio</p>
+  <p class="studio-st" data-reveal>We don’t design for <s>decoration</s>.<br>We design for <em>perception.</em></p>
+  <div class="studio-cols">
+    <p class="dropcap" data-reveal>From identity systems to digital interfaces, every decision is made to help a business communicate with confidence and move with intention.</p>
+    <p data-reveal>We look beyond the immediate deliverable. We ask what needs to be understood, who needs to believe it and what the design needs to make possible.</p>
+    <p class="lbl studio-note" data-reveal>A studio for ideas that refuse to look ordinary.</p>
+  </div>
+  <p class="lbl gl-head">A small glossary</p>
+  <ol class="glossary"><li data-reveal><p class="gl-word"><span class="serif">Clarity</span> <i class="lbl">n.</i></p><p class="gl-num lbl">01</p><p class="gl-def">Making the important thing unmistakable.</p></li><li data-reveal><p class="gl-word"><span class="serif">Character</span> <i class="lbl">n.</i></p><p class="gl-num lbl">02</p><p class="gl-def">A visual signature people can recognise.</p></li><li data-reveal><p class="gl-word"><span class="serif">Craft</span> <i class="lbl">n.</i></p><p class="gl-num lbl">03</p><p class="gl-def">Obsessing over the details that change perception.</p></li><li data-reveal><p class="gl-word"><span class="serif">Consistency</span> <i class="lbl">n.</i></p><p class="gl-num lbl">04</p><p class="gl-def">Building systems, not disconnected assets.</p></li></ol>
+</section>
+<section class="depts env-ink" id="departments" data-section="05 — Departments">
+  <header class="sh ">
+  <p class="sh-no" aria-hidden="true">05</p>
+  <p class="lbl sh-lbl"><span>§05</span> Departments</p>
+  <h2 class="sh-title" data-reveal>One studio. <em>Many ways to move.</em></h2>
+  <p class="sh-intro" data-reveal>Strategy, visual design and digital thinking in one connected practice.</p>
+</header>
+  <ol class="dept-list"><li><a class="dept" href="/work/?d=brand" data-peek="/edition/img/green-blueprint/cover.webp,/edition/img/design-eigen/cover.webp,/edition/img/bitefort/cover.webp,/edition/img/linkrithm/cover.webp" data-cap="Brand identity">
+  <span class="dept-no lbl">01</span><span class="dept-name">Brand identity</span>
+  <span class="dept-desc">Identity systems that make clear what you stand for, and stay consistent wherever the brand appears.</span><span class="dept-count lbl">07 in the archive →</span></a></li><li><a class="dept" href="/work/?d=social" data-peek="/edition/img/shorteeme/cover.webp,/edition/img/kymela-2026/cover.webp,/edition/img/pdoca/cover.webp,/edition/img/dress-doctor/cover.webp" data-cap="Social media">
+  <span class="dept-no lbl">02</span><span class="dept-name">Social media</span>
+  <span class="dept-desc">Campaigns and content systems that keep a brand recognisable while giving every post a reason to exist.</span><span class="dept-count lbl">05 in the archive →</span></a></li><li><a class="dept" href="/work/?d=ui" data-peek="/edition/img/proxima-exchange/cover.webp,/edition/img/afaa-pay/cover.webp,/edition/img/vita-house-care/cover.webp,/edition/img/northstar-capital-website/cover.webp" data-cap="UI design">
+  <span class="dept-no lbl">03</span><span class="dept-name">UI design</span>
+  <span class="dept-desc">Interfaces that turn complex products and services into clear, confident digital experiences.</span><span class="dept-count lbl">05 in the archive →</span></a></li><li><a class="dept" href="/work/?d=packaging" data-peek="/edition/img/book-cover-design/cover.webp,/edition/img/jojo-foods/cover.webp" data-cap="Packaging">
+  <span class="dept-no lbl">04</span><span class="dept-name">Packaging</span>
+  <span class="dept-desc">Physical objects designed to make products feel considered, desirable and unmistakably yours.</span><span class="dept-count lbl">02 in the archive →</span></a></li><li><a class="dept" href="/work/?d=motion" data-peek="/edition/img/proxima-exchange-films/cover.webp,/edition/img/rovard-studios-brand-film/cover.webp,/edition/img/northstar-capital-ad/cover.webp" data-cap="Motion">
+  <span class="dept-no lbl">05</span><span class="dept-name">Motion</span>
+  <span class="dept-desc">Movement systems, campaign films and kinetic type that give an identity a pulse.</span><span class="dept-count lbl">03 in the archive →</span></a></li><li><a class="dept" href="/work/?d=web" data-peek="/edition/img/afaa-pay/cover.webp,/edition/img/vita-house-care/cover.webp,/edition/img/northstar-capital-website/cover.webp,/edition/img/mason-and-rowe-residences/cover.webp" data-cap="Web design">
+  <span class="dept-no lbl">06</span><span class="dept-name">Web design</span>
+  <span class="dept-desc">Websites with strong art direction, clear structure and interaction that has a purpose.</span><span class="dept-count lbl">04 live sites →</span></a></li></ol>
+</section>
+<section class="archive" id="archive" data-section="06 — The archive">
+  <header class="sh ">
+  <p class="sh-no" aria-hidden="true">06</p>
+  <p class="lbl sh-lbl"><span>§06</span> The archive</p>
+  <h2 class="sh-title" data-reveal>Every project, <em>in one sentence.</em></h2>
+  <p class="sh-intro" data-reveal>Hover a title to see it. Select one to read it.</p>
+</header>
+  <p class="arun-wrap"><a class="arun" href="/work/green-blueprint/" data-peek="/edition/img/green-blueprint/cover.webp" data-cap="No. 01 — Brand identity"><span>Green Blueprint</span><sup class="lbl">01</sup></a> <span class="sl" aria-hidden="true">/</span> <a class="arun" href="/work/design-eigen/" data-peek="/edition/img/design-eigen/cover.webp" data-cap="No. 02 — Brand identity"><span>Design Eigen</span><sup class="lbl">02</sup></a> <span class="sl" aria-hidden="true">/</span> <a class="arun" href="/work/bitefort/" data-peek="/edition/img/bitefort/cover.webp" data-cap="No. 03 — Brand identity"><span>Bitefort</span><sup class="lbl">03</sup></a> <span class="sl" aria-hidden="true">/</span> <a class="arun" href="/work/linkrithm/" data-peek="/edition/img/linkrithm/cover.webp" data-cap="No. 04 — Brand identity"><span>LinkRithm</span><sup class="lbl">04</sup></a> <span class="sl" aria-hidden="true">/</span> <a class="arun" href="/work/vita-house/" data-peek="/edition/img/vita-house/cover.webp" data-cap="No. 05 — Brand identity"><span>Vita House</span><sup class="lbl">05</sup></a> <span class="sl" aria-hidden="true">/</span> <a class="arun" href="/work/northstar-capital/" data-peek="/edition/img/northstar-capital/cover.webp" data-cap="No. 06 — Brand identity"><span>Northstar Capital</span><sup class="lbl">06</sup></a> <span class="sl" aria-hidden="true">/</span> <a class="arun" href="/work/mason-and-rowe/" data-peek="/edition/img/mason-and-rowe/cover.webp" data-cap="No. 07 — Brand identity"><span>Mason &amp; Rowe</span><sup class="lbl">07</sup></a> <span class="sl" aria-hidden="true">/</span> <a class="arun" href="/work/shorteeme/" data-peek="/edition/img/shorteeme/cover.webp" data-cap="No. 08 — Social media"><span>ShorteeMe</span><sup class="lbl">08</sup></a> <span class="sl" aria-hidden="true">/</span> <a class="arun" href="/work/kymela-2026/" data-peek="/edition/img/kymela-2026/cover.webp" data-cap="No. 09 — Social media"><span>Kymela 2026</span><sup class="lbl">09</sup></a> <span class="sl" aria-hidden="true">/</span> <a class="arun" href="/work/pdoca/" data-peek="/edition/img/pdoca/cover.webp" data-cap="No. 10 — Social media"><span>PDOCA</span><sup class="lbl">10</sup></a> <span class="sl" aria-hidden="true">/</span> <a class="arun" href="/work/dress-doctor/" data-peek="/edition/img/dress-doctor/cover.webp" data-cap="No. 11 — Social media"><span>Dress Doctor</span><sup class="lbl">11</sup></a> <span class="sl" aria-hidden="true">/</span> <a class="arun" href="/work/gce-study-app/" data-peek="/edition/img/gce-study-app/cover.webp" data-cap="No. 12 — Social media"><span>GCE Study App</span><sup class="lbl">12</sup></a> <span class="sl" aria-hidden="true">/</span> <a class="arun" href="/work/proxima-exchange/" data-peek="/edition/img/proxima-exchange/cover.webp" data-cap="No. 13 — UI design"><span>Proxima Exchange</span><sup class="lbl">13</sup></a> <span class="sl" aria-hidden="true">/</span> <a class="arun" href="/work/afaa-pay/" data-peek="/edition/img/afaa-pay/cover.webp" data-cap="No. 14 — UI design"><span>Afa&#x27;a Pay</span><sup class="lbl">14</sup></a> <span class="sl" aria-hidden="true">/</span> <a class="arun" href="/work/vita-house-care/" data-peek="/edition/img/vita-house-care/cover.webp" data-cap="No. 15 — UI design"><span>Vita House Care</span><sup class="lbl">15</sup></a> <span class="sl" aria-hidden="true">/</span> <a class="arun" href="/work/northstar-capital-website/" data-peek="/edition/img/northstar-capital-website/cover.webp" data-cap="No. 16 — UI design"><span>Northstar Capital Website</span><sup class="lbl">16</sup></a> <span class="sl" aria-hidden="true">/</span> <a class="arun" href="/work/mason-and-rowe-residences/" data-peek="/edition/img/mason-and-rowe-residences/cover.webp" data-cap="No. 17 — UI design"><span>Mason &amp; Rowe Residences</span><sup class="lbl">17</sup></a> <span class="sl" aria-hidden="true">/</span> <a class="arun" href="/work/book-cover-design/" data-peek="/edition/img/book-cover-design/cover.webp" data-cap="No. 18 — Packaging"><span>Book Cover Design</span><sup class="lbl">18</sup></a> <span class="sl" aria-hidden="true">/</span> <a class="arun" href="/work/jojo-foods/" data-peek="/edition/img/jojo-foods/cover.webp" data-cap="No. 19 — Packaging"><span>JoJo Foods</span><sup class="lbl">19</sup></a> <span class="sl" aria-hidden="true">/</span> <a class="arun" href="/work/proxima-exchange-films/" data-peek="/edition/img/proxima-exchange-films/cover.webp" data-cap="No. 20 — Motion"><span>Proxima Exchange Films</span><sup class="lbl">20</sup></a> <span class="sl" aria-hidden="true">/</span> <a class="arun" href="/work/rovard-studios-brand-film/" data-peek="/edition/img/rovard-studios-brand-film/cover.webp" data-cap="No. 21 — Motion"><span>Rovard Studios Brand Film</span><sup class="lbl">21</sup></a> <span class="sl" aria-hidden="true">/</span> <a class="arun" href="/work/northstar-capital-ad/" data-peek="/edition/img/northstar-capital-ad/cover.webp" data-cap="No. 22 — Motion"><span>Northstar Capital Ad</span><sup class="lbl">22</sup></a></p>
+  <p class="archive-open"><a class="btn btn-line" href="/work/">Browse the archive as an index <span aria-hidden="true">→</span></a></p>
+</section>
+<section class="notes" id="notes" data-section="07 — Field notes">
+  <header class="sh ">
+  <p class="sh-no" aria-hidden="true">07</p>
+  <p class="lbl sh-lbl"><span>§07</span> Field notes</p>
+  <h2 class="sh-title" data-reveal>How an idea <em>becomes a system.</em></h2>
+  
+</header>
+  <ol class="note-list"><li data-reveal><p class="note-no lbl">Field notes — 01</p><h3 class="note-h">Discover</h3><p class="note-t serif">Start with the real problem.</p><p class="note-p">We learn the business, audience, context and objective before we decide what the design should look like.</p></li><li data-reveal><p class="note-no lbl">Field notes — 02</p><h3 class="note-h">Define</h3><p class="note-t serif">Turn context into direction.</p><p class="note-p">We clarify the opportunity, positioning, audience and creative direction so the project has a clear north star.</p></li><li data-reveal><p class="note-no lbl">Field notes — 03</p><h3 class="note-h">Design</h3><p class="note-t serif">Make the idea visible.</p><p class="note-p">We explore, develop and execute the visual solution across the places it needs to live.</p></li><li data-reveal><p class="note-no lbl">Field notes — 04</p><h3 class="note-h">Refine</h3><p class="note-t serif">Make good work better.</p><p class="note-p">We review, test, remove what is not working and sharpen what is until the system feels inevitable.</p></li><li data-reveal><p class="note-no lbl">Field notes — 05</p><h3 class="note-h">Deliver</h3><p class="note-t serif">Leave you with a system.</p><p class="note-p">You receive organised, production-ready files and the guidance needed to use the work confidently.</p></li></ol>
+</section>
+<section class="contact env-cobalt" id="contact" data-section="08 — Open projects">
+  <p class="lbl sh-lbl"><span>§08</span> Open projects</p>
+  <h2 class="contact-h" data-reveal>Have an idea that refuses to look <em>ordinary?</em></h2>
+  <div class="contact-grid">
+    <div class="contact-side">
+      <p class="contact-intro">Tell us what you are building, where you want to take it and what needs to change. We read every brief and reply to schedule a conversation.</p>
+      <p class="lbl">Or write to us directly</p>
+      <p class="contact-mail"><a href="mailto:hello@rovardstudio.com">hello@rovardstudio.com</a></p>
+    </div>
+    <form class="brief" id="brief" action="https://formspree.io/f/xvkgepeo" method="POST" novalidate
+  data-sending="Sending…" data-err="Something went wrong. Please try again or email hello@rovardstudio.com." data-need="Please fill in your name, email and a few words about the project." data-ok-title="Brief received." data-ok-text="Thank you. We will read it and reply to schedule a conversation.">
+  <input type="hidden" name="language" value="en">
+  <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true">
+  <label class="fld"><span class="lbl">01 — Your name</span><input name="name" type="text" autocomplete="name" required></label>
+  <label class="fld"><span class="lbl">02 — Email</span><input name="email" type="email" autocomplete="email" required></label>
+  <label class="fld fld-wide"><span class="lbl">03 — Company or brand</span><input name="company" type="text" autocomplete="organization"></label>
+  <fieldset class="fld fld-wide"><legend class="lbl">04 — What do you need?</legend><div class="chips"><label class="chip"><input type="checkbox" name="services" value="Brand Identity Design"><span>Brand identity</span></label><label class="chip"><input type="checkbox" name="services" value="Social Media Design"><span>Social media</span></label><label class="chip"><input type="checkbox" name="services" value="UI Design"><span>UI design</span></label><label class="chip"><input type="checkbox" name="services" value="Packaging"><span>Packaging</span></label><label class="chip"><input type="checkbox" name="services" value="Motion Design"><span>Motion</span></label><label class="chip"><input type="checkbox" name="services" value="Web Design"><span>Web design</span></label></div></fieldset>
+  <label class="fld"><span class="lbl">05 — Approximate budget</span><select name="budget"><option value="">Select</option><option>$2,500 – $5,000</option><option>$5,000 – $10,000</option><option>$10,000 – $20,000</option><option>$20,000+</option><option>Let’s discuss</option></select></label>
+  <label class="fld"><span class="lbl">06 — Timeline</span><select name="timeline"><option value="">Select</option><option>As soon as possible</option><option>Within 1 month</option><option>1–3 months</option><option>3–6 months</option><option>Flexible</option></select></label>
+  <label class="fld fld-wide"><span class="lbl">07 — What are you trying to achieve?</span><textarea name="goals" rows="3" required></textarea></label>
+  <label class="fld fld-wide"><span class="lbl">08 — Website or social link (optional)</span><input name="website" type="url" inputmode="url" placeholder="https://"></label>
+  <p class="brief-err" role="alert" aria-live="polite"></p>
+  <button class="btn btn-paper" type="submit">Send the brief <span aria-hidden="true">↗</span></button>
+</form>
+  </div>
+</section>
+</main>
+<footer class="colophon" id="colophon">
+  <div class="col-grid">
+    <div class="col-a"><p class="lbl">Colophon</p><p class="col-text">Issue 001 of the Rovard Studios edition. Set in Archivo, Instrument Serif and DM Mono. Designed and built by the studio in Canada, for clients everywhere.</p></div>
+    <div><p class="lbl">Index</p><ul class="col-list"><li><a href="#works">Works</a></li><li><a href="#studio">Studio</a></li><li><a href="#departments">Services</a></li><li><a href="#archive">Archive</a></li><li><a href="#contact">Contact</a></li><li><a href="/work/">Open the full archive →</a></li></ul></div>
+    <div><p class="lbl">Contact</p><ul class="col-list"><li><a href="mailto:hello@rovardstudio.com">hello@rovardstudio.com</a></li><li>Canada · Worldwide</li></ul></div>
+    <div><p class="lbl">Language</p><ul class="col-list"><li><a href="#" aria-current="true" lang="en">English</a></li><li><a href="/fr/"  lang="fr">Français</a></li></ul></div>
+  </div>
+  <p class="col-word" aria-hidden="true"><span data-fit>ROVARD</span></p>
+  <p class="lbl col-base"><span>© <span data-year>2026</span> Rovard Studios. All rights reserved.</span><span>Issue 001 — The Creative Edition</span><a href="#cover">Back to the cover ↑</a></p>
+</footer>
+<div class="peek" id="peek" aria-hidden="true"><div class="peek-in"></div><span class="peek-cap lbl"></span></div>
 </body>
-
 </html>
